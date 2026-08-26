@@ -178,20 +178,62 @@ activa sola.
 Cada una con su archivo en `configs/`. La tabla completa, con el estado real de cada una,
 está en la pestaña **Guía → Para montarlo** del sistema.
 
-## Qué no viene en el repositorio
+## Qué no viene en el repositorio, y por qué
 
-Para no publicar datos de personas ni cientos de megas que se descargan solos:
+**Las fotos de caras no están, y no van a estar.** Son 195.402 archivos de personas
+reales. Esa gente cedió sus fotos a un dataset de investigación, no para que las
+republiquemos aquí: en un repositorio público sería difundir datos biométricos de miles
+de personas. Y aparte son 1,5 GB, cuando el repositorio entero pesa 31 MB.
+
+Tampoco están **los vectores extraídos de esas caras** (`modelos/*.npz`), por lo mismo:
+son medidas de rostros concretos.
+
+Nada de esto se pierde. Todo se recupera con un comando, y siempre sale igual:
 
 | | Cómo conseguirlo |
 |---|---|
 | Las fotos de caras (1,5 GB) | `python preparacion/descargar_dataset.py --fuente fairface` |
-| Los modelos preentrenados | Se descargan solos al abrir cada vista |
+| Los modelos preentrenados (varios GB) | Se descargan solos al abrir cada vista |
 | Los índices de búsqueda | Se crean desde las propias vistas *Búsqueda semántica* y *Buscar fotos* |
 | La galería de caras inscritas | `python galeria_rostros.py --inscribir <carpeta>` |
 | Los datos de detección y audio | Los generan los scripts de `preparacion/` |
 
-Sí vienen los cinco modelos ya entrenados (26 MB), para que el panel enseñe algo desde el
-primer minuto.
+Sí vienen los cinco modelos ya entrenados (26 MB) y el detector de caras (232 KB), para
+que el panel enseñe algo desde el primer minuto.
+
+## Si entrenas, ¿se sube solo?
+
+**No. Nada se sube solo.** Git solo manda algo cuando escribes `git push`. Puedes entrenar
+veinte modelos seguidos y el repositorio ni se entera.
+
+Cuando **sí** decidas subir un modelo nuevo, de cada carpeta de `experimentos/` esto es lo
+que entra y lo que se queda en tu máquina:
+
+| Sube | Se queda en tu disco |
+|---|---|
+| `mejor.pt` — el modelo | `ultimo.pt` — el checkpoint a medias |
+| `metricas.json` — los resultados | `historial.csv` — la curva del entrenamiento |
+| `config.yaml` — con qué se entrenó | `modelo.onnx`, `evaluacion.json`, `errores.html` |
+
+Es decir: el modelo y su ficha, no la chatarra del proceso.
+
+**Ojo con reentrenar y subir muchas veces.** Git no reemplaza un archivo, guarda además
+el anterior. Cada `push` del modelo de género añade **17 MB que ya no se quitan**:
+
+| Modelo | Peso de cada subida |
+|---|---|
+| genero | 17 MB |
+| anomalias | 5,7 MB |
+| superresolucion | 3,0 MB |
+| tabular · series | 56 KB |
+
+Entrena todo lo que quieras; sube solo cuando tengas una versión que merezca guardarse.
+Para ver qué se iría antes de mandarlo:
+
+```bash
+git status --short      # qué ha cambiado
+git add -A && git status # qué entraría de verdad, ya con el .gitignore aplicado
+```
 
 ## Cuánto tarda entrenar
 
