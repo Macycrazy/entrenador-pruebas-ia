@@ -284,9 +284,15 @@ async function montarEjemplos() {
   const entrada = document.querySelector("main input[type=file]#archivo");
   if (!slug || !entrada) return;
 
+  // El botón "Probar con un ejemplo" no debe quedarse ahí sin hacer nada cuando
+  // la máquina no tiene los datos descargados: se esconde.
+  const rapido = document.getElementById("btn-ejemplo");
   let lista = [];
-  try { lista = await (await fetch(`/api/${slug}/ejemplos`)).json(); } catch { return; }
-  if (!Array.isArray(lista) || !lista.length) return;
+  try { lista = await (await fetch(`/api/${slug}/ejemplos`)).json(); } catch { lista = []; }
+  if (!Array.isArray(lista) || !lista.length) {
+    if (rapido) rapido.hidden = true;
+    return;
+  }
 
   const tira = document.createElement("div");
   tira.className = "tira-ejemplos";
@@ -318,7 +324,6 @@ async function montarEjemplos() {
   });
 
   // El botón "Probar con un ejemplo" de la vista de cámara usa el primero.
-  const rapido = document.getElementById("btn-ejemplo");
   if (rapido) rapido.onclick = () => tira.querySelector(".miniatura")?.click();
 }
 
