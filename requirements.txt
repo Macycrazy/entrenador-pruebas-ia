@@ -12,7 +12,7 @@ torchvision>=0.22
 numpy>=1.26
 pillow>=10.2
 pyyaml>=6.0            # configuraciones y presets
-opencv-python>=4.9     # detección de rostros al preparar los datos
+opencv-python>=4.9,<5          # OpenCV 5 quitó cv2.CascadeClassifier     # detección de rostros al preparar los datos
 pyarrow>=15.0          # leer los parquet de los datasets (preparacion/descargar_dataset.py)
 
 # --- opcionales, cada uno habilita una parte del catálogo -------------------

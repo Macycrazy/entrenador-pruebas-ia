@@ -3,7 +3,7 @@
 Usa YuNet (ONNX, mucho más preciso) si el modelo está descargado en `modelos/`,
 y si no cae automáticamente al clasificador Haar que viene incluido con OpenCV.
 
-    python entrenamiento/descargar_detector.py   # descarga YuNet (opcional pero recomendado)
+    python preparacion/descargar_detector.py   # descarga YuNet (opcional pero recomendado)
 """
 
 from __future__ import annotations

@@ -44,6 +44,9 @@ experimentos/demo_cpu/
 modelos/*.pt
 modelos/*.pth
 modelos/*.onnx
+# ...menos el detector de caras: son 232 KB y sin él no funciona ninguna
+# vista de rostro nada más clonar. Es YuNet (OpenCV Zoo, licencia MIT).
+!modelos/face_detection_yunet_2023mar.onnx
 modelos/*.json
 modelos/*.parquet
 modelos/ocr/
