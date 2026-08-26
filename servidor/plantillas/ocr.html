@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block titulo %}Leer documentos{% endblock %}
+
+{% block estilos %}
+  .campo-detectado{display:flex;justify-content:space-between;padding:9px 11px;
+                   background:var(--panel2);border:1px solid var(--acento);border-radius:9px;
+                   margin-bottom:7px;font-size:14px}
+  .campo-detectado b{font-family:ui-monospace,monospace}
+  .bloque{display:flex;justify-content:space-between;gap:10px;padding:5px 0;
+          border-bottom:1px dashed var(--borde);font-size:13px}
+  .texto-completo{background:var(--panel2);border:1px solid var(--borde);border-radius:10px;
+                  padding:14px;white-space:pre-wrap;font-size:13.5px;line-height:1.7;
+                  max-height:220px;overflow-y:auto;margin-top:10px}
+{% endblock %}
+
+{% block contenido %}
+<h1>📄 Leer documentos</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <div class="controles acciones-arriba">
+      <button id="btn-foto">Leer una imagen…</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <label class="check">Confianza mínima
+        <input type="range" id="umbral" min="0.1" max="0.9" step="0.05" value="0.35">
+        <span id="umbral-txt">0.35</span></label>
+    </div>
+    <div class="lienzo-caja" style="aspect-ratio:4/3">
+      <img id="imagen" hidden>
+      <canvas id="overlay" class="overlay"></canvas>
+      <div class="aviso" id="aviso">Sube la foto de una cédula, un carnet o un formulario</div>
+    </div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Bloques <b id="m-bloques">0</b></span>
+      <span>Tiempo <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Campos detectados</h2>
+    <div id="campos"><p class="vacio">Sin datos todavía.</p></div>
+    <h2 style="margin-top:20px">Texto completo</h2>
+    <div class="texto-completo" id="texto">—</div>
+    <div class="controles"><button class="sec" id="btn-copiar">Copiar texto</button></div>
+    <p class="nota" style="margin-top:auto">
+      Reconoce dónde hay texto y lo lee, en español e inglés, sin entrenar nada. Después
+      busca los patrones típicos —cédula, fecha, teléfono, correo— para que no haya que
+      rebuscar a mano.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const imagen = document.getElementById("imagen");
+const overlay = document.getElementById("overlay");
+const umbral = document.getElementById("umbral");
+let ultimoArchivo = null;
+
+async function comprobar() {
+  return (await Panel.pintarEstado("ocr",
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"))).ok;
+}
+
+async function leer(f) {
+  document.getElementById("aviso").textContent = "Leyendo… (la primera vez descarga el modelo)";
+  document.getElementById("aviso").hidden = false;
+  try {
+    const datos = await Panel.enviarArchivo(
+      `/api/ocr/predecir?umbral=${umbral.value}`, f, "imagen");
+    document.getElementById("aviso").hidden = true;
+    document.getElementById("m-bloques").textContent = datos.bloques.length;
+    document.getElementById("m-ms").textContent = (datos.ms / 1000).toFixed(1) + " s";
+
+    dibujarCajas(overlay, imagen, datos.bloques.map((b, i) => ({
+      ...b.caja, color: Panel.color(i), texto: b.texto.slice(0, 18),
+    })), datos.ancho, datos.alto, {contener: true});
+
+    const campos = Object.entries(datos.campos || {});
+    document.getElementById("campos").innerHTML = campos.length
+      ? campos.map(([k, v]) => `<div class="campo-detectado">
+          <span>${Panel.escapar(k)}</span><b>${Panel.escapar(v)}</b></div>`).join("")
+      : '<p class="vacio">No se reconoció ningún campo con formato conocido.</p>';
+    document.getElementById("texto").textContent = datos.texto || "(sin texto)";
+  } catch (err) {
+    document.getElementById("aviso").textContent = err.message;
+  }
+}
+
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  ultimoArchivo = f;
+  imagen.src = URL.createObjectURL(f);
+  imagen.hidden = false;
+  await new Promise(r => imagen.complete ? r() : imagen.onload = r);
+  await leer(f);
+  e.target.value = "";
+};
+umbral.oninput = () => {
+  document.getElementById("umbral-txt").textContent = Number(umbral.value).toFixed(2);
+  if (ultimoArchivo) leer(ultimoArchivo);
+};
+document.getElementById("btn-copiar").onclick = () =>
+  navigator.clipboard.writeText(document.getElementById("texto").textContent);
+
+comprobar();
+</script>
+{% endblock %}

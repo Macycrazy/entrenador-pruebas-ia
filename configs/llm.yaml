@@ -1,0 +1,56 @@
+# Ajuste fino de un modelo de lenguaje con LoRA.
+#
+#   datos_llm/train.jsonl  con líneas: {"instruccion": "...", "entrada": "...", "salida": "..."}
+#   python entrenar.py --config configs/llm.yaml
+#
+# Para probar sin datos:  python preparacion/generar_instrucciones_sintetico.py
+# Necesita:  pip install transformers peft   (y bitsandbytes si usas cuatro_bits)
+nombre: llm
+tarea: texto_llm
+
+datos:
+  ruta: datos_llm
+  batch: 2              # con 512 tokens y un modelo de 1,5B entra bien en 16 GB
+  workers: 2
+  val_proporcion: 0.1
+
+llm:
+  # Qué cabe en 16 GB:
+  #   hasta ~3B  con LoRA normal (bf16)
+  #   hasta ~13B con cuatro_bits: true (QLoRA)
+  modelo_base: Qwen/Qwen2.5-1.5B-Instruct
+  longitud_max: 512
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  cuatro_bits: false
+  solo_respuesta: true
+
+modelo:
+  checkpoint_gradiente: true   # ahorra bastante VRAM a cambio de ~30 % más de tiempo
+
+optimizador:
+  nombre: adamw
+  lr: 2.0e-4            # LoRA admite un lr mucho más alto que un fine-tune completo
+  wd: 0.0
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 0.3
+
+entrenamiento:
+  epocas: 3             # con instrucciones, 2-3 pasadas suelen bastar
+  precision: bf16
+  acumular: 8           # lote efectivo de 16 sin más memoria
+  clip_grad: 1.0
+  congelar_epocas: 0    # NO congelar: rompería LoRA
+  canales_last: false
+  ema: 0.0              # duplicaría la memoria del modelo
+  paciencia: 2
+  metrica_objetivo: acc # = 1/perplejidad
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

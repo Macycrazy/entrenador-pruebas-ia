@@ -1,0 +1,51 @@
+# Síntesis y clonación de voz con SpeechT5 (licencia MIT, se puede usar sin ataduras).
+#
+#   datos_voz/textos.csv   con columnas: archivo,texto
+#   datos_voz/audios/*.wav
+#   python entrenar.py --config configs/voz_sintesis.yaml
+#
+# Para hablar sin entrenar nada, entra directamente en la vista /voz del panel.
+# Necesita:  pip install transformers datasets soundfile
+#            pip install speechbrain     (solo para clonar desde una grabación)
+nombre: voz
+tarea: voz_sintesis
+
+datos:
+  ruta: datos_voz
+  batch: 4
+  workers: 2
+  val_proporcion: 0.1
+
+voz:
+  modelo_base: microsoft/speecht5_tts
+  vocoder: microsoft/speecht5_hifigan
+  banco_voces: Matthijs/cmu-arctic-xvectors
+  voz_por_defecto: 7306
+  sr: 16000
+  vector_hablante: ""      # pon aquí un .npy propio para ajustar TU voz
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-5               # muy bajo: es un ajuste fino sobre un modelo ya entrenado
+  wd: 0.0
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 0.5
+
+entrenamiento:
+  epocas: 20
+  precision: fp32          # la síntesis es sensible; bf16 solo si va sobrado
+  acumular: 4
+  clip_grad: 1.0
+  congelar_epocas: 0
+  canales_last: false
+  ema: 0.0
+  paciencia: 5
+  metrica_objetivo: acc
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

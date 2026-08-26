@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block titulo %}Predicción tabular{% endblock %}
+
+{% block estilos %}
+  .campos{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+  .campo label{display:block;font-size:12px;color:var(--suave);margin-bottom:4px}
+  .grande{font-size:30px;font-weight:700;margin:6px 0}
+{% endblock %}
+
+{% block contenido %}
+<h1>📊 Predicción tabular</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <h2 id="titulo-campos">Datos del caso</h2>
+    <div class="campos" id="campos"><p class="vacio">Cargando…</p></div>
+    <div class="controles"><button id="btn-predecir">Predecir</button></div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Predice <b id="m-objetivo">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Resultado</h2>
+    <div id="resultados"><p class="vacio">Rellena los datos y pulsa Predecir.</p></div>
+    <p class="nota" style="margin-top:auto">
+      Con clases poco frecuentes —ausencias, fraude, averías— el acierto global engaña:
+      un modelo que siempre diga «no» acierta el 87 % y no sirve para nada. Por eso aquí
+      se optimiza el <b>acierto balanceado</b> y se compensan las clases al entrenar.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "tabular", config: "{{ vista.config }}"};
+let campos = [];
+
+/* Un formulario con "antiguedad_anios" y todo a cero no lo entiende nadie y además
+   da una predicción absurda. Se traduce el nombre de la columna y se precarga un caso
+   verosímil, para que el primer clic devuelva algo con sentido. */
+const ETIQUETAS = {
+  edad: "Edad (años)", antiguedad_anios: "Antigüedad en el cargo (años)",
+  hijos: "Hijos a cargo", distancia_km: "Distancia al trabajo (km)",
+  horas_extra_mes: "Horas extra al mes", turno: "Turno", gerencia: "Gerencia",
+  ausento: "¿Se ausentó?", salario: "Salario", genero: "Género",
+};
+const EJEMPLO = {
+  edad: 38, antiguedad_anios: 6, hijos: 2, distancia_km: 18,
+  horas_extra_mes: 9, salario: 0,
+};
+const bonito = n => ETIQUETAS[n] ||
+  (n.replace(/_/g, " ").replace(/^./, l => l.toUpperCase()));
+const porDefecto = n => EJEMPLO[n] ?? 0;
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) { avisoSinModelo(document.getElementById("sin-modelo"), VISTA); return false; }
+
+  const extra = datos.extra || {};
+  campos = extra.campos || [];
+  document.getElementById("m-objetivo").textContent =
+    extra.objetivo ? bonito(extra.objetivo) : "–";
+  document.getElementById("campos").innerHTML = campos.map(c => `
+    <div class="campo"><label for="c-${c.nombre}">${Panel.escapar(bonito(c.nombre))}</label>
+      ${c.tipo === "opcion"
+        ? `<select id="c-${c.nombre}">${c.valores.map(v =>
+            `<option>${Panel.escapar(v)}</option>`).join("")}</select>`
+        : `<input type="text" id="c-${c.nombre}" value="${porDefecto(c.nombre)}">`}</div>`).join("");
+  return true;
+}
+
+document.getElementById("btn-predecir").onclick = async (e) => {
+  const fila = {};
+  campos.forEach(c => fila[c.nombre] = document.getElementById("c-" + c.nombre).value);
+  e.target.disabled = true;
+  try {
+    const datos = await Panel.enviarJson("/api/tabular/predecir", {fila});
+    document.getElementById("resultados").innerHTML = datos.probabilidades
+      ? `<div class="grande" style="color:${Panel.color(0)}">${Panel.escapar(datos.etiqueta)}</div>
+         <p class="vacio" style="margin:0 0 10px">${Panel.escapar(bonito(datos.objetivo))}</p>
+         ${Panel.barras(datos.probabilidades)}`
+      : `<div class="grande">${datos.valor.toFixed(2)}</div>
+         <p class="vacio">${Panel.escapar(bonito(datos.objetivo))} estimado</p>`;
+  } catch (err) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  } finally { e.target.disabled = false; }
+};
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

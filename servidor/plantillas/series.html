@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block titulo %}Series temporales{% endblock %}
+
+{% block contenido %}
+<h1>📈 Series temporales</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <h2>Histórico y predicción</h2>
+    <div class="controles acciones-arriba">
+      <button id="btn-predecir">Predecir lo que viene</button>
+      <label class="check">Histórico mostrado
+        <input type="range" id="ventana" min="30" max="120" step="10" value="80">
+        <span id="ventana-txt">80</span></label>
+    </div>
+    <canvas id="grafica" style="width:100%;height:min(38vh,280px)"></canvas>
+    <div id="leyenda" style="margin:8px 0 4px"></div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Serie <b id="m-columna">–</b></span>
+      <span>Horizonte <b id="m-horizonte">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Qué tan bueno es</h2>
+    <div id="calidad"><p class="vacio">Cargando…</p></div>
+    <h2 style="margin-top:20px">Predicción</h2>
+    <div id="valores"><p class="vacio">Pulsa el botón.</p></div>
+    <p class="nota" style="margin-top:auto">
+      El error se compara siempre contra el método ingenuo —repetir el último valor—
+      porque muchas series se predicen sorprendentemente bien así. Si el modelo no lo
+      supera con holgura, no está aportando nada.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "series", config: "{{ vista.config }}"};
+let serie = [], prediccion = [];
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) { avisoSinModelo(document.getElementById("sin-modelo"), VISTA); return false; }
+
+  const extra = datos.extra || {};
+  serie = extra.serie || [];
+  document.getElementById("m-columna").textContent = extra.columna || "–";
+  document.getElementById("m-horizonte").textContent = extra.horizonte + " pasos";
+  const mejora = extra.mae_ingenuo && extra.mae ? (extra.mae_ingenuo / extra.mae) : 0;
+  document.getElementById("calidad").innerHTML = `
+    <div class="fila"><span>error medio</span><span>${extra.mae} (${extra.mape} %)</span></div>
+    <div class="fila"><span>método ingenuo</span><span>${extra.mae_ingenuo}</span></div>
+    <div class="fila"><span>mejora</span>
+      <span style="color:${mejora > 1.5 ? "var(--d)" : "var(--c)"}">
+        ${mejora ? mejora.toFixed(1) + "× mejor" : "–"}</span></div>`;
+  dibujar();
+  return true;
+}
+
+function dibujar() {
+  const cuantos = Number(document.getElementById("ventana").value);
+  const historico = serie.slice(-cuantos);
+  const series = [{nombre: "histórico", color: "#38bdf8",
+                   valores: historico.concat(prediccion.map(() => null))}];
+  if (prediccion.length) {
+    series.push({nombre: "predicción", color: "#fbbf24",
+                 valores: historico.map((_, i) => i === historico.length - 1
+                   ? historico[i] : null).concat(prediccion)});
+  }
+  graficar(document.getElementById("grafica"), series, {ejeX: "pasos"});
+  document.getElementById("leyenda").innerHTML = leyenda(series);
+}
+
+document.getElementById("btn-predecir").onclick = async (e) => {
+  e.target.disabled = true;
+  try {
+    const datos = await Panel.enviarJson("/api/series/predecir", {valores: serie});
+    prediccion = datos.prediccion;
+    document.getElementById("valores").innerHTML = prediccion.map((v, i) =>
+      `<div class="fila" style="padding:4px 0"><span>paso ${i + 1}</span>
+        <span style="color:var(--texto)">${v}</span></div>`).join("");
+    dibujar();
+  } catch (err) {
+    document.getElementById("valores").innerHTML =
+      `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  } finally { e.target.disabled = false; }
+};
+document.getElementById("ventana").oninput = () => {
+  document.getElementById("ventana-txt").textContent =
+    document.getElementById("ventana").value;
+  dibujar();
+};
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

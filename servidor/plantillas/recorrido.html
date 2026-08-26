@@ -1,0 +1,373 @@
+{% extends "base.html" %}
+{% block titulo %}Recorrido guiado{% endblock %}
+
+{% block estilos %}
+  .progreso{height:3px;background:var(--borde);border-radius:2px;margin:0 0 20px;overflow:hidden}
+  .progreso i{display:block;height:100%;width:20%;border-radius:2px;
+              background:linear-gradient(90deg,var(--azul),var(--cian));
+              transition:width .5s var(--curva)}
+
+  .paso{position:relative;overflow:hidden;background:var(--panel);
+        border:1px solid var(--borde);border-radius:18px;padding:28px 30px;
+        margin-bottom:16px;display:none;box-shadow:var(--sombra)}
+  .paso.activo{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+               gap:34px;align-items:center;animation:entrar .45s var(--curva) both}
+  .paso::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;
+                background:linear-gradient(180deg,var(--cian),transparent)}
+  .paso .numero{display:inline-flex;align-items:center;justify-content:center;
+                width:36px;height:36px;border-radius:50%;
+                background:linear-gradient(135deg,var(--cian),var(--azul));
+                color:#04121f;font-weight:750;font-size:16px;margin-bottom:14px;
+                box-shadow:0 6px 18px rgba(9,113,184,.4)}
+  .paso h2{font-size:24px;text-transform:none;letter-spacing:-.4px;color:var(--texto);
+           margin:0 0 12px;font-weight:700}
+  .paso p{font-size:15px;line-height:1.75;color:var(--suave);margin:0 0 14px;max-width:62ch}
+  .paso b{color:var(--texto);font-weight:650}
+
+  .cifras{display:flex;gap:28px;flex-wrap:wrap;margin:20px 0 4px}
+  .cifra b{display:block;font-size:28px;font-weight:750;letter-spacing:-.8px;
+           font-variant-numeric:tabular-nums;
+           background:linear-gradient(180deg,#fff,var(--celeste));
+           -webkit-background-clip:text;background-clip:text;color:transparent}
+  .cifra span{font-size:11.5px;color:var(--tenue);text-transform:uppercase;letter-spacing:.6px}
+
+  .acciones{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .acciones a{background:rgba(255,255,255,.05);border:1px solid var(--borde);color:var(--texto);
+              padding:10px 16px;border-radius:10px;font-size:13.5px;font-weight:500;
+              transition:.2s var(--curva)}
+  .acciones a:hover{border-color:var(--borde-vivo);background:rgba(29,192,231,.10);
+                    transform:translateY(-2px);color:var(--texto)}
+  .acciones a.principal{background:linear-gradient(135deg,var(--cian),var(--azul));
+                        color:#04121f;border-color:transparent;font-weight:700;
+                        box-shadow:0 6px 18px rgba(9,113,184,.35)}
+
+  .navegacion{display:flex;justify-content:space-between;align-items:center;gap:12px;
+              margin-top:22px;padding-top:18px;border-top:1px solid var(--borde)}
+  .puntos{display:flex;gap:8px}
+  .punto{width:9px;height:9px;border-radius:50%;background:var(--borde);cursor:pointer;
+         transition:.25s var(--curva)}
+  .punto:hover{background:var(--suave)}
+  .punto.activo{background:var(--cian);transform:scale(1.35);
+                box-shadow:0 0 0 4px rgba(29,192,231,.16)}
+  .pista{font-size:11.5px;color:var(--tenue);text-align:center;margin-top:14px}
+  .pista kbd{background:var(--panel2);border:1px solid var(--borde);border-radius:5px;
+             padding:1px 6px;font-size:10.5px;font-family:var(--mono,monospace)}
+
+  /* ---------------------------------------------------------------- visuales */
+  .visual{position:relative;height:290px;border-radius:14px;overflow:hidden;
+          background:radial-gradient(circle at 60% 35%,rgba(9,113,184,.20),rgba(4,8,22,.6) 70%);
+          border:1px solid var(--borde);display:flex;align-items:center;
+          justify-content:center;padding:18px 18px 30px}
+  .visual .rotulo{position:absolute;left:14px;bottom:12px;font-size:11px;color:var(--tenue);
+                  letter-spacing:.5px;text-transform:uppercase}
+
+  /* 1. Mosaico de datos: las fichas van apareciendo, unas etiquetadas y otras no. */
+  .mosaico{display:grid;grid-template-columns:repeat(6,1fr);gap:7px;
+           width:100%;max-width:266px;margin-bottom:14px}
+  .mosaico i{aspect-ratio:1;border-radius:6px;background:var(--panel2);
+             border:1px solid var(--borde);opacity:0;animation:aparecer .5s var(--curva) forwards}
+  .mosaico i.h{background:linear-gradient(135deg,rgba(9,113,184,.55),rgba(34,61,144,.35));
+               border-color:rgba(29,192,231,.35)}
+  .mosaico i.m{background:linear-gradient(135deg,rgba(29,192,231,.45),rgba(165,216,234,.22));
+               border-color:rgba(165,216,234,.4)}
+  @keyframes aparecer{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
+
+  /* 2. Curvas de entrenamiento: se dibujan solas y se repiten. */
+  .curvas{width:100%;height:100%}
+  .curvas path{fill:none;stroke-width:2.5;stroke-linecap:round;
+               stroke-dasharray:420;stroke-dashoffset:420;
+               animation:trazar 3.4s var(--curva) infinite}
+  .curvas .error{stroke:var(--error)}
+  .curvas .acierto{stroke:var(--exito);animation-delay:.35s}
+  .curvas .reja{stroke:var(--borde);stroke-width:1;stroke-dasharray:none;
+                stroke-dashoffset:0;animation:none;opacity:.5}
+  @keyframes trazar{0%{stroke-dashoffset:420}55%,100%{stroke-dashoffset:0}}
+
+  /* 3. Cara escaneada: la línea baja y aparecen la caja y el porcentaje. */
+  .escaneo{position:relative;width:180px;height:210px}
+  .escaneo .caja{position:absolute;inset:18px 26px 46px;border:2px solid var(--cian);
+                 border-radius:10px;box-shadow:0 0 0 1px rgba(29,192,231,.2) inset;
+                 animation:latir 2.6s ease-in-out infinite}
+  .escaneo .cara{position:absolute;left:50%;top:34%;transform:translate(-50%,-50%);
+                 font-size:70px;filter:grayscale(.15)}
+  .escaneo .linea{position:absolute;left:26px;right:26px;height:2px;
+                  background:linear-gradient(90deg,transparent,var(--cian),transparent);
+                  box-shadow:0 0 14px var(--cian);animation:barrido 2.8s ease-in-out infinite}
+  @keyframes barrido{0%,100%{top:20px}50%{top:238px}}
+  .escaneo .marca-pct{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);
+                      font-size:12px;font-weight:700;color:var(--cian);white-space:nowrap;
+                      background:rgba(4,10,26,.85);border:1px solid var(--borde-vivo);
+                      border-radius:999px;padding:4px 12px}
+
+  /* 4. Generación: onda de voz a la izquierda, imagen formándose a la derecha. */
+  .genera{display:flex;align-items:center;gap:26px}
+  .onda{display:flex;align-items:center;gap:4px;height:90px}
+  .onda i{width:5px;border-radius:3px;background:linear-gradient(180deg,var(--cian),var(--azul));
+          animation:onda 1.1s ease-in-out infinite}
+  @keyframes onda{0%,100%{height:14px}50%{height:74px}}
+  .pixeles{display:grid;grid-template-columns:repeat(8,1fr);gap:3px;width:132px}
+  .pixeles i{aspect-ratio:1;border-radius:2px;background:var(--cian);opacity:.08;
+             animation:pixelar 3.2s ease-in-out infinite}
+  @keyframes pixelar{0%,100%{opacity:.08}50%{opacity:.85}}
+
+  /* 5. Escala: una tarjeta hoy, un bastidor entero mañana. */
+  .escala{display:flex;align-items:center;gap:22px}
+  .escala .bloque{text-align:center;width:104px}
+  .escala .tarjeta-gpu{width:64px;height:38px;border-radius:6px;border:1px solid var(--borde-vivo);
+                       background:linear-gradient(135deg,rgba(9,113,184,.5),rgba(34,61,144,.3));
+                       margin:0 auto 8px;animation:latir 2.4s ease-in-out infinite}
+  .escala .bastidor{display:grid;gap:4px;margin:0 auto 8px}
+  .escala .bastidor i{width:64px;height:9px;border-radius:3px;
+                      background:linear-gradient(90deg,var(--azul),var(--cian));
+                      opacity:.25;animation:encender 2.6s ease-in-out infinite}
+  @keyframes encender{0%,100%{opacity:.22}50%{opacity:.95}}
+  .escala .flecha{font-size:24px;color:var(--cian);animation:latir 2s ease-in-out infinite}
+  .escala small{display:block;font-size:11px;color:var(--tenue);text-transform:uppercase;
+                letter-spacing:.6px}
+
+  @media (max-width:1000px){
+    .paso.activo{grid-template-columns:1fr}
+    .visual{height:220px;order:-1}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .visual *{animation:none !important}
+    .curvas path{stroke-dashoffset:0}
+  }
+{% endblock %}
+
+{% block contenido %}
+<h1>🎬 Recorrido guiado</h1>
+<p class="subtitulo">Cinco pasos, de los datos al resultado. Pensado para enseñárselo a
+   alguien sin tener que ir explicando por dónde va la cosa.</p>
+
+<div class="progreso"><i id="barra-progreso"></i></div>
+
+<div class="paso activo" data-paso="0">
+  <div>
+    <div class="numero">1</div>
+    <h2>Todo empieza con los datos</h2>
+    <p>Una IA no sabe nada por sí misma: aprende de ejemplos. Este sistema tiene
+       <b>casi cien mil fotografías de rostros</b> etiquetadas con género, edad y etnia,
+       descargadas de un repositorio público y verificadas una por una.</p>
+    <p>Lo importante no es la cantidad, sino <b>qué hay dentro</b>. Si todas las caras
+       fueran del mismo tipo de persona, el modelo funcionaría bien con unos y mal con
+       otros — y el número global no lo delataría.</p>
+    <div class="cifras">
+      <div class="cifra"><b id="c-fotos">–</b><span>fotografías</span></div>
+      <div class="cifra"><b id="c-clases">–</b><span>clases</span></div>
+      <div class="cifra"><b id="c-datasets">–</b><span>conjuntos de datos</span></div>
+    </div>
+    <div class="acciones"><a href="/datos" class="principal">Ver los datos →</a></div>
+  </div>
+  <div class="visual">
+    <div class="mosaico" id="mosaico"></div>
+    <span class="rotulo">cada ficha, una foto etiquetada</span>
+  </div>
+</div>
+
+<div class="paso" data-paso="1">
+  <div>
+    <div class="numero">2</div>
+    <h2>Entrenar es repetir y corregir</h2>
+    <p>El modelo mira las fotos, se equivoca, mide cuánto se equivocó y ajusta sus números.
+       Millones de veces. Eso es todo el misterio.</p>
+    <p>En la pantalla de entrenamiento se ve <b>en directo</b>: la línea del error bajando y
+       la del acierto subiendo, época tras época. Se lanza desde el navegador y el proceso
+       sigue aunque cierres la página.</p>
+    <div class="cifras">
+      <div class="cifra"><b id="c-experimentos">–</b><span>modelos entrenados aquí</span></div>
+      <div class="cifra"><b id="c-tareas">–</b><span>tipos de tarea</span></div>
+      <div class="cifra"><b>~2 h</b><span>lo que tarda uno</span></div>
+    </div>
+    <div class="acciones">
+      <a href="/entrenamiento" class="principal">Abrir la consola →</a>
+      <a href="/comparar">Comparar dos modelos</a>
+    </div>
+  </div>
+  <div class="visual">
+    <svg class="curvas" viewBox="0 0 320 200" preserveAspectRatio="xMidYMid meet">
+      <path class="reja" d="M30 20 V170 M30 170 H300"/>
+      <path class="reja" d="M30 60 H300 M30 100 H300 M30 140 H300"/>
+      <path class="error"   d="M32 34 C 90 60, 120 128, 170 142 S 250 158, 298 162"/>
+      <path class="acierto" d="M32 160 C 90 138, 120 74, 170 56 S 250 40, 298 34"/>
+    </svg>
+    <span class="rotulo"><span style="color:var(--error)">■</span> error &nbsp;
+      <span style="color:var(--exito)">■</span> acierto</span>
+  </div>
+</div>
+
+<div class="paso" data-paso="2">
+  <div>
+    <div class="numero">3</div>
+    <h2>Lo que aprendió, funcionando</h2>
+    <p>El modelo entrenado se usa en tiempo real desde la cámara. Reconoce a quién tiene
+       delante, estima atributos, detecta objetos, lee documentos o calcula la distancia a
+       la que está cada cosa.</p>
+    <p>Detalle que casi nadie cuida: los porcentajes que verás están <b>calibrados</b>. Un
+       90 % significa que acierta aproximadamente el 90 % de las veces, no una confianza
+       inventada por el modelo.</p>
+    <div class="cifras">
+      <div class="cifra"><b id="c-listas">–</b><span>vistas con modelo listo</span></div>
+      <div class="cifra"><b id="c-vistas">–</b><span>vistas en total</span></div>
+    </div>
+    <div class="acciones">
+      <a href="/rostros" class="principal">Reconocimiento facial →</a>
+      <a href="/ocr">Leer una cédula</a>
+      <a href="/pose">Pose corporal</a>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="escaneo">
+      <div class="caja"></div>
+      <div class="cara">🧑</div>
+      <div class="linea"></div>
+      <div class="marca-pct">rostro · 94 % · calibrado</div>
+    </div>
+    <span class="rotulo">detección + porcentaje honesto</span>
+  </div>
+</div>
+
+<div class="paso" data-paso="3">
+  <div>
+    <div class="numero">4</div>
+    <h2>Y además, genera</h2>
+    <p>No solo clasifica lo que ve: <b>produce cosas nuevas</b>. Escribe un texto y lo dice
+       en voz alta con una voz que puede ser la tuya. Describe una escena y la dibuja.
+       Rescata el detalle de una foto vieja de carnet.</p>
+    <p>Todo esto corre <b>en esta máquina</b>, sin enviar nada a internet ni pagar por uso.
+       Los datos no salen de aquí.</p>
+    <div class="acciones">
+      <a href="/voz" class="principal">Hablar con una voz →</a>
+      <a href="/generacion">Generar una imagen</a>
+      <a href="/superresolucion">Rescatar una foto</a>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="genera">
+      <div class="onda" id="onda"></div>
+      <div class="pixeles" id="rejilla"></div>
+    </div>
+    <span class="rotulo">voz y píxeles creados aquí</span>
+  </div>
+</div>
+
+<div class="paso" data-paso="4">
+  <div>
+    <div class="numero">5</div>
+    <h2>Esto es a pequeña escala</h2>
+    <p>Todo lo que acabas de ver corre en <b>una sola tarjeta gráfica de escritorio</b>, con
+       modelos pequeños y entrenamientos de un par de horas. Y aun así hace de todo:
+       ver, oír, hablar, leer, dibujar y predecir.</p>
+    <p>Con hardware dedicado, la misma arquitectura escala a modelos mayores, datos propios
+       de toda la institución y varios entrenamientos a la vez. Lo que hoy tarda dos horas
+       tardaría minutos, y lo que hoy es una demostración pasaría a ser un servicio.</p>
+    <div class="cifras">
+      <div class="cifra"><b id="c-tareas2">–</b><span>tipos de tarea montados</span></div>
+      <div class="cifra"><b id="c-demos">–</b><span>demostraciones funcionando</span></div>
+      <div class="cifra"><b>0</b><span>en servicios externos</span></div>
+    </div>
+    <div class="acciones">
+      <a href="/" class="principal">Ver el panel completo →</a>
+      <a href="/guia">Cómo funciona por dentro</a>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="escala">
+      <div class="bloque">
+        <div class="tarjeta-gpu"></div>
+        <small>hoy<br>1 tarjeta</small>
+      </div>
+      <div class="flecha">→</div>
+      <div class="bloque">
+        <div class="bastidor" id="bastidor"></div>
+        <small>con servidor<br>varias, a la vez</small>
+      </div>
+    </div>
+    <span class="rotulo">la misma arquitectura, más músculo</span>
+  </div>
+</div>
+
+<div class="navegacion">
+  <button class="sec" id="btn-anterior">← Anterior</button>
+  <div class="puntos" id="puntos"></div>
+  <button id="btn-siguiente">Siguiente →</button>
+</div>
+<p class="pista">Puedes moverte con <kbd>←</kbd> y <kbd>→</kbd></p>
+{% endblock %}
+
+{% block scripts %}
+<script>
+/* --- visuales generados: menos HTML repetido a mano ---------------------- */
+const clases = ["h","m","","h","m","h","","m","h","m","h","","m","h","m","h","m","",
+                "h","m","h","m","h","m","","h","m","h","m","h"];
+document.getElementById("mosaico").innerHTML = clases.map((c, i) =>
+  `<i class="${c}" style="animation-delay:${i * 55}ms"></i>`).join("");
+document.getElementById("onda").innerHTML = Array.from({length: 11}, (_, i) =>
+  `<i style="animation-delay:${i * 90}ms"></i>`).join("");
+document.getElementById("rejilla").innerHTML = Array.from({length: 64}, (_, i) =>
+  `<i style="animation-delay:${(i % 8 + Math.floor(i / 8)) * 110}ms"></i>`).join("");
+document.getElementById("bastidor").innerHTML = Array.from({length: 6}, (_, i) =>
+  `<i style="animation-delay:${i * 180}ms"></i>`).join("");
+
+/* --- navegación por pasos ------------------------------------------------ */
+const pasos = document.querySelectorAll(".paso");
+let actual = 0;
+
+function mostrar(indice) {
+  actual = Math.max(0, Math.min(pasos.length - 1, indice));
+  pasos.forEach((p, i) => p.classList.toggle("activo", i === actual));
+  document.querySelectorAll(".punto").forEach((p, i) =>
+    p.classList.toggle("activo", i === actual));
+  document.getElementById("barra-progreso").style.width =
+    `${(actual + 1) / pasos.length * 100}%`;
+  document.getElementById("btn-anterior").disabled = actual === 0;
+  document.getElementById("btn-siguiente").textContent =
+    actual === pasos.length - 1 ? "Volver al inicio" : "Siguiente →";
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+
+document.getElementById("puntos").innerHTML =
+  [...pasos].map((_, i) => `<div class="punto" data-i="${i}"></div>`).join("");
+document.querySelectorAll(".punto").forEach(p =>
+  p.onclick = () => mostrar(Number(p.dataset.i)));
+document.getElementById("btn-anterior").onclick = () => mostrar(actual - 1);
+document.getElementById("btn-siguiente").onclick = () =>
+  actual === pasos.length - 1 ? mostrar(0) : mostrar(actual + 1);
+document.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") mostrar(actual + 1);
+  if (e.key === "ArrowLeft") mostrar(actual - 1);
+});
+
+/* --- las cifras se leen del propio sistema: nunca se quedan desfasadas --- */
+(async () => {
+  try {
+    const vistas = await (await fetch("/api/vistas")).json();
+    const listas = vistas.filter(v => v.disponible).length;
+    document.getElementById("c-vistas").textContent = vistas.length;
+    document.getElementById("c-listas").textContent = listas;
+
+    const datos = await (await fetch("/api/datos/resumen")).json();
+    const principal = datos.datasets.find(d => d.nombre === "datos") || datos.datasets[0];
+    if (principal) {
+      document.getElementById("c-fotos").textContent =
+        principal.total.toLocaleString("es");
+      document.getElementById("c-clases").textContent = Object.keys(principal.clases).length;
+    }
+    document.getElementById("c-datasets").textContent = datos.datasets.length;
+
+    // Mismo criterio que la portada: entrenados aquí = vistas con checkpoint propio.
+    // Contar carpetas de experimentos daba 6 (hay una de demostración duplicada) y
+    // sumarle las listas inflaba el total, porque las entrenadas ya van dentro.
+    const entrenados = vistas.filter(v => v.nivel === "entrenado").length;
+    document.getElementById("c-experimentos").textContent = entrenados;
+    document.getElementById("c-demos").textContent = vistas.length;
+
+    const tareas = new Set(vistas.map(v => v.tarea).filter(Boolean)).size;
+    document.getElementById("c-tareas").textContent = tareas;
+    document.getElementById("c-tareas2").textContent = tareas;
+  } catch (e) { console.error(e); }
+})();
+
+mostrar(0);
+</script>
+{% endblock %}

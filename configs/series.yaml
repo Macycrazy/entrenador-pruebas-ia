@@ -1,0 +1,42 @@
+# Series temporales: predecir cómo sigue una serie de números.
+#
+#   datos_series/datos.csv
+#   python entrenar.py --config configs/tabular.yaml --set tabular.objetivo=ausento
+nombre: series
+tarea: series
+
+datos:
+  ruta: datos_series
+  batch: 64
+  workers: 0
+  val_proporcion: 0.2
+
+series:
+  columna: ""             # OBLIGATORIO: la serie a predecir
+  fecha: ""               # columna de fecha, opcional
+  ventana: 24             # cuántos pasos mira hacia atrás
+  horizonte: 6            # cuántos predice hacia delante
+  capas: [128, 64]
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-3
+  wd: 0.01
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 1.0
+
+entrenamiento:
+  epocas: 60
+  precision: fp32
+  congelar_epocas: 0
+  canales_last: false
+  ema: 0.999
+  paciencia: 15
+  metrica_objetivo: acc     # = 1 - MAPE
+
+evaluacion:
+  calibrar: false
+  curvas: false

@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% block titulo %}Reconocimiento facial{% endblock %}
+
+{% block estilos %}
+  .pestanas{display:flex;gap:6px;margin-bottom:16px}
+  .pestanas button{background:var(--panel2);border:1px solid var(--borde);color:var(--suave);
+                   font-weight:500}
+  .pestanas button.activa{background:var(--acento);color:#06231f;border-color:var(--acento);
+                          font-weight:650}
+  .persona{display:flex;justify-content:space-between;align-items:center;padding:9px 11px;
+           background:var(--panel2);border:1px solid var(--borde);border-radius:9px;
+           margin-bottom:7px;font-size:13.5px}
+  .persona button{padding:4px 9px;font-size:12px}
+  .veredicto{font-size:19px;font-weight:700;margin:6px 0}
+  .dos{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+{% endblock %}
+
+{% block contenido %}
+<h1>🪪 Reconocimiento facial</h1>
+<p class="subtitulo">Identifica quién es contra la galería de personas inscritas, o compara
+   dos fotos. Inscribir a alguien no requiere reentrenar nada: se guarda su vector.</p>
+
+<div class="pestanas">
+  <button data-modo="identificar" class="activa">Identificar (1:N)</button>
+  <button data-modo="verificar">Verificar (1:1)</button>
+  <button data-modo="galeria">Galería</button>
+</div>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <!-- IDENTIFICAR -->
+    <div data-panel="identificar">
+      <div class="lienzo-caja">
+        <video id="video" playsinline muted autoplay class="espejo"></video>
+        <canvas id="overlay" class="overlay"></canvas>
+        <div class="aviso" id="aviso">Inicia la cámara o sube una foto</div>
+      </div>
+      <div class="controles">
+        <button id="btn-camara">Iniciar cámara</button>
+        <button id="btn-capturar" class="sec" disabled>Identificar ahora</button>
+        <button id="btn-foto" class="sec">Subir foto…</button>
+        <input type="file" id="archivo" accept="image/*" hidden>
+        <label class="check"><input type="checkbox" id="chk-continuo"> Continuo</label>
+        <label class="check">Umbral
+          <input type="range" id="umbral" min="0" max="0.9" step="0.01" value="0.35">
+          <span id="umbral-txt">0.35</span></label>
+      </div>
+    </div>
+
+    <!-- VERIFICAR -->
+    <div data-panel="verificar" hidden>
+      <div class="dos">
+        <div>
+          <h2>Foto A</h2>
+          <div class="lienzo-caja" style="aspect-ratio:1"><img id="img-a" hidden>
+            <div class="aviso" id="aviso-a">Sube la primera foto</div></div>
+          <div class="controles"><button class="sec" id="btn-a">Elegir A…</button></div>
+          <input type="file" id="file-a" accept="image/*" hidden>
+        </div>
+        <div>
+          <h2>Foto B</h2>
+          <div class="lienzo-caja" style="aspect-ratio:1"><img id="img-b" hidden>
+            <div class="aviso" id="aviso-b">Sube la segunda foto</div></div>
+          <div class="controles"><button class="sec" id="btn-b">Elegir B…</button></div>
+          <input type="file" id="file-b" accept="image/*" hidden>
+        </div>
+      </div>
+      <div class="controles"><button id="btn-verificar" disabled>¿Son la misma persona?</button></div>
+    </div>
+
+    <!-- GALERÍA -->
+    <div data-panel="galeria" hidden>
+      <h2>Inscribir una persona</h2>
+      <div class="controles" style="margin-top:0">
+        <input type="text" id="nombre" placeholder="Nombre y apellido" style="max-width:280px">
+        <button class="sec" id="btn-fotos">Elegir fotos…</button>
+        <input type="file" id="file-inscribir" accept="image/*" multiple hidden>
+        <button id="btn-inscribir" disabled>Inscribir</button>
+      </div>
+      <p class="nota" id="elegidas">Con 3 o 4 fotos distintas de la misma persona el
+         reconocimiento es bastante más estable que con una sola.</p>
+      <h2 style="margin-top:22px">Inscritos</h2>
+      <div id="lista"><p class="vacio">Cargando…</p></div>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Inscritos <b id="m-inscritos">0</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Resultado</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      El umbral decide a partir de qué parecido se acepta una identificación. Súbelo para
+      un control de acceso (menos impostores, más rechazos legítimos); bájalo si rechaza
+      a gente conocida. El valor sugerido viene del entrenamiento.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "rostros", config: "{{ vista.config }}"};
+const video = document.getElementById("video");
+const overlay = document.getElementById("overlay");
+const resultados = document.getElementById("resultados");
+const umbral = document.getElementById("umbral");
+let ficheros = {a: null, b: null, inscribir: []};
+
+const camara = new Camara(video, {intervalo: 700, onFotograma: async (blob) => {
+  if (document.getElementById("chk-continuo").checked) await identificar(blob);
+}});
+
+document.querySelectorAll(".pestanas button").forEach(boton => {
+  boton.onclick = () => {
+    document.querySelectorAll(".pestanas button").forEach(b => b.classList.remove("activa"));
+    boton.classList.add("activa");
+    document.querySelectorAll("[data-panel]").forEach(p =>
+      p.hidden = p.dataset.panel !== boton.dataset.modo);
+    if (boton.dataset.modo === "galeria") cargarGaleria();
+  };
+});
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  if (ok) {
+    document.getElementById("m-inscritos").textContent = datos.extra?.inscritos ?? 0;
+    if (datos.extra?.umbral != null) {
+      umbral.value = datos.extra.umbral;
+      document.getElementById("umbral-txt").textContent = Number(datos.extra.umbral).toFixed(2);
+    }
+    if (datos.extra?.sin_entrenar) {
+      resultados.innerHTML = `<p class="vacio">Usando un backbone preentrenado con caras
+        (<code>rostro:facenet</code>) porque todavía no has entrenado esta tarea.
+        Ya funciona; entrenar con fotos propias lo mejora.</p>`;
+    }
+  }
+  return ok;
+}
+
+async function identificar(blob) {
+  try {
+    const datos = await Panel.enviarArchivo(
+      `/api/rostros/identificar?umbral=${umbral.value}`, blob, "imagen");
+    if (datos.error === "galeria_vacia") {
+      resultados.innerHTML = '<p class="vacio">La galería está vacía: inscribe a alguien primero.</p>';
+      return;
+    }
+    const color = datos.identidad ? "var(--d)" : "var(--error)";
+    const texto = datos.identidad ? `${datos.identidad} ${(datos.similitud * 100).toFixed(0)}%`
+                                  : "desconocido";
+    dibujarCajas(overlay, video, [{...datos.caja, color, texto}],
+                 datos.ancho, datos.alto, {contener: true});
+    resultados.innerHTML = `
+      <div class="veredicto" style="color:${color}">
+        ${datos.identidad ? Panel.escapar(datos.identidad) : "DESCONOCIDO"}</div>
+      <div class="fila"><span>parecido</span><span>${datos.similitud.toFixed(3)}
+        (umbral ${datos.umbral.toFixed(2)})</span></div>
+      <h2 style="margin-top:18px">Candidatos</h2>
+      ${datos.candidatos.map(c => `<div class="fila" style="padding:4px 0">
+        <span>${Panel.escapar(c.nombre)}</span><span>${c.similitud.toFixed(3)}</span></div>`).join("")}`;
+  } catch (e) {
+    resultados.innerHTML = `<p class="vacio">${Panel.escapar(e.message)}</p>`;
+  }
+}
+
+document.getElementById("btn-camara").onclick = async (e) => {
+  if (camara.activa) {
+    camara.detener(); e.target.textContent = "Iniciar cámara";
+    document.getElementById("btn-capturar").disabled = true;
+    return;
+  }
+  await camara.iniciar();
+  document.getElementById("aviso").hidden = true;
+  document.getElementById("btn-capturar").disabled = false;
+  e.target.textContent = "Detener cámara";
+};
+document.getElementById("btn-capturar").onclick = async () => identificar(await camara.capturar());
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  camara.detener();
+  video.style.cssText += `background-image:url(${URL.createObjectURL(f)});
+                          background-size:contain;background-position:center;
+                          background-repeat:no-repeat`;
+  video.classList.remove("espejo");
+  document.getElementById("aviso").hidden = true;
+  await identificar(f);
+  e.target.value = "";
+};
+umbral.oninput = () => document.getElementById("umbral-txt").textContent =
+  Number(umbral.value).toFixed(2);
+
+// --- verificación ---
+for (const lado of ["a", "b"]) {
+  document.getElementById(`btn-${lado}`).onclick = () =>
+    document.getElementById(`file-${lado}`).click();
+  document.getElementById(`file-${lado}`).onchange = (e) => {
+    const f = e.target.files[0];
+    if (!f) return;
+    ficheros[lado] = f;
+    const img = document.getElementById(`img-${lado}`);
+    img.src = URL.createObjectURL(f); img.hidden = false;
+    document.getElementById(`aviso-${lado}`).hidden = true;
+    document.getElementById("btn-verificar").disabled = !(ficheros.a && ficheros.b);
+  };
+}
+document.getElementById("btn-verificar").onclick = async () => {
+  const cuerpo = new FormData();
+  cuerpo.append("imagen", ficheros.a);
+  cuerpo.append("contra", ficheros.b);
+  const r = await fetch(`/api/rostros/verificar?umbral=${umbral.value}`,
+                        {method: "POST", body: cuerpo});
+  const datos = await r.json();
+  if (!r.ok) { resultados.innerHTML = `<p class="vacio">${Panel.escapar(datos.detail)}</p>`; return; }
+  const color = datos.misma_persona ? "var(--d)" : "var(--error)";
+  resultados.innerHTML = `
+    <div class="veredicto" style="color:${color}">
+      ${datos.misma_persona ? "LA MISMA PERSONA" : "PERSONAS DISTINTAS"}</div>
+    <div class="fila"><span>parecido</span><span>${datos.similitud.toFixed(3)}</span></div>
+    <div class="fila"><span>umbral</span><span>${datos.umbral.toFixed(3)}</span></div>
+    <div class="barra" style="margin-top:10px"><span style="width:${
+      Math.max(0, Math.min(100, datos.similitud * 100)).toFixed(0)}%;background:${color}"></span></div>`;
+};
+
+// --- galería ---
+document.getElementById("btn-fotos").onclick = () =>
+  document.getElementById("file-inscribir").click();
+document.getElementById("file-inscribir").onchange = (e) => {
+  ficheros.inscribir = Array.from(e.target.files);
+  document.getElementById("elegidas").textContent =
+    `${ficheros.inscribir.length} foto(s) elegidas.`;
+  document.getElementById("btn-inscribir").disabled = !ficheros.inscribir.length;
+};
+document.getElementById("btn-inscribir").onclick = async () => {
+  const nombre = document.getElementById("nombre").value.trim();
+  if (!nombre) { alert("Falta el nombre"); return; }
+  const cuerpo = new FormData();
+  ficheros.inscribir.forEach(f => cuerpo.append("imagenes", f));
+  const r = await fetch(`/api/rostros/inscribir?nombre=${encodeURIComponent(nombre)}`,
+                        {method: "POST", body: cuerpo});
+  const datos = await r.json();
+  if (!r.ok) { alert(datos.detail); return; }
+  document.getElementById("nombre").value = "";
+  ficheros.inscribir = [];
+  document.getElementById("btn-inscribir").disabled = true;
+  document.getElementById("elegidas").textContent = `${datos.nombre} inscrito con ${datos.fotos} fotos.`;
+  cargarGaleria();
+};
+
+async function cargarGaleria() {
+  const r = await fetch("/api/rostros/galeria");
+  const datos = await r.json();
+  if (!r.ok) { document.getElementById("lista").innerHTML =
+    `<p class="vacio">${Panel.escapar(datos.detail)}</p>`; return; }
+  document.getElementById("m-inscritos").textContent = datos.personas.length;
+  document.getElementById("lista").innerHTML = datos.personas.length
+    ? datos.personas.map(n => `<div class="persona"><span>${Panel.escapar(n)}</span>
+        <button class="sec" data-olvidar="${Panel.escapar(n)}">Quitar</button></div>`).join("")
+    : '<p class="vacio">Nadie inscrito todavía.</p>';
+  document.querySelectorAll("[data-olvidar]").forEach(b => b.onclick = async () => {
+    await fetch(`/api/rostros/inscritos/${encodeURIComponent(b.dataset.olvidar)}`,
+                {method: "DELETE"});
+    cargarGaleria();
+  });
+}
+
+comprobar();
+</script>
+{% endblock %}

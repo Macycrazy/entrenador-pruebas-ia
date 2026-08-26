@@ -1,0 +1,45 @@
+# Super-resolución: recuperar detalle de fotos pequeñas o borrosas (carnets viejos).
+#
+# Vale cualquier carpeta de fotos: los pares se fabrican degradando la original.
+#   python entrenar.py --config configs/superresolucion.yaml
+nombre: superresolucion
+tarea: imagen_superresolucion
+
+datos:
+  ruta: datos/train/hombre    # cualquier carpeta con fotos sirve
+  batch: 16
+  workers: 4
+  val_proporcion: 0.1
+  limite: 4000                # con unos miles de imágenes ya aprende
+
+superresolucion:
+  escala: 4
+  tam_parche: 128
+  canales: 64
+  bloques: 8
+  degradacion: 0.5            # sube a 0.8 si tus fotos reales son muy malas
+
+optimizador:
+  nombre: adamw
+  lr: 2.0e-4
+  wd: 0.0
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 0.5
+
+entrenamiento:
+  epocas: 30
+  precision: bf16
+  congelar_epocas: 0
+  canales_last: false
+  clip_grad: 1.0
+  ema: 0.999
+  paciencia: 8
+  metrica_objetivo: acc       # = PSNR normalizado
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

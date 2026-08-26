@@ -1,0 +1,57 @@
+# Preset «máxima»: todo encendido. Bastante más lento (SAM duplica el coste por lote)
+# pero es lo que exprime el último punto de precisión.
+#
+# Con timm instalado, esta suele ser la mejor opción de backbone:
+#   --set modelo.arquitectura=timm:convnextv2_tiny.fcmae_ft_in22k_in1k
+nombre: maxima
+
+modelo:
+  arquitectura: convnext_tiny
+  dropout: 0.3
+  drop_path: 0.1               # stochastic depth (solo tiene efecto en backbones timm)
+
+datos:
+  tam_img: 224
+  batch: 64
+  workers: 8
+
+optimizador:
+  nombre: adamw_fused
+  lr: 2.0e-4
+  wd: 0.05
+  lr_backbone_factor: 0.25
+  sam: true                    # +generalización a cambio del doble de tiempo por lote
+  sam_rho: 0.05
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 2.0
+
+perdida:
+  nombre: focal
+  focal_gamma: 1.5
+  suavizado: 0.05
+
+aumentos:
+  politica: trivialaugment
+  webcam: 0.4
+  mixup: 0.2
+  cutmix: 1.0
+  borrado: 0.25
+
+entrenamiento:
+  epocas: 40
+  precision: bf16
+  acumular: 2                  # lote efectivo de 128 sin más VRAM
+  congelar_epocas: 2
+  descongelado_gradual: true
+  ema: 0.9995
+  swa: true
+  swa_desde: 0.7
+  resolucion_progresiva: [160, 192, 224]
+  paciencia: 10
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  tta: true
+  calibrar: true

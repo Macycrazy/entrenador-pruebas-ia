@@ -1,0 +1,350 @@
+{% extends "base.html" %}
+{% block titulo %}Guía{% endblock %}
+
+{% block estilos %}
+  .guia{max-width:1080px}
+  .guia h2{font-size:16px;text-transform:none;letter-spacing:0;color:var(--texto);
+           margin:30px 0 10px;font-weight:650}
+  .guia h2:first-of-type{margin-top:8px}
+  .guia p{font-size:14px;color:var(--suave);line-height:1.7}
+  .guia ul{font-size:14px;color:var(--suave);line-height:1.8;padding-left:20px}
+  .guia b{color:var(--texto)}
+  .guia a{color:var(--cian)}
+  pre{background:#070b16;border:1px solid var(--borde);border-radius:10px;padding:14px 16px;
+      overflow-x:auto;font-size:12.5px;line-height:1.7;color:#cfd8f0;
+      font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .paso{display:flex;gap:14px;align-items:flex-start;margin-bottom:6px}
+  .numero{flex:none;width:26px;height:26px;border-radius:50%;
+          background:linear-gradient(135deg,var(--cian),var(--azul));
+          color:#04121f;font-weight:700;font-size:13px;display:flex;align-items:center;
+          justify-content:center;margin-top:2px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:10px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--borde)}
+  th{color:var(--suave);font-weight:600;font-size:12px;text-transform:uppercase;
+     letter-spacing:.6px}
+  .aviso-caja{background:var(--panel2);border-left:3px solid var(--alerta);border-radius:8px;
+              padding:12px 16px;font-size:13.5px;color:var(--suave);line-height:1.7;margin:14px 0}
+
+  /* --- las dos caras de la guía ------------------------------------------- */
+  .pestanas{display:flex;gap:8px;margin:18px 0 26px;border-bottom:1px solid var(--borde)}
+  .pestanas button{background:none;border:0;border-bottom:2px solid transparent;
+                   border-radius:0;box-shadow:none;color:var(--suave);font-weight:600;
+                   font-size:14px;padding:11px 16px;cursor:pointer;transition:.2s var(--curva)}
+  .pestanas button:hover:not(:disabled){transform:none;color:var(--texto);
+                                        box-shadow:none;background:none}
+  .pestanas button.activa{color:var(--cian);border-bottom-color:var(--cian)}
+  .cara{display:none;animation:entrar .4s var(--curva) both}
+  .cara.activa{display:block}
+
+  /* --- portada para quien no es técnico ----------------------------------- */
+  .titular{font-size:26px;font-weight:700;line-height:1.35;color:var(--texto);
+           letter-spacing:-.4px;margin:0 0 14px;max-width:46ch}
+  .titular .destaca{background:linear-gradient(90deg,var(--cian),var(--celeste));
+                    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .en-vivo{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+           margin:22px 0 6px}
+  .en-vivo div{background:var(--panel);border:1px solid var(--borde);border-radius:12px;
+               padding:14px 16px}
+  .en-vivo b{display:block;font-size:26px;font-weight:750;letter-spacing:-.8px;
+             font-variant-numeric:tabular-nums;
+             background:linear-gradient(180deg,#fff,var(--celeste));
+             -webkit-background-clip:text;background-clip:text;color:transparent}
+  .en-vivo span{display:block;margin-top:3px;font-size:11.5px;color:var(--tenue);
+                text-transform:uppercase;letter-spacing:.6px}
+
+  .circuito{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+            margin:16px 0 8px}
+  .eslabon{position:relative;background:var(--panel);border:1px solid var(--borde);
+           border-radius:14px;padding:18px 18px 16px;transition:.25s var(--curva)}
+  .eslabon:hover{border-color:var(--borde-vivo);transform:translateY(-3px)}
+  .eslabon .icono{font-size:24px;line-height:1}
+  .eslabon h3{margin:9px 0 6px;font-size:14.5px;font-weight:650;color:var(--texto)}
+  .eslabon p{margin:0;font-size:12.5px;line-height:1.6;color:var(--suave)}
+  .eslabon .orden{position:absolute;top:14px;right:16px;font-size:11px;color:var(--tenue);
+                  font-weight:700}
+
+  .doble{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+         margin:14px 0}
+  .caja{background:var(--panel);border:1px solid var(--borde);border-radius:14px;padding:18px 20px}
+  .caja h3{margin:0 0 10px;font-size:14px;font-weight:650;color:var(--texto)}
+  .caja ul{margin:0;font-size:13.5px}
+  .caja.limites{border-color:rgba(255,181,71,.3)}
+  .caja.limites h3{color:var(--alerta)}
+
+  .cierre{background:linear-gradient(135deg,rgba(34,61,144,.45),rgba(9,113,184,.18));
+          border:1px solid var(--borde-vivo);border-radius:16px;padding:24px 26px;margin:26px 0 8px}
+  .cierre h2{margin-top:0}
+  .cierre .acciones{display:flex;gap:11px;flex-wrap:wrap;margin-top:18px}
+{% endblock %}
+
+{% block contenido %}
+<div class="guia">
+<h1>📖 Cómo funciona</h1>
+<p class="subtitulo">Dos caras: la explicación para quien viene a verlo, y las
+   instrucciones para quien lo va a montar.</p>
+
+<div class="pestanas">
+  <button class="activa" data-cara="entender">Para entender qué es</button>
+  <button data-cara="montar">Para montarlo</button>
+</div>
+
+<!-- ==================================================== para el visitante -->
+<div class="cara activa" id="cara-entender">
+
+  <p class="titular">Esto es una inteligencia artificial
+     <span class="destaca">entrenada aquí</span>, con datos nuestros y sin depender
+     de nadie.</p>
+  <p>No es una suscripción a un servicio de fuera ni una demostración grabada. Es un
+     sistema real corriendo en <b>este ordenador</b>: aprende de ejemplos, se le puede
+     ver aprender en directo, y lo que aprende se queda aquí dentro.</p>
+
+  <div class="en-vivo">
+    <div><b>{{ listas }}</b><span>listas para probar</span></div>
+    <div><b>{{ entrenados }}</b><span>entrenadas aquí</span></div>
+    <div><b>{{ vistas | length }}</b><span>demostraciones</span></div>
+    <div><b>0</b><span>en servicios externos</span></div>
+  </div>
+  <p style="font-size:12.5px;color:var(--tenue)">Estas cifras las lee la propia página
+     del sistema: no están escritas a mano.</p>
+
+  <h2>Cómo aprende una máquina, en cuatro pasos</h2>
+  <p>Es más sencillo de lo que parece, y siempre es el mismo circuito, tanto para
+     reconocer una cara como para predecir la asistencia del mes que viene.</p>
+
+  <div class="circuito">
+    <div class="eslabon">
+      <span class="orden">1</span>
+      <div class="icono">🗂️</div>
+      <h3>Ejemplos</h3>
+      <p>Se le dan miles de casos ya resueltos. Aquí, casi cien mil fotografías de
+         rostros con su etiqueta. Sin ejemplos no hay nada que aprender.</p>
+    </div>
+    <div class="eslabon">
+      <span class="orden">2</span>
+      <div class="icono">🔁</div>
+      <h3>Ensayo y error</h3>
+      <p>Mira un ejemplo, responde, se le dice cuánto falló y se corrige. Millones de
+         veces. Ese es todo el misterio del entrenamiento.</p>
+    </div>
+    <div class="eslabon">
+      <span class="orden">3</span>
+      <div class="icono">📏</div>
+      <h3>Examen</h3>
+      <p>Se le prueba con casos que <b>nunca vio</b>. Si solo acertara los que estudió,
+         no habría aprendido: se lo habría aprendido de memoria.</p>
+    </div>
+    <div class="eslabon">
+      <span class="orden">4</span>
+      <div class="icono">▶️</div>
+      <h3>En uso</h3>
+      <p>Lo aprendido queda en un archivo. Este panel lo lee y responde en milésimas de
+         segundo, ya sin volver a aprender.</p>
+    </div>
+  </div>
+  <p>Los pasos 1, 2 y 4 se pueden ver aquí mismo:
+     <a href="/datos">los datos</a>, <a href="/entrenamiento">el entrenamiento en
+     directo</a> y cualquiera de las demostraciones.</p>
+
+  <div class="doble">
+    <div class="caja">
+      <h3>✅ Lo que sí hace hoy</h3>
+      <ul>
+        <li>Reconocer quién hay delante de una cámara y si es una persona real.</li>
+        <li>Leer una cédula o una constancia y sacar los datos sin teclearlos.</li>
+        <li>Transcribir una reunión, y leer un texto en voz alta.</li>
+        <li>Responder preguntas sobre nuestros propios reglamentos.</li>
+        <li>Anticipar ausentismo o asistencia a partir de los registros.</li>
+      </ul>
+    </div>
+    <div class="caja limites">
+      <h3>⚠️ Lo que conviene tener claro</h3>
+      <ul>
+        <li>Es la <b>versión pequeña</b>: modelos modestos y entrenamientos de horas.</li>
+        <li>Se equivoca, y lo dice: los porcentajes están calibrados, un 90&nbsp;% es
+            un 90&nbsp;% de acierto real y no una confianza inventada.</li>
+        <li>Estima apariencia aprendida de unos datos; <b>no determina</b> la identidad
+            ni ningún dato real de nadie.</li>
+        <li>Grabar rostros es tratar datos biométricos: hay que avisar a quien esté
+            delante de la cámara.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Por qué corre aquí y no en la nube</h2>
+  <ul>
+    <li><b>Nada sale de la institución.</b> Ninguna imagen, grabación ni documento viaja
+        a internet. Con datos de personal, eso no es un detalle.</li>
+    <li><b>No se paga por uso.</b> Un servicio externo cobra por cada consulta; esto,
+        una vez montado, responde todas las que haga falta.</li>
+    <li><b>Aprende de lo nuestro.</b> Un servicio genérico no conoce nuestras gerencias,
+        nuestros formatos ni nuestro acento. Este se entrena con nuestros datos.</li>
+  </ul>
+
+  <div class="cierre">
+    <h2>Y esto es a pequeña escala</h2>
+    <p>Todo lo que hay aquí corre en <b>una sola tarjeta gráfica de escritorio</b>, con
+       modelos pequeños y entrenamientos de un par de horas. Aun así ve, oye, habla, lee,
+       dibuja y predice.</p>
+    <p>Con hardware dedicado la misma arquitectura escala a modelos mayores, a los datos
+       de toda la institución y a varios entrenamientos a la vez. Lo que hoy tarda dos
+       horas tardaría minutos, y lo que hoy es una demostración pasaría a ser un
+       servicio en marcha.</p>
+    <div class="acciones">
+      <a class="boton" href="/recorrido">🎬 Verlo en cinco pasos</a>
+      <a class="boton secundario" href="/">Probar las demostraciones</a>
+      <a class="boton secundario" href="#" data-ir="montar">Ver la parte técnica</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================= para quien lo instala -->
+<div class="cara" id="cara-montar">
+
+<h2>Qué es esto</h2>
+<p>Son <b>dos mitades separadas a propósito</b>. Por un lado una plataforma de
+entrenamiento que se maneja desde la terminal o desde la pestaña
+<a href="/entrenamiento">Entrenar</a>. Por otro, este panel, que <b>solo lee</b> los
+modelos ya entrenados y nunca entrena: así una cámara en vivo nunca compite por la GPU
+con un entrenamiento.</p>
+
+<h2>Instalación</h2>
+<p>La RTX 50xx es Blackwell (sm_120) y necesita PyTorch con CUDA 12.8. Las builds
+cu118 o cu121 no traen núcleos para esa tarjeta y fallarán.</p>
+<pre>sudo apt install python3-pip python3-venv        # esta máquina no trae pip
+
+cd ~/Descargas/ia-genero
+python3 -m venv .venv && source .venv/bin/activate
+
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+pip install -r requirements.txt
+pip install -r servidor/requirements.txt         # lo que necesita el panel
+
+python preparacion/comprobar_gpu.py             # debe listar sm_120</pre>
+
+<div class="aviso-caja">
+  <b>Cuidado con <code>facenet-pytorch</code>:</b> instálalo siempre con
+  <code>--no-deps</code>. Sus dependencias fijan torch&lt;2.3 y degradarían tu
+  instalación cu128 a cu121, dejando la GPU sin núcleos utilizables.
+</div>
+
+<h2>Poner el panel en marcha</h2>
+<pre>python servidor/app.py --puerto 8010</pre>
+<p>La cámara y el micrófono solo funcionan en <code>localhost</code> o por HTTPS: es una
+restricción de los navegadores, no del servidor.</p>
+
+<h2>El circuito completo, paso a paso</h2>
+
+<div class="paso"><div class="numero">1</div><div>
+  <b>Conseguir datos.</b> Desde la pestaña Entrenar, o en la terminal:
+  <pre>python preparacion/descargar_dataset.py --listar
+python preparacion/descargar_dataset.py --fuente fairface --max-por-clase 0
+python preparacion/preparar_datos.py --val 0.15</pre>
+  Para cada tarea hay además un generador de datos sintéticos, para probar el circuito
+  antes de conseguir datos de verdad.
+</div></div>
+
+<div class="paso"><div class="numero">2</div><div>
+  <b>Saber cuánto va a tardar</b> antes de comprometer horas:
+  <pre>python estimar_tiempo.py --config configs/genero.yaml</pre>
+  Mide la velocidad real de tu máquina y avisa si el cuello de botella es la CPU
+  preparando los datos en vez de la GPU.
+</div></div>
+
+<div class="paso"><div class="numero">3</div><div>
+  <b>Entrenar.</b>
+  <pre>python entrenar.py --config configs/genero.yaml
+python entrenar.py --preset rapido                 # prueba rápida
+python entrenar.py --reanudar experimentos/genero  # continuar tras un corte
+python entrenar.py --listar-opciones               # catálogo completo</pre>
+  Cualquier opción se cambia sin tocar archivos con <code>--set seccion.clave=valor</code>.
+</div></div>
+
+<div class="paso"><div class="numero">4</div><div>
+  <b>Evaluar</b> y mirar el desglose por subgrupo, que es donde aparece el sesgo:
+  <pre>python evaluar.py experimentos/genero --galeria</pre>
+</div></div>
+
+<div class="paso"><div class="numero">5</div><div>
+  <b>Usarlo</b> en la vista correspondiente de este panel. En cuanto existe
+  <code>experimentos/&lt;nombre&gt;/mejor.pt</code>, la vista se activa sola.
+</div></div>
+
+<h2>Cuánto tarda cada entrenamiento</h2>
+<p>Aproximados en una RTX 5060 Ti con bf16, ±40 %. Con parada temprana suele quedarse
+en la mitad.</p>
+<table>
+  <tr><th>Entrenamiento</th><th>Datos</th><th>Tiempo</th></tr>
+  <tr><td>Género, preset rápido</td><td>83 k imágenes, 8 épocas</td><td>~15 min</td></tr>
+  <tr><td><b>Género, preset calidad</b></td><td>83 k imágenes, 25 épocas</td><td><b>1,5 - 2 h</b></td></tr>
+  <tr><td>Género, preset máxima</td><td>83 k imágenes, 40 épocas</td><td>5 - 6 h</td></tr>
+  <tr><td>Rostros con LFW / CASIA</td><td>13 k / 490 k fotos</td><td>~20 min / ~4 h</td></tr>
+  <tr><td>Detección R-CNN / MobileNet</td><td>5 k imágenes</td><td>2-3 h / ~40 min</td></tr>
+  <tr><td>Segmentación</td><td>2 k imágenes, 30 épocas</td><td>~25 min</td></tr>
+  <tr><td>Audio</td><td>20 k clips, 25 épocas</td><td>10 - 20 min</td></tr>
+  <tr><td>Texto</td><td>10 k textos, 5 épocas</td><td>~5 min</td></tr>
+  <tr><td>LLM con LoRA 1,5B / QLoRA 7B</td><td>5 k instrucciones</td><td>~30 min / ~1,5 h</td></tr>
+</table>
+
+<h2>¿Se puede quemar la tarjeta?</h2>
+<p>No. La GPU baja frecuencias sola antes de dañarse, y una 5060 Ti son 180 W. Además el
+entrenamiento registra temperatura y consumo, y <b>se detiene solo</b> guardando el
+checkpoint si pasa de 85 °C en tres lecturas seguidas.</p>
+<pre>python preparacion/vigilar_gpu.py                  # monitor en otra terminal
+python entrenar.py --set entrenamiento.temp_max=80 # más conservador</pre>
+<ul>
+  <li>Por debajo de 80 °C: perfecto. Entre 80 y 84 °C: normal bajo carga.</li>
+  <li>Por encima de 85 °C: revisa polvo y flujo de aire, no el entrenamiento.</li>
+  <li>Si se corta la luz no pierdes nada: cada época guarda el estado completo y se
+      retoma con <code>--reanudar</code>.</li>
+</ul>
+
+<h2>Las tareas del catálogo</h2>
+<p>Esta tabla se arma sola con el registro de vistas: no se queda desfasada al añadir
+   una tarea nueva.</p>
+<table>
+  <tr><th>Tarea</th><th>Configuración</th><th>Estado</th><th>Para qué sirve</th></tr>
+  {% for f in familias %}{% for v in f.vistas %}{% if v.config %}
+  <tr>
+    <td><a href="/{{ v.slug }}">{{ v.titulo }}</a></td>
+    <td><code>{{ v.config | replace("configs/", "") }}</code></td>
+    <td>{% if v.nivel() == 'entrenado' %}entrenada aquí
+        {%- elif v.nivel() == 'base' %}{{ v.modelo_base }}
+        {%- else %}por entrenar{% endif %}</td>
+    <td>{{ v.descripcion }}</td>
+  </tr>
+  {% endif %}{% endfor %}{% endfor %}
+</table>
+
+<h2>Cosas que conviene tener claras</h2>
+<ul>
+  <li>Mira siempre el <b>acierto balanceado y por subgrupo</b>, no el global: un dataset
+      desequilibrado da 92 % global con un desastre en la clase minoritaria.</li>
+  <li>Los porcentajes de las vistas están <b>calibrados</b>: un 90 % significa
+      aproximadamente un 90 % de acierto real, no una confianza inventada.</li>
+  <li>El modelo de género estima una <b>apariencia aprendida del dataset</b>. No determina
+      la identidad ni ningún dato real de nadie.</li>
+  <li>Grabar rostros es tratamiento de datos biométricos: informa a quien esté delante de
+      la cámara y no almacenes las imágenes.</li>
+</ul>
+</div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+/* Dos caras de la misma guía. La elegida se recuerda en la URL (#montar) para poder
+   enlazar directamente a la parte técnica. */
+const pestanas = document.querySelectorAll(".pestanas button");
+function mostrar(cara) {
+  pestanas.forEach(b => b.classList.toggle("activa", b.dataset.cara === cara));
+  document.querySelectorAll(".cara").forEach(
+    c => c.classList.toggle("activa", c.id === `cara-${cara}`));
+  history.replaceState(null, "", cara === "montar" ? "#montar" : location.pathname);
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
+pestanas.forEach(b => b.onclick = () => mostrar(b.dataset.cara));
+document.querySelectorAll("[data-ir]").forEach(
+  a => a.onclick = e => { e.preventDefault(); mostrar(a.dataset.ir); });
+if (location.hash === "#montar") mostrar("montar");
+</script>
+{% endblock %}

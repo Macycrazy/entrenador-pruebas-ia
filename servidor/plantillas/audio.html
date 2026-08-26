@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% block titulo %}Audio y voz{% endblock %}
+
+{% block estilos %}
+  .grabador{display:flex;flex-direction:column;align-items:center;justify-content:center;
+            gap:14px;min-height:240px;background:var(--panel2);border:1px solid var(--borde);
+            border-radius:12px;padding:24px}
+  .nivel{width:100%;height:56px}
+  .rec{width:74px;height:74px;border-radius:50%;background:var(--error);color:#fff;
+       font-size:13px;font-weight:650;border:0;cursor:pointer}
+  .rec.grabando{animation:latido 1s infinite}
+  @keyframes latido{50%{opacity:.55}}
+  audio{width:100%;margin-top:14px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🎙️ Audio y voz</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <div class="grabador">
+      <canvas id="nivel" class="nivel"></canvas>
+      <button id="btn-grabar" class="rec">Grabar</button>
+      <span class="vacio" id="estado-grabacion">Pulsa para grabar desde el micrófono</span>
+    </div>
+    <audio id="reproductor" controls hidden></audio>
+
+    <div class="controles">
+      <button id="btn-archivo" class="sec">Subir audio…</button>
+      <input type="file" id="archivo" accept="audio/*" hidden>
+      <button id="btn-analizar" disabled>Analizar</button>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Duración <b id="m-duracion">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Resultado</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      El sonido se convierte en espectrograma y se clasifica como si fuera una imagen. El
+      modelo usa una ventana fija (la de su configuración): si el audio es más largo, se
+      analiza el trozo central.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "audio", config: "{{ vista.config }}"};
+const lienzo = document.getElementById("nivel");
+const ctx = lienzo.getContext("2d");
+let grabadora = null, trozos = [], audioActual = null, analizador = null, animacion = null;
+
+async function comprobar() {
+  const {ok} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) avisoSinModelo(document.getElementById("sin-modelo"), VISTA);
+  return ok;
+}
+
+function dibujarNivel() {
+  const datos = new Uint8Array(analizador.fftSize);
+  analizador.getByteTimeDomainData(datos);
+  lienzo.width = lienzo.clientWidth;
+  lienzo.height = lienzo.clientHeight;
+  ctx.clearRect(0, 0, lienzo.width, lienzo.height);
+  ctx.strokeStyle = "#5eead4";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let i = 0; i < datos.length; i++) {
+    const x = (i / datos.length) * lienzo.width;
+    const y = (datos[i] / 255) * lienzo.height;
+    i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+  }
+  ctx.stroke();
+  animacion = requestAnimationFrame(dibujarNivel);
+}
+
+document.getElementById("btn-grabar").onclick = async (e) => {
+  if (grabadora && grabadora.state === "recording") {
+    grabadora.stop();
+    return;
+  }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    const contexto = new AudioContext();
+    analizador = contexto.createAnalyser();
+    contexto.createMediaStreamSource(stream).connect(analizador);
+    dibujarNivel();
+
+    grabadora = new MediaRecorder(stream);
+    trozos = [];
+    grabadora.ondataavailable = ev => trozos.push(ev.data);
+    grabadora.onstop = () => {
+      cancelAnimationFrame(animacion);
+      stream.getTracks().forEach(t => t.stop());
+      contexto.close();
+      audioActual = new File(trozos, "grabacion.webm", {type: grabadora.mimeType});
+      const reproductor = document.getElementById("reproductor");
+      reproductor.src = URL.createObjectURL(audioActual);
+      reproductor.hidden = false;
+      document.getElementById("btn-analizar").disabled = false;
+      document.getElementById("estado-grabacion").textContent =
+        "Grabación lista. Pulsa «Analizar».";
+      e.target.textContent = "Grabar";
+      e.target.classList.remove("grabando");
+    };
+    grabadora.start();
+    e.target.textContent = "Parar";
+    e.target.classList.add("grabando");
+    document.getElementById("estado-grabacion").textContent = "Grabando…";
+  } catch (err) {
+    document.getElementById("estado-grabacion").textContent =
+      "No se pudo abrir el micrófono: " + err.message;
+  }
+};
+
+document.getElementById("btn-archivo").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  audioActual = f;
+  const reproductor = document.getElementById("reproductor");
+  reproductor.src = URL.createObjectURL(f);
+  reproductor.hidden = false;
+  document.getElementById("btn-analizar").disabled = false;
+  document.getElementById("estado-grabacion").textContent = f.name;
+};
+
+document.getElementById("btn-analizar").onclick = async () => {
+  if (!audioActual) return;
+  document.getElementById("resultados").innerHTML = '<p class="vacio">Analizando…</p>';
+  try {
+    const datos = await Panel.enviarArchivo("/api/audio/predecir", audioActual, "audio");
+    document.getElementById("m-duracion").textContent = datos.duracion + " s";
+    document.getElementById("resultados").innerHTML = `
+      <div class="etiqueta" style="color:${Panel.color(0)};margin-bottom:10px">
+        ${Panel.escapar(datos.etiqueta)}</div>
+      ${Panel.barras(datos.probabilidades)}`;
+  } catch (err) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  }
+};
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

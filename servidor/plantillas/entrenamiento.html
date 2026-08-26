@@ -1,0 +1,394 @@
+{% extends "base.html" %}
+{% block titulo %}Entrenar{% endblock %}
+
+{% block estilos %}
+  .preseleccion{margin-top:9px;font-size:12.5px;color:var(--celeste);
+                background:rgba(29,192,231,.10);border:1px solid var(--borde-vivo);
+                border-radius:9px;padding:8px 11px;line-height:1.5}
+  .rejilla{grid-template-columns:minmax(0,1fr) 380px}
+  /* el panel de "qué hacer" primero en pantallas estrechas */
+  @media (max-width:980px){.rejilla > aside{order:-1}}
+  .rejilla .consola{height:34vh}
+  .consola{background:#070b16;border:1px solid var(--borde);border-radius:10px;padding:14px;
+           font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:12.5px;
+           line-height:1.55;height:60vh;overflow-y:auto;white-space:pre-wrap;
+           word-break:break-word;color:#cfd8f0}
+  .consola .aviso-linea{color:var(--c)}
+  .consola .error-linea{color:var(--error)}
+  .consola .bien-linea{color:var(--d)}
+  .campo{margin-bottom:12px}
+  .campo label{display:block;font-size:12px;color:var(--suave);margin-bottom:5px}
+  .campo-doble{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .proceso{display:flex;justify-content:space-between;align-items:center;gap:8px;
+           padding:8px 10px;background:var(--panel2);border:1px solid var(--borde);
+           border-radius:9px;margin-bottom:6px;font-size:12.5px;cursor:pointer}
+  .proceso.activo{border-color:var(--acento)}
+  .proceso button{padding:3px 8px;font-size:11px}
+  .punto{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:7px}
+  .experimento{display:flex;justify-content:space-between;padding:7px 0;font-size:12.5px;
+               border-bottom:1px dashed var(--borde)}
+  .aviso-seguridad{background:#2a1f10;border:1px solid #7a5a1e;color:#f4d58d;
+                   border-radius:10px;padding:12px 14px;font-size:12.5px;margin-bottom:18px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🚀 Entrenar</h1>
+<p class="subtitulo">Lanza aquí lo mismo que harías en la terminal. El proceso corre aparte:
+   puedes cerrar esta página y el entrenamiento sigue.</p>
+
+<div class="aviso-seguridad">
+  Esta página ejecuta procesos en tu máquina. Está pensada para uso local
+  (<code>127.0.0.1</code>); no la expongas a la red con <code>--host 0.0.0.0</code>.
+</div>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <h2>Curva de entrenamiento</h2>
+    <canvas id="grafica" style="width:100%;height:200px"></canvas>
+    <div id="leyenda" style="margin:6px 0 16px"></div>
+
+    <h2>Consola</h2>
+    <div class="consola" id="consola">Elige una acción y pulsa el botón para empezar.</div>
+    <div class="controles">
+      <button id="btn-parar" class="sec" disabled>Detener proceso</button>
+      <button id="btn-limpiar-consola" class="sec">Limpiar consola</button>
+      <label class="check"><input type="checkbox" id="chk-auto" checked> Seguir al final</label>
+      <span class="chip" id="chip-proceso">sin proceso</span>
+    </div>
+  </section>
+
+  <aside>
+    <div class="tarjeta" style="margin-bottom:18px">
+      <h2>Qué hacer</h2>
+
+      <div class="campo">
+        <label for="accion">Acción</label>
+        <select id="accion">
+          <optgroup label="Entrenamiento">
+            <option value="entrenar">Entrenar un modelo</option>
+            <option value="estimar">Estimar cuánto tardará</option>
+            <option value="evaluar">Evaluar un modelo entrenado</option>
+            <option value="exportar">Exportar (ONNX, INT8…)</option>
+            <option value="buscar">Buscar hiperparámetros</option>
+          </optgroup>
+          <optgroup label="Datos">
+            <option value="descargar_dataset">Descargar rostros con género (FairFace…)</option>
+            <option value="descargar_rostros">Descargar identidades (LFW, CASIA…)</option>
+            <option value="preparar_datos">Preparar datos (train/val)</option>
+            <option value="sintetico_deteccion">Generar datos de detección</option>
+            <option value="sintetico_segmentacion">Generar datos de segmentación</option>
+            <option value="sintetico_audio">Generar audios de prueba</option>
+            <option value="sintetico_texto">Generar textos de prueba</option>
+            <option value="sintetico_llm">Generar instrucciones de prueba</option>
+          </optgroup>
+          <optgroup label="Sistema">
+            <option value="comprobar_gpu">Comprobar la GPU</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="campo" data-para="config">
+        <label for="config">Configuración (las que tienen datos van primero)</label>
+        <select id="config">
+          {% for c in configs %}
+          <option value="configs/{{ c.archivo }}">
+            {{ c.archivo }} — {% if c.listo %}datos listos{% else %}faltan datos en {{ c.datos }}/{% endif %}
+          </option>{% endfor %}
+        </select>
+      </div>
+
+      <div class="campo" data-para="experimento" hidden>
+        <label for="experimento">Experimento</label>
+        <select id="experimento"></select>
+      </div>
+
+      <div class="controles">
+        <button id="btn-lanzar">▶ Lanzar</button>
+        <button id="btn-estimar" class="sec">⏱ Estimar tiempo</button>
+      </div>
+
+      <details class="opciones" data-para="rapido">
+        <summary><span>Opciones</span></summary>
+        <div class="campo-doble">
+          <div class="campo">
+            <label for="epocas">Épocas (vacío = las de la config)</label>
+            <input type="text" id="epocas" placeholder="p. ej. 25">
+          </div>
+          <div class="campo">
+            <label for="batch">Tamaño de lote</label>
+            <input type="text" id="batch" placeholder="p. ej. 96">
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="nombre">Nombre del experimento</label>
+          <input type="text" id="nombre" placeholder="vacío = el de la config">
+        </div>
+
+        <div class="campo">
+          <label for="extra">Opciones extra (una por línea, <code>clave=valor</code>)</label>
+          <textarea id="extra" style="min-height:70px"
+            placeholder="modelo.arquitectura=resnet50&#10;aumentos.mixup=0.2"></textarea>
+        </div>
+      </details>
+      <p class="nota" id="comando-previo"></p>
+    </div>
+
+    <div class="tarjeta" style="margin-bottom:18px">
+      <h2>Procesos</h2>
+      <div id="procesos"><p class="vacio">Ninguno todavía.</p></div>
+      <div class="controles">
+        <button class="sec" id="btn-limpiar-procesos">Quitar los terminados</button>
+      </div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Experimentos</h2>
+      <div id="experimentos"><p class="vacio">Cargando…</p></div>
+    </div>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const consola = document.getElementById("consola");
+const accion = document.getElementById("accion");
+let activo = null, cursor = 0, sondeo = null;
+
+// Qué campos necesita cada acción
+const NECESITA = {
+  entrenar: ["config", "rapido"], estimar: ["config", "rapido"],
+  evaluar: ["experimento"], exportar: ["experimento"], buscar: ["config", "rapido"],
+};
+
+function refrescarCampos() {
+  const necesita = NECESITA[accion.value] || [];
+  document.querySelectorAll("[data-para]").forEach(el =>
+    el.hidden = !necesita.includes(el.dataset.para));
+  document.getElementById("btn-estimar").hidden = !necesita.includes("config");
+  previsualizar();
+}
+
+function argumentos(accionElegida) {
+  const args = [];
+  const necesita = NECESITA[accionElegida] || [];
+  if (necesita.includes("config")) args.push("--config", document.getElementById("config").value);
+  if (necesita.includes("experimento")) {
+    const exp = document.getElementById("experimento").value;
+    if (exp) args.push(`experimentos/${exp}`);
+  }
+  if (necesita.includes("rapido")) {
+    const epocas = document.getElementById("epocas").value.trim();
+    const batch = document.getElementById("batch").value.trim();
+    const nombre = document.getElementById("nombre").value.trim();
+    if (epocas) args.push("--set", `entrenamiento.epocas=${epocas}`);
+    if (batch) args.push("--set", `datos.batch=${batch}`);
+    if (nombre) args.push("--set", `nombre=${nombre}`);
+    document.getElementById("extra").value.split("\n").map(l => l.trim())
+      .filter(Boolean).forEach(l => args.push("--set", l));
+  }
+  return args;
+}
+
+function previsualizar() {
+  const script = {entrenar: "entrenar.py", estimar: "estimar_tiempo.py",
+                  evaluar: "evaluar.py", exportar: "exportar.py", buscar: "buscar.py"
+                 }[accion.value] || `preparacion/${accion.value}.py`;
+  document.getElementById("comando-previo").textContent =
+    `python ${script} ${argumentos(accion.value).join(" ")}`;
+}
+
+function pintarLineas(lineas) {
+  for (const linea of lineas) {
+    const div = document.createElement("div");
+    const bajo = linea.toLowerCase();
+    if (bajo.includes("error") || bajo.includes("traceback")) div.className = "error-linea";
+    else if (bajo.includes("aviso") || bajo.includes("warning")) div.className = "aviso-linea";
+    else if (linea.includes("<- mejor") || bajo.startsWith("mejor ")) div.className = "bien-linea";
+    div.textContent = linea;
+    consola.appendChild(div);
+  }
+  if (document.getElementById("chk-auto").checked) consola.scrollTop = consola.scrollHeight;
+}
+
+async function lanzar(accionElegida) {
+  try {
+    const datos = await Panel.enviarJson("/api/procesos/lanzar", {
+      accion: accionElegida, argumentos: argumentos(accionElegida),
+    });
+    consola.innerHTML = "";
+    cursor = 0;
+    seguir(datos.id);
+    listarProcesos();
+  } catch (e) {
+    pintarLineas(["ERROR: " + e.message]);
+  }
+}
+
+function seguir(id) {
+  activo = id;
+  experimentoSeguido = null;
+  cursor = 0;
+  consola.innerHTML = "";
+  clearInterval(sondeo);
+  sondeo = setInterval(sondear, 900);
+  sondear();
+}
+
+async function sondear() {
+  if (!activo) return;
+  const r = await fetch(`/api/procesos/${activo}/salida?desde=${cursor}`);
+  if (!r.ok) { clearInterval(sondeo); return; }
+  const datos = await r.json();
+  cursor = datos.hasta;
+  pintarLineas(datos.nuevas);
+
+  const chip = document.getElementById("chip-proceso");
+  chip.textContent = `${datos.descripcion} · ${datos.estado} · ${datos.segundos.toFixed(0)}s`;
+  chip.className = "chip " + (datos.estado === "ejecutando" ? "" :
+                              datos.estado === "terminado" ? "ok" : "mal");
+  document.getElementById("btn-parar").disabled = datos.estado !== "ejecutando";
+
+  // El nombre del experimento sale de la cabecera que imprime el entrenador
+  if (!experimentoSeguido) {
+    const cabecera = datos.nuevas.find(l => l.includes(" épocas · "));
+    if (cabecera) experimentoSeguido = cabecera.split(" · ")[0].trim();
+  }
+  if (experimentoSeguido) dibujarGrafica(experimentoSeguido);
+
+  if (datos.estado !== "ejecutando") {
+    clearInterval(sondeo);
+    listarProcesos();
+    cargarExperimentos();
+  }
+}
+
+async function listarProcesos() {
+  const r = await fetch("/api/procesos");
+  const {procesos} = await r.json();
+  const contenedor = document.getElementById("procesos");
+  if (!procesos.length) {
+    contenedor.innerHTML = '<p class="vacio">Ninguno todavía.</p>';
+    return;
+  }
+  const colores = {ejecutando: "var(--acento)", terminado: "var(--d)",
+                   fallido: "var(--error)", detenido: "var(--suave)"};
+  contenedor.innerHTML = procesos.map(p => `
+    <div class="proceso ${p.id === activo ? "activo" : ""}" data-ver="${p.id}">
+      <span><span class="punto" style="background:${colores[p.estado]}"></span>
+        ${Panel.escapar(p.descripcion)} · ${p.segundos.toFixed(0)}s</span>
+      ${p.estado === "ejecutando"
+        ? `<button class="sec" data-parar="${p.id}">Parar</button>`
+        : `<span class="vacio">${p.estado}</span>`}
+    </div>`).join("");
+  contenedor.querySelectorAll("[data-ver]").forEach(el => el.onclick = (ev) => {
+    if (ev.target.dataset.parar) return;
+    seguir(el.dataset.ver);
+  });
+  contenedor.querySelectorAll("[data-parar]").forEach(b => b.onclick = async (ev) => {
+    ev.stopPropagation();
+    await fetch(`/api/procesos/${b.dataset.parar}/parar`, {method: "POST"});
+    listarProcesos();
+  });
+}
+
+let experimentoSeguido = null;
+
+async function dibujarGrafica(nombre) {
+  if (!nombre) return;
+  const r = await fetch(`/api/experimentos/${encodeURIComponent(nombre)}/historial`);
+  if (!r.ok) return;
+  const datos = await r.json();
+  if (!datos.series) return;
+
+  // Se dibujan las columnas que existan; cada tarea aporta las suyas
+  const candidatas = [
+    ["perdida_train", "pérdida (train)", "#f87171"],
+    ["perdida_val", "pérdida (val)", "#fbbf24"],
+    ["acc", "acierto (val)", "#34d399"],
+    ["acc_balanceada", "acierto balanceado", "#38bdf8"],
+    ["auc", "AUC", "#a78bfa"],
+    ["temp_pico", "°C pico", "#f472b6"],
+  ];
+  const series = candidatas
+    .filter(([clave]) => datos.series[clave]?.some(v => v != null))
+    .map(([clave, nombre, color]) => ({nombre, color, valores: datos.series[clave]}));
+  if (!series.length) return;
+
+  graficar(document.getElementById("grafica"), series, {ejeX: `${datos.epocas} épocas`});
+  document.getElementById("leyenda").innerHTML = leyenda(series);
+}
+
+async function cargarExperimentos() {
+  const r = await fetch("/api/experimentos");
+  const {experimentos} = await r.json();
+  const selector = document.getElementById("experimento");
+  selector.innerHTML = experimentos.filter(e => e.tiene_modelo)
+    .map(e => `<option value="${Panel.escapar(e.nombre)}">${Panel.escapar(e.nombre)}</option>`)
+    .join("");
+  // Al abrir la página se dibuja la curva del último experimento, aunque no haya
+  // ningún proceso en marcha: así se ve de qué venimos.
+  if (!experimentoSeguido && experimentos.length) {
+    const ultimo = experimentos.filter(e => e.epocas > 0).pop();
+    if (ultimo) dibujarGrafica(ultimo.nombre);
+  }
+  document.getElementById("experimentos").innerHTML = experimentos.length
+    ? experimentos.map(e => {
+        const m = e.metricas || {};
+        const clave = m.acc != null ? `acc ${m.acc}` : m.map50 != null ? `mAP ${m.map50}`
+                    : m.miou != null ? `mIoU ${m.miou}` : "—";
+        return `<div class="experimento"><span>${Panel.escapar(e.nombre)}</span>
+          <span>${e.epocas} épocas · ${clave}</span></div>`;
+      }).join("")
+    : '<p class="vacio">Todavía no has entrenado nada.</p>';
+}
+
+document.getElementById("btn-lanzar").onclick = () => lanzar(accion.value);
+document.getElementById("btn-estimar").onclick = () => lanzar("estimar");
+document.getElementById("btn-parar").onclick = async () => {
+  if (activo) await fetch(`/api/procesos/${activo}/parar`, {method: "POST"});
+  sondear();
+};
+document.getElementById("btn-limpiar-consola").onclick = () => consola.innerHTML = "";
+document.getElementById("btn-limpiar-procesos").onclick = async () => {
+  await fetch("/api/procesos/limpiar", {method: "POST"});
+  listarProcesos();
+};
+accion.onchange = refrescarCampos;
+["config", "epocas", "batch", "nombre", "extra"].forEach(id =>
+  document.getElementById(id).addEventListener("input", previsualizar));
+
+/* Se puede llegar aquí desde una vista sin entrenar: /entrenamiento?config=...&accion=...
+   En ese caso se deja todo elegido y se avisa de qué se va a entrenar. */
+(function preseleccionar() {
+  const q = new URLSearchParams(location.search);
+  const cfg = q.get("config"), acc = q.get("accion");
+  if (acc && [...accion.options].some(o => o.value === acc)) accion.value = acc;
+  if (!cfg) return;
+  const sel = document.getElementById("config");
+  const poner = () => {
+    const op = [...sel.options].find(o => o.value === cfg);
+    if (!op) return false;
+    sel.value = cfg;
+    const aviso = document.createElement("div");
+    aviso.className = "preseleccion";
+    aviso.innerHTML = `Listo para entrenar <b>${op.textContent.split("—")[0].trim()}</b>. ` +
+                      `Revisa las opciones si quieres y pulsa <b>Lanzar</b>.`;
+    sel.parentElement.appendChild(aviso);
+    previsualizar();
+    return true;
+  };
+  // el desplegable se rellena por AJAX: si aún no está, se reintenta un momento
+  if (!poner()) {
+    let intentos = 0;
+    const t = setInterval(() => { if (poner() || ++intentos > 40) clearInterval(t); }, 150);
+  }
+})();
+
+refrescarCampos();
+listarProcesos();
+cargarExperimentos();
+setInterval(listarProcesos, 5000);
+</script>
+{% endblock %}

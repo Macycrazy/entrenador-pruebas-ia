@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block titulo %}Clasificación de texto{% endblock %}
+
+{% block estilos %}
+  .ejemplos{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+  .ejemplos button{font-size:12px;padding:5px 10px}
+{% endblock %}
+
+{% block contenido %}
+<h1>📝 Clasificación de texto</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <h2>Texto a clasificar</h2>
+    <textarea id="texto" placeholder="Escribe o pega aquí el texto…"
+      style="min-height:220px"></textarea>
+
+    <div class="ejemplos">
+      <button class="sec" data-ejemplo="El carnet lleva dos semanas sin funcionar y nadie responde.">Ejemplo 1</button>
+      <button class="sec" data-ejemplo="¿Cuánto tarda el trámite del permiso?">Ejemplo 2</button>
+      <button class="sec" data-ejemplo="Solicito la renovación del expediente antes de fin de mes.">Ejemplo 3</button>
+    </div>
+
+    <div class="controles">
+      <button id="btn-clasificar">Clasificar</button>
+      <label class="check"><input type="checkbox" id="chk-vivo"> Al escribir</label>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Tokens <b id="m-tokens">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Resultado</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      Los porcentajes están calibrados con la temperatura ajustada en validación. Si el
+      texto no se parece a nada de lo visto en el entrenamiento, el modelo igual da un
+      número alto: eso no significa que acierte.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "texto", config: "{{ vista.config }}"};
+const texto = document.getElementById("texto");
+let temporizador = null;
+
+async function comprobar() {
+  const {ok} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) avisoSinModelo(document.getElementById("sin-modelo"), VISTA);
+  return ok;
+}
+
+async function clasificar() {
+  const contenido = texto.value.trim();
+  if (!contenido) {
+    document.getElementById("resultados").innerHTML = '<p class="vacio">Escribe algo primero.</p>';
+    return;
+  }
+  try {
+    const datos = await Panel.enviarJson("/api/texto/predecir", {texto: contenido});
+    document.getElementById("m-tokens").textContent = datos.tokens;
+    document.getElementById("resultados").innerHTML = `
+      <div class="etiqueta" style="color:${Panel.color(0)};margin-bottom:10px">
+        ${Panel.escapar(datos.etiqueta)}</div>
+      ${Panel.barras(datos.probabilidades)}`;
+  } catch (e) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(e.message)}</p>`;
+  }
+}
+
+document.getElementById("btn-clasificar").onclick = clasificar;
+document.querySelectorAll("[data-ejemplo]").forEach(b => b.onclick = () => {
+  texto.value = b.dataset.ejemplo;
+  clasificar();
+});
+texto.oninput = () => {
+  if (!document.getElementById("chk-vivo").checked) return;
+  clearTimeout(temporizador);
+  temporizador = setTimeout(clasificar, 450);   // espera a que deje de teclear
+};
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

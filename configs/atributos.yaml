@@ -1,0 +1,43 @@
+# Atributos faciales a la vez: género (principal) + edad + etnia (auxiliares).
+#
+#   python entrenar.py --config configs/atributos.yaml
+#
+# Multitarea: el backbone tiene que explicar tres cosas con los mismos rasgos, lo que
+# regulariza y suele mejorar también la tarea principal. Las cabezas auxiliares pesan
+# 0,3 respecto a la principal (PESO_AUXILIAR en tareas/imagen_clasificacion).
+nombre: atributos
+tarea: imagen_clasificacion
+
+datos:
+  ruta: datos
+  metadatos: datos/metadatos.csv
+  objetivos_extra: [edad, etnia]    # cabezas adicionales
+  subgrupos: [edad, etnia]          # y además desglose de métricas por esos grupos
+  tam_img: 224
+  batch: 96
+  workers: 8
+
+modelo:
+  arquitectura: efficientnet_v2_s
+  dropout: 0.3
+
+optimizador:
+  nombre: adamw_fused
+  lr: 3.0e-4
+  lr_backbone_factor: 0.3
+
+aumentos:
+  politica: randaugment
+  webcam: 0.35
+  mixup: 0.0        # con cabezas auxiliares, mezclar complica las etiquetas extra
+  cutmix: 0.0
+
+entrenamiento:
+  epocas: 25
+  ema: 0.999
+  congelar_epocas: 1
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  tta: true
+  calibrar: true

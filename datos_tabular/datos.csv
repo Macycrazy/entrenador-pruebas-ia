@@ -1,0 +1,3001 @@
+id_empleado,edad,antiguedad_anios,hijos,distancia_km,turno,gerencia,horas_extra_mes,ausento
+E00000,34,16.0,1,2.1,tarde,Recursos Humanos,7.2,no
+E00001,33,2.2,1,19.6,mañana,Sistemas,0,no
+E00002,46,0.7,1,9.7,noche,Administración,3.4,no
+E00003,37,19.0,1,8.0,tarde,Operaciones,9.5,no
+E00004,42,19.1,2,5.5,tarde,Sistemas,0,no
+E00005,55,13.4,2,43.8,tarde,Sistemas,1.4,no
+E00006,24,15.5,0,38.9,noche,Recursos Humanos,2.5,no
+E00007,49,21.4,2,39.1,tarde,Operaciones,0,no
+E00008,58,8.9,1,30.5,noche,Sistemas,3.6,no
+E00009,34,6.7,2,41.7,noche,Administración,7.0,no
+E00010,45,19.4,2,11.1,mañana,Operaciones,20.1,no
+E00011,61,17.9,3,10.4,tarde,Seguridad,13.4,no
+E00012,57,3.5,3,33.8,noche,Operaciones,12.9,si
+E00013,27,24.9,1,23.4,mañana,Sistemas,4.4,no
+E00014,44,19.8,4,19.6,mañana,Seguridad,15.4,no
+E00015,63,21.5,4,1.5,noche,Sistemas,7.8,no
+E00016,30,19.2,3,16.0,tarde,Seguridad,17.6,no
+E00017,60,24.3,2,34.5,noche,Sistemas,8.2,no
+E00018,54,12.7,4,9.8,tarde,Recursos Humanos,15.1,no
+E00019,23,2.8,1,17.0,tarde,Recursos Humanos,4.0,no
+E00020,54,23.7,1,4.8,tarde,Sistemas,12.7,no
+E00021,54,6.6,1,39.4,tarde,Recursos Humanos,12.9,no
+E00022,53,10.0,3,30.6,tarde,Seguridad,11.1,no
+E00023,24,14.7,0,11.1,mañana,Sistemas,10.9,no
+E00024,35,22.6,2,38.8,mañana,Administración,6.0,no
+E00025,50,23.4,3,26.1,tarde,Recursos Humanos,4.4,no
+E00026,49,2.4,0,20.0,tarde,Seguridad,0,no
+E00027,32,10.1,1,15.9,mañana,Recursos Humanos,0,no
+E00028,24,3.5,3,9.1,tarde,Recursos Humanos,12.2,si
+E00029,35,16.3,1,24.8,mañana,Sistemas,0,no
+E00030,44,12.0,0,39.0,mañana,Recursos Humanos,12.7,no
+E00031,62,11.4,3,19.6,noche,Administración,7.6,si
+E00032,23,7.4,2,43.6,noche,Administración,15.4,no
+E00033,31,21.3,0,7.9,noche,Sistemas,10.8,no
+E00034,35,16.9,4,11.3,mañana,Administración,1.1,no
+E00035,62,14.6,2,24.0,tarde,Recursos Humanos,3.3,no
+E00036,40,9.9,0,30.6,tarde,Seguridad,16.3,no
+E00037,28,2.5,2,24.7,noche,Operaciones,8.5,no
+E00038,54,22.0,2,17.3,mañana,Seguridad,0,no
+E00039,28,0.2,2,37.0,tarde,Sistemas,0,si
+E00040,58,2.7,1,25.3,tarde,Operaciones,7.2,no
+E00041,60,6.6,3,22.5,mañana,Sistemas,4.0,no
+E00042,30,1.1,3,15.7,mañana,Operaciones,2.0,si
+E00043,22,1.9,2,39.9,mañana,Administración,6.0,no
+E00044,22,3.7,2,6.6,tarde,Operaciones,9.1,si
+E00045,29,19.5,1,39.9,tarde,Administración,12.4,no
+E00046,31,24.4,2,36.7,tarde,Sistemas,9.2,no
+E00047,44,18.4,0,11.9,mañana,Sistemas,1.9,no
+E00048,39,5.6,1,36.9,tarde,Operaciones,9.5,no
+E00049,61,7.0,4,4.1,tarde,Operaciones,16.7,no
+E00050,36,24.5,1,24.6,mañana,Sistemas,0,no
+E00051,58,14.9,4,16.2,tarde,Seguridad,0,no
+E00052,20,22.5,4,9.4,mañana,Seguridad,14.7,no
+E00053,24,18.5,2,30.5,tarde,Seguridad,4.6,no
+E00054,39,16.6,3,6.5,tarde,Administración,3.7,no
+E00055,59,4.8,4,30.3,tarde,Recursos Humanos,16.2,no
+E00056,47,13.7,4,1.0,tarde,Recursos Humanos,3.9,no
+E00057,62,16.9,0,23.5,noche,Recursos Humanos,4.7,no
+E00058,63,16.6,2,28.2,mañana,Recursos Humanos,8.6,si
+E00059,46,6.1,4,21.9,mañana,Seguridad,11.9,no
+E00060,61,17.4,0,22.8,mañana,Recursos Humanos,17.3,no
+E00061,49,19.5,0,10.6,noche,Administración,0.6,no
+E00062,62,22.9,4,6.3,mañana,Seguridad,16.0,no
+E00063,47,22.3,4,28.0,noche,Administración,7.4,no
+E00064,35,4.0,2,38.9,tarde,Operaciones,8.7,no
+E00065,37,6.9,2,4.4,tarde,Recursos Humanos,0.8,no
+E00066,64,13.5,1,7.1,mañana,Seguridad,7.4,no
+E00067,44,13.6,4,19.3,mañana,Seguridad,5.9,no
+E00068,50,0.5,0,39.7,noche,Seguridad,12.7,no
+E00069,58,22.3,1,37.8,noche,Administración,6.2,no
+E00070,62,6.8,3,22.4,tarde,Operaciones,6.1,no
+E00071,56,24.5,0,24.5,tarde,Administración,0,no
+E00072,36,10.7,3,39.1,mañana,Sistemas,4.9,no
+E00073,25,22.0,3,13.2,tarde,Operaciones,13.8,si
+E00074,61,13.5,0,45.0,tarde,Recursos Humanos,9.7,no
+E00075,29,23.7,1,9.8,mañana,Administración,0,no
+E00076,64,16.7,2,25.8,mañana,Seguridad,8.4,no
+E00077,26,18.7,4,6.0,mañana,Operaciones,4.4,si
+E00078,32,7.8,0,30.8,tarde,Seguridad,0,no
+E00079,27,17.4,4,14.3,noche,Administración,1.8,no
+E00080,52,8.7,2,19.8,tarde,Sistemas,14.2,no
+E00081,47,10.8,1,16.9,tarde,Recursos Humanos,8.5,no
+E00082,49,24.1,3,12.9,noche,Seguridad,11.7,no
+E00083,35,6.1,3,42.1,tarde,Seguridad,0.9,no
+E00084,31,16.7,3,15.8,tarde,Operaciones,10.5,no
+E00085,20,22.0,4,31.9,tarde,Administración,18.4,no
+E00086,35,2.1,3,32.7,tarde,Administración,3.8,no
+E00087,39,2.3,4,10.8,noche,Recursos Humanos,2.5,no
+E00088,41,13.8,2,16.1,noche,Administración,6.6,no
+E00089,64,3.0,1,9.5,mañana,Administración,3.4,no
+E00090,58,18.5,2,13.2,noche,Administración,19.3,no
+E00091,28,9.0,2,14.3,noche,Administración,6.6,si
+E00092,26,1.4,0,13.9,mañana,Seguridad,2.0,no
+E00093,24,4.6,3,3.3,tarde,Sistemas,5.0,no
+E00094,56,14.4,2,31.2,mañana,Recursos Humanos,11.9,no
+E00095,53,10.4,3,27.2,noche,Recursos Humanos,10.3,no
+E00096,56,11.1,4,38.8,tarde,Operaciones,22.2,si
+E00097,30,19.1,1,28.5,tarde,Sistemas,13.6,no
+E00098,50,1.9,2,1.1,tarde,Administración,12.8,no
+E00099,60,21.5,4,4.1,mañana,Operaciones,9.0,no
+E00100,61,23.3,1,19.7,noche,Recursos Humanos,17.4,si
+E00101,38,4.1,3,14.5,noche,Administración,1.9,si
+E00102,54,17.2,3,31.8,tarde,Administración,0.5,no
+E00103,34,18.4,4,27.6,mañana,Sistemas,11.1,no
+E00104,22,0.5,1,34.6,tarde,Administración,0,no
+E00105,25,4.5,3,26.8,noche,Seguridad,9.6,no
+E00106,46,8.3,3,30.5,mañana,Operaciones,4.6,no
+E00107,40,13.8,0,21.0,tarde,Operaciones,22.0,no
+E00108,49,10.1,3,23.6,mañana,Administración,14.8,no
+E00109,37,12.5,4,20.4,mañana,Recursos Humanos,10.4,si
+E00110,21,7.2,4,39.8,tarde,Sistemas,10.9,no
+E00111,49,0.3,0,19.0,mañana,Sistemas,0,no
+E00112,37,3.8,3,42.0,tarde,Administración,16.5,no
+E00113,28,13.8,0,17.9,noche,Administración,0,no
+E00114,20,19.8,2,19.3,noche,Operaciones,6.3,no
+E00115,50,16.5,2,39.1,tarde,Administración,0,no
+E00116,64,19.1,1,17.6,tarde,Recursos Humanos,4.1,no
+E00117,44,1.1,1,33.8,noche,Seguridad,6.1,no
+E00118,26,0.9,3,23.1,noche,Operaciones,18.7,si
+E00119,50,3.6,2,39.3,mañana,Sistemas,15.7,no
+E00120,44,17.3,2,29.6,tarde,Administración,0,no
+E00121,34,13.5,0,28.2,mañana,Operaciones,0,no
+E00122,30,2.5,2,28.9,mañana,Seguridad,9.5,no
+E00123,53,7.3,3,17.5,mañana,Recursos Humanos,7.0,no
+E00124,44,19.8,4,8.5,mañana,Administración,5.1,no
+E00125,62,5.8,0,29.1,tarde,Operaciones,1.6,no
+E00126,24,11.6,3,13.7,noche,Recursos Humanos,24.7,no
+E00127,32,24.1,3,31.4,tarde,Operaciones,2.0,no
+E00128,38,2.7,2,17.8,tarde,Administración,19.2,no
+E00129,58,0.2,3,39.1,noche,Sistemas,9.6,no
+E00130,42,22.6,1,35.1,mañana,Administración,2.5,no
+E00131,60,18.0,0,30.0,mañana,Sistemas,1.7,no
+E00132,25,11.0,2,26.5,noche,Recursos Humanos,5.1,si
+E00133,52,19.7,2,39.6,tarde,Administración,13.5,no
+E00134,41,6.4,0,37.3,tarde,Operaciones,5.7,no
+E00135,55,5.6,2,30.8,noche,Seguridad,8.5,si
+E00136,43,9.9,2,12.6,mañana,Seguridad,0,no
+E00137,55,2.7,2,11.3,mañana,Administración,2.3,no
+E00138,61,5.5,3,3.8,tarde,Operaciones,9.4,si
+E00139,28,24.9,3,6.1,mañana,Administración,9.2,no
+E00140,57,16.8,1,33.7,noche,Seguridad,14.6,no
+E00141,64,15.4,2,42.3,tarde,Sistemas,2.2,no
+E00142,63,11.1,2,11.4,tarde,Sistemas,0,no
+E00143,25,10.0,1,9.4,mañana,Seguridad,3.4,no
+E00144,28,14.9,4,1.9,tarde,Recursos Humanos,11.1,no
+E00145,29,14.7,4,36.8,mañana,Operaciones,18.8,si
+E00146,36,21.5,1,7.4,mañana,Administración,17.3,no
+E00147,21,9.0,1,35.7,noche,Operaciones,15.7,no
+E00148,50,3.2,3,19.5,mañana,Sistemas,9.3,si
+E00149,39,12.6,3,42.6,mañana,Administración,0.9,no
+E00150,63,0.8,0,44.9,tarde,Seguridad,0,si
+E00151,37,2.0,4,27.8,mañana,Recursos Humanos,8.8,no
+E00152,38,13.7,3,15.3,noche,Administración,1.6,no
+E00153,47,2.9,3,29.8,noche,Recursos Humanos,7.8,no
+E00154,26,10.3,2,37.4,tarde,Seguridad,0.0,no
+E00155,25,3.8,0,41.6,mañana,Sistemas,11.9,no
+E00156,23,18.6,4,17.4,mañana,Administración,15.4,no
+E00157,38,10.3,4,39.4,tarde,Sistemas,5.9,no
+E00158,34,2.6,0,23.3,mañana,Seguridad,3.5,no
+E00159,59,7.0,4,11.0,tarde,Administración,14.2,no
+E00160,21,13.9,1,27.8,noche,Operaciones,6.5,no
+E00161,62,8.8,3,9.0,mañana,Administración,18.1,si
+E00162,33,18.5,3,43.8,mañana,Administración,3.2,no
+E00163,25,18.0,0,35.2,noche,Administración,10.6,no
+E00164,48,18.9,3,3.2,mañana,Operaciones,1.5,no
+E00165,38,18.9,4,6.0,tarde,Sistemas,8.6,no
+E00166,23,16.7,0,3.0,tarde,Administración,12.1,no
+E00167,51,19.1,3,13.7,mañana,Sistemas,21.9,no
+E00168,62,9.5,2,32.0,noche,Administración,18.7,si
+E00169,47,0.5,4,41.5,tarde,Administración,13.2,no
+E00170,40,16.0,1,13.7,tarde,Sistemas,10.6,no
+E00171,47,23.0,4,4.9,mañana,Recursos Humanos,0.1,no
+E00172,34,2.0,2,39.3,noche,Operaciones,8.4,no
+E00173,61,13.3,1,9.5,tarde,Operaciones,5.6,no
+E00174,61,3.7,0,9.7,noche,Recursos Humanos,12.6,no
+E00175,61,18.9,4,34.4,tarde,Administración,17.3,no
+E00176,50,24.3,3,14.9,tarde,Sistemas,0.7,no
+E00177,22,8.8,0,4.3,tarde,Seguridad,0.1,no
+E00178,58,7.2,4,29.4,mañana,Administración,2.1,no
+E00179,40,18.5,4,2.8,noche,Recursos Humanos,13.2,no
+E00180,25,3.8,4,3.7,mañana,Operaciones,7.0,no
+E00181,43,24.8,2,24.1,noche,Recursos Humanos,6.7,no
+E00182,23,9.7,2,35.1,noche,Administración,10.4,no
+E00183,29,7.1,2,32.8,noche,Administración,9.1,si
+E00184,28,16.6,4,41.3,tarde,Seguridad,7.4,no
+E00185,25,16.1,3,15.5,mañana,Administración,5.6,no
+E00186,51,0.5,1,14.6,mañana,Operaciones,8.5,si
+E00187,22,21.1,2,5.5,noche,Administración,11.2,no
+E00188,31,15.5,4,27.3,mañana,Recursos Humanos,9.3,no
+E00189,59,10.3,2,30.8,mañana,Seguridad,4.6,no
+E00190,50,19.6,1,11.3,mañana,Operaciones,0,no
+E00191,53,11.5,3,13.4,tarde,Administración,18.7,no
+E00192,23,20.4,3,36.3,mañana,Operaciones,13.4,si
+E00193,30,21.1,2,38.5,tarde,Sistemas,2.6,no
+E00194,48,12.8,2,37.6,mañana,Recursos Humanos,13.6,no
+E00195,34,9.3,0,18.0,mañana,Operaciones,5.4,no
+E00196,28,2.5,0,32.4,tarde,Recursos Humanos,5.4,no
+E00197,20,3.5,0,32.0,tarde,Administración,19.0,si
+E00198,53,5.4,3,7.6,noche,Administración,11.8,no
+E00199,24,1.2,0,19.5,noche,Seguridad,11.2,no
+E00200,56,12.5,1,24.6,noche,Administración,7.0,si
+E00201,53,8.8,2,26.1,mañana,Sistemas,3.1,si
+E00202,21,13.2,3,23.3,noche,Administración,9.3,no
+E00203,42,9.3,1,33.9,tarde,Sistemas,6.7,no
+E00204,28,15.7,0,34.9,noche,Operaciones,4.7,no
+E00205,60,20.8,1,31.1,noche,Seguridad,12.4,no
+E00206,38,1.6,1,35.2,tarde,Sistemas,11.9,si
+E00207,36,23.3,0,23.7,noche,Seguridad,9.1,no
+E00208,37,4.8,0,16.7,mañana,Operaciones,10.0,no
+E00209,51,11.0,3,43.1,tarde,Recursos Humanos,1.9,no
+E00210,25,19.9,3,12.7,mañana,Seguridad,0,no
+E00211,39,8.0,3,4.5,noche,Operaciones,1.3,no
+E00212,22,10.7,2,31.3,tarde,Seguridad,3.2,no
+E00213,43,19.8,4,3.5,noche,Seguridad,3.8,no
+E00214,63,17.0,3,42.9,mañana,Administración,10.2,no
+E00215,58,9.2,1,17.8,noche,Sistemas,8.5,no
+E00216,28,23.7,4,17.4,mañana,Administración,4.5,no
+E00217,53,24.0,3,2.1,mañana,Seguridad,11.9,no
+E00218,33,2.9,4,35.1,noche,Seguridad,5.0,no
+E00219,48,3.1,0,38.5,tarde,Recursos Humanos,21.0,no
+E00220,24,24.2,4,44.4,noche,Operaciones,0,no
+E00221,43,17.8,4,41.8,noche,Recursos Humanos,4.7,si
+E00222,21,24.6,2,35.9,mañana,Seguridad,2.6,no
+E00223,39,13.8,3,27.9,mañana,Sistemas,6.1,no
+E00224,24,18.0,1,24.1,tarde,Administración,16.5,no
+E00225,31,17.0,1,16.2,noche,Administración,6.5,no
+E00226,29,22.8,2,3.4,mañana,Administración,10.7,no
+E00227,36,8.7,1,42.4,tarde,Sistemas,12.6,no
+E00228,54,13.8,0,6.5,tarde,Administración,4.4,no
+E00229,41,3.9,4,30.0,noche,Administración,7.9,si
+E00230,36,21.6,1,4.6,noche,Administración,8.7,no
+E00231,50,12.5,1,28.6,tarde,Operaciones,1.8,no
+E00232,30,17.1,3,14.1,mañana,Sistemas,2.2,no
+E00233,45,3.6,1,38.9,tarde,Operaciones,11.4,no
+E00234,27,12.9,2,5.7,mañana,Seguridad,4.9,no
+E00235,30,23.6,2,39.0,tarde,Recursos Humanos,9.0,no
+E00236,52,18.0,3,9.4,mañana,Seguridad,2.8,si
+E00237,57,23.6,2,23.2,mañana,Recursos Humanos,8.0,no
+E00238,38,7.0,4,27.3,noche,Seguridad,10.9,si
+E00239,22,6.6,3,17.1,tarde,Operaciones,8.1,si
+E00240,44,14.0,4,17.0,tarde,Sistemas,0.8,no
+E00241,45,15.6,2,27.9,mañana,Sistemas,10.3,no
+E00242,58,8.5,4,42.3,mañana,Recursos Humanos,6.6,si
+E00243,29,17.8,4,36.4,noche,Seguridad,9.0,no
+E00244,45,3.5,4,42.0,tarde,Recursos Humanos,7.7,no
+E00245,39,20.7,3,24.4,noche,Administración,3.0,no
+E00246,39,9.2,0,30.6,tarde,Administración,4.1,no
+E00247,57,24.3,3,26.5,mañana,Sistemas,5.3,no
+E00248,63,15.7,1,28.3,tarde,Recursos Humanos,22.3,no
+E00249,64,0.5,1,14.8,mañana,Seguridad,10.9,no
+E00250,28,19.4,4,41.5,noche,Sistemas,9.4,no
+E00251,54,13.1,2,14.8,mañana,Seguridad,13.1,no
+E00252,59,16.9,3,39.2,noche,Operaciones,9.6,no
+E00253,33,5.6,3,43.8,tarde,Operaciones,12.2,no
+E00254,38,8.7,0,42.1,noche,Operaciones,1.3,no
+E00255,22,9.9,2,16.2,mañana,Operaciones,4.7,no
+E00256,50,2.0,1,41.7,noche,Operaciones,10.2,no
+E00257,35,17.4,1,7.0,noche,Administración,15.1,si
+E00258,26,22.6,3,10.9,mañana,Sistemas,4.7,no
+E00259,61,3.4,3,43.4,mañana,Seguridad,13.9,no
+E00260,61,5.0,0,43.4,tarde,Operaciones,10.2,no
+E00261,46,13.4,1,32.8,mañana,Recursos Humanos,6.6,no
+E00262,38,0.9,0,37.8,tarde,Recursos Humanos,15.8,si
+E00263,53,24.6,3,13.5,noche,Administración,8.5,no
+E00264,27,3.4,2,23.2,tarde,Recursos Humanos,11.5,no
+E00265,63,4.7,1,33.4,tarde,Administración,13.7,no
+E00266,40,21.4,0,40.5,tarde,Administración,5.8,no
+E00267,44,11.9,1,42.2,mañana,Operaciones,9.6,no
+E00268,20,6.7,2,15.5,noche,Administración,2.8,si
+E00269,39,3.0,0,14.5,tarde,Administración,0.4,no
+E00270,28,23.5,3,17.2,mañana,Recursos Humanos,13.7,no
+E00271,62,10.4,1,25.2,tarde,Administración,16.2,no
+E00272,48,17.0,4,27.2,mañana,Administración,7.3,no
+E00273,56,1.5,4,25.1,noche,Recursos Humanos,5.7,si
+E00274,57,8.2,3,23.9,mañana,Recursos Humanos,14.0,no
+E00275,23,11.3,4,23.6,tarde,Administración,11.9,no
+E00276,20,20.2,1,32.8,tarde,Operaciones,6.4,no
+E00277,22,1.6,2,44.7,mañana,Seguridad,7.1,no
+E00278,43,19.2,3,34.7,noche,Seguridad,0,no
+E00279,61,2.0,2,43.4,noche,Recursos Humanos,12.3,si
+E00280,20,24.8,0,18.3,mañana,Recursos Humanos,14.6,no
+E00281,49,10.6,2,17.7,mañana,Recursos Humanos,7.1,no
+E00282,62,4.7,3,39.5,mañana,Sistemas,0,no
+E00283,48,6.0,4,4.0,noche,Sistemas,0,no
+E00284,48,21.8,1,11.8,mañana,Seguridad,0,no
+E00285,40,3.5,4,44.7,mañana,Administración,5.5,no
+E00286,62,16.8,4,15.1,tarde,Recursos Humanos,8.9,si
+E00287,55,23.7,3,39.7,mañana,Seguridad,13.0,si
+E00288,40,8.6,3,29.3,tarde,Administración,3.8,no
+E00289,29,13.4,3,11.6,mañana,Operaciones,10.8,no
+E00290,28,14.1,3,43.6,noche,Administración,8.2,no
+E00291,32,23.1,0,38.3,mañana,Administración,12.0,no
+E00292,57,16.8,4,27.5,mañana,Recursos Humanos,8.8,no
+E00293,27,7.6,3,41.0,mañana,Recursos Humanos,12.0,no
+E00294,55,17.4,2,32.0,tarde,Recursos Humanos,8.9,no
+E00295,49,9.0,0,12.5,noche,Seguridad,2.2,no
+E00296,43,18.1,2,34.5,tarde,Recursos Humanos,1.4,no
+E00297,46,3.6,2,12.5,noche,Administración,12.0,si
+E00298,55,8.2,2,17.7,mañana,Seguridad,7.5,no
+E00299,30,16.0,1,22.6,mañana,Operaciones,19.1,no
+E00300,53,12.2,0,41.3,noche,Sistemas,9.3,no
+E00301,24,1.2,1,1.3,mañana,Recursos Humanos,6.0,si
+E00302,50,12.6,3,17.4,noche,Administración,15.4,no
+E00303,21,0.4,4,32.8,noche,Operaciones,8.7,no
+E00304,26,16.9,4,36.5,mañana,Sistemas,10.3,no
+E00305,43,20.4,3,12.8,tarde,Sistemas,11.2,no
+E00306,61,6.1,0,31.7,tarde,Sistemas,12.9,no
+E00307,51,1.4,3,1.4,mañana,Sistemas,11.2,no
+E00308,22,8.3,1,44.0,mañana,Administración,10.9,no
+E00309,54,11.9,4,3.0,mañana,Operaciones,19.7,no
+E00310,57,4.5,1,38.4,mañana,Recursos Humanos,8.1,no
+E00311,44,1.9,4,8.1,mañana,Administración,0,no
+E00312,52,18.9,2,7.2,noche,Sistemas,14.1,no
+E00313,40,8.5,0,34.8,noche,Seguridad,10.1,no
+E00314,55,19.6,3,20.8,mañana,Operaciones,0,no
+E00315,25,2.1,2,28.2,mañana,Sistemas,11.8,si
+E00316,40,17.8,2,28.9,noche,Seguridad,8.5,no
+E00317,31,9.0,3,12.9,mañana,Sistemas,8.4,no
+E00318,42,13.9,4,19.0,mañana,Sistemas,14.8,no
+E00319,55,9.6,1,13.8,tarde,Sistemas,12.5,no
+E00320,39,4.2,2,17.8,mañana,Operaciones,5.8,no
+E00321,36,10.5,1,22.3,mañana,Operaciones,8.1,no
+E00322,28,12.4,2,28.1,tarde,Sistemas,14.0,no
+E00323,47,9.5,4,38.9,tarde,Operaciones,8.3,si
+E00324,40,8.0,1,42.7,mañana,Seguridad,23.4,no
+E00325,40,17.4,3,22.6,noche,Recursos Humanos,4.5,no
+E00326,57,19.6,4,17.1,noche,Recursos Humanos,12.4,si
+E00327,38,18.2,0,42.5,mañana,Seguridad,17.3,no
+E00328,60,19.9,2,19.0,tarde,Recursos Humanos,8.4,no
+E00329,57,19.7,3,4.3,noche,Seguridad,16.8,no
+E00330,22,23.1,2,39.3,tarde,Administración,4.7,no
+E00331,30,22.9,4,5.8,mañana,Operaciones,0,si
+E00332,47,24.6,0,30.8,tarde,Operaciones,12.6,no
+E00333,48,13.0,2,26.5,noche,Recursos Humanos,8.3,no
+E00334,42,19.3,0,26.9,noche,Recursos Humanos,3.0,no
+E00335,42,2.1,2,37.6,noche,Recursos Humanos,8.5,no
+E00336,26,19.6,3,23.9,tarde,Seguridad,6.8,no
+E00337,61,1.1,0,32.3,mañana,Operaciones,1.5,no
+E00338,31,4.1,4,44.3,mañana,Administración,12.1,no
+E00339,60,5.8,3,18.8,mañana,Recursos Humanos,14.5,no
+E00340,47,18.4,3,39.9,tarde,Administración,12.2,no
+E00341,54,17.6,1,36.0,noche,Sistemas,8.1,no
+E00342,53,4.9,2,6.0,noche,Seguridad,1.2,no
+E00343,63,8.7,2,38.2,noche,Recursos Humanos,3.3,no
+E00344,35,14.8,2,30.6,tarde,Sistemas,12.3,no
+E00345,47,9.7,1,27.2,noche,Seguridad,11.9,no
+E00346,30,13.4,3,41.4,mañana,Administración,7.1,no
+E00347,28,15.5,1,39.1,mañana,Seguridad,11.7,no
+E00348,63,24.1,3,23.2,tarde,Seguridad,0,no
+E00349,22,2.1,2,2.4,mañana,Operaciones,13.8,no
+E00350,55,7.2,4,35.4,noche,Seguridad,10.2,no
+E00351,54,20.6,1,17.1,mañana,Seguridad,9.9,no
+E00352,22,2.6,3,37.5,mañana,Operaciones,7.0,si
+E00353,57,21.6,2,6.2,mañana,Recursos Humanos,19.9,no
+E00354,33,15.3,1,19.8,noche,Recursos Humanos,10.7,no
+E00355,38,14.9,4,8.4,noche,Operaciones,0.7,no
+E00356,28,21.5,3,44.4,noche,Sistemas,24.4,no
+E00357,40,3.2,1,39.1,mañana,Recursos Humanos,0,no
+E00358,60,16.9,3,22.5,noche,Operaciones,6.3,no
+E00359,64,19.2,2,18.7,noche,Operaciones,9.7,no
+E00360,49,12.2,2,26.6,noche,Sistemas,14.3,no
+E00361,40,24.2,2,37.3,tarde,Operaciones,0,no
+E00362,63,14.4,0,25.9,tarde,Operaciones,16.1,no
+E00363,49,0.4,0,41.9,mañana,Seguridad,10.4,no
+E00364,30,10.7,2,44.8,mañana,Operaciones,12.7,si
+E00365,60,16.6,2,29.6,mañana,Seguridad,11.1,no
+E00366,20,18.9,1,19.9,mañana,Sistemas,4.8,no
+E00367,27,17.0,3,1.4,noche,Operaciones,8.5,no
+E00368,26,11.9,2,11.1,mañana,Sistemas,4.6,no
+E00369,24,20.3,4,39.5,noche,Recursos Humanos,11.7,no
+E00370,60,15.3,1,8.2,tarde,Recursos Humanos,15.3,no
+E00371,57,5.4,3,40.5,mañana,Sistemas,4.0,no
+E00372,61,10.7,0,35.8,mañana,Operaciones,8.1,no
+E00373,33,7.1,4,42.4,mañana,Operaciones,16.1,no
+E00374,35,4.7,3,18.2,noche,Sistemas,4.6,no
+E00375,40,1.8,1,40.1,mañana,Operaciones,10.9,no
+E00376,50,21.0,0,19.5,noche,Recursos Humanos,10.2,no
+E00377,38,1.0,4,3.7,tarde,Administración,8.2,no
+E00378,54,10.6,4,18.7,noche,Administración,9.4,si
+E00379,40,23.0,3,43.9,mañana,Administración,10.1,no
+E00380,39,19.1,3,29.6,noche,Sistemas,6.5,si
+E00381,58,2.2,0,20.1,tarde,Administración,0,no
+E00382,28,18.5,0,33.6,mañana,Sistemas,15.6,no
+E00383,28,19.6,2,32.7,mañana,Operaciones,20.7,no
+E00384,37,3.0,4,40.6,tarde,Seguridad,16.7,no
+E00385,51,1.9,4,21.0,tarde,Sistemas,11.7,si
+E00386,34,3.9,4,35.0,noche,Sistemas,19.9,si
+E00387,22,1.1,4,17.0,mañana,Recursos Humanos,8.2,no
+E00388,35,17.9,3,29.9,mañana,Operaciones,12.5,no
+E00389,31,14.3,1,6.3,noche,Sistemas,5.3,no
+E00390,38,24.5,2,43.0,mañana,Seguridad,4.4,si
+E00391,35,5.0,3,25.8,tarde,Administración,14.7,no
+E00392,35,24.3,1,44.9,mañana,Administración,14.2,no
+E00393,20,8.7,3,37.9,mañana,Operaciones,8.2,no
+E00394,46,18.2,3,5.6,noche,Recursos Humanos,23.6,si
+E00395,46,7.0,2,2.9,mañana,Administración,4.1,no
+E00396,60,18.7,3,26.6,noche,Recursos Humanos,14.9,no
+E00397,45,24.1,2,11.4,tarde,Operaciones,11.5,no
+E00398,57,6.8,0,4.3,mañana,Recursos Humanos,10.0,no
+E00399,39,10.2,3,24.6,mañana,Seguridad,11.0,no
+E00400,64,3.0,4,7.9,noche,Operaciones,19.0,no
+E00401,52,2.3,0,11.9,tarde,Seguridad,10.9,no
+E00402,48,6.5,4,44.6,mañana,Seguridad,7.9,no
+E00403,34,20.1,1,7.2,mañana,Sistemas,3.5,no
+E00404,57,10.0,4,31.2,noche,Sistemas,7.4,si
+E00405,25,1.6,2,40.7,tarde,Recursos Humanos,19.0,si
+E00406,45,23.6,3,3.2,noche,Seguridad,16.9,no
+E00407,29,5.4,0,9.2,tarde,Seguridad,9.7,no
+E00408,55,15.4,3,29.5,tarde,Seguridad,12.5,no
+E00409,60,5.0,4,39.9,noche,Recursos Humanos,9.8,no
+E00410,54,24.7,3,35.4,tarde,Seguridad,3.7,no
+E00411,21,6.8,2,2.1,noche,Recursos Humanos,14.4,si
+E00412,30,24.8,0,24.3,noche,Recursos Humanos,8.1,no
+E00413,44,19.8,2,33.4,mañana,Administración,12.5,no
+E00414,40,24.8,2,8.6,mañana,Administración,9.2,no
+E00415,51,23.7,4,25.8,noche,Recursos Humanos,7.3,no
+E00416,34,12.3,0,5.0,mañana,Administración,7.8,no
+E00417,40,5.0,0,6.7,noche,Recursos Humanos,8.0,si
+E00418,43,14.7,0,41.4,mañana,Administración,0,no
+E00419,47,2.5,3,14.3,mañana,Recursos Humanos,18.2,no
+E00420,42,4.4,1,43.6,noche,Administración,2.4,no
+E00421,64,18.3,4,14.0,mañana,Sistemas,0,no
+E00422,58,24.9,2,43.5,mañana,Recursos Humanos,21.8,no
+E00423,24,14.1,1,42.2,mañana,Operaciones,0.5,no
+E00424,48,8.0,0,29.0,mañana,Operaciones,7.6,no
+E00425,44,6.4,3,5.8,mañana,Sistemas,12.5,no
+E00426,42,24.2,4,39.9,tarde,Seguridad,0.0,no
+E00427,48,14.5,0,34.4,mañana,Recursos Humanos,16.0,no
+E00428,24,0.8,2,1.9,tarde,Sistemas,10.8,no
+E00429,58,13.7,4,40.5,mañana,Operaciones,13.1,no
+E00430,58,17.6,3,20.0,noche,Recursos Humanos,9.5,no
+E00431,36,4.7,2,31.7,noche,Administración,10.3,no
+E00432,29,2.4,0,18.3,noche,Seguridad,3.9,no
+E00433,21,16.6,1,27.4,mañana,Sistemas,12.9,no
+E00434,45,7.3,3,4.6,mañana,Operaciones,0,si
+E00435,31,13.6,3,9.1,tarde,Operaciones,8.6,si
+E00436,23,11.0,1,12.6,tarde,Administración,8.1,no
+E00437,55,8.6,0,24.8,noche,Recursos Humanos,0,no
+E00438,56,20.5,1,19.4,noche,Seguridad,5.6,no
+E00439,63,17.9,4,23.1,noche,Administración,8.4,si
+E00440,32,23.7,1,20.8,mañana,Recursos Humanos,10.3,no
+E00441,36,5.0,2,37.2,mañana,Administración,8.6,no
+E00442,45,22.9,4,3.9,tarde,Administración,5.8,no
+E00443,53,21.8,3,35.6,noche,Administración,12.3,si
+E00444,26,3.7,4,25.9,noche,Sistemas,9.9,no
+E00445,61,22.0,3,39.6,tarde,Seguridad,0,no
+E00446,59,11.8,4,8.6,tarde,Recursos Humanos,5.4,no
+E00447,37,22.0,2,31.4,mañana,Seguridad,2.5,si
+E00448,64,20.4,0,14.3,tarde,Seguridad,12.3,no
+E00449,46,18.6,4,35.1,tarde,Operaciones,7.3,no
+E00450,53,4.7,2,10.3,tarde,Seguridad,11.1,no
+E00451,56,7.8,0,23.3,mañana,Administración,1.5,no
+E00452,22,21.9,3,9.8,mañana,Recursos Humanos,13.4,no
+E00453,63,9.2,0,21.4,tarde,Sistemas,9.8,no
+E00454,55,12.2,2,20.6,tarde,Administración,1.6,no
+E00455,23,20.8,1,5.0,mañana,Seguridad,17.5,no
+E00456,63,19.5,1,10.4,mañana,Recursos Humanos,7.3,no
+E00457,28,19.5,1,34.8,mañana,Seguridad,14.1,no
+E00458,47,0.2,3,12.1,tarde,Operaciones,12.0,no
+E00459,57,7.6,0,23.9,noche,Seguridad,2.7,si
+E00460,61,25.0,4,43.5,tarde,Administración,4.1,no
+E00461,37,1.6,2,44.5,noche,Operaciones,4.8,no
+E00462,53,23.8,1,29.7,mañana,Recursos Humanos,16.8,no
+E00463,21,15.0,3,30.1,noche,Recursos Humanos,1.6,no
+E00464,57,6.5,4,19.4,tarde,Sistemas,10.2,no
+E00465,52,17.2,2,29.1,tarde,Operaciones,3.0,no
+E00466,26,21.0,3,39.6,mañana,Operaciones,11.2,no
+E00467,61,19.1,0,9.1,noche,Operaciones,11.3,no
+E00468,43,5.6,2,39.3,tarde,Operaciones,2.2,si
+E00469,24,1.3,3,28.9,noche,Administración,4.6,no
+E00470,39,12.5,3,39.2,tarde,Administración,19.1,no
+E00471,29,5.0,2,19.0,noche,Seguridad,11.9,no
+E00472,40,4.5,0,4.6,tarde,Recursos Humanos,12.8,no
+E00473,28,4.2,4,34.6,tarde,Sistemas,8.1,no
+E00474,20,10.7,0,19.9,tarde,Seguridad,0,no
+E00475,21,22.3,0,34.3,noche,Recursos Humanos,6.0,no
+E00476,28,6.2,0,31.5,tarde,Operaciones,2.0,no
+E00477,53,20.6,4,14.1,tarde,Seguridad,13.3,no
+E00478,51,10.8,2,31.2,mañana,Operaciones,8.0,no
+E00479,33,20.3,0,1.8,mañana,Recursos Humanos,4.4,no
+E00480,44,4.2,2,17.1,noche,Sistemas,9.1,no
+E00481,64,1.2,0,5.8,mañana,Sistemas,0,no
+E00482,33,9.5,0,25.1,tarde,Recursos Humanos,5.2,no
+E00483,26,6.7,4,27.6,mañana,Seguridad,16.4,no
+E00484,32,2.9,4,6.0,mañana,Seguridad,9.5,no
+E00485,22,5.0,4,32.0,tarde,Recursos Humanos,12.5,no
+E00486,20,5.2,0,42.1,tarde,Recursos Humanos,1.8,no
+E00487,24,16.7,0,7.6,mañana,Administración,0,no
+E00488,49,16.1,0,21.1,tarde,Operaciones,11.0,no
+E00489,27,7.3,0,36.3,tarde,Seguridad,10.2,no
+E00490,41,22.3,2,1.4,mañana,Recursos Humanos,19.8,no
+E00491,27,18.3,3,17.4,tarde,Recursos Humanos,0,no
+E00492,46,11.4,1,37.8,noche,Seguridad,15.0,si
+E00493,50,23.6,4,8.0,tarde,Administración,14.0,no
+E00494,21,4.5,1,17.7,tarde,Administración,1.1,no
+E00495,20,11.0,4,3.8,noche,Operaciones,8.7,no
+E00496,53,14.4,4,25.9,noche,Operaciones,4.8,no
+E00497,29,18.2,4,22.2,noche,Seguridad,0.3,no
+E00498,50,15.3,3,1.5,mañana,Administración,9.6,no
+E00499,34,6.0,4,43.7,mañana,Administración,6.3,no
+E00500,56,10.1,3,11.3,tarde,Seguridad,14.0,no
+E00501,45,24.5,3,33.8,mañana,Sistemas,11.7,si
+E00502,60,13.7,2,37.3,noche,Administración,13.9,no
+E00503,49,11.4,2,16.0,mañana,Recursos Humanos,3.1,no
+E00504,48,15.5,0,21.8,noche,Operaciones,15.2,si
+E00505,53,8.9,2,28.9,tarde,Administración,13.1,no
+E00506,26,1.1,2,8.2,mañana,Seguridad,5.0,no
+E00507,26,9.8,3,21.1,mañana,Operaciones,5.5,si
+E00508,49,15.8,4,30.6,mañana,Seguridad,11.1,no
+E00509,50,13.3,4,3.1,tarde,Administración,7.1,no
+E00510,26,22.8,3,31.4,mañana,Recursos Humanos,3.5,no
+E00511,37,22.0,3,19.4,noche,Recursos Humanos,1.2,no
+E00512,46,24.3,4,20.9,mañana,Recursos Humanos,4.9,no
+E00513,60,17.5,1,38.9,noche,Administración,0,no
+E00514,61,15.6,1,13.8,tarde,Recursos Humanos,0,no
+E00515,56,2.9,3,16.5,tarde,Administración,7.8,no
+E00516,53,22.3,0,24.5,tarde,Sistemas,11.3,no
+E00517,63,5.0,2,34.0,mañana,Operaciones,8.5,no
+E00518,22,1.6,2,35.5,mañana,Administración,9.1,no
+E00519,44,18.5,1,39.1,noche,Administración,5.4,no
+E00520,44,19.9,3,31.6,noche,Sistemas,0,no
+E00521,32,24.1,4,3.4,noche,Operaciones,13.3,no
+E00522,57,21.5,4,20.5,mañana,Operaciones,7.7,no
+E00523,31,4.8,1,20.7,noche,Sistemas,4.0,no
+E00524,36,3.0,1,2.8,tarde,Administración,14.2,si
+E00525,40,11.7,4,42.2,mañana,Recursos Humanos,17.8,si
+E00526,51,23.3,4,28.1,noche,Operaciones,5.8,no
+E00527,52,13.1,1,43.1,noche,Sistemas,7.3,no
+E00528,62,13.4,2,5.0,mañana,Recursos Humanos,5.6,no
+E00529,27,15.5,2,21.9,noche,Sistemas,12.4,no
+E00530,22,22.6,2,28.0,noche,Recursos Humanos,0.1,si
+E00531,43,6.4,4,32.9,mañana,Administración,15.3,no
+E00532,40,11.1,4,2.9,noche,Recursos Humanos,10.3,no
+E00533,33,19.3,1,24.5,noche,Sistemas,9.3,no
+E00534,61,10.6,0,5.6,noche,Seguridad,7.9,no
+E00535,36,8.3,4,4.9,mañana,Recursos Humanos,4.5,si
+E00536,48,20.5,3,41.1,tarde,Seguridad,7.0,no
+E00537,57,13.4,0,29.2,noche,Sistemas,8.5,no
+E00538,63,1.8,2,41.8,mañana,Operaciones,4.2,no
+E00539,30,9.5,4,37.2,mañana,Seguridad,5.0,no
+E00540,60,18.7,1,36.1,noche,Operaciones,4.3,no
+E00541,55,21.7,1,29.5,mañana,Administración,20.0,no
+E00542,25,0.1,2,27.3,noche,Administración,10.5,no
+E00543,30,5.3,1,40.8,noche,Recursos Humanos,17.6,no
+E00544,23,20.9,4,9.6,mañana,Administración,0.6,no
+E00545,51,1.7,2,5.3,noche,Administración,9.8,no
+E00546,24,16.8,1,11.3,tarde,Administración,5.3,no
+E00547,43,7.6,2,26.7,noche,Administración,14.0,no
+E00548,37,4.2,2,14.8,mañana,Seguridad,14.5,no
+E00549,55,11.6,0,16.8,tarde,Seguridad,15.3,no
+E00550,32,15.2,2,38.0,mañana,Administración,7.1,no
+E00551,57,22.3,4,38.4,noche,Sistemas,0,no
+E00552,54,14.8,4,40.9,noche,Operaciones,0,no
+E00553,28,5.6,3,35.0,noche,Operaciones,9.8,no
+E00554,59,2.3,1,17.0,mañana,Recursos Humanos,8.1,no
+E00555,42,14.2,0,25.9,mañana,Seguridad,4.7,no
+E00556,22,12.2,1,3.8,tarde,Recursos Humanos,0,no
+E00557,26,22.9,4,39.8,mañana,Operaciones,6.8,no
+E00558,56,6.8,1,33.6,noche,Administración,3.8,no
+E00559,34,22.5,4,4.4,tarde,Seguridad,12.1,no
+E00560,20,20.4,4,16.2,tarde,Administración,12.8,no
+E00561,30,12.9,2,13.4,mañana,Recursos Humanos,3.6,no
+E00562,27,20.4,3,30.1,tarde,Operaciones,4.9,no
+E00563,28,16.2,4,19.1,mañana,Sistemas,1.9,no
+E00564,23,3.4,1,23.6,noche,Recursos Humanos,7.8,no
+E00565,25,15.0,1,25.8,mañana,Operaciones,11.8,no
+E00566,46,24.8,4,39.2,mañana,Recursos Humanos,13.0,no
+E00567,49,15.6,4,23.5,mañana,Operaciones,14.2,no
+E00568,32,5.7,4,18.0,mañana,Sistemas,12.5,no
+E00569,58,3.7,0,5.2,tarde,Administración,2.5,no
+E00570,62,13.3,1,34.1,mañana,Seguridad,14.1,si
+E00571,46,23.4,2,30.9,tarde,Administración,3.7,no
+E00572,42,17.4,4,19.9,tarde,Seguridad,12.4,no
+E00573,34,14.4,0,19.7,tarde,Seguridad,0,no
+E00574,20,21.9,4,19.0,mañana,Sistemas,0.8,no
+E00575,26,5.1,1,36.4,tarde,Operaciones,7.0,no
+E00576,56,14.6,2,12.5,noche,Seguridad,0,no
+E00577,31,5.1,2,25.3,noche,Seguridad,0,no
+E00578,45,12.1,1,44.5,noche,Operaciones,13.4,no
+E00579,33,11.2,4,31.8,mañana,Sistemas,1.0,no
+E00580,30,8.5,3,25.2,noche,Sistemas,8.6,si
+E00581,24,3.6,2,41.7,tarde,Sistemas,7.9,no
+E00582,59,2.0,4,2.7,tarde,Seguridad,4.5,si
+E00583,20,19.3,1,8.7,tarde,Seguridad,23.0,no
+E00584,58,23.3,4,23.8,mañana,Sistemas,3.7,no
+E00585,25,0.9,2,11.5,mañana,Recursos Humanos,7.6,no
+E00586,53,8.8,0,18.4,noche,Recursos Humanos,7.8,si
+E00587,42,7.1,2,37.5,noche,Operaciones,5.7,si
+E00588,20,24.1,2,21.0,tarde,Administración,11.2,no
+E00589,36,12.6,4,16.0,mañana,Administración,14.4,no
+E00590,50,14.4,1,31.5,tarde,Administración,8.7,no
+E00591,27,11.5,2,26.8,mañana,Seguridad,0,si
+E00592,40,15.8,3,44.7,noche,Recursos Humanos,15.0,si
+E00593,63,20.8,2,11.9,mañana,Seguridad,6.0,no
+E00594,56,23.3,2,22.0,tarde,Recursos Humanos,12.1,no
+E00595,36,4.8,1,33.4,mañana,Recursos Humanos,17.1,no
+E00596,26,20.9,0,37.8,tarde,Recursos Humanos,15.9,no
+E00597,50,15.3,2,34.6,noche,Sistemas,3.7,no
+E00598,51,12.3,1,44.4,noche,Operaciones,21.3,no
+E00599,47,5.6,3,26.4,mañana,Administración,6.7,no
+E00600,49,0.8,0,16.3,noche,Recursos Humanos,5.9,no
+E00601,40,0.3,2,10.3,noche,Sistemas,1.7,no
+E00602,50,6.5,4,25.1,mañana,Operaciones,5.9,no
+E00603,37,10.5,3,34.1,tarde,Seguridad,11.2,no
+E00604,37,3.3,1,26.3,mañana,Sistemas,0,no
+E00605,31,20.0,3,33.5,tarde,Sistemas,4.0,no
+E00606,40,24.9,3,38.4,noche,Administración,5.6,no
+E00607,36,10.0,3,31.4,mañana,Recursos Humanos,15.3,no
+E00608,43,2.4,4,33.8,tarde,Operaciones,0,no
+E00609,32,10.3,4,16.4,noche,Administración,4.1,no
+E00610,40,16.2,4,8.7,tarde,Operaciones,0,no
+E00611,30,9.5,2,13.6,noche,Recursos Humanos,8.8,no
+E00612,30,15.3,2,18.8,mañana,Sistemas,8.7,no
+E00613,43,6.7,4,29.4,tarde,Seguridad,13.2,no
+E00614,35,11.3,2,8.4,mañana,Recursos Humanos,16.7,no
+E00615,55,4.2,0,5.5,mañana,Seguridad,4.6,si
+E00616,36,9.9,4,34.7,mañana,Sistemas,12.9,no
+E00617,60,7.7,1,11.9,tarde,Seguridad,15.2,no
+E00618,40,21.0,3,2.3,noche,Operaciones,0,no
+E00619,31,13.7,4,6.9,noche,Administración,10.5,no
+E00620,53,15.8,4,29.0,noche,Seguridad,6.0,no
+E00621,36,20.1,1,20.4,tarde,Seguridad,13.2,no
+E00622,38,0.0,3,36.9,mañana,Operaciones,0,no
+E00623,58,18.9,1,14.2,tarde,Operaciones,6.0,no
+E00624,45,13.7,1,9.3,noche,Seguridad,13.1,no
+E00625,53,9.5,4,12.6,tarde,Recursos Humanos,16.4,no
+E00626,37,17.1,3,13.5,noche,Administración,8.9,si
+E00627,64,2.8,4,21.0,tarde,Operaciones,10.1,no
+E00628,31,8.0,0,7.7,noche,Sistemas,7.4,no
+E00629,33,0.2,2,5.0,mañana,Seguridad,11.0,no
+E00630,64,19.6,0,22.9,tarde,Seguridad,2.4,no
+E00631,50,1.4,1,35.1,mañana,Administración,18.1,no
+E00632,35,21.0,3,37.0,mañana,Sistemas,8.9,no
+E00633,62,0.8,1,21.3,mañana,Administración,1.6,no
+E00634,60,17.0,0,14.7,tarde,Recursos Humanos,7.7,no
+E00635,62,12.0,1,14.1,tarde,Sistemas,0.4,no
+E00636,37,5.9,4,20.1,mañana,Recursos Humanos,15.7,si
+E00637,29,1.0,2,35.5,tarde,Administración,15.2,no
+E00638,41,6.2,0,23.0,noche,Administración,16.0,no
+E00639,55,19.8,2,6.5,mañana,Operaciones,11.2,no
+E00640,42,11.0,1,9.5,noche,Seguridad,8.0,no
+E00641,56,14.0,1,24.9,tarde,Recursos Humanos,9.7,no
+E00642,30,8.1,0,21.6,noche,Administración,1.6,no
+E00643,44,13.5,1,21.0,noche,Administración,6.7,no
+E00644,40,15.5,0,17.0,noche,Recursos Humanos,3.9,no
+E00645,59,13.1,2,22.9,noche,Recursos Humanos,1.7,no
+E00646,22,16.0,1,5.9,noche,Sistemas,8.7,si
+E00647,62,4.8,3,2.4,noche,Seguridad,9.4,no
+E00648,58,17.5,0,12.3,tarde,Recursos Humanos,21.5,no
+E00649,43,23.2,4,37.6,tarde,Sistemas,9.1,no
+E00650,59,22.3,2,37.2,noche,Sistemas,0,no
+E00651,26,1.9,1,10.5,noche,Sistemas,6.2,no
+E00652,60,4.7,1,24.2,mañana,Administración,0.8,no
+E00653,64,19.2,3,26.4,noche,Seguridad,5.2,no
+E00654,41,4.2,1,8.9,tarde,Administración,0.1,no
+E00655,46,22.6,3,25.2,tarde,Operaciones,6.3,no
+E00656,44,8.1,4,11.6,noche,Recursos Humanos,12.1,no
+E00657,38,11.2,4,18.5,noche,Sistemas,5.9,si
+E00658,34,3.4,1,40.2,mañana,Operaciones,8.8,no
+E00659,55,17.2,4,13.1,noche,Administración,7.0,no
+E00660,28,3.9,2,2.7,tarde,Recursos Humanos,2.7,no
+E00661,33,20.3,0,5.0,tarde,Administración,13.9,no
+E00662,26,19.8,4,8.6,noche,Administración,7.0,no
+E00663,47,9.5,3,35.3,tarde,Operaciones,6.7,no
+E00664,20,3.0,3,34.9,noche,Administración,14.9,si
+E00665,29,14.1,0,15.4,noche,Recursos Humanos,10.4,no
+E00666,52,24.9,0,43.7,noche,Administración,8.9,no
+E00667,55,3.3,3,4.6,noche,Sistemas,12.9,no
+E00668,28,10.0,3,20.1,noche,Recursos Humanos,1.5,no
+E00669,35,4.9,1,28.1,noche,Administración,5.5,si
+E00670,27,19.4,3,15.2,noche,Sistemas,3.1,no
+E00671,42,14.8,4,2.1,tarde,Recursos Humanos,10.6,no
+E00672,34,20.1,1,28.4,tarde,Sistemas,6.6,no
+E00673,29,2.1,2,33.5,mañana,Administración,4.8,si
+E00674,21,17.3,2,5.9,tarde,Seguridad,9.9,no
+E00675,29,13.1,0,12.4,tarde,Administración,15.2,no
+E00676,23,22.7,2,24.2,tarde,Recursos Humanos,10.8,no
+E00677,62,11.6,2,42.6,mañana,Seguridad,16.8,no
+E00678,38,22.8,3,16.8,mañana,Sistemas,8.7,no
+E00679,25,2.5,1,14.9,noche,Administración,13.8,si
+E00680,22,24.2,1,25.7,noche,Sistemas,12.5,no
+E00681,42,18.6,2,1.8,noche,Operaciones,5.6,no
+E00682,44,24.5,0,23.1,mañana,Operaciones,21.8,no
+E00683,44,8.5,4,18.3,mañana,Sistemas,3.0,no
+E00684,35,15.3,4,28.5,mañana,Seguridad,17.1,no
+E00685,57,8.2,4,24.9,mañana,Recursos Humanos,21.0,no
+E00686,28,5.1,3,7.1,noche,Administración,24.4,si
+E00687,55,23.3,4,41.4,tarde,Sistemas,7.6,no
+E00688,40,3.0,3,15.0,mañana,Sistemas,13.0,no
+E00689,29,20.5,1,29.0,noche,Operaciones,6.8,si
+E00690,37,4.6,4,34.5,noche,Administración,4.0,si
+E00691,28,17.2,4,16.8,noche,Seguridad,6.2,no
+E00692,51,11.7,3,29.6,mañana,Seguridad,10.6,si
+E00693,34,19.1,1,1.7,tarde,Seguridad,11.0,no
+E00694,51,1.7,2,41.8,tarde,Administración,16.4,no
+E00695,45,19.4,4,27.7,tarde,Operaciones,0,no
+E00696,53,14.3,0,24.6,noche,Sistemas,0,si
+E00697,55,24.9,3,23.8,tarde,Sistemas,11.4,no
+E00698,45,15.8,2,3.2,tarde,Seguridad,8.7,no
+E00699,29,7.4,3,41.4,noche,Administración,3.1,no
+E00700,57,11.3,4,32.8,mañana,Recursos Humanos,12.1,no
+E00701,49,4.5,0,27.0,noche,Recursos Humanos,12.7,no
+E00702,25,17.3,0,40.9,mañana,Sistemas,5.7,no
+E00703,30,17.7,3,33.0,noche,Administración,0,no
+E00704,62,1.1,1,8.5,tarde,Administración,9.8,no
+E00705,38,1.3,1,14.6,noche,Seguridad,10.9,si
+E00706,20,3.3,3,9.9,noche,Operaciones,1.0,no
+E00707,62,15.2,3,22.7,mañana,Administración,8.1,no
+E00708,55,11.0,2,27.5,mañana,Recursos Humanos,2.4,no
+E00709,22,1.2,1,7.5,noche,Operaciones,2.8,no
+E00710,25,16.7,0,37.9,tarde,Operaciones,22.8,no
+E00711,56,7.1,4,30.1,noche,Administración,20.1,si
+E00712,39,11.4,2,26.5,mañana,Sistemas,4.0,si
+E00713,28,10.7,0,25.2,tarde,Seguridad,12.3,no
+E00714,64,6.9,1,24.2,noche,Recursos Humanos,5.8,no
+E00715,38,15.7,3,44.4,tarde,Administración,6.1,no
+E00716,28,7.9,4,24.1,noche,Operaciones,1.3,no
+E00717,38,12.3,1,8.9,noche,Recursos Humanos,5.2,si
+E00718,59,0.6,3,28.5,mañana,Recursos Humanos,3.4,no
+E00719,36,15.9,0,1.5,mañana,Operaciones,10.8,no
+E00720,63,12.7,2,15.3,mañana,Sistemas,2.8,no
+E00721,63,0.7,3,8.7,tarde,Operaciones,16.1,no
+E00722,60,19.9,3,29.4,tarde,Recursos Humanos,13.8,no
+E00723,53,19.6,2,19.2,noche,Sistemas,3.3,no
+E00724,56,17.0,2,25.4,mañana,Recursos Humanos,11.8,no
+E00725,44,24.2,4,13.3,mañana,Operaciones,0,no
+E00726,39,14.3,2,18.1,noche,Sistemas,6.8,si
+E00727,53,21.9,2,17.3,tarde,Recursos Humanos,3.4,no
+E00728,48,9.4,4,2.6,mañana,Sistemas,14.8,no
+E00729,39,4.8,2,41.6,noche,Administración,9.1,si
+E00730,33,21.8,0,37.2,noche,Recursos Humanos,0,no
+E00731,25,0.1,2,42.0,noche,Administración,10.4,no
+E00732,21,1.2,4,23.9,noche,Operaciones,8.5,si
+E00733,48,5.0,0,13.6,noche,Operaciones,0,no
+E00734,52,3.9,0,6.0,noche,Administración,9.5,no
+E00735,35,3.5,1,32.0,tarde,Administración,13.4,si
+E00736,28,15.3,0,15.9,tarde,Sistemas,0,no
+E00737,57,1.3,3,19.8,mañana,Administración,9.6,no
+E00738,25,7.8,3,37.0,noche,Administración,5.6,no
+E00739,50,17.5,1,5.3,tarde,Seguridad,6.9,no
+E00740,45,3.6,1,40.4,tarde,Operaciones,5.2,no
+E00741,50,22.1,0,20.9,mañana,Sistemas,0,no
+E00742,56,11.5,1,8.5,tarde,Administración,1.9,no
+E00743,54,2.7,3,25.5,mañana,Operaciones,7.7,no
+E00744,50,10.3,3,28.3,noche,Recursos Humanos,11.8,no
+E00745,54,10.8,1,44.1,noche,Operaciones,9.7,si
+E00746,51,16.7,0,33.5,noche,Administración,2.4,no
+E00747,58,20.6,0,8.8,tarde,Sistemas,4.3,no
+E00748,61,14.9,0,37.1,tarde,Seguridad,17.3,no
+E00749,62,22.6,1,29.0,mañana,Recursos Humanos,14.0,no
+E00750,33,7.3,2,28.1,tarde,Recursos Humanos,4.7,no
+E00751,25,23.0,4,42.2,noche,Operaciones,18.2,si
+E00752,23,24.7,2,18.8,mañana,Operaciones,20.8,si
+E00753,21,14.0,1,44.1,mañana,Operaciones,0,no
+E00754,45,14.8,3,28.5,noche,Seguridad,4.2,si
+E00755,29,3.5,2,25.4,tarde,Seguridad,9.6,no
+E00756,29,16.8,3,6.9,mañana,Sistemas,0,no
+E00757,47,3.4,4,36.5,tarde,Administración,0,si
+E00758,42,12.7,1,25.3,tarde,Seguridad,11.2,no
+E00759,46,21.2,4,11.4,noche,Operaciones,15.5,no
+E00760,27,0.8,4,2.7,tarde,Operaciones,0,si
+E00761,53,18.3,0,44.3,tarde,Seguridad,9.1,no
+E00762,63,15.3,4,11.8,noche,Sistemas,9.5,si
+E00763,52,8.6,3,35.3,tarde,Seguridad,3.0,no
+E00764,30,8.3,0,16.5,tarde,Operaciones,5.3,no
+E00765,57,19.6,1,12.5,noche,Seguridad,0.4,no
+E00766,21,16.4,2,13.8,noche,Administración,4.9,si
+E00767,37,19.6,2,12.1,noche,Operaciones,8.3,si
+E00768,62,2.8,3,8.7,noche,Recursos Humanos,5.5,no
+E00769,41,5.9,0,9.0,noche,Sistemas,10.7,no
+E00770,44,14.9,1,37.2,tarde,Seguridad,2.9,no
+E00771,27,14.4,0,38.0,mañana,Operaciones,0,no
+E00772,34,10.0,3,14.3,noche,Administración,5.6,no
+E00773,44,13.3,2,20.1,tarde,Seguridad,2.5,no
+E00774,47,17.1,4,2.8,noche,Operaciones,18.3,no
+E00775,45,6.7,3,5.3,noche,Administración,2.2,no
+E00776,53,18.7,2,33.3,noche,Recursos Humanos,0,no
+E00777,46,0.3,0,1.4,mañana,Sistemas,0,no
+E00778,36,17.1,1,16.5,noche,Operaciones,16.1,si
+E00779,60,14.9,0,40.3,mañana,Administración,9.8,no
+E00780,62,3.0,4,38.7,mañana,Seguridad,9.3,si
+E00781,60,4.6,3,14.0,noche,Sistemas,4.4,no
+E00782,36,6.9,1,19.8,noche,Operaciones,8.9,si
+E00783,31,9.7,3,44.8,tarde,Operaciones,3.3,si
+E00784,61,24.5,3,9.8,tarde,Recursos Humanos,13.8,no
+E00785,26,15.3,0,5.7,tarde,Operaciones,12.7,no
+E00786,51,14.3,1,12.0,tarde,Sistemas,7.9,no
+E00787,56,9.8,0,7.7,tarde,Seguridad,7.8,no
+E00788,24,23.5,4,22.6,tarde,Seguridad,8.9,no
+E00789,41,19.5,2,6.3,noche,Operaciones,13.8,no
+E00790,54,15.8,2,43.2,mañana,Operaciones,13.8,no
+E00791,62,16.2,1,8.8,mañana,Seguridad,11.2,no
+E00792,51,9.8,0,5.7,noche,Operaciones,12.8,no
+E00793,51,0.9,3,2.1,noche,Recursos Humanos,3.7,si
+E00794,21,13.5,0,14.5,noche,Seguridad,5.1,no
+E00795,49,10.1,4,10.3,noche,Administración,12.6,si
+E00796,51,14.5,0,41.7,mañana,Recursos Humanos,0,no
+E00797,39,17.5,0,6.7,mañana,Sistemas,10.4,no
+E00798,51,4.3,4,27.0,mañana,Sistemas,9.3,no
+E00799,40,10.7,0,36.7,noche,Seguridad,4.0,no
+E00800,57,14.4,1,7.0,mañana,Sistemas,6.4,no
+E00801,48,10.4,1,31.6,noche,Recursos Humanos,10.6,no
+E00802,44,1.0,1,5.4,noche,Administración,14.9,si
+E00803,38,4.5,3,4.9,noche,Administración,8.7,no
+E00804,29,19.8,2,21.9,mañana,Recursos Humanos,1.9,no
+E00805,59,15.3,0,2.7,mañana,Seguridad,7.1,no
+E00806,35,19.6,1,16.3,mañana,Administración,13.5,no
+E00807,34,9.0,3,34.5,noche,Administración,13.0,no
+E00808,29,16.5,3,13.2,mañana,Sistemas,4.5,no
+E00809,36,1.4,2,17.0,mañana,Seguridad,8.1,no
+E00810,54,22.3,1,20.9,mañana,Sistemas,8.8,no
+E00811,57,1.8,2,11.4,tarde,Administración,9.2,no
+E00812,40,18.7,1,40.5,mañana,Sistemas,16.0,no
+E00813,51,9.4,0,10.7,tarde,Administración,13.7,no
+E00814,44,3.6,2,41.8,tarde,Recursos Humanos,14.3,no
+E00815,64,24.4,4,9.9,mañana,Sistemas,15.2,no
+E00816,30,3.4,2,38.5,tarde,Seguridad,8.9,no
+E00817,55,19.9,1,42.9,mañana,Administración,12.9,no
+E00818,50,21.4,3,22.5,mañana,Administración,6.2,no
+E00819,57,6.2,1,15.4,noche,Recursos Humanos,17.5,no
+E00820,50,22.5,4,19.4,mañana,Sistemas,15.2,no
+E00821,35,20.0,0,37.1,tarde,Seguridad,9.5,no
+E00822,42,0.3,2,33.2,mañana,Recursos Humanos,9.5,si
+E00823,57,16.7,0,8.1,tarde,Administración,30.2,no
+E00824,31,11.6,2,7.1,noche,Seguridad,1.5,si
+E00825,53,15.7,0,17.9,noche,Operaciones,1.3,no
+E00826,56,18.8,1,31.7,noche,Administración,8.6,no
+E00827,23,18.4,0,3.4,noche,Operaciones,5.6,no
+E00828,61,11.6,4,2.8,tarde,Recursos Humanos,5.8,no
+E00829,61,3.5,3,15.7,noche,Sistemas,0.6,no
+E00830,34,18.8,2,39.3,noche,Recursos Humanos,5.2,no
+E00831,51,6.9,4,3.8,tarde,Seguridad,11.8,no
+E00832,38,3.1,3,32.2,noche,Administración,0.2,no
+E00833,49,20.2,0,42.4,mañana,Recursos Humanos,0.6,no
+E00834,30,22.4,2,13.7,mañana,Sistemas,10.6,no
+E00835,46,5.1,4,42.9,mañana,Operaciones,10.2,no
+E00836,38,11.8,1,19.5,noche,Sistemas,19.2,no
+E00837,41,23.7,2,29.4,tarde,Administración,12.7,no
+E00838,49,16.6,2,24.3,noche,Seguridad,0,no
+E00839,23,19.7,1,11.0,tarde,Operaciones,2.7,no
+E00840,38,11.4,1,8.3,mañana,Administración,19.3,no
+E00841,22,16.7,2,7.8,mañana,Sistemas,6.1,no
+E00842,22,11.0,2,17.3,mañana,Administración,11.4,no
+E00843,45,24.4,3,24.5,mañana,Sistemas,7.5,no
+E00844,54,23.7,4,41.8,mañana,Sistemas,3.4,no
+E00845,56,7.2,3,42.5,noche,Recursos Humanos,16.2,no
+E00846,63,2.8,4,22.1,mañana,Recursos Humanos,9.0,no
+E00847,58,5.5,1,16.7,tarde,Sistemas,8.9,no
+E00848,21,5.6,0,42.2,tarde,Recursos Humanos,1.7,no
+E00849,40,2.2,4,23.5,mañana,Seguridad,6.4,no
+E00850,29,23.6,3,41.0,tarde,Seguridad,4.0,no
+E00851,33,8.8,3,44.0,noche,Sistemas,12.2,no
+E00852,46,10.4,1,20.5,mañana,Seguridad,12.1,no
+E00853,24,7.6,4,44.5,noche,Operaciones,1.0,no
+E00854,31,2.2,4,19.0,tarde,Seguridad,0.4,no
+E00855,51,5.0,0,37.6,tarde,Administración,9.8,no
+E00856,49,7.5,1,26.7,tarde,Administración,8.4,no
+E00857,61,23.9,2,37.7,tarde,Sistemas,8.1,no
+E00858,27,12.3,2,31.3,mañana,Sistemas,0,no
+E00859,60,9.0,3,22.1,tarde,Operaciones,8.7,no
+E00860,21,20.5,2,17.4,noche,Administración,9.1,no
+E00861,37,22.0,2,7.0,mañana,Sistemas,9.8,no
+E00862,53,22.8,0,16.7,tarde,Operaciones,0,no
+E00863,40,2.4,2,34.1,noche,Operaciones,7.1,no
+E00864,42,17.4,1,17.0,noche,Administración,15.2,no
+E00865,33,12.1,1,16.0,mañana,Sistemas,8.6,no
+E00866,64,20.8,4,36.0,noche,Administración,13.4,no
+E00867,28,20.1,0,19.4,mañana,Sistemas,0.2,no
+E00868,53,7.8,2,17.0,tarde,Administración,10.4,no
+E00869,64,3.0,1,6.7,noche,Recursos Humanos,12.5,no
+E00870,24,5.2,0,44.2,tarde,Sistemas,9.6,si
+E00871,23,2.7,3,35.9,noche,Administración,0,si
+E00872,26,6.3,0,3.9,noche,Sistemas,11.6,no
+E00873,37,4.6,4,16.5,mañana,Recursos Humanos,6.0,no
+E00874,35,4.0,4,23.0,noche,Administración,5.5,no
+E00875,30,0.3,4,10.5,mañana,Operaciones,6.8,si
+E00876,43,18.1,4,41.7,noche,Seguridad,11.6,si
+E00877,52,20.9,1,44.2,tarde,Recursos Humanos,16.2,no
+E00878,53,19.0,1,14.8,tarde,Sistemas,2.3,no
+E00879,44,18.1,2,4.6,tarde,Sistemas,8.1,no
+E00880,55,18.4,3,31.2,tarde,Recursos Humanos,5.0,no
+E00881,31,1.7,0,38.0,tarde,Operaciones,19.4,no
+E00882,62,12.3,0,5.6,tarde,Administración,12.4,no
+E00883,43,24.4,1,33.6,mañana,Sistemas,12.1,no
+E00884,47,14.9,3,44.6,mañana,Recursos Humanos,6.3,no
+E00885,42,6.8,3,35.7,noche,Seguridad,17.3,no
+E00886,29,23.8,3,44.5,noche,Operaciones,11.5,no
+E00887,24,15.7,3,6.9,mañana,Sistemas,10.9,no
+E00888,29,24.3,2,17.8,noche,Operaciones,6.1,si
+E00889,38,18.8,3,34.8,tarde,Recursos Humanos,6.1,no
+E00890,21,6.5,0,16.1,noche,Administración,20.3,si
+E00891,22,11.3,0,38.5,tarde,Seguridad,7.3,no
+E00892,51,16.5,3,35.3,noche,Recursos Humanos,14.3,no
+E00893,63,2.7,4,30.7,noche,Administración,15.1,no
+E00894,45,11.9,2,38.6,noche,Sistemas,0,no
+E00895,21,8.8,4,44.0,tarde,Sistemas,8.5,si
+E00896,21,20.9,2,16.4,noche,Administración,3.4,no
+E00897,35,10.3,2,3.5,mañana,Recursos Humanos,12.3,no
+E00898,41,22.8,1,3.9,tarde,Sistemas,13.3,no
+E00899,21,21.6,3,26.0,tarde,Operaciones,8.7,no
+E00900,56,24.6,0,17.6,tarde,Operaciones,9.0,no
+E00901,30,8.4,4,23.1,noche,Operaciones,5.4,no
+E00902,54,24.2,1,9.9,noche,Sistemas,7.6,no
+E00903,57,10.1,0,10.9,noche,Sistemas,9.8,no
+E00904,47,6.8,1,25.9,noche,Seguridad,6.6,no
+E00905,40,12.6,1,14.2,noche,Administración,10.0,no
+E00906,31,6.3,0,23.7,noche,Administración,3.0,no
+E00907,37,12.5,4,30.1,noche,Seguridad,2.8,no
+E00908,53,21.3,1,40.9,noche,Sistemas,5.8,no
+E00909,40,17.1,0,14.2,tarde,Seguridad,10.6,no
+E00910,36,21.1,4,12.7,tarde,Recursos Humanos,8.4,no
+E00911,51,0.7,4,36.1,tarde,Seguridad,12.4,no
+E00912,37,10.6,1,40.8,mañana,Recursos Humanos,18.4,no
+E00913,21,13.8,0,29.3,mañana,Seguridad,9.9,no
+E00914,43,2.1,0,27.5,mañana,Seguridad,0,no
+E00915,53,5.9,4,26.1,noche,Sistemas,14.9,no
+E00916,58,23.3,0,12.1,mañana,Recursos Humanos,8.8,no
+E00917,47,18.4,1,36.5,noche,Recursos Humanos,2.9,no
+E00918,36,4.4,4,43.7,tarde,Seguridad,15.0,no
+E00919,37,2.8,1,25.0,tarde,Recursos Humanos,10.6,no
+E00920,22,17.9,0,37.1,mañana,Administración,4.1,no
+E00921,63,13.8,0,14.6,noche,Operaciones,0,no
+E00922,36,5.9,2,20.5,mañana,Seguridad,17.4,no
+E00923,61,5.3,3,40.2,tarde,Operaciones,14.0,no
+E00924,46,6.9,2,4.5,tarde,Seguridad,5.5,no
+E00925,42,20.6,3,31.7,noche,Sistemas,0,no
+E00926,23,20.3,1,33.5,tarde,Sistemas,0.7,no
+E00927,25,10.0,0,28.6,tarde,Administración,0.3,no
+E00928,58,12.9,3,43.7,noche,Recursos Humanos,9.4,no
+E00929,40,18.4,2,12.5,noche,Administración,2.9,no
+E00930,34,10.4,0,9.0,tarde,Administración,20.9,no
+E00931,36,15.7,1,40.9,tarde,Recursos Humanos,3.6,si
+E00932,43,15.5,1,27.4,mañana,Sistemas,10.8,no
+E00933,27,10.9,1,41.5,tarde,Seguridad,7.0,no
+E00934,51,4.8,3,38.9,tarde,Operaciones,16.1,no
+E00935,46,24.9,1,13.5,noche,Recursos Humanos,16.6,no
+E00936,59,3.6,3,13.8,tarde,Recursos Humanos,12.8,no
+E00937,64,11.5,3,1.5,mañana,Operaciones,4.8,no
+E00938,36,17.8,0,32.2,noche,Administración,9.7,no
+E00939,22,5.9,0,41.0,noche,Administración,9.2,no
+E00940,28,15.5,4,14.3,tarde,Operaciones,11.6,no
+E00941,25,12.3,2,15.9,tarde,Recursos Humanos,9.0,no
+E00942,28,10.8,3,12.5,tarde,Sistemas,15.9,no
+E00943,36,23.2,4,13.4,tarde,Administración,0,no
+E00944,55,22.3,3,14.9,tarde,Recursos Humanos,11.2,no
+E00945,47,0.9,0,12.4,noche,Seguridad,9.1,no
+E00946,51,23.2,3,2.8,tarde,Administración,0,no
+E00947,30,3.1,4,5.1,tarde,Recursos Humanos,8.5,no
+E00948,20,14.1,4,30.2,mañana,Administración,8.4,no
+E00949,21,6.2,2,22.9,mañana,Operaciones,4.2,no
+E00950,40,17.0,1,18.3,noche,Sistemas,14.6,no
+E00951,62,12.0,0,28.6,tarde,Administración,9.2,no
+E00952,56,1.1,1,28.4,tarde,Operaciones,8.5,no
+E00953,58,8.1,3,3.4,mañana,Administración,9.8,si
+E00954,21,6.4,1,11.6,tarde,Sistemas,13.4,no
+E00955,51,18.8,3,29.8,mañana,Operaciones,16.9,no
+E00956,42,23.0,0,40.8,noche,Recursos Humanos,11.5,no
+E00957,47,22.1,0,22.0,noche,Administración,1.7,no
+E00958,25,20.3,0,28.0,tarde,Seguridad,0,no
+E00959,60,16.2,4,32.4,tarde,Administración,6.6,si
+E00960,29,11.7,1,4.5,tarde,Operaciones,6.0,no
+E00961,22,10.7,4,26.0,noche,Sistemas,3.4,si
+E00962,36,10.6,2,5.2,noche,Administración,7.9,no
+E00963,45,2.8,0,30.1,mañana,Recursos Humanos,10.5,si
+E00964,62,21.9,3,14.1,noche,Seguridad,4.6,no
+E00965,58,21.8,2,9.2,mañana,Sistemas,4.7,no
+E00966,27,2.7,0,24.5,mañana,Seguridad,11.2,no
+E00967,39,21.7,4,43.5,noche,Seguridad,14.0,no
+E00968,39,15.4,0,31.4,noche,Seguridad,8.7,no
+E00969,50,0.4,1,43.7,mañana,Recursos Humanos,8.7,no
+E00970,25,10.9,2,28.5,noche,Recursos Humanos,8.4,no
+E00971,51,2.9,3,40.7,noche,Seguridad,4.6,si
+E00972,45,11.2,0,11.7,tarde,Administración,6.6,no
+E00973,58,10.8,4,19.3,tarde,Administración,10.4,no
+E00974,59,0.9,3,18.6,noche,Administración,8.2,si
+E00975,50,14.4,0,25.3,tarde,Seguridad,10.1,no
+E00976,21,23.5,1,16.3,noche,Seguridad,7.1,no
+E00977,58,5.8,3,10.7,noche,Operaciones,11.8,si
+E00978,50,7.3,1,32.3,tarde,Operaciones,4.5,no
+E00979,58,16.7,3,6.7,mañana,Recursos Humanos,4.6,no
+E00980,33,10.4,4,44.7,tarde,Recursos Humanos,9.1,no
+E00981,24,8.9,2,8.0,noche,Sistemas,8.3,no
+E00982,36,15.4,2,6.3,mañana,Seguridad,10.2,no
+E00983,58,13.9,0,40.4,noche,Administración,0,no
+E00984,26,23.2,4,20.3,tarde,Sistemas,0,no
+E00985,33,14.1,2,23.3,mañana,Sistemas,0.5,no
+E00986,26,7.3,1,20.4,noche,Seguridad,4.7,si
+E00987,35,21.2,3,20.3,tarde,Sistemas,3.7,no
+E00988,43,12.6,1,4.8,tarde,Seguridad,13.8,no
+E00989,49,5.7,4,36.3,tarde,Seguridad,16.2,no
+E00990,53,9.0,0,2.3,mañana,Sistemas,12.5,no
+E00991,56,4.1,0,3.7,mañana,Recursos Humanos,10.6,no
+E00992,46,24.5,3,36.2,noche,Operaciones,15.0,no
+E00993,37,18.0,4,14.8,tarde,Sistemas,1.9,no
+E00994,54,3.7,4,18.8,noche,Recursos Humanos,10.1,no
+E00995,39,22.2,0,35.4,tarde,Recursos Humanos,0,no
+E00996,53,8.4,4,32.9,noche,Recursos Humanos,7.4,no
+E00997,21,13.0,4,34.3,mañana,Sistemas,10.6,no
+E00998,52,6.0,0,35.1,noche,Seguridad,6.7,no
+E00999,48,12.7,2,6.4,noche,Sistemas,0,no
+E01000,56,0.1,4,15.9,mañana,Administración,10.5,no
+E01001,44,16.7,4,36.9,noche,Recursos Humanos,4.4,no
+E01002,49,2.6,0,23.7,mañana,Operaciones,11.8,no
+E01003,33,2.3,3,19.7,mañana,Seguridad,13.0,si
+E01004,45,16.9,2,18.7,noche,Administración,0.6,no
+E01005,30,17.2,1,42.7,noche,Seguridad,3.7,no
+E01006,53,12.1,0,21.1,noche,Administración,5.7,si
+E01007,46,3.9,0,25.6,mañana,Administración,1.8,no
+E01008,43,14.3,2,2.8,mañana,Sistemas,13.1,no
+E01009,23,19.8,2,7.3,noche,Seguridad,7.7,no
+E01010,27,5.4,4,37.0,tarde,Sistemas,1.0,no
+E01011,50,14.3,4,25.9,tarde,Seguridad,17.9,no
+E01012,29,3.5,2,29.0,tarde,Seguridad,15.1,no
+E01013,22,9.7,3,40.6,tarde,Administración,12.5,no
+E01014,56,16.1,2,39.1,noche,Sistemas,5.1,no
+E01015,56,4.8,4,28.2,noche,Sistemas,6.8,si
+E01016,31,11.9,0,40.5,mañana,Administración,7.4,no
+E01017,58,21.0,2,26.5,mañana,Administración,12.0,no
+E01018,47,1.1,1,38.9,mañana,Operaciones,0,no
+E01019,30,6.4,2,6.0,mañana,Administración,14.1,no
+E01020,63,6.4,1,4.9,tarde,Seguridad,22.3,no
+E01021,29,17.8,3,14.1,mañana,Operaciones,13.5,no
+E01022,32,6.4,1,42.4,mañana,Sistemas,8.1,no
+E01023,23,18.8,2,17.9,mañana,Operaciones,0.0,no
+E01024,21,10.2,2,22.3,tarde,Recursos Humanos,0.5,si
+E01025,56,19.1,3,29.7,mañana,Operaciones,5.3,no
+E01026,54,21.2,1,23.0,mañana,Operaciones,9.5,no
+E01027,59,22.8,2,20.9,mañana,Seguridad,0.7,no
+E01028,58,4.2,2,3.6,tarde,Operaciones,11.1,no
+E01029,22,15.8,1,26.7,noche,Operaciones,3.0,no
+E01030,28,14.1,4,14.2,tarde,Sistemas,20.3,no
+E01031,60,12.6,2,36.3,noche,Operaciones,7.9,no
+E01032,41,17.7,1,13.0,noche,Operaciones,0.1,si
+E01033,50,17.3,0,29.4,mañana,Administración,10.0,no
+E01034,45,16.8,4,19.2,noche,Seguridad,18.7,no
+E01035,63,13.5,0,40.3,noche,Seguridad,14.0,no
+E01036,31,20.3,0,37.4,tarde,Seguridad,12.1,no
+E01037,32,0.2,0,33.7,tarde,Operaciones,12.1,no
+E01038,51,15.6,2,36.6,mañana,Recursos Humanos,14.8,no
+E01039,27,15.2,2,1.3,noche,Seguridad,9.6,no
+E01040,63,12.4,4,25.3,noche,Administración,6.0,si
+E01041,53,1.6,2,12.4,noche,Recursos Humanos,7.1,si
+E01042,59,16.9,2,44.6,noche,Administración,2.8,si
+E01043,40,10.7,3,30.6,noche,Sistemas,0,no
+E01044,51,10.2,2,6.4,noche,Seguridad,6.2,no
+E01045,40,1.2,0,41.4,noche,Seguridad,7.8,no
+E01046,64,8.4,3,39.7,mañana,Recursos Humanos,20.9,no
+E01047,21,8.2,3,3.8,noche,Sistemas,4.5,no
+E01048,35,0.6,0,36.1,tarde,Operaciones,0,no
+E01049,58,20.5,4,23.9,mañana,Sistemas,10.5,no
+E01050,23,2.4,0,20.6,mañana,Sistemas,0,no
+E01051,39,19.6,4,3.7,tarde,Sistemas,16.8,no
+E01052,38,1.6,3,30.8,noche,Sistemas,1.2,no
+E01053,49,21.6,3,35.6,noche,Sistemas,12.8,no
+E01054,61,10.7,0,28.3,mañana,Operaciones,2.9,no
+E01055,32,2.6,4,27.2,mañana,Administración,9.5,si
+E01056,48,12.7,1,16.6,tarde,Administración,8.5,no
+E01057,39,7.8,4,20.2,noche,Operaciones,18.7,no
+E01058,41,19.4,2,7.5,tarde,Administración,7.5,no
+E01059,23,17.0,3,3.5,noche,Administración,8.6,no
+E01060,41,24.4,1,29.2,mañana,Sistemas,3.4,no
+E01061,41,15.0,4,15.6,noche,Administración,0,no
+E01062,34,8.2,0,5.6,mañana,Seguridad,2.1,no
+E01063,33,5.3,3,22.2,tarde,Seguridad,0.9,no
+E01064,21,24.7,4,17.0,mañana,Operaciones,11.7,no
+E01065,32,14.6,1,34.7,mañana,Sistemas,11.3,no
+E01066,55,5.5,1,12.5,mañana,Operaciones,8.5,no
+E01067,44,22.8,0,1.9,noche,Recursos Humanos,9.1,no
+E01068,62,5.3,1,21.1,tarde,Operaciones,23.4,no
+E01069,29,22.0,1,39.6,mañana,Sistemas,2.0,no
+E01070,58,4.8,3,17.6,tarde,Operaciones,12.4,si
+E01071,29,15.4,2,9.3,noche,Operaciones,7.4,no
+E01072,57,15.7,3,13.3,mañana,Administración,8.6,no
+E01073,61,16.6,4,3.9,noche,Seguridad,10.4,no
+E01074,53,13.0,3,8.9,noche,Operaciones,6.5,no
+E01075,33,10.0,1,41.5,noche,Sistemas,1.2,no
+E01076,47,11.3,3,11.3,mañana,Operaciones,0,no
+E01077,48,13.8,4,6.9,mañana,Operaciones,1.9,no
+E01078,47,14.6,3,21.5,noche,Operaciones,2.0,no
+E01079,34,7.9,2,17.8,mañana,Seguridad,9.2,no
+E01080,54,9.0,0,4.6,noche,Administración,11.1,si
+E01081,32,1.8,2,2.7,mañana,Operaciones,0,no
+E01082,58,18.6,1,34.8,tarde,Recursos Humanos,18.0,no
+E01083,42,22.8,3,1.4,tarde,Operaciones,7.9,no
+E01084,61,20.5,4,34.3,mañana,Seguridad,22.7,no
+E01085,34,5.7,4,32.8,mañana,Seguridad,7.0,no
+E01086,25,13.8,2,21.6,tarde,Operaciones,11.6,no
+E01087,43,10.4,1,20.3,noche,Sistemas,2.8,no
+E01088,62,3.2,2,42.5,mañana,Seguridad,4.7,no
+E01089,40,10.1,4,35.3,noche,Operaciones,13.3,si
+E01090,56,19.6,4,41.6,mañana,Operaciones,14.7,no
+E01091,44,9.5,1,42.7,mañana,Administración,4.0,no
+E01092,25,8.2,1,43.3,noche,Operaciones,14.0,si
+E01093,24,17.2,3,22.5,mañana,Recursos Humanos,12.6,no
+E01094,23,5.8,2,30.0,mañana,Seguridad,4.3,no
+E01095,54,10.3,3,7.9,mañana,Recursos Humanos,7.6,no
+E01096,33,1.7,2,43.0,mañana,Recursos Humanos,0,no
+E01097,52,15.1,3,42.3,noche,Recursos Humanos,11.9,no
+E01098,58,0.2,1,7.3,mañana,Seguridad,0,no
+E01099,38,11.5,3,26.3,noche,Sistemas,5.9,no
+E01100,31,21.1,3,35.9,tarde,Administración,8.1,no
+E01101,26,11.4,3,41.1,mañana,Administración,20.9,no
+E01102,60,1.1,4,40.0,mañana,Operaciones,4.5,no
+E01103,55,18.1,0,10.6,tarde,Seguridad,20.9,no
+E01104,48,1.9,1,5.6,tarde,Seguridad,7.9,no
+E01105,44,1.8,2,31.6,noche,Seguridad,15.1,no
+E01106,27,21.4,1,18.5,mañana,Operaciones,3.4,no
+E01107,28,1.7,3,25.1,mañana,Seguridad,16.8,no
+E01108,26,21.0,1,8.5,mañana,Administración,6.0,no
+E01109,29,1.9,3,34.6,noche,Operaciones,15.1,no
+E01110,33,5.4,3,2.5,noche,Administración,4.2,no
+E01111,64,16.0,2,32.5,mañana,Seguridad,0,no
+E01112,35,15.0,2,3.1,tarde,Recursos Humanos,11.4,si
+E01113,34,0.7,0,1.6,mañana,Sistemas,5.8,no
+E01114,46,20.8,4,8.4,mañana,Sistemas,12.2,no
+E01115,47,4.7,0,10.1,noche,Seguridad,11.3,no
+E01116,61,2.6,2,15.2,mañana,Seguridad,12.1,no
+E01117,22,16.4,0,13.3,noche,Operaciones,8.3,no
+E01118,54,10.3,4,34.8,tarde,Sistemas,15.2,no
+E01119,41,24.5,1,31.6,noche,Recursos Humanos,21.4,no
+E01120,24,22.1,2,15.0,noche,Seguridad,21.2,no
+E01121,20,12.8,1,33.6,noche,Administración,9.5,si
+E01122,35,19.0,4,6.5,mañana,Seguridad,10.9,no
+E01123,35,5.1,4,17.5,noche,Sistemas,9.6,no
+E01124,40,11.1,0,39.6,mañana,Operaciones,0,no
+E01125,41,7.2,1,2.0,noche,Operaciones,5.8,no
+E01126,58,1.4,3,41.4,mañana,Recursos Humanos,4.2,no
+E01127,60,1.6,1,22.6,mañana,Sistemas,7.5,no
+E01128,35,3.1,4,8.6,noche,Recursos Humanos,16.5,no
+E01129,35,18.0,2,11.8,mañana,Administración,12.5,no
+E01130,25,11.2,2,29.0,tarde,Seguridad,5.1,no
+E01131,21,12.6,3,33.3,mañana,Seguridad,10.2,no
+E01132,54,2.1,1,40.9,tarde,Administración,4.5,no
+E01133,50,7.6,0,13.5,noche,Administración,6.8,no
+E01134,20,17.9,4,9.6,mañana,Sistemas,7.3,no
+E01135,44,10.4,3,18.4,noche,Operaciones,2.2,no
+E01136,44,24.7,4,4.1,mañana,Sistemas,13.3,no
+E01137,51,19.3,2,34.1,tarde,Administración,16.7,no
+E01138,35,16.3,3,41.8,noche,Recursos Humanos,18.7,no
+E01139,36,16.9,4,31.7,noche,Recursos Humanos,10.4,no
+E01140,62,17.0,1,12.2,noche,Administración,18.3,no
+E01141,53,22.9,1,18.5,noche,Sistemas,8.8,no
+E01142,52,4.1,4,19.8,noche,Operaciones,4.8,no
+E01143,26,10.3,4,39.6,noche,Sistemas,3.1,no
+E01144,45,8.6,2,7.3,noche,Recursos Humanos,11.6,no
+E01145,46,2.4,2,35.0,tarde,Administración,8.1,no
+E01146,32,4.3,3,17.5,noche,Recursos Humanos,14.1,no
+E01147,32,20.4,2,9.2,mañana,Recursos Humanos,21.3,no
+E01148,60,21.8,1,20.4,noche,Sistemas,10.2,no
+E01149,51,1.6,0,2.3,mañana,Seguridad,9.2,si
+E01150,22,6.7,0,43.0,noche,Administración,10.6,no
+E01151,50,13.0,2,43.3,tarde,Seguridad,18.3,no
+E01152,35,8.4,2,31.0,tarde,Operaciones,5.0,si
+E01153,49,8.9,3,15.5,mañana,Sistemas,3.0,no
+E01154,53,22.2,2,7.1,noche,Sistemas,17.5,no
+E01155,46,11.3,1,31.2,tarde,Administración,5.0,si
+E01156,60,16.0,2,42.4,tarde,Sistemas,19.1,no
+E01157,59,16.9,0,11.3,tarde,Seguridad,0,no
+E01158,44,23.5,2,42.4,tarde,Sistemas,0.6,no
+E01159,22,21.9,1,35.5,noche,Administración,2.1,no
+E01160,30,2.2,3,37.6,noche,Seguridad,14.6,no
+E01161,26,6.1,3,8.5,noche,Sistemas,6.1,no
+E01162,37,0.7,1,41.9,tarde,Seguridad,6.3,no
+E01163,25,16.8,2,30.3,noche,Seguridad,0,no
+E01164,61,23.3,2,34.7,noche,Sistemas,1.2,no
+E01165,34,9.5,1,29.3,noche,Seguridad,14.7,no
+E01166,32,7.3,0,5.9,tarde,Administración,5.2,no
+E01167,57,9.5,4,33.4,tarde,Sistemas,6.6,no
+E01168,53,9.7,4,19.6,tarde,Recursos Humanos,5.6,si
+E01169,51,21.3,3,14.9,tarde,Recursos Humanos,6.5,no
+E01170,58,7.1,2,33.9,noche,Sistemas,1.4,si
+E01171,51,24.9,2,32.1,tarde,Recursos Humanos,25.0,no
+E01172,33,9.4,1,44.2,tarde,Recursos Humanos,7.4,no
+E01173,62,4.5,1,22.5,tarde,Operaciones,6.1,no
+E01174,42,13.7,3,15.8,noche,Seguridad,2.3,no
+E01175,26,17.4,1,9.6,noche,Seguridad,12.6,no
+E01176,49,19.8,1,39.1,mañana,Operaciones,2.3,no
+E01177,61,22.4,0,10.2,noche,Recursos Humanos,5.0,no
+E01178,47,21.4,1,5.5,mañana,Seguridad,10.4,no
+E01179,57,4.5,3,3.3,noche,Operaciones,6.8,no
+E01180,35,15.7,3,18.8,mañana,Sistemas,0,no
+E01181,49,16.3,3,17.5,noche,Sistemas,8.7,no
+E01182,25,16.3,0,17.2,mañana,Sistemas,0,no
+E01183,37,0.6,0,26.2,noche,Seguridad,8.6,no
+E01184,39,4.5,4,22.3,noche,Seguridad,11.8,no
+E01185,45,21.6,4,24.7,tarde,Sistemas,11.8,no
+E01186,57,19.6,4,24.3,mañana,Administración,5.6,no
+E01187,58,18.8,1,43.5,mañana,Recursos Humanos,0,si
+E01188,56,11.2,1,14.8,mañana,Recursos Humanos,6.5,no
+E01189,39,18.8,2,4.7,mañana,Administración,5.9,no
+E01190,35,4.3,2,44.0,noche,Sistemas,21.9,no
+E01191,51,7.3,2,24.5,mañana,Administración,12.1,no
+E01192,33,24.7,0,16.5,noche,Administración,7.1,no
+E01193,58,3.5,4,38.7,mañana,Recursos Humanos,6.5,no
+E01194,24,9.0,4,6.7,noche,Seguridad,7.8,no
+E01195,64,10.0,1,4.7,tarde,Seguridad,13.9,no
+E01196,43,1.8,4,33.2,noche,Recursos Humanos,1.9,no
+E01197,21,10.5,4,7.8,tarde,Seguridad,0,no
+E01198,46,6.8,0,24.4,noche,Administración,6.8,no
+E01199,20,19.5,0,7.4,mañana,Operaciones,10.3,no
+E01200,31,24.2,4,17.7,mañana,Sistemas,7.3,no
+E01201,38,12.2,4,24.3,noche,Administración,2.9,no
+E01202,31,2.5,2,3.1,tarde,Seguridad,11.1,no
+E01203,57,13.8,1,39.8,tarde,Seguridad,0,no
+E01204,29,17.2,3,32.4,noche,Recursos Humanos,3.7,no
+E01205,46,16.0,3,17.3,mañana,Administración,6.1,no
+E01206,37,24.7,3,36.1,noche,Operaciones,0,no
+E01207,46,5.7,2,29.0,mañana,Operaciones,6.8,no
+E01208,30,15.9,4,4.4,mañana,Sistemas,17.3,no
+E01209,28,12.3,3,39.5,tarde,Administración,11.5,no
+E01210,45,17.1,0,30.8,noche,Sistemas,0,no
+E01211,35,17.9,4,31.9,noche,Operaciones,0,no
+E01212,34,1.1,1,20.7,mañana,Administración,18.2,no
+E01213,43,23.8,0,19.6,tarde,Recursos Humanos,13.2,no
+E01214,39,17.0,3,37.6,mañana,Operaciones,6.9,no
+E01215,22,14.2,3,10.6,tarde,Administración,12.0,no
+E01216,49,21.2,2,3.5,mañana,Administración,7.1,no
+E01217,47,18.1,3,18.7,mañana,Sistemas,10.7,no
+E01218,51,13.2,0,40.5,tarde,Sistemas,12.9,no
+E01219,54,9.9,2,14.2,tarde,Recursos Humanos,15.3,no
+E01220,42,11.0,3,37.9,mañana,Recursos Humanos,20.4,no
+E01221,46,2.8,2,13.5,mañana,Seguridad,8.5,no
+E01222,27,4.0,3,9.8,tarde,Operaciones,1.0,no
+E01223,44,3.2,1,34.0,tarde,Administración,8.5,si
+E01224,52,2.7,0,1.9,mañana,Operaciones,8.5,no
+E01225,47,8.6,3,44.0,noche,Sistemas,3.6,no
+E01226,29,12.1,4,34.5,mañana,Administración,9.9,si
+E01227,32,6.6,3,31.8,noche,Seguridad,12.5,no
+E01228,31,20.2,1,31.9,noche,Administración,16.0,no
+E01229,32,5.7,1,6.8,mañana,Operaciones,7.6,no
+E01230,46,15.4,4,5.0,mañana,Seguridad,5.0,no
+E01231,61,8.4,0,22.1,noche,Seguridad,16.0,no
+E01232,35,6.7,2,13.3,tarde,Seguridad,11.0,si
+E01233,37,16.5,4,15.2,tarde,Seguridad,5.7,si
+E01234,39,4.6,0,42.7,tarde,Operaciones,8.8,no
+E01235,57,21.5,4,15.6,noche,Operaciones,8.6,no
+E01236,25,6.0,0,13.1,noche,Seguridad,14.7,si
+E01237,32,14.7,3,41.1,noche,Recursos Humanos,15.2,no
+E01238,50,1.9,1,25.0,tarde,Operaciones,4.6,no
+E01239,43,10.5,3,32.3,noche,Operaciones,7.3,no
+E01240,53,2.9,4,20.2,tarde,Seguridad,8.9,no
+E01241,64,24.2,1,13.7,noche,Sistemas,4.5,no
+E01242,30,9.9,3,31.1,noche,Sistemas,8.0,no
+E01243,30,10.0,4,12.9,mañana,Sistemas,2.1,no
+E01244,52,17.4,4,39.7,noche,Seguridad,7.3,no
+E01245,54,6.7,1,6.2,mañana,Sistemas,19.7,no
+E01246,37,16.0,0,42.5,tarde,Recursos Humanos,5.2,no
+E01247,43,13.4,2,1.1,tarde,Administración,4.5,no
+E01248,46,17.6,4,25.2,noche,Recursos Humanos,3.1,no
+E01249,31,0.3,2,16.6,noche,Operaciones,24.7,no
+E01250,64,13.4,3,44.1,noche,Sistemas,12.4,no
+E01251,40,15.1,2,10.1,tarde,Recursos Humanos,6.5,no
+E01252,48,15.7,1,38.8,tarde,Recursos Humanos,7.2,no
+E01253,31,12.0,1,22.8,tarde,Recursos Humanos,1.7,no
+E01254,39,23.6,1,8.9,tarde,Sistemas,16.3,no
+E01255,49,4.7,3,7.3,tarde,Recursos Humanos,0.7,si
+E01256,26,13.2,3,33.0,mañana,Administración,5.8,si
+E01257,25,20.8,2,42.1,mañana,Recursos Humanos,9.9,no
+E01258,54,15.7,2,1.6,mañana,Sistemas,9.5,no
+E01259,41,19.0,3,40.3,mañana,Operaciones,6.0,no
+E01260,27,1.4,0,31.4,noche,Administración,9.3,no
+E01261,34,12.8,0,37.8,mañana,Sistemas,5.5,no
+E01262,63,9.6,3,16.5,tarde,Recursos Humanos,4.3,no
+E01263,38,12.3,2,44.6,mañana,Sistemas,0,si
+E01264,58,8.3,1,16.9,mañana,Sistemas,11.2,no
+E01265,59,17.0,2,7.6,noche,Operaciones,14.6,no
+E01266,36,2.6,0,41.3,noche,Operaciones,10.9,no
+E01267,48,19.4,3,7.4,mañana,Seguridad,0,no
+E01268,29,2.8,0,19.8,noche,Operaciones,6.6,no
+E01269,58,8.8,2,22.7,tarde,Seguridad,10.8,no
+E01270,55,23.6,3,41.6,tarde,Seguridad,1.2,no
+E01271,53,5.8,4,4.7,noche,Seguridad,6.3,no
+E01272,43,20.3,0,10.7,mañana,Recursos Humanos,11.4,no
+E01273,42,11.8,2,6.9,mañana,Sistemas,19.2,no
+E01274,29,21.7,4,37.0,tarde,Seguridad,21.1,no
+E01275,64,20.7,1,3.5,mañana,Sistemas,5.7,no
+E01276,64,0.7,0,43.5,tarde,Sistemas,6.8,no
+E01277,25,21.8,1,2.3,tarde,Recursos Humanos,6.0,no
+E01278,50,14.2,1,36.8,mañana,Recursos Humanos,7.9,no
+E01279,38,10.3,0,15.8,noche,Sistemas,0,no
+E01280,30,22.0,0,2.4,mañana,Administración,3.0,no
+E01281,52,11.4,2,32.3,tarde,Administración,11.8,no
+E01282,44,10.6,1,7.9,mañana,Administración,7.7,no
+E01283,24,9.8,3,37.2,noche,Administración,1.9,no
+E01284,23,16.3,2,18.8,tarde,Recursos Humanos,5.6,no
+E01285,35,1.9,2,27.5,tarde,Sistemas,4.9,no
+E01286,32,2.7,4,10.3,mañana,Operaciones,12.1,no
+E01287,50,2.1,0,26.1,mañana,Administración,21.2,si
+E01288,45,2.3,4,14.6,tarde,Operaciones,11.4,no
+E01289,46,24.3,4,31.9,mañana,Operaciones,17.4,no
+E01290,50,20.2,4,7.6,noche,Seguridad,9.1,si
+E01291,34,17.1,1,4.5,noche,Sistemas,6.8,no
+E01292,53,16.4,4,34.8,mañana,Administración,0,no
+E01293,47,19.6,0,15.9,tarde,Administración,0,no
+E01294,58,19.4,0,18.1,mañana,Administración,15.5,no
+E01295,25,2.4,3,1.7,tarde,Administración,6.0,si
+E01296,37,7.8,4,42.1,mañana,Sistemas,6.3,si
+E01297,48,19.3,1,12.3,tarde,Operaciones,10.0,no
+E01298,45,24.3,3,22.5,tarde,Operaciones,16.3,no
+E01299,25,9.2,3,38.2,tarde,Operaciones,0,no
+E01300,59,6.6,0,39.5,noche,Sistemas,7.7,no
+E01301,30,0.2,4,38.5,tarde,Seguridad,3.5,no
+E01302,42,1.8,3,18.1,tarde,Sistemas,0.7,no
+E01303,47,2.7,1,8.9,mañana,Seguridad,9.5,no
+E01304,33,1.6,3,16.1,noche,Seguridad,13.0,no
+E01305,56,23.7,0,7.4,mañana,Operaciones,12.3,no
+E01306,50,19.4,1,3.7,tarde,Seguridad,19.4,no
+E01307,25,17.1,1,12.9,noche,Recursos Humanos,12.0,si
+E01308,46,10.1,4,14.1,noche,Seguridad,10.8,si
+E01309,39,1.3,1,40.4,tarde,Operaciones,20.4,no
+E01310,64,23.5,3,22.2,noche,Recursos Humanos,2.4,no
+E01311,24,0.2,4,35.5,noche,Recursos Humanos,15.3,no
+E01312,20,8.1,1,44.4,noche,Operaciones,19.1,no
+E01313,36,7.9,4,35.8,noche,Seguridad,0,no
+E01314,60,24.7,4,42.5,mañana,Seguridad,11.4,no
+E01315,44,10.5,1,25.0,mañana,Administración,10.4,no
+E01316,43,23.8,2,43.8,noche,Sistemas,20.7,no
+E01317,46,21.7,3,31.8,noche,Seguridad,9.3,no
+E01318,31,20.7,3,19.7,tarde,Sistemas,4.6,no
+E01319,60,13.6,2,17.8,noche,Seguridad,9.6,no
+E01320,26,23.4,0,40.9,mañana,Sistemas,3.1,no
+E01321,60,12.4,3,34.1,noche,Sistemas,1.3,no
+E01322,34,20.1,3,30.4,tarde,Recursos Humanos,5.2,no
+E01323,61,23.8,3,16.4,tarde,Seguridad,7.1,si
+E01324,62,9.4,2,10.9,tarde,Operaciones,3.4,no
+E01325,20,16.8,0,1.2,tarde,Sistemas,20.1,no
+E01326,40,9.4,2,36.9,noche,Administración,11.7,no
+E01327,23,13.9,4,18.2,noche,Seguridad,14.9,no
+E01328,45,23.5,2,18.2,noche,Recursos Humanos,1.6,si
+E01329,45,20.0,2,23.2,noche,Administración,7.3,no
+E01330,21,4.0,3,15.2,mañana,Sistemas,18.3,si
+E01331,44,15.5,0,24.9,mañana,Administración,8.7,no
+E01332,31,3.3,1,21.0,noche,Operaciones,5.6,si
+E01333,62,21.0,0,33.0,tarde,Operaciones,4.5,no
+E01334,26,23.4,0,28.6,noche,Administración,0.2,no
+E01335,51,7.1,2,40.4,mañana,Sistemas,10.1,no
+E01336,24,5.2,3,5.4,mañana,Seguridad,10.3,no
+E01337,31,9.4,2,14.8,tarde,Recursos Humanos,7.4,si
+E01338,27,4.5,2,26.0,noche,Sistemas,14.9,no
+E01339,27,13.7,1,8.0,noche,Operaciones,7.7,no
+E01340,43,13.4,0,23.8,mañana,Recursos Humanos,9.2,no
+E01341,37,2.1,3,31.4,mañana,Operaciones,7.1,no
+E01342,49,2.3,3,32.2,noche,Operaciones,0,no
+E01343,45,6.3,0,9.7,noche,Operaciones,13.7,no
+E01344,47,19.2,3,14.7,mañana,Seguridad,0,no
+E01345,56,15.6,2,27.7,tarde,Recursos Humanos,12.6,no
+E01346,52,15.8,2,3.8,mañana,Sistemas,3.7,no
+E01347,21,16.1,0,43.5,tarde,Seguridad,5.4,no
+E01348,24,8.1,1,35.8,tarde,Recursos Humanos,4.8,no
+E01349,33,3.1,3,15.0,mañana,Operaciones,3.2,no
+E01350,38,8.0,4,11.2,mañana,Seguridad,9.0,no
+E01351,56,17.9,3,42.6,noche,Sistemas,12.1,no
+E01352,23,10.9,3,36.8,mañana,Recursos Humanos,0,no
+E01353,44,3.1,1,8.5,tarde,Administración,8.2,no
+E01354,49,7.1,2,29.3,noche,Sistemas,18.6,si
+E01355,24,13.3,3,24.2,tarde,Sistemas,19.5,si
+E01356,42,20.1,3,32.8,tarde,Operaciones,17.1,no
+E01357,61,1.2,0,14.1,tarde,Seguridad,13.0,no
+E01358,20,23.4,1,5.5,mañana,Sistemas,12.2,no
+E01359,54,10.9,0,8.5,mañana,Operaciones,11.3,no
+E01360,23,21.7,2,12.4,mañana,Sistemas,12.8,no
+E01361,57,20.3,3,12.9,mañana,Recursos Humanos,10.4,no
+E01362,60,8.0,3,7.5,noche,Seguridad,4.4,no
+E01363,50,11.9,1,22.6,tarde,Operaciones,1.7,no
+E01364,35,19.2,1,32.3,tarde,Administración,7.2,no
+E01365,32,5.3,3,30.5,tarde,Seguridad,5.8,si
+E01366,40,5.2,2,27.0,noche,Administración,5.7,no
+E01367,48,2.6,4,6.7,tarde,Seguridad,0,no
+E01368,30,19.5,2,9.3,tarde,Seguridad,15.5,no
+E01369,21,11.5,3,5.7,mañana,Recursos Humanos,5.6,no
+E01370,36,0.7,0,30.1,tarde,Operaciones,10.3,no
+E01371,23,3.8,3,23.1,noche,Operaciones,6.9,si
+E01372,32,2.4,2,29.5,noche,Seguridad,9.4,no
+E01373,61,15.2,1,23.8,mañana,Sistemas,11.5,no
+E01374,37,5.5,1,3.3,mañana,Administración,10.5,no
+E01375,26,15.5,1,32.5,tarde,Seguridad,9.1,no
+E01376,33,22.0,2,12.8,mañana,Recursos Humanos,1.9,no
+E01377,50,0.1,2,9.1,noche,Administración,0.9,no
+E01378,30,17.2,1,8.5,noche,Sistemas,4.7,no
+E01379,36,16.7,0,19.8,mañana,Recursos Humanos,13.8,no
+E01380,57,19.0,0,1.4,tarde,Seguridad,3.5,no
+E01381,53,20.5,4,26.0,tarde,Recursos Humanos,8.3,no
+E01382,48,3.7,3,5.1,tarde,Operaciones,6.3,no
+E01383,39,12.2,2,17.0,mañana,Operaciones,0,no
+E01384,27,19.4,2,38.7,noche,Seguridad,4.2,si
+E01385,42,24.5,3,38.7,noche,Recursos Humanos,0,si
+E01386,33,14.4,0,31.6,tarde,Operaciones,13.2,no
+E01387,48,24.1,4,39.6,noche,Administración,22.0,si
+E01388,57,22.8,3,16.3,tarde,Seguridad,12.5,no
+E01389,47,14.5,3,31.9,noche,Sistemas,6.4,no
+E01390,51,19.8,1,16.3,mañana,Sistemas,4.7,no
+E01391,38,15.6,0,30.2,tarde,Seguridad,8.7,no
+E01392,27,0.4,0,2.8,tarde,Administración,7.4,no
+E01393,38,20.9,4,3.2,mañana,Operaciones,8.0,no
+E01394,29,19.2,1,7.8,mañana,Operaciones,0,no
+E01395,47,0.8,3,42.0,mañana,Seguridad,13.6,no
+E01396,39,2.5,1,12.5,tarde,Administración,0,no
+E01397,28,14.5,3,31.1,mañana,Operaciones,4.5,no
+E01398,54,7.5,1,4.8,noche,Seguridad,0,no
+E01399,63,3.5,2,20.4,tarde,Administración,16.6,no
+E01400,21,10.7,4,19.5,tarde,Seguridad,18.1,si
+E01401,52,3.5,2,40.9,mañana,Administración,9.7,si
+E01402,45,13.6,1,25.9,tarde,Sistemas,7.5,no
+E01403,23,21.9,2,21.2,mañana,Sistemas,8.4,no
+E01404,56,16.2,3,15.7,mañana,Operaciones,3.6,no
+E01405,64,14.6,1,23.5,noche,Sistemas,0,no
+E01406,63,14.1,1,43.6,mañana,Recursos Humanos,6.4,no
+E01407,27,0.2,0,22.3,noche,Recursos Humanos,12.9,si
+E01408,33,15.1,0,6.3,mañana,Recursos Humanos,0,no
+E01409,31,1.4,1,6.4,tarde,Seguridad,9.9,no
+E01410,62,13.7,4,37.2,noche,Seguridad,10.4,si
+E01411,52,3.5,4,33.8,mañana,Recursos Humanos,10.4,si
+E01412,51,12.0,2,13.7,mañana,Administración,5.0,no
+E01413,21,2.7,2,19.3,tarde,Recursos Humanos,2.8,no
+E01414,61,14.1,4,1.5,tarde,Sistemas,0,no
+E01415,20,3.5,1,39.8,tarde,Operaciones,12.5,no
+E01416,44,21.4,4,23.1,tarde,Administración,16.1,no
+E01417,37,18.0,2,15.9,noche,Recursos Humanos,11.4,no
+E01418,50,1.7,4,37.9,tarde,Seguridad,3.7,no
+E01419,57,19.4,4,24.1,mañana,Operaciones,1.4,no
+E01420,30,15.4,1,18.8,mañana,Sistemas,10.3,no
+E01421,26,11.9,1,34.4,noche,Recursos Humanos,9.6,no
+E01422,59,9.6,2,43.8,mañana,Sistemas,16.7,si
+E01423,40,19.1,0,27.7,mañana,Recursos Humanos,15.7,no
+E01424,32,9.4,1,44.5,noche,Administración,7.9,no
+E01425,25,5.0,4,8.1,noche,Recursos Humanos,14.4,si
+E01426,20,24.0,2,5.2,mañana,Recursos Humanos,9.2,no
+E01427,51,8.5,1,31.0,noche,Administración,0.3,no
+E01428,59,14.3,4,21.8,tarde,Operaciones,14.5,no
+E01429,28,15.6,4,39.5,noche,Sistemas,0,no
+E01430,41,2.9,0,11.1,noche,Administración,10.3,no
+E01431,38,6.3,0,31.9,mañana,Recursos Humanos,22.1,no
+E01432,39,6.0,3,23.8,noche,Administración,2.5,no
+E01433,22,14.6,2,42.2,tarde,Sistemas,2.9,no
+E01434,33,5.0,4,40.1,mañana,Recursos Humanos,10.2,no
+E01435,56,22.8,4,3.7,tarde,Sistemas,3.1,no
+E01436,58,19.1,4,2.6,mañana,Seguridad,19.3,no
+E01437,51,3.2,4,32.8,mañana,Sistemas,2.6,no
+E01438,23,8.8,0,22.0,mañana,Sistemas,9.6,no
+E01439,55,21.5,3,31.0,noche,Sistemas,0,si
+E01440,55,19.1,1,31.6,tarde,Seguridad,10.2,no
+E01441,23,22.6,1,16.5,tarde,Seguridad,10.0,no
+E01442,56,14.7,0,11.0,noche,Administración,9.0,no
+E01443,31,20.3,2,4.4,mañana,Seguridad,7.9,no
+E01444,28,8.7,4,29.8,mañana,Operaciones,1.0,no
+E01445,42,1.9,1,42.3,mañana,Seguridad,13.3,no
+E01446,61,7.6,1,17.1,noche,Operaciones,3.3,no
+E01447,51,12.6,2,3.4,tarde,Administración,7.2,no
+E01448,39,22.8,4,38.0,noche,Recursos Humanos,9.4,no
+E01449,61,3.5,3,44.0,noche,Seguridad,13.6,no
+E01450,57,0.5,3,37.8,tarde,Operaciones,3.2,si
+E01451,44,21.4,3,17.9,mañana,Seguridad,22.8,si
+E01452,23,5.1,2,9.1,tarde,Administración,18.0,no
+E01453,57,22.8,1,34.2,tarde,Operaciones,10.0,no
+E01454,23,8.5,0,37.5,tarde,Seguridad,0,no
+E01455,47,7.2,4,44.6,noche,Seguridad,3.1,no
+E01456,35,19.2,1,12.4,tarde,Seguridad,12.1,no
+E01457,41,6.9,4,44.9,noche,Operaciones,5.3,no
+E01458,61,15.4,4,16.9,noche,Operaciones,13.1,no
+E01459,21,20.9,3,38.3,tarde,Seguridad,8.4,si
+E01460,33,0.9,3,16.8,noche,Administración,21.2,no
+E01461,31,15.3,2,14.8,mañana,Seguridad,13.1,no
+E01462,60,6.9,1,39.2,mañana,Recursos Humanos,13.0,si
+E01463,48,2.9,4,2.7,noche,Administración,14.6,no
+E01464,36,13.8,0,11.0,noche,Operaciones,2.8,no
+E01465,24,18.0,4,27.4,tarde,Sistemas,0,no
+E01466,43,12.8,3,11.4,tarde,Administración,13.7,no
+E01467,46,0.6,2,27.7,tarde,Operaciones,10.7,no
+E01468,22,24.3,2,28.4,mañana,Operaciones,20.0,si
+E01469,57,15.2,2,36.6,noche,Administración,2.4,no
+E01470,44,9.5,0,26.6,noche,Recursos Humanos,22.5,no
+E01471,46,14.1,4,44.9,noche,Administración,3.8,no
+E01472,50,21.2,4,24.2,mañana,Administración,2.8,no
+E01473,43,14.4,1,41.1,tarde,Recursos Humanos,7.3,no
+E01474,46,18.7,2,6.1,mañana,Seguridad,14.7,no
+E01475,46,9.1,1,22.3,mañana,Seguridad,11.7,no
+E01476,46,20.7,4,6.5,noche,Recursos Humanos,3.9,no
+E01477,52,8.5,1,6.2,tarde,Seguridad,0.9,no
+E01478,20,15.8,1,35.0,mañana,Seguridad,11.4,no
+E01479,47,23.3,0,33.7,mañana,Sistemas,11.2,no
+E01480,47,24.7,2,6.8,noche,Seguridad,14.5,no
+E01481,58,7.3,4,15.8,tarde,Administración,14.7,si
+E01482,46,18.1,3,4.2,tarde,Seguridad,7.6,no
+E01483,52,17.5,0,33.3,noche,Administración,1.6,no
+E01484,44,0.2,2,27.1,noche,Seguridad,1.4,no
+E01485,41,23.6,0,5.3,tarde,Seguridad,10.7,no
+E01486,40,22.4,3,26.5,tarde,Operaciones,6.4,no
+E01487,47,20.3,4,33.3,noche,Recursos Humanos,11.4,no
+E01488,30,22.0,0,14.8,tarde,Operaciones,6.4,no
+E01489,26,4.2,1,42.3,tarde,Administración,14.7,no
+E01490,21,3.5,4,10.1,noche,Recursos Humanos,20.5,no
+E01491,33,20.0,2,1.3,mañana,Operaciones,0,no
+E01492,49,14.3,2,33.2,noche,Recursos Humanos,16.3,no
+E01493,25,3.0,1,40.1,tarde,Operaciones,3.3,no
+E01494,34,18.3,0,6.1,tarde,Sistemas,4.7,no
+E01495,22,15.8,3,23.6,mañana,Operaciones,14.3,si
+E01496,62,17.6,0,23.9,mañana,Administración,16.0,no
+E01497,36,14.7,3,39.4,mañana,Recursos Humanos,5.4,no
+E01498,32,20.3,0,33.3,tarde,Recursos Humanos,19.3,no
+E01499,33,0.1,1,4.0,noche,Administración,4.4,si
+E01500,35,17.2,2,28.0,noche,Administración,0,no
+E01501,51,7.5,3,11.2,tarde,Seguridad,8.9,no
+E01502,38,13.6,3,14.0,mañana,Sistemas,13.2,no
+E01503,42,2.9,3,21.4,tarde,Sistemas,7.0,no
+E01504,46,19.3,1,22.3,tarde,Administración,12.7,no
+E01505,36,21.3,2,19.0,noche,Operaciones,8.9,no
+E01506,37,20.2,3,19.7,tarde,Sistemas,7.3,no
+E01507,54,7.7,1,19.0,noche,Recursos Humanos,2.6,no
+E01508,28,2.8,4,43.6,noche,Operaciones,0,si
+E01509,55,9.5,0,35.3,tarde,Operaciones,4.4,no
+E01510,54,13.0,3,16.9,mañana,Recursos Humanos,10.8,no
+E01511,35,22.8,0,15.6,mañana,Administración,4.7,no
+E01512,45,0.5,3,42.4,mañana,Administración,12.7,si
+E01513,27,15.8,3,31.3,mañana,Operaciones,9.3,no
+E01514,24,3.3,0,33.6,tarde,Sistemas,0,no
+E01515,29,0.5,0,33.7,noche,Administración,7.7,no
+E01516,40,19.8,3,9.5,noche,Operaciones,6.7,no
+E01517,50,5.1,3,12.6,noche,Administración,7.9,no
+E01518,50,2.3,2,43.5,noche,Operaciones,14.2,si
+E01519,54,0.4,0,22.9,tarde,Operaciones,3.9,no
+E01520,43,14.4,3,2.1,mañana,Seguridad,0.1,no
+E01521,30,20.2,1,43.9,mañana,Administración,4.7,no
+E01522,59,12.2,3,12.0,mañana,Seguridad,0,no
+E01523,41,1.5,1,22.7,tarde,Operaciones,6.3,si
+E01524,64,17.2,1,27.3,mañana,Operaciones,8.3,no
+E01525,50,7.8,4,29.7,tarde,Seguridad,0,no
+E01526,64,18.5,0,33.3,mañana,Seguridad,0.8,no
+E01527,22,18.7,3,8.3,tarde,Sistemas,15.1,no
+E01528,46,15.7,3,24.1,mañana,Administración,11.0,no
+E01529,40,18.0,4,39.7,tarde,Administración,8.2,no
+E01530,63,14.1,1,8.3,tarde,Administración,12.8,no
+E01531,28,15.1,1,21.8,mañana,Operaciones,0,no
+E01532,29,20.7,3,1.4,tarde,Recursos Humanos,23.0,no
+E01533,41,4.7,0,31.5,noche,Seguridad,14.7,si
+E01534,34,11.7,2,7.9,tarde,Administración,0,no
+E01535,43,20.5,4,39.2,noche,Operaciones,0,no
+E01536,24,23.4,4,25.7,noche,Recursos Humanos,13.6,no
+E01537,61,6.6,3,5.5,noche,Administración,15.9,no
+E01538,62,19.3,3,27.1,tarde,Administración,8.1,no
+E01539,29,5.4,1,41.9,noche,Recursos Humanos,8.4,no
+E01540,52,0.0,3,4.4,mañana,Recursos Humanos,2.0,no
+E01541,44,19.0,3,11.6,tarde,Seguridad,11.1,no
+E01542,33,21.0,1,14.9,mañana,Administración,18.7,no
+E01543,63,21.0,0,25.7,tarde,Operaciones,4.2,no
+E01544,49,10.9,2,16.3,mañana,Operaciones,7.4,no
+E01545,31,24.9,0,42.3,tarde,Operaciones,3.9,no
+E01546,41,9.0,0,9.6,noche,Operaciones,19.3,no
+E01547,61,0.3,3,13.0,noche,Operaciones,0.9,no
+E01548,56,24.9,0,32.0,tarde,Sistemas,17.0,no
+E01549,26,15.8,0,22.6,tarde,Administración,0,no
+E01550,28,15.3,0,32.4,noche,Recursos Humanos,0,si
+E01551,37,15.9,1,3.7,mañana,Administración,13.6,no
+E01552,30,18.4,4,15.6,noche,Operaciones,7.0,si
+E01553,24,16.6,1,19.3,noche,Sistemas,2.4,no
+E01554,48,12.5,0,33.1,mañana,Recursos Humanos,7.4,no
+E01555,37,4.3,4,33.9,mañana,Operaciones,11.9,no
+E01556,56,8.5,3,26.0,noche,Sistemas,19.4,si
+E01557,30,2.2,0,15.0,noche,Sistemas,15.1,no
+E01558,39,9.4,1,4.6,noche,Recursos Humanos,7.8,no
+E01559,56,9.5,2,13.6,tarde,Recursos Humanos,0,no
+E01560,38,20.9,2,13.0,mañana,Recursos Humanos,6.5,no
+E01561,48,14.5,1,16.3,noche,Administración,3.5,si
+E01562,33,20.9,3,18.0,noche,Administración,1.7,no
+E01563,37,5.2,0,31.8,noche,Administración,17.0,no
+E01564,27,5.3,4,10.6,tarde,Sistemas,5.9,si
+E01565,22,14.7,2,17.4,tarde,Administración,4.8,no
+E01566,46,15.7,3,39.3,mañana,Recursos Humanos,3.6,si
+E01567,31,22.8,0,14.5,tarde,Administración,15.5,no
+E01568,45,15.4,3,27.1,noche,Seguridad,10.3,no
+E01569,34,8.4,4,30.9,tarde,Sistemas,4.0,si
+E01570,57,10.6,0,12.9,noche,Seguridad,9.9,no
+E01571,56,14.9,1,31.7,noche,Recursos Humanos,11.1,si
+E01572,29,8.3,2,43.2,mañana,Operaciones,4.5,si
+E01573,25,3.7,1,39.9,tarde,Operaciones,8.9,no
+E01574,63,5.1,4,5.0,mañana,Recursos Humanos,11.3,no
+E01575,64,8.6,1,21.7,noche,Seguridad,3.2,no
+E01576,26,16.7,3,37.6,noche,Recursos Humanos,15.0,si
+E01577,58,19.3,3,40.5,noche,Seguridad,15.4,no
+E01578,34,8.7,4,30.5,noche,Sistemas,9.9,no
+E01579,24,12.5,1,1.1,noche,Seguridad,12.0,si
+E01580,41,4.7,3,10.3,tarde,Sistemas,4.4,no
+E01581,46,9.7,1,37.1,mañana,Operaciones,2.8,no
+E01582,42,17.1,0,37.7,tarde,Sistemas,4.6,no
+E01583,63,4.0,3,6.7,noche,Seguridad,2.9,si
+E01584,39,16.3,3,30.5,tarde,Sistemas,7.5,no
+E01585,41,20.1,4,20.8,tarde,Seguridad,16.5,no
+E01586,44,2.8,0,8.9,tarde,Administración,11.2,no
+E01587,47,14.8,0,9.7,noche,Seguridad,12.4,no
+E01588,23,1.0,4,39.2,tarde,Operaciones,6.2,no
+E01589,31,7.4,2,37.0,noche,Operaciones,3.8,no
+E01590,58,0.4,0,15.3,noche,Sistemas,7.0,no
+E01591,29,6.2,3,4.7,mañana,Recursos Humanos,9.3,no
+E01592,35,6.9,4,43.8,noche,Administración,6.4,no
+E01593,44,1.0,4,27.8,noche,Sistemas,7.3,no
+E01594,47,2.0,3,41.8,noche,Operaciones,22.6,si
+E01595,32,16.3,4,39.8,tarde,Sistemas,10.1,no
+E01596,43,7.6,4,23.6,mañana,Sistemas,0,no
+E01597,62,18.7,0,35.2,tarde,Administración,9.7,no
+E01598,46,22.7,1,30.8,tarde,Sistemas,14.2,no
+E01599,26,6.7,1,27.4,noche,Operaciones,8.7,no
+E01600,58,17.7,3,10.7,noche,Operaciones,0.8,no
+E01601,41,9.7,2,41.9,mañana,Operaciones,3.5,no
+E01602,33,11.1,4,21.3,noche,Seguridad,5.1,no
+E01603,55,0.8,2,38.5,mañana,Seguridad,0,si
+E01604,40,18.7,3,24.3,tarde,Operaciones,7.3,no
+E01605,21,4.2,2,16.5,tarde,Seguridad,6.7,no
+E01606,44,12.3,4,11.3,noche,Recursos Humanos,10.9,no
+E01607,30,5.3,3,5.9,tarde,Recursos Humanos,7.0,no
+E01608,40,8.8,2,10.6,noche,Operaciones,1.9,no
+E01609,54,15.8,3,29.0,noche,Administración,1.5,no
+E01610,30,10.1,1,34.3,tarde,Seguridad,7.6,no
+E01611,44,19.1,4,29.9,noche,Sistemas,8.3,no
+E01612,59,24.4,1,19.1,noche,Sistemas,13.4,no
+E01613,59,15.0,1,33.2,mañana,Operaciones,14.4,no
+E01614,58,15.6,3,31.1,tarde,Sistemas,0,no
+E01615,50,4.0,1,17.2,mañana,Recursos Humanos,4.2,no
+E01616,49,7.3,3,40.4,mañana,Administración,8.3,no
+E01617,58,19.9,2,43.8,noche,Sistemas,16.2,no
+E01618,20,22.7,0,11.8,noche,Sistemas,5.5,no
+E01619,54,11.8,0,18.0,tarde,Operaciones,2.4,no
+E01620,48,15.2,3,44.5,noche,Sistemas,9.0,no
+E01621,45,20.7,4,32.9,mañana,Operaciones,6.1,no
+E01622,36,11.0,4,35.6,mañana,Recursos Humanos,8.1,no
+E01623,33,10.3,2,16.0,mañana,Seguridad,5.1,no
+E01624,35,16.1,2,4.3,noche,Seguridad,3.0,no
+E01625,22,11.3,1,12.3,tarde,Administración,15.7,no
+E01626,43,7.2,2,10.7,tarde,Administración,4.7,no
+E01627,29,7.6,1,32.4,noche,Operaciones,16.9,si
+E01628,21,7.3,1,17.9,noche,Recursos Humanos,5.1,si
+E01629,50,9.1,4,23.4,noche,Seguridad,6.3,no
+E01630,40,24.3,4,29.3,noche,Administración,0,no
+E01631,44,4.2,0,24.1,mañana,Seguridad,16.5,no
+E01632,29,1.6,2,10.9,mañana,Recursos Humanos,0.5,si
+E01633,53,4.9,1,22.9,noche,Sistemas,1.9,no
+E01634,41,9.1,4,2.4,noche,Sistemas,14.9,no
+E01635,56,18.5,4,39.4,mañana,Seguridad,11.1,no
+E01636,34,6.4,3,33.5,noche,Recursos Humanos,15.4,no
+E01637,28,6.9,4,33.7,noche,Sistemas,23.0,no
+E01638,49,5.2,0,11.7,noche,Seguridad,0,no
+E01639,25,15.8,3,9.6,mañana,Seguridad,5.6,no
+E01640,56,13.6,0,10.5,tarde,Operaciones,0,no
+E01641,60,22.2,4,35.2,mañana,Administración,2.1,no
+E01642,37,24.8,3,12.1,tarde,Administración,4.4,no
+E01643,35,7.1,2,29.4,tarde,Administración,4.1,no
+E01644,31,14.0,3,14.6,tarde,Sistemas,20.7,no
+E01645,26,12.4,3,8.9,tarde,Operaciones,8.5,no
+E01646,34,17.2,1,37.2,mañana,Sistemas,6.2,no
+E01647,56,11.8,1,31.1,noche,Recursos Humanos,12.8,no
+E01648,59,4.8,1,18.4,mañana,Recursos Humanos,4.7,no
+E01649,34,14.9,2,19.3,noche,Operaciones,14.4,no
+E01650,41,21.4,2,14.4,mañana,Operaciones,10.5,no
+E01651,23,14.1,3,34.6,mañana,Seguridad,3.4,no
+E01652,32,20.1,1,43.9,tarde,Sistemas,5.6,no
+E01653,55,0.6,4,19.8,tarde,Operaciones,4.1,no
+E01654,26,19.9,0,28.2,tarde,Operaciones,8.2,no
+E01655,64,18.0,3,21.7,mañana,Seguridad,13.3,no
+E01656,23,24.7,2,26.8,mañana,Sistemas,7.1,no
+E01657,40,2.8,3,6.9,noche,Sistemas,13.7,no
+E01658,55,21.8,0,27.0,noche,Recursos Humanos,3.0,no
+E01659,28,16.5,0,25.5,tarde,Sistemas,10.0,no
+E01660,33,17.5,1,33.5,tarde,Seguridad,6.1,no
+E01661,58,5.0,0,43.7,tarde,Operaciones,11.9,no
+E01662,53,16.1,0,19.8,tarde,Sistemas,14.1,no
+E01663,54,10.9,3,2.4,noche,Operaciones,4.3,no
+E01664,25,8.3,4,4.0,mañana,Administración,9.4,no
+E01665,61,21.2,1,4.9,tarde,Administración,0.7,no
+E01666,48,19.2,1,20.0,tarde,Seguridad,6.6,no
+E01667,21,8.5,3,24.2,noche,Seguridad,6.1,no
+E01668,34,0.2,2,37.4,mañana,Sistemas,3.8,no
+E01669,56,16.9,2,15.4,tarde,Recursos Humanos,10.1,no
+E01670,33,17.9,2,26.4,mañana,Recursos Humanos,8.6,no
+E01671,24,21.1,2,35.3,noche,Operaciones,9.3,no
+E01672,30,23.2,3,30.0,mañana,Operaciones,12.4,no
+E01673,44,19.3,0,2.2,tarde,Sistemas,7.8,no
+E01674,48,18.6,3,33.6,tarde,Sistemas,4.7,no
+E01675,57,20.4,4,5.1,mañana,Administración,10.4,no
+E01676,42,18.9,2,6.3,tarde,Administración,4.4,no
+E01677,49,12.7,0,22.0,noche,Sistemas,10.1,si
+E01678,43,20.1,2,18.6,mañana,Operaciones,11.3,no
+E01679,50,7.5,0,45.0,mañana,Seguridad,2.5,no
+E01680,29,6.9,1,29.5,tarde,Sistemas,8.4,no
+E01681,58,3.5,1,21.7,mañana,Sistemas,8.7,no
+E01682,46,16.5,1,17.4,tarde,Recursos Humanos,11.3,no
+E01683,30,20.2,0,30.4,tarde,Sistemas,14.5,no
+E01684,40,7.7,0,28.5,tarde,Administración,9.1,no
+E01685,54,0.9,3,39.4,tarde,Sistemas,2.7,no
+E01686,42,18.1,1,8.5,mañana,Sistemas,23.0,no
+E01687,28,11.9,4,44.3,noche,Seguridad,17.8,no
+E01688,40,0.0,4,22.0,tarde,Recursos Humanos,2.5,no
+E01689,28,11.9,1,33.9,noche,Recursos Humanos,14.2,no
+E01690,26,20.1,3,7.3,noche,Sistemas,6.3,no
+E01691,49,6.3,4,33.1,tarde,Operaciones,16.1,no
+E01692,47,14.4,2,39.9,mañana,Operaciones,3.8,no
+E01693,32,0.9,1,40.9,tarde,Sistemas,1.3,si
+E01694,45,15.9,2,37.8,mañana,Recursos Humanos,14.9,no
+E01695,48,4.7,1,39.3,noche,Seguridad,8.5,no
+E01696,61,6.6,4,20.4,noche,Operaciones,12.8,no
+E01697,49,6.4,0,36.5,tarde,Administración,5.5,no
+E01698,47,8.6,0,23.8,mañana,Operaciones,11.0,no
+E01699,28,11.4,2,5.9,noche,Operaciones,7.3,no
+E01700,31,10.9,3,44.3,mañana,Administración,13.3,no
+E01701,42,3.5,4,30.9,mañana,Recursos Humanos,0,no
+E01702,54,3.8,2,38.8,noche,Sistemas,0,no
+E01703,60,4.2,4,8.0,noche,Recursos Humanos,5.7,si
+E01704,47,23.3,1,32.5,noche,Administración,5.3,no
+E01705,49,7.4,2,40.6,tarde,Seguridad,22.9,no
+E01706,62,23.5,2,1.0,tarde,Administración,10.5,no
+E01707,50,1.7,1,34.2,mañana,Recursos Humanos,17.4,no
+E01708,30,20.2,3,42.8,mañana,Seguridad,5.0,no
+E01709,45,1.8,0,43.4,tarde,Recursos Humanos,10.5,no
+E01710,29,14.6,2,30.6,mañana,Seguridad,8.1,no
+E01711,50,7.8,1,5.5,noche,Administración,7.1,no
+E01712,49,7.5,1,6.5,noche,Administración,23.1,no
+E01713,36,8.5,0,13.0,mañana,Seguridad,15.1,no
+E01714,38,10.6,1,8.4,noche,Seguridad,5.4,no
+E01715,64,24.0,3,39.1,mañana,Seguridad,7.6,no
+E01716,36,16.0,4,39.1,tarde,Operaciones,3.8,no
+E01717,35,8.9,4,1.6,noche,Seguridad,15.8,no
+E01718,55,14.8,4,30.3,mañana,Seguridad,11.0,no
+E01719,57,23.1,0,17.8,noche,Sistemas,3.0,no
+E01720,63,2.9,4,34.6,tarde,Administración,2.7,no
+E01721,53,8.7,0,35.7,tarde,Administración,10.8,no
+E01722,33,20.3,4,28.6,tarde,Sistemas,11.6,no
+E01723,36,7.3,2,19.1,mañana,Seguridad,15.7,no
+E01724,48,8.6,0,43.8,mañana,Operaciones,3.8,no
+E01725,61,19.2,2,8.1,noche,Administración,16.3,no
+E01726,25,18.8,2,35.4,mañana,Seguridad,3.5,no
+E01727,25,24.1,3,14.9,tarde,Sistemas,14.0,no
+E01728,36,12.4,3,9.2,tarde,Recursos Humanos,1.6,no
+E01729,27,18.9,1,43.2,tarde,Sistemas,16.8,no
+E01730,55,22.7,4,31.8,noche,Operaciones,11.6,si
+E01731,36,2.3,1,32.3,noche,Seguridad,15.5,no
+E01732,38,13.3,4,18.5,tarde,Sistemas,5.8,no
+E01733,62,11.1,2,2.8,noche,Recursos Humanos,6.9,si
+E01734,34,5.6,3,31.6,mañana,Recursos Humanos,5.5,si
+E01735,48,6.1,3,1.9,noche,Seguridad,4.6,no
+E01736,57,25.0,3,9.5,mañana,Administración,0,no
+E01737,47,18.7,2,32.1,tarde,Operaciones,0,no
+E01738,24,23.1,1,11.3,noche,Operaciones,3.1,no
+E01739,50,19.9,4,26.5,mañana,Administración,18.1,no
+E01740,64,20.2,4,27.6,noche,Operaciones,9.8,no
+E01741,57,20.9,3,21.3,tarde,Seguridad,4.1,no
+E01742,61,24.9,0,2.0,tarde,Administración,13.4,no
+E01743,56,1.6,2,16.6,noche,Operaciones,3.8,no
+E01744,28,18.2,3,32.4,tarde,Seguridad,9.4,no
+E01745,46,16.9,1,15.5,noche,Administración,14.4,no
+E01746,23,24.5,2,26.8,mañana,Administración,0,no
+E01747,35,1.6,4,19.2,mañana,Recursos Humanos,2.6,no
+E01748,27,24.7,2,37.8,mañana,Seguridad,20.3,no
+E01749,64,23.7,3,18.0,tarde,Seguridad,15.7,no
+E01750,47,8.6,2,5.2,tarde,Recursos Humanos,4.2,no
+E01751,41,5.7,3,44.4,noche,Sistemas,8.0,no
+E01752,55,13.1,0,1.9,noche,Sistemas,6.9,si
+E01753,39,24.6,0,1.6,tarde,Seguridad,5.5,no
+E01754,32,14.2,4,17.5,mañana,Recursos Humanos,0.6,no
+E01755,43,2.4,4,31.1,mañana,Administración,8.1,si
+E01756,29,11.0,3,38.2,mañana,Administración,9.7,no
+E01757,26,24.0,2,42.4,tarde,Operaciones,8.3,no
+E01758,32,14.8,4,8.4,mañana,Seguridad,12.6,no
+E01759,27,11.4,4,30.0,tarde,Seguridad,14.8,si
+E01760,45,6.2,0,7.2,tarde,Recursos Humanos,0,no
+E01761,26,20.3,4,41.0,noche,Administración,18.4,si
+E01762,64,16.4,4,41.1,noche,Administración,0,no
+E01763,60,7.1,3,7.0,mañana,Operaciones,6.6,no
+E01764,40,9.4,4,22.6,tarde,Sistemas,2.1,no
+E01765,53,19.7,0,13.6,noche,Sistemas,8.6,no
+E01766,54,2.2,1,40.3,noche,Administración,1.8,no
+E01767,54,1.2,0,14.3,mañana,Operaciones,0.4,no
+E01768,31,17.1,4,20.1,noche,Administración,1.6,no
+E01769,24,2.5,1,42.8,mañana,Operaciones,14.7,no
+E01770,33,14.3,0,28.0,mañana,Seguridad,8.5,no
+E01771,34,20.3,2,37.6,mañana,Seguridad,7.7,no
+E01772,59,10.0,2,7.9,noche,Recursos Humanos,12.6,no
+E01773,46,21.6,0,28.6,mañana,Operaciones,3.8,no
+E01774,36,10.3,4,13.2,mañana,Seguridad,17.2,si
+E01775,24,19.2,0,6.7,noche,Recursos Humanos,8.6,no
+E01776,40,22.6,1,22.5,mañana,Administración,12.3,no
+E01777,38,23.3,4,18.5,noche,Operaciones,6.4,no
+E01778,55,19.0,3,18.4,mañana,Sistemas,10.2,si
+E01779,31,12.0,0,5.9,mañana,Seguridad,14.9,no
+E01780,48,20.2,1,11.6,noche,Operaciones,0,no
+E01781,22,12.6,4,43.9,mañana,Operaciones,11.7,si
+E01782,42,3.8,3,38.8,tarde,Recursos Humanos,10.6,no
+E01783,31,3.8,1,13.8,mañana,Recursos Humanos,16.2,no
+E01784,35,18.0,4,2.1,tarde,Sistemas,0.5,no
+E01785,46,24.1,4,3.5,noche,Sistemas,6.6,no
+E01786,22,15.5,1,8.5,tarde,Operaciones,15.4,si
+E01787,27,0.1,1,3.6,tarde,Administración,2.7,no
+E01788,56,0.9,3,25.0,mañana,Seguridad,6.3,no
+E01789,42,18.7,3,31.0,noche,Operaciones,16.1,no
+E01790,29,22.5,2,21.0,tarde,Recursos Humanos,5.6,no
+E01791,47,25.0,2,39.8,tarde,Sistemas,5.2,no
+E01792,45,11.5,1,32.3,noche,Recursos Humanos,11.0,no
+E01793,48,10.5,3,19.4,noche,Seguridad,3.3,no
+E01794,33,8.4,1,30.3,mañana,Administración,8.8,no
+E01795,49,21.8,4,30.0,noche,Operaciones,11.8,no
+E01796,45,19.8,1,17.5,tarde,Recursos Humanos,0.6,no
+E01797,23,22.6,1,43.1,noche,Seguridad,9.4,no
+E01798,47,13.8,1,7.9,tarde,Administración,9.2,no
+E01799,29,14.2,3,8.6,noche,Administración,7.5,no
+E01800,35,20.0,1,7.6,tarde,Seguridad,8.5,no
+E01801,63,19.1,0,24.3,noche,Sistemas,1.1,no
+E01802,25,2.1,2,1.4,mañana,Operaciones,13.1,no
+E01803,59,23.9,2,14.5,mañana,Operaciones,5.7,no
+E01804,38,20.7,2,21.9,noche,Recursos Humanos,14.2,no
+E01805,46,3.8,1,19.3,noche,Administración,12.6,no
+E01806,27,15.7,1,31.8,tarde,Recursos Humanos,10.3,si
+E01807,21,22.0,4,21.8,tarde,Recursos Humanos,6.5,no
+E01808,31,20.4,3,42.0,noche,Administración,20.5,no
+E01809,24,14.2,1,40.0,mañana,Operaciones,0,no
+E01810,62,7.5,1,18.3,mañana,Sistemas,13.1,no
+E01811,21,23.7,4,4.7,noche,Seguridad,6.7,no
+E01812,52,10.4,2,8.4,tarde,Recursos Humanos,20.9,si
+E01813,64,8.0,2,8.3,noche,Recursos Humanos,6.5,no
+E01814,62,24.9,0,15.9,tarde,Seguridad,7.2,no
+E01815,39,23.2,3,1.5,noche,Sistemas,9.3,no
+E01816,64,11.8,3,18.1,noche,Operaciones,2.5,no
+E01817,42,19.6,2,18.9,tarde,Recursos Humanos,17.3,no
+E01818,62,12.2,2,12.7,tarde,Sistemas,16.2,si
+E01819,31,3.2,2,34.5,mañana,Sistemas,0,si
+E01820,20,14.3,0,11.4,mañana,Sistemas,7.5,no
+E01821,62,1.8,0,26.6,tarde,Operaciones,2.5,no
+E01822,31,1.4,0,7.1,noche,Sistemas,7.5,no
+E01823,44,17.1,2,10.2,noche,Sistemas,5.4,no
+E01824,58,4.8,1,37.0,noche,Seguridad,0,no
+E01825,25,21.5,1,20.5,noche,Sistemas,9.9,no
+E01826,64,6.6,0,39.6,noche,Recursos Humanos,7.3,no
+E01827,60,8.0,4,44.6,mañana,Seguridad,5.7,no
+E01828,36,10.3,2,29.2,mañana,Seguridad,7.3,no
+E01829,23,24.2,0,12.1,mañana,Sistemas,0.7,no
+E01830,63,22.6,3,3.7,tarde,Sistemas,17.9,no
+E01831,63,14.7,0,41.3,tarde,Administración,8.7,no
+E01832,43,18.2,3,15.0,tarde,Seguridad,5.8,no
+E01833,64,18.6,2,11.0,mañana,Sistemas,14.6,no
+E01834,49,22.0,3,15.3,tarde,Seguridad,13.6,no
+E01835,60,23.7,1,39.4,tarde,Seguridad,16.0,no
+E01836,29,0.3,4,35.8,noche,Recursos Humanos,12.0,si
+E01837,51,11.8,3,12.9,mañana,Sistemas,6.6,no
+E01838,32,20.7,3,38.6,tarde,Recursos Humanos,2.5,no
+E01839,42,21.3,0,22.4,noche,Sistemas,3.6,no
+E01840,35,8.1,4,22.0,tarde,Recursos Humanos,18.1,no
+E01841,60,0.3,2,14.6,mañana,Operaciones,4.2,no
+E01842,38,10.7,2,6.4,mañana,Administración,6.3,no
+E01843,48,9.2,2,43.7,mañana,Sistemas,0,no
+E01844,60,5.2,3,15.4,mañana,Operaciones,9.8,no
+E01845,60,8.3,4,9.6,mañana,Operaciones,0.6,no
+E01846,51,5.7,4,27.1,mañana,Recursos Humanos,6.8,no
+E01847,25,2.4,4,34.0,noche,Operaciones,8.2,no
+E01848,24,15.1,3,40.2,noche,Operaciones,5.0,no
+E01849,35,17.8,1,17.0,mañana,Seguridad,10.5,no
+E01850,29,8.2,2,37.3,tarde,Administración,14.7,no
+E01851,58,22.1,4,9.8,noche,Recursos Humanos,6.1,si
+E01852,52,18.3,2,33.4,mañana,Administración,8.1,no
+E01853,38,21.3,0,14.1,mañana,Recursos Humanos,13.8,no
+E01854,29,16.1,3,19.5,tarde,Seguridad,2.6,no
+E01855,37,19.0,1,5.7,tarde,Seguridad,2.6,no
+E01856,21,11.3,0,8.2,mañana,Operaciones,13.0,no
+E01857,21,3.5,3,37.6,tarde,Administración,9.7,no
+E01858,40,9.9,4,15.4,mañana,Operaciones,8.1,no
+E01859,24,18.1,1,32.4,tarde,Sistemas,6.3,no
+E01860,43,13.1,2,42.4,mañana,Sistemas,4.7,no
+E01861,61,12.3,3,25.0,noche,Seguridad,13.3,no
+E01862,30,13.7,0,4.9,mañana,Seguridad,9.0,no
+E01863,61,1.4,1,31.1,mañana,Sistemas,0,no
+E01864,52,1.1,2,34.4,mañana,Recursos Humanos,3.5,no
+E01865,62,0.5,3,34.7,tarde,Sistemas,17.0,no
+E01866,57,1.0,3,26.9,mañana,Recursos Humanos,17.3,no
+E01867,33,9.2,1,40.5,mañana,Seguridad,8.4,no
+E01868,55,22.9,2,33.7,tarde,Operaciones,4.5,no
+E01869,45,15.2,0,15.7,tarde,Operaciones,7.8,no
+E01870,45,11.3,1,20.6,noche,Administración,8.7,no
+E01871,39,18.6,1,39.5,mañana,Administración,9.6,no
+E01872,56,20.4,2,16.9,mañana,Recursos Humanos,8.3,si
+E01873,44,20.7,2,38.9,mañana,Seguridad,9.3,no
+E01874,55,9.8,4,34.2,tarde,Seguridad,4.1,no
+E01875,59,6.2,0,28.1,mañana,Sistemas,25.2,no
+E01876,44,23.7,4,41.9,tarde,Seguridad,10.6,no
+E01877,24,16.1,2,43.7,noche,Operaciones,7.3,no
+E01878,29,0.6,2,34.9,mañana,Operaciones,0,no
+E01879,50,22.9,1,6.3,noche,Sistemas,11.7,si
+E01880,37,2.2,2,11.3,noche,Administración,15.6,si
+E01881,21,17.3,0,10.5,tarde,Seguridad,9.1,no
+E01882,22,20.8,0,19.1,mañana,Administración,19.9,no
+E01883,62,18.0,2,9.9,tarde,Sistemas,4.9,no
+E01884,56,4.7,3,31.3,mañana,Sistemas,0,no
+E01885,25,17.9,4,33.7,tarde,Operaciones,4.6,no
+E01886,55,20.5,4,25.0,tarde,Operaciones,14.0,no
+E01887,38,4.3,1,18.7,tarde,Operaciones,15.8,no
+E01888,43,18.8,3,22.8,noche,Seguridad,11.9,si
+E01889,63,23.1,1,29.4,tarde,Administración,10.4,no
+E01890,58,8.6,2,41.4,noche,Recursos Humanos,0,si
+E01891,25,20.0,3,7.1,mañana,Seguridad,5.2,no
+E01892,56,24.8,0,24.9,noche,Sistemas,7.8,no
+E01893,27,18.5,2,31.1,tarde,Seguridad,15.6,no
+E01894,62,19.9,3,25.1,tarde,Administración,9.1,no
+E01895,29,18.8,1,5.7,noche,Seguridad,13.5,no
+E01896,29,22.3,0,43.6,mañana,Seguridad,6.3,no
+E01897,32,7.6,0,10.2,noche,Sistemas,3.2,si
+E01898,24,7.4,2,10.1,noche,Sistemas,5.1,no
+E01899,41,16.5,3,1.5,noche,Operaciones,8.9,no
+E01900,57,7.6,0,28.2,tarde,Administración,0.9,no
+E01901,54,8.8,0,12.3,tarde,Seguridad,0,no
+E01902,21,14.7,3,39.7,noche,Seguridad,14.7,no
+E01903,60,11.9,0,24.9,mañana,Recursos Humanos,9.7,no
+E01904,40,18.7,2,11.6,tarde,Sistemas,0,no
+E01905,57,15.3,0,5.2,noche,Recursos Humanos,5.0,no
+E01906,64,11.1,4,23.1,tarde,Operaciones,0,no
+E01907,51,1.2,1,26.8,noche,Administración,16.8,no
+E01908,41,7.3,3,8.2,tarde,Administración,10.7,no
+E01909,61,5.0,1,22.4,mañana,Seguridad,10.2,no
+E01910,51,1.1,1,9.0,tarde,Administración,5.5,no
+E01911,56,2.9,0,8.2,mañana,Administración,0,no
+E01912,64,9.2,2,31.8,mañana,Administración,6.1,no
+E01913,24,7.0,0,25.5,tarde,Sistemas,5.9,no
+E01914,35,23.7,1,16.7,tarde,Administración,10.6,no
+E01915,55,16.6,2,20.6,noche,Operaciones,10.5,no
+E01916,27,24.3,4,29.9,noche,Seguridad,11.9,no
+E01917,52,18.7,0,18.2,tarde,Sistemas,9.0,no
+E01918,28,16.6,2,26.8,mañana,Operaciones,18.5,no
+E01919,26,4.7,1,21.9,tarde,Recursos Humanos,2.3,no
+E01920,62,15.8,1,24.8,mañana,Recursos Humanos,10.1,no
+E01921,30,11.9,1,44.6,mañana,Administración,5.4,no
+E01922,46,10.3,0,28.5,mañana,Operaciones,8.0,no
+E01923,45,9.9,3,9.5,noche,Operaciones,6.2,no
+E01924,59,21.7,4,33.9,mañana,Seguridad,14.6,no
+E01925,24,3.9,3,27.4,tarde,Seguridad,2.4,no
+E01926,61,10.4,0,25.7,noche,Recursos Humanos,3.9,no
+E01927,58,20.2,2,41.4,tarde,Administración,12.4,no
+E01928,64,21.4,4,21.7,tarde,Seguridad,3.4,no
+E01929,25,16.5,3,26.3,tarde,Operaciones,0,no
+E01930,60,13.3,2,28.1,mañana,Operaciones,19.2,no
+E01931,56,5.7,1,41.8,tarde,Recursos Humanos,3.1,no
+E01932,37,7.7,2,37.3,noche,Seguridad,0.7,si
+E01933,32,15.3,2,35.6,noche,Operaciones,2.9,no
+E01934,53,13.8,1,10.0,tarde,Administración,15.1,no
+E01935,31,6.2,3,27.3,noche,Operaciones,14.5,no
+E01936,54,9.8,2,32.5,noche,Seguridad,13.0,no
+E01937,24,24.2,1,36.8,tarde,Sistemas,14.5,no
+E01938,37,6.4,4,22.8,noche,Administración,4.4,si
+E01939,50,10.7,3,44.2,noche,Sistemas,6.4,no
+E01940,22,3.0,0,9.0,tarde,Sistemas,6.7,no
+E01941,33,19.6,0,41.7,noche,Seguridad,15.5,no
+E01942,37,14.2,2,1.4,tarde,Administración,4.1,no
+E01943,35,14.3,1,12.7,noche,Operaciones,9.9,si
+E01944,33,14.6,4,34.5,mañana,Seguridad,0,si
+E01945,27,18.5,0,44.1,tarde,Seguridad,0,no
+E01946,31,10.2,1,11.6,noche,Recursos Humanos,7.9,no
+E01947,33,10.9,1,38.9,tarde,Seguridad,8.5,no
+E01948,44,2.0,4,32.3,tarde,Recursos Humanos,8.0,no
+E01949,41,5.1,2,30.6,tarde,Administración,6.7,si
+E01950,33,12.7,2,18.1,tarde,Administración,9.5,no
+E01951,33,17.1,2,8.4,tarde,Recursos Humanos,9.9,no
+E01952,58,6.9,3,32.5,mañana,Seguridad,16.9,no
+E01953,44,16.1,4,3.8,noche,Sistemas,5.8,no
+E01954,47,9.5,0,22.6,noche,Seguridad,2.9,no
+E01955,34,22.8,4,12.4,mañana,Recursos Humanos,10.1,no
+E01956,43,15.0,0,36.6,mañana,Seguridad,8.2,no
+E01957,25,2.3,4,31.6,mañana,Operaciones,5.4,no
+E01958,31,11.3,1,13.9,tarde,Operaciones,4.9,no
+E01959,38,21.8,4,28.3,noche,Recursos Humanos,10.0,no
+E01960,58,10.6,0,8.4,mañana,Recursos Humanos,10.5,no
+E01961,43,4.5,1,6.5,tarde,Administración,9.1,no
+E01962,30,23.3,2,11.8,mañana,Operaciones,6.8,no
+E01963,29,1.4,1,6.9,mañana,Seguridad,7.9,no
+E01964,35,15.2,3,17.2,tarde,Seguridad,9.3,no
+E01965,28,16.0,0,34.2,mañana,Seguridad,10.6,no
+E01966,54,13.2,3,22.6,tarde,Administración,13.2,no
+E01967,36,13.0,4,35.6,noche,Seguridad,3.7,no
+E01968,33,4.2,0,38.7,mañana,Sistemas,3.3,no
+E01969,43,15.1,0,19.1,tarde,Operaciones,4.6,no
+E01970,48,5.0,4,1.7,tarde,Recursos Humanos,10.5,no
+E01971,48,7.5,2,11.8,mañana,Recursos Humanos,0,no
+E01972,28,11.7,3,21.5,mañana,Seguridad,12.4,no
+E01973,42,16.0,3,5.5,tarde,Sistemas,6.9,no
+E01974,38,22.2,2,39.4,mañana,Administración,11.3,si
+E01975,41,24.5,1,38.3,mañana,Operaciones,1.1,no
+E01976,55,12.7,2,1.5,mañana,Recursos Humanos,14.7,no
+E01977,49,9.3,2,20.7,tarde,Administración,10.6,no
+E01978,27,7.1,3,3.2,noche,Administración,8.3,no
+E01979,52,16.7,0,25.1,noche,Administración,1.6,no
+E01980,60,3.8,2,37.3,tarde,Seguridad,14.3,no
+E01981,22,15.4,2,13.1,mañana,Sistemas,16.0,si
+E01982,29,3.3,3,19.4,mañana,Seguridad,3.6,no
+E01983,50,0.0,0,3.9,mañana,Operaciones,6.7,no
+E01984,27,22.9,0,8.3,noche,Seguridad,2.7,no
+E01985,56,18.2,4,17.4,tarde,Operaciones,0,no
+E01986,53,22.5,1,33.7,noche,Operaciones,2.4,no
+E01987,21,17.1,3,36.5,mañana,Recursos Humanos,0,no
+E01988,23,8.2,4,23.4,tarde,Seguridad,4.3,si
+E01989,49,3.7,1,10.8,mañana,Recursos Humanos,19.4,no
+E01990,46,17.4,4,23.3,tarde,Seguridad,6.8,no
+E01991,23,12.0,3,41.9,mañana,Operaciones,10.2,no
+E01992,43,10.8,0,19.2,mañana,Operaciones,5.5,no
+E01993,47,23.2,1,18.4,mañana,Seguridad,14.5,no
+E01994,40,15.3,4,8.3,mañana,Administración,6.2,si
+E01995,51,19.9,0,1.4,noche,Seguridad,9.7,no
+E01996,20,19.8,3,31.7,mañana,Sistemas,9.4,no
+E01997,62,9.2,4,31.2,noche,Operaciones,10.9,si
+E01998,57,4.1,0,14.6,mañana,Sistemas,16.3,no
+E01999,26,4.8,2,8.5,tarde,Seguridad,7.4,no
+E02000,28,15.4,0,24.1,noche,Operaciones,0,no
+E02001,34,19.4,2,23.7,tarde,Administración,10.8,si
+E02002,48,21.3,2,30.3,noche,Seguridad,12.9,no
+E02003,62,20.4,2,19.4,mañana,Operaciones,6.5,no
+E02004,23,11.5,4,31.9,mañana,Sistemas,10.4,no
+E02005,64,3.2,2,32.8,tarde,Operaciones,5.6,no
+E02006,57,18.0,2,20.2,mañana,Administración,11.8,no
+E02007,24,0.8,0,7.9,mañana,Operaciones,6.4,si
+E02008,49,21.3,3,12.1,mañana,Seguridad,10.5,no
+E02009,62,20.4,2,33.8,noche,Seguridad,0,no
+E02010,30,18.8,2,39.2,mañana,Sistemas,2.0,no
+E02011,58,3.7,3,39.9,mañana,Administración,11.5,no
+E02012,20,22.7,2,32.7,tarde,Sistemas,5.4,no
+E02013,33,0.1,1,22.2,noche,Recursos Humanos,0,no
+E02014,53,16.5,3,33.4,noche,Operaciones,22.7,no
+E02015,49,15.3,4,20.1,noche,Sistemas,0,no
+E02016,41,13.5,0,34.3,mañana,Operaciones,1.0,no
+E02017,56,11.9,1,39.6,tarde,Administración,12.6,no
+E02018,61,20.9,0,10.8,tarde,Operaciones,11.6,no
+E02019,34,9.9,3,1.2,mañana,Sistemas,0,no
+E02020,54,0.1,4,3.1,mañana,Operaciones,9.0,no
+E02021,62,18.3,0,34.7,tarde,Administración,7.6,no
+E02022,27,14.5,1,24.5,noche,Operaciones,13.3,no
+E02023,25,4.4,2,29.9,mañana,Seguridad,5.3,no
+E02024,30,23.7,2,1.9,mañana,Operaciones,5.1,no
+E02025,39,5.1,4,8.2,mañana,Operaciones,2.5,no
+E02026,20,16.0,1,4.4,mañana,Sistemas,17.4,no
+E02027,27,6.8,4,8.9,tarde,Operaciones,12.1,no
+E02028,62,19.5,4,21.5,mañana,Seguridad,7.6,no
+E02029,36,8.8,0,18.1,mañana,Administración,10.5,no
+E02030,30,15.5,1,43.7,mañana,Sistemas,4.0,no
+E02031,21,4.9,2,44.6,noche,Operaciones,14.1,no
+E02032,33,19.8,1,20.0,noche,Seguridad,11.1,no
+E02033,62,18.7,3,3.9,noche,Recursos Humanos,16.0,no
+E02034,22,11.4,0,15.2,tarde,Recursos Humanos,7.5,no
+E02035,46,24.7,0,42.1,noche,Operaciones,8.2,no
+E02036,53,21.6,4,4.7,mañana,Administración,8.8,no
+E02037,59,13.8,0,25.3,tarde,Sistemas,0,no
+E02038,38,16.0,0,11.8,noche,Seguridad,9.3,no
+E02039,29,24.1,2,7.0,tarde,Seguridad,6.4,no
+E02040,24,10.3,3,4.3,noche,Operaciones,6.2,si
+E02041,28,24.5,4,15.4,noche,Sistemas,12.7,no
+E02042,41,21.3,2,17.0,mañana,Operaciones,10.9,no
+E02043,55,20.0,4,11.2,tarde,Operaciones,5.5,no
+E02044,39,2.0,4,32.4,noche,Administración,6.5,no
+E02045,62,23.3,2,14.7,tarde,Sistemas,5.7,no
+E02046,26,1.3,3,4.0,noche,Sistemas,18.5,no
+E02047,25,2.7,2,8.0,noche,Recursos Humanos,10.9,si
+E02048,50,16.2,1,26.0,mañana,Sistemas,7.6,no
+E02049,20,20.6,4,31.0,mañana,Seguridad,4.9,no
+E02050,55,14.4,1,33.1,mañana,Seguridad,11.8,no
+E02051,45,4.8,4,24.2,tarde,Recursos Humanos,9.5,no
+E02052,46,14.5,2,12.9,noche,Sistemas,3.8,no
+E02053,56,10.1,1,9.4,tarde,Recursos Humanos,2.3,no
+E02054,22,14.5,1,43.6,mañana,Recursos Humanos,17.9,no
+E02055,27,17.1,4,6.9,mañana,Operaciones,7.9,si
+E02056,46,5.3,0,5.9,noche,Sistemas,4.5,no
+E02057,46,16.2,3,6.4,tarde,Operaciones,13.5,no
+E02058,33,17.0,3,20.5,mañana,Recursos Humanos,0.7,no
+E02059,23,16.6,2,22.6,tarde,Seguridad,17.7,si
+E02060,53,11.6,2,3.7,mañana,Seguridad,8.8,no
+E02061,53,7.1,0,8.8,mañana,Seguridad,10.8,no
+E02062,64,8.7,2,29.3,tarde,Recursos Humanos,16.2,no
+E02063,35,12.0,3,20.3,mañana,Sistemas,0,no
+E02064,27,24.7,2,25.3,noche,Recursos Humanos,6.7,no
+E02065,21,6.8,0,30.0,tarde,Seguridad,0.8,no
+E02066,35,22.1,4,11.6,tarde,Operaciones,12.8,no
+E02067,29,23.0,0,28.6,noche,Sistemas,1.8,no
+E02068,20,17.2,3,25.4,noche,Operaciones,9.0,no
+E02069,32,19.1,3,12.1,tarde,Administración,10.7,no
+E02070,44,24.0,3,25.9,tarde,Sistemas,0,no
+E02071,41,21.4,3,16.7,mañana,Administración,0,no
+E02072,56,23.9,1,1.7,mañana,Sistemas,9.4,no
+E02073,63,10.3,4,44.8,mañana,Sistemas,20.0,no
+E02074,26,3.4,0,33.5,mañana,Operaciones,7.5,no
+E02075,25,24.8,2,29.3,tarde,Recursos Humanos,21.4,no
+E02076,54,15.3,1,5.1,tarde,Administración,16.8,no
+E02077,33,16.4,3,31.6,mañana,Seguridad,10.5,no
+E02078,37,2.5,0,23.2,mañana,Administración,3.0,no
+E02079,60,11.3,4,31.6,mañana,Sistemas,10.5,si
+E02080,22,6.9,1,8.6,mañana,Recursos Humanos,9.4,no
+E02081,28,11.5,0,30.1,mañana,Administración,11.9,no
+E02082,63,22.8,3,10.0,noche,Operaciones,9.2,no
+E02083,54,11.8,1,1.3,tarde,Sistemas,9.8,no
+E02084,24,22.3,1,5.8,mañana,Recursos Humanos,2.5,no
+E02085,63,4.2,4,32.4,noche,Administración,11.3,no
+E02086,48,23.3,1,40.6,noche,Operaciones,11.8,no
+E02087,48,5.4,2,20.8,mañana,Administración,0.9,no
+E02088,45,15.2,2,41.8,mañana,Recursos Humanos,2.7,no
+E02089,23,21.9,1,6.1,noche,Recursos Humanos,13.2,no
+E02090,45,13.3,4,38.7,noche,Seguridad,5.4,si
+E02091,23,4.5,4,39.5,mañana,Recursos Humanos,0,no
+E02092,25,13.6,2,4.3,noche,Administración,5.4,no
+E02093,51,13.7,1,37.4,mañana,Seguridad,7.6,no
+E02094,29,19.8,4,31.7,mañana,Administración,2.1,no
+E02095,63,2.0,2,34.4,tarde,Recursos Humanos,10.2,no
+E02096,62,8.4,0,2.5,mañana,Sistemas,14.3,no
+E02097,25,4.1,0,33.7,noche,Administración,0.7,no
+E02098,61,12.0,2,36.4,tarde,Administración,15.9,no
+E02099,44,0.6,0,7.6,tarde,Operaciones,11.0,no
+E02100,30,12.6,0,13.8,tarde,Operaciones,4.7,no
+E02101,29,13.5,1,13.6,noche,Sistemas,7.0,no
+E02102,44,7.2,3,28.4,mañana,Operaciones,14.2,si
+E02103,44,15.0,2,1.1,tarde,Recursos Humanos,9.6,no
+E02104,29,2.2,3,32.9,tarde,Administración,5.8,no
+E02105,62,19.9,0,23.5,tarde,Operaciones,10.1,no
+E02106,55,20.5,0,35.5,tarde,Sistemas,6.6,no
+E02107,59,10.3,2,38.7,noche,Seguridad,6.6,no
+E02108,31,0.4,1,28.5,noche,Administración,12.4,si
+E02109,55,3.1,4,18.2,noche,Sistemas,9.9,no
+E02110,55,6.5,3,33.3,noche,Recursos Humanos,0,no
+E02111,45,9.5,2,34.6,noche,Sistemas,8.1,no
+E02112,63,16.8,2,7.2,tarde,Administración,6.9,no
+E02113,21,16.7,1,14.5,tarde,Recursos Humanos,0.8,no
+E02114,47,18.9,1,6.7,noche,Administración,20.1,no
+E02115,60,11.5,3,2.8,tarde,Operaciones,17.3,no
+E02116,31,23.7,3,17.4,tarde,Sistemas,10.3,no
+E02117,62,13.6,0,9.2,mañana,Sistemas,0,no
+E02118,56,7.7,4,35.9,tarde,Administración,0,no
+E02119,53,18.3,1,17.2,noche,Administración,7.6,no
+E02120,59,6.9,0,32.9,mañana,Seguridad,5.5,no
+E02121,33,16.0,1,44.7,tarde,Recursos Humanos,3.1,no
+E02122,57,19.1,2,16.6,noche,Operaciones,10.3,no
+E02123,58,20.2,3,36.5,mañana,Sistemas,6.0,no
+E02124,58,18.0,1,35.6,noche,Sistemas,8.1,no
+E02125,34,12.3,0,6.9,noche,Operaciones,10.6,no
+E02126,52,21.4,3,32.8,mañana,Administración,8.3,no
+E02127,53,11.5,0,23.0,tarde,Administración,2.7,si
+E02128,26,4.6,2,37.1,mañana,Administración,8.5,si
+E02129,41,14.9,3,41.7,mañana,Seguridad,5.1,no
+E02130,46,12.4,0,33.1,noche,Sistemas,14.7,no
+E02131,39,15.2,4,16.2,mañana,Sistemas,1.9,si
+E02132,26,3.1,4,24.1,noche,Operaciones,6.9,no
+E02133,32,8.6,1,2.2,mañana,Seguridad,12.2,no
+E02134,29,3.9,0,10.5,noche,Administración,8.3,no
+E02135,28,1.9,4,12.2,mañana,Operaciones,12.8,no
+E02136,41,23.5,1,2.9,tarde,Sistemas,2.0,no
+E02137,27,19.8,1,3.0,noche,Sistemas,8.3,no
+E02138,53,21.2,1,42.3,mañana,Sistemas,4.1,no
+E02139,63,20.5,3,34.6,tarde,Recursos Humanos,12.6,si
+E02140,36,23.5,2,10.4,mañana,Recursos Humanos,1.2,no
+E02141,47,4.6,4,26.2,tarde,Seguridad,16.7,no
+E02142,38,3.6,0,10.3,noche,Operaciones,11.8,no
+E02143,39,19.8,1,44.3,mañana,Operaciones,11.4,no
+E02144,46,16.7,0,25.2,noche,Recursos Humanos,10.0,no
+E02145,64,3.1,0,5.5,tarde,Seguridad,16.4,no
+E02146,24,1.2,2,17.2,noche,Administración,7.2,si
+E02147,45,24.9,4,44.6,noche,Recursos Humanos,11.7,no
+E02148,44,15.6,2,28.5,noche,Administración,12.2,no
+E02149,53,18.7,2,30.7,tarde,Sistemas,0.5,no
+E02150,35,19.6,1,26.5,noche,Administración,6.6,si
+E02151,31,12.5,1,14.6,noche,Recursos Humanos,10.4,si
+E02152,29,21.0,3,36.5,mañana,Operaciones,1.7,no
+E02153,29,10.2,3,31.8,noche,Seguridad,12.4,no
+E02154,31,11.4,1,19.4,mañana,Seguridad,2.8,no
+E02155,43,13.0,1,10.7,noche,Administración,21.4,no
+E02156,38,13.0,0,29.9,noche,Sistemas,20.2,no
+E02157,59,2.9,3,7.3,noche,Administración,0,no
+E02158,57,13.7,2,38.4,mañana,Seguridad,4.8,no
+E02159,42,2.3,3,25.2,noche,Seguridad,7.1,no
+E02160,47,23.1,0,10.5,noche,Seguridad,3.7,no
+E02161,27,4.8,2,24.3,noche,Operaciones,0,no
+E02162,57,19.4,2,18.5,mañana,Recursos Humanos,10.8,no
+E02163,34,21.4,0,37.6,mañana,Seguridad,4.1,si
+E02164,24,21.3,0,20.1,tarde,Seguridad,20.4,no
+E02165,41,5.1,0,4.6,mañana,Administración,19.2,no
+E02166,25,1.7,2,24.2,noche,Operaciones,6.4,no
+E02167,32,1.4,4,18.9,mañana,Administración,6.3,no
+E02168,34,16.1,2,28.6,mañana,Operaciones,6.4,no
+E02169,28,15.0,3,18.2,mañana,Seguridad,20.7,no
+E02170,21,10.3,4,6.7,mañana,Operaciones,11.0,no
+E02171,30,15.6,4,21.9,tarde,Sistemas,0,no
+E02172,45,15.0,4,34.8,tarde,Sistemas,5.9,no
+E02173,40,5.0,2,21.0,mañana,Recursos Humanos,3.8,no
+E02174,49,4.3,4,16.2,tarde,Sistemas,14.0,no
+E02175,25,24.9,4,40.9,noche,Sistemas,5.0,si
+E02176,52,9.5,2,10.6,tarde,Recursos Humanos,12.7,no
+E02177,24,8.6,4,6.3,mañana,Seguridad,13.2,no
+E02178,40,6.6,0,3.2,mañana,Administración,11.8,no
+E02179,23,24.3,1,5.2,tarde,Operaciones,12.7,no
+E02180,54,17.1,0,37.6,tarde,Seguridad,19.7,no
+E02181,20,12.5,1,23.6,mañana,Sistemas,2.3,no
+E02182,31,22.0,0,40.3,noche,Administración,4.8,no
+E02183,63,10.5,4,26.2,tarde,Seguridad,4.6,no
+E02184,35,18.9,0,39.1,mañana,Administración,10.2,no
+E02185,48,8.0,0,2.3,mañana,Administración,4.9,no
+E02186,45,17.6,0,25.0,noche,Seguridad,0,no
+E02187,29,23.5,0,11.4,tarde,Administración,10.7,no
+E02188,31,0.1,1,24.8,mañana,Recursos Humanos,4.3,no
+E02189,20,24.8,2,30.9,noche,Operaciones,4.1,no
+E02190,56,11.2,1,5.6,tarde,Seguridad,7.2,no
+E02191,56,4.4,3,44.2,mañana,Operaciones,0.7,no
+E02192,54,18.9,2,43.0,noche,Administración,8.8,no
+E02193,22,19.6,2,39.2,mañana,Recursos Humanos,16.3,no
+E02194,47,23.8,4,31.4,mañana,Administración,7.1,no
+E02195,59,16.2,4,14.1,noche,Operaciones,3.5,no
+E02196,60,1.7,4,4.7,tarde,Seguridad,0,no
+E02197,31,0.9,1,29.8,mañana,Operaciones,7.3,no
+E02198,62,10.0,1,18.2,mañana,Administración,16.2,no
+E02199,51,19.5,4,43.4,mañana,Seguridad,9.4,no
+E02200,47,9.6,4,7.6,noche,Administración,0,no
+E02201,22,3.2,4,23.7,mañana,Seguridad,8.2,no
+E02202,43,13.1,0,18.5,mañana,Recursos Humanos,3.8,no
+E02203,59,21.7,2,34.2,tarde,Seguridad,0,no
+E02204,37,14.2,4,2.3,mañana,Recursos Humanos,12.5,no
+E02205,49,6.7,4,9.0,noche,Seguridad,16.9,no
+E02206,31,3.5,1,37.4,noche,Operaciones,5.9,no
+E02207,32,14.4,4,12.8,tarde,Recursos Humanos,5.6,no
+E02208,30,23.1,2,42.1,tarde,Seguridad,16.0,no
+E02209,41,13.3,3,15.9,tarde,Recursos Humanos,12.3,no
+E02210,64,14.4,1,18.8,noche,Recursos Humanos,3.5,no
+E02211,55,2.6,3,38.9,noche,Sistemas,14.8,no
+E02212,44,0.6,4,29.4,noche,Operaciones,4.3,no
+E02213,20,19.3,1,13.6,tarde,Recursos Humanos,15.3,no
+E02214,24,15.6,0,39.6,noche,Administración,15.0,no
+E02215,35,5.0,2,37.7,tarde,Administración,3.8,no
+E02216,25,2.2,2,17.0,tarde,Operaciones,7.2,no
+E02217,59,5.1,1,10.5,mañana,Operaciones,10.8,no
+E02218,35,11.9,3,38.2,noche,Sistemas,3.0,si
+E02219,38,15.5,0,42.9,mañana,Sistemas,9.7,no
+E02220,27,8.8,4,21.1,noche,Administración,0.4,no
+E02221,43,20.9,1,34.3,mañana,Operaciones,6.9,no
+E02222,30,12.9,1,25.5,tarde,Seguridad,15.0,no
+E02223,52,19.4,3,19.3,tarde,Administración,5.0,no
+E02224,28,11.2,3,20.5,tarde,Recursos Humanos,6.0,no
+E02225,57,22.3,3,13.3,noche,Operaciones,1.1,no
+E02226,38,19.9,1,15.0,noche,Administración,2.9,no
+E02227,41,3.0,0,4.7,noche,Seguridad,7.9,si
+E02228,39,21.3,2,39.8,mañana,Recursos Humanos,2.9,no
+E02229,40,1.8,2,11.4,noche,Sistemas,1.9,si
+E02230,33,0.1,3,16.0,mañana,Administración,4.4,si
+E02231,44,7.6,3,38.4,noche,Administración,6.7,no
+E02232,47,24.9,3,22.6,tarde,Recursos Humanos,16.5,no
+E02233,28,7.3,2,19.2,noche,Sistemas,1.7,no
+E02234,33,24.6,0,32.0,tarde,Operaciones,0,no
+E02235,32,13.6,0,36.9,noche,Recursos Humanos,6.2,si
+E02236,60,15.2,2,39.7,noche,Sistemas,6.5,no
+E02237,51,22.1,1,23.9,tarde,Operaciones,6.5,no
+E02238,50,13.8,3,16.2,noche,Recursos Humanos,5.5,no
+E02239,40,19.7,2,40.6,tarde,Seguridad,7.7,no
+E02240,44,9.1,1,28.6,tarde,Recursos Humanos,17.3,no
+E02241,44,15.5,4,23.5,noche,Seguridad,0,no
+E02242,27,2.6,3,3.3,mañana,Seguridad,11.0,no
+E02243,61,11.1,4,32.6,mañana,Administración,13.9,no
+E02244,31,23.9,1,41.7,tarde,Recursos Humanos,1.1,no
+E02245,40,18.5,4,39.8,mañana,Seguridad,4.4,si
+E02246,30,7.6,2,25.3,mañana,Recursos Humanos,2.7,no
+E02247,55,14.4,2,40.4,mañana,Operaciones,0.3,no
+E02248,34,3.1,1,32.9,tarde,Seguridad,9.8,no
+E02249,51,14.3,4,12.5,tarde,Administración,3.4,no
+E02250,48,2.9,0,40.3,noche,Administración,9.4,si
+E02251,53,1.4,3,11.8,noche,Seguridad,11.4,no
+E02252,57,5.4,4,32.1,tarde,Recursos Humanos,14.8,si
+E02253,43,0.7,3,30.7,mañana,Recursos Humanos,5.6,no
+E02254,22,18.2,0,3.4,mañana,Recursos Humanos,7.3,no
+E02255,52,23.5,4,39.9,noche,Administración,15.6,no
+E02256,62,17.1,4,31.5,noche,Operaciones,5.2,no
+E02257,21,23.1,2,36.1,mañana,Recursos Humanos,11.4,no
+E02258,56,5.9,2,18.1,mañana,Administración,9.7,no
+E02259,25,4.1,0,10.2,noche,Administración,9.4,no
+E02260,42,16.1,0,8.4,noche,Administración,11.3,no
+E02261,32,21.7,0,23.5,mañana,Administración,10.2,no
+E02262,51,24.8,0,4.6,noche,Administración,5.7,no
+E02263,30,15.8,0,33.2,mañana,Recursos Humanos,6.1,no
+E02264,62,23.1,1,43.2,tarde,Seguridad,15.7,no
+E02265,28,2.2,1,6.0,tarde,Sistemas,10.7,si
+E02266,62,15.4,4,2.4,mañana,Operaciones,8.9,no
+E02267,56,15.6,1,33.1,mañana,Operaciones,0,no
+E02268,49,8.4,2,24.6,noche,Recursos Humanos,8.5,no
+E02269,55,7.1,3,5.4,tarde,Sistemas,5.2,no
+E02270,62,3.5,2,15.8,mañana,Administración,11.4,no
+E02271,64,3.2,2,38.0,noche,Recursos Humanos,7.6,no
+E02272,33,8.7,4,17.7,mañana,Sistemas,5.4,no
+E02273,49,12.4,0,1.8,mañana,Recursos Humanos,6.2,no
+E02274,54,4.8,2,42.1,noche,Operaciones,0.3,si
+E02275,21,21.2,1,12.4,mañana,Recursos Humanos,14.6,no
+E02276,30,23.3,3,19.6,tarde,Administración,8.8,no
+E02277,47,15.0,3,3.7,noche,Sistemas,15.0,no
+E02278,53,0.6,0,11.0,mañana,Operaciones,5.4,no
+E02279,34,20.7,2,31.1,noche,Sistemas,11.9,si
+E02280,51,1.5,4,1.7,tarde,Seguridad,15.4,no
+E02281,48,22.3,4,14.6,mañana,Operaciones,3.6,no
+E02282,35,25.0,2,17.4,tarde,Recursos Humanos,5.2,no
+E02283,55,6.3,0,20.1,mañana,Sistemas,8.4,no
+E02284,21,19.9,3,23.6,mañana,Recursos Humanos,5.4,no
+E02285,53,19.1,0,5.0,mañana,Seguridad,7.1,no
+E02286,48,12.9,0,36.7,noche,Operaciones,8.9,no
+E02287,32,24.4,4,32.0,tarde,Sistemas,9.2,si
+E02288,41,11.3,0,11.8,tarde,Recursos Humanos,18.8,no
+E02289,32,24.2,3,43.0,tarde,Operaciones,5.9,no
+E02290,31,17.6,2,2.1,noche,Seguridad,0.8,no
+E02291,21,10.6,1,19.9,tarde,Seguridad,6.5,no
+E02292,58,0.1,3,9.8,noche,Recursos Humanos,14.1,no
+E02293,29,23.0,0,37.9,tarde,Seguridad,17.1,no
+E02294,21,1.6,0,11.6,mañana,Seguridad,12.4,no
+E02295,21,2.5,0,43.5,noche,Administración,9.7,no
+E02296,27,1.3,2,26.9,noche,Seguridad,17.7,no
+E02297,56,5.9,2,34.8,noche,Sistemas,10.3,no
+E02298,40,7.9,1,30.4,noche,Sistemas,16.0,no
+E02299,45,20.2,4,14.1,noche,Seguridad,10.2,no
+E02300,49,12.3,4,10.8,mañana,Recursos Humanos,5.2,no
+E02301,44,15.1,0,34.0,mañana,Seguridad,9.1,no
+E02302,56,12.1,2,42.9,tarde,Seguridad,8.1,no
+E02303,62,10.9,4,10.3,noche,Administración,19.3,no
+E02304,20,14.6,0,41.1,noche,Seguridad,4.8,si
+E02305,21,10.8,1,44.5,noche,Recursos Humanos,0,no
+E02306,26,12.9,0,37.1,noche,Recursos Humanos,0,no
+E02307,26,16.5,4,28.8,noche,Operaciones,14.1,no
+E02308,56,20.0,4,11.3,noche,Administración,0,no
+E02309,48,11.2,0,7.5,mañana,Sistemas,1.0,no
+E02310,21,13.4,0,28.5,tarde,Administración,21.5,no
+E02311,42,7.6,4,7.1,mañana,Seguridad,5.5,no
+E02312,43,23.2,3,26.1,tarde,Administración,14.8,no
+E02313,40,0.6,3,24.8,tarde,Seguridad,4.9,no
+E02314,56,20.7,0,8.9,mañana,Seguridad,6.1,no
+E02315,63,16.7,4,42.1,noche,Seguridad,13.8,no
+E02316,29,4.1,3,30.5,noche,Administración,7.1,no
+E02317,37,16.8,0,38.3,noche,Sistemas,2.1,no
+E02318,47,5.7,0,6.2,mañana,Administración,6.9,no
+E02319,55,16.1,1,8.8,tarde,Administración,9.4,no
+E02320,62,9.4,3,5.7,tarde,Administración,11.6,no
+E02321,44,23.2,3,31.9,tarde,Administración,15.8,no
+E02322,37,18.0,3,42.2,tarde,Sistemas,4.6,no
+E02323,30,3.8,2,15.9,tarde,Recursos Humanos,7.7,no
+E02324,54,6.1,1,28.7,tarde,Administración,23.7,no
+E02325,64,19.5,4,12.7,tarde,Administración,8.0,no
+E02326,50,1.0,1,20.2,tarde,Seguridad,18.0,no
+E02327,25,14.4,2,19.7,noche,Sistemas,7.4,si
+E02328,42,25.0,4,6.0,noche,Recursos Humanos,5.7,no
+E02329,50,5.1,3,18.9,mañana,Recursos Humanos,5.2,no
+E02330,40,8.5,4,44.2,mañana,Operaciones,1.9,no
+E02331,39,17.5,3,41.0,tarde,Operaciones,7.6,no
+E02332,32,3.1,2,5.3,tarde,Sistemas,6.4,no
+E02333,24,21.1,4,21.7,noche,Seguridad,18.4,si
+E02334,54,6.5,4,24.7,noche,Sistemas,17.3,no
+E02335,25,11.5,3,25.3,mañana,Operaciones,5.4,no
+E02336,59,12.9,1,44.8,mañana,Operaciones,15.4,no
+E02337,35,13.6,4,28.1,noche,Administración,3.9,no
+E02338,56,15.5,2,20.4,noche,Seguridad,3.5,no
+E02339,27,14.7,0,44.1,noche,Sistemas,0,no
+E02340,43,18.1,1,30.9,mañana,Seguridad,6.1,no
+E02341,63,8.8,0,4.1,mañana,Seguridad,2.4,no
+E02342,33,14.9,3,34.1,noche,Seguridad,5.6,no
+E02343,43,3.1,4,23.6,tarde,Operaciones,13.7,si
+E02344,39,12.1,1,3.2,noche,Administración,3.2,no
+E02345,55,1.2,4,41.5,tarde,Operaciones,23.2,no
+E02346,30,12.4,0,3.2,tarde,Operaciones,13.9,no
+E02347,54,21.6,0,22.6,tarde,Operaciones,0,no
+E02348,32,19.6,4,14.6,tarde,Recursos Humanos,8.5,no
+E02349,28,21.4,1,17.3,tarde,Seguridad,6.6,no
+E02350,60,8.4,2,13.7,mañana,Seguridad,3.6,no
+E02351,31,0.2,0,42.0,tarde,Recursos Humanos,4.6,no
+E02352,50,7.4,3,43.4,tarde,Seguridad,6.8,no
+E02353,37,1.7,0,2.2,mañana,Recursos Humanos,11.0,no
+E02354,53,22.8,3,38.5,tarde,Administración,8.7,no
+E02355,45,13.4,3,5.8,noche,Administración,8.0,no
+E02356,56,24.8,4,6.6,mañana,Recursos Humanos,12.2,no
+E02357,28,22.4,3,42.0,tarde,Seguridad,4.2,no
+E02358,29,21.3,0,29.1,tarde,Sistemas,9.7,no
+E02359,34,5.7,3,34.4,tarde,Operaciones,7.0,no
+E02360,49,14.7,4,18.0,noche,Sistemas,1.5,si
+E02361,28,24.6,0,42.7,mañana,Operaciones,17.0,no
+E02362,43,17.4,2,11.2,tarde,Operaciones,16.6,no
+E02363,41,7.6,1,17.2,noche,Seguridad,10.6,no
+E02364,29,21.1,3,4.4,mañana,Recursos Humanos,6.4,no
+E02365,48,18.3,3,22.6,noche,Sistemas,15.3,no
+E02366,61,10.0,1,10.1,noche,Operaciones,6.5,no
+E02367,50,13.9,2,17.7,mañana,Sistemas,8.1,no
+E02368,44,16.4,1,3.7,mañana,Administración,10.1,no
+E02369,54,4.9,4,18.0,mañana,Operaciones,3.9,no
+E02370,39,6.7,0,40.3,tarde,Recursos Humanos,21.2,no
+E02371,48,15.9,3,5.6,mañana,Seguridad,11.0,no
+E02372,31,12.9,2,3.9,tarde,Operaciones,7.7,no
+E02373,54,6.5,2,19.8,noche,Recursos Humanos,21.4,no
+E02374,26,11.9,0,28.3,tarde,Administración,2.5,no
+E02375,27,18.2,1,15.1,noche,Administración,1.2,no
+E02376,44,24.0,4,23.5,tarde,Administración,2.2,no
+E02377,23,12.9,2,7.8,noche,Administración,5.4,no
+E02378,26,7.9,2,26.5,mañana,Seguridad,12.8,no
+E02379,54,5.8,3,36.6,noche,Administración,0.3,no
+E02380,61,4.4,1,6.8,mañana,Administración,5.0,no
+E02381,51,14.2,0,5.5,mañana,Administración,6.0,no
+E02382,31,20.4,4,42.5,noche,Recursos Humanos,17.1,no
+E02383,22,13.9,0,10.3,mañana,Sistemas,0,si
+E02384,64,5.8,4,40.1,mañana,Sistemas,3.2,si
+E02385,62,22.8,4,23.3,noche,Administración,12.2,no
+E02386,55,16.9,0,32.5,mañana,Sistemas,9.6,no
+E02387,55,2.3,2,3.7,noche,Recursos Humanos,4.5,no
+E02388,52,16.2,0,29.2,mañana,Administración,9.1,no
+E02389,40,19.2,2,25.2,mañana,Recursos Humanos,3.3,no
+E02390,22,24.6,0,14.9,noche,Sistemas,11.3,si
+E02391,43,20.9,2,18.8,mañana,Sistemas,17.8,no
+E02392,41,23.8,0,26.9,tarde,Sistemas,9.5,no
+E02393,24,22.4,0,18.2,tarde,Sistemas,6.9,no
+E02394,34,9.8,2,17.3,mañana,Sistemas,14.5,no
+E02395,59,10.0,3,37.0,noche,Operaciones,8.1,si
+E02396,47,15.4,3,17.2,noche,Recursos Humanos,3.2,si
+E02397,30,13.4,3,26.0,noche,Seguridad,6.5,no
+E02398,55,19.6,4,24.2,noche,Seguridad,0,si
+E02399,59,13.2,0,31.0,noche,Seguridad,6.9,no
+E02400,49,9.3,0,27.0,mañana,Operaciones,0,si
+E02401,47,14.9,2,6.6,mañana,Recursos Humanos,2.6,no
+E02402,44,24.1,0,24.0,noche,Recursos Humanos,7.2,no
+E02403,28,19.0,0,44.1,noche,Operaciones,10.3,no
+E02404,51,9.0,3,23.5,mañana,Seguridad,7.3,no
+E02405,26,12.2,4,17.9,mañana,Sistemas,10.5,no
+E02406,58,20.9,4,25.3,tarde,Sistemas,5.3,no
+E02407,52,4.1,4,27.5,tarde,Operaciones,9.9,si
+E02408,37,1.3,1,32.1,tarde,Operaciones,14.0,no
+E02409,47,9.3,4,37.7,mañana,Operaciones,12.7,si
+E02410,20,21.1,4,7.2,tarde,Seguridad,17.7,si
+E02411,37,10.0,0,41.7,tarde,Seguridad,9.1,no
+E02412,52,5.3,1,7.0,tarde,Recursos Humanos,15.2,no
+E02413,51,22.1,4,13.3,mañana,Sistemas,4.0,no
+E02414,48,22.8,1,23.7,mañana,Operaciones,24.1,no
+E02415,50,23.5,0,24.9,tarde,Sistemas,18.2,no
+E02416,25,8.8,0,25.7,noche,Sistemas,0,no
+E02417,40,21.1,1,40.0,mañana,Sistemas,0.7,no
+E02418,48,18.7,0,2.9,tarde,Recursos Humanos,9.4,no
+E02419,63,11.6,0,36.6,noche,Operaciones,5.1,si
+E02420,52,12.1,4,40.9,noche,Sistemas,9.7,no
+E02421,53,7.3,3,36.7,mañana,Administración,0.5,no
+E02422,28,13.9,4,10.4,tarde,Operaciones,7.3,no
+E02423,29,10.3,3,33.2,noche,Administración,23.0,si
+E02424,22,7.8,2,24.7,mañana,Sistemas,6.3,no
+E02425,24,16.6,3,18.7,noche,Recursos Humanos,11.0,no
+E02426,48,5.3,2,39.8,noche,Operaciones,0,si
+E02427,45,21.8,2,7.7,noche,Sistemas,6.1,no
+E02428,57,10.9,4,33.8,tarde,Recursos Humanos,9.8,no
+E02429,39,7.5,1,24.8,mañana,Administración,17.4,no
+E02430,45,5.7,1,41.5,noche,Operaciones,2.8,si
+E02431,45,20.4,2,41.8,noche,Sistemas,6.7,no
+E02432,33,8.4,4,4.5,tarde,Recursos Humanos,12.6,no
+E02433,22,13.5,3,15.7,tarde,Sistemas,18.2,no
+E02434,34,7.7,0,2.2,noche,Sistemas,27.4,no
+E02435,29,12.7,2,18.1,noche,Sistemas,1.8,no
+E02436,63,17.6,1,20.6,tarde,Sistemas,8.6,no
+E02437,63,9.3,1,11.3,tarde,Sistemas,9.1,no
+E02438,40,22.3,4,30.3,mañana,Seguridad,0,si
+E02439,25,21.5,2,34.4,noche,Sistemas,20.0,si
+E02440,61,5.4,4,32.7,mañana,Operaciones,7.5,no
+E02441,48,0.8,1,13.4,tarde,Sistemas,16.5,no
+E02442,63,11.6,2,25.2,tarde,Administración,0,no
+E02443,63,20.7,4,3.1,tarde,Operaciones,0,no
+E02444,27,7.6,0,32.7,mañana,Administración,7.5,si
+E02445,24,5.4,0,3.0,noche,Operaciones,11.1,no
+E02446,59,15.7,4,41.0,mañana,Operaciones,19.8,no
+E02447,41,19.0,1,11.7,tarde,Administración,0,no
+E02448,56,9.7,4,2.5,tarde,Seguridad,9.2,no
+E02449,24,23.6,4,41.0,noche,Sistemas,8.1,no
+E02450,50,11.0,4,12.6,noche,Recursos Humanos,7.0,no
+E02451,39,23.9,4,30.1,noche,Operaciones,17.0,no
+E02452,45,24.7,3,38.9,mañana,Sistemas,0,no
+E02453,20,8.4,0,1.4,mañana,Operaciones,10.6,no
+E02454,31,24.6,2,14.8,mañana,Seguridad,13.9,no
+E02455,34,1.5,1,9.2,noche,Recursos Humanos,12.6,no
+E02456,56,21.4,0,4.1,noche,Sistemas,0.1,no
+E02457,55,1.2,3,11.7,noche,Administración,0,no
+E02458,44,6.1,3,7.7,mañana,Sistemas,0,no
+E02459,41,0.2,4,40.4,tarde,Seguridad,11.7,no
+E02460,25,24.6,1,20.9,noche,Recursos Humanos,1.3,no
+E02461,62,4.2,1,3.0,mañana,Seguridad,3.5,no
+E02462,53,22.1,1,7.2,tarde,Operaciones,13.9,no
+E02463,27,0.6,0,27.2,mañana,Seguridad,11.1,no
+E02464,31,21.0,1,10.9,noche,Sistemas,0,no
+E02465,42,19.9,4,32.9,mañana,Sistemas,14.3,no
+E02466,63,13.1,2,41.0,noche,Sistemas,2.1,no
+E02467,55,12.6,4,10.3,tarde,Operaciones,5.4,si
+E02468,64,14.7,3,14.8,noche,Seguridad,12.6,no
+E02469,50,12.9,4,32.2,tarde,Recursos Humanos,16.0,no
+E02470,44,17.5,4,38.8,mañana,Administración,14.7,no
+E02471,39,22.5,0,36.4,tarde,Operaciones,5.5,no
+E02472,30,24.9,0,7.1,noche,Seguridad,15.2,no
+E02473,62,13.4,1,28.5,mañana,Recursos Humanos,10.5,no
+E02474,28,2.2,4,13.3,tarde,Recursos Humanos,8.0,no
+E02475,64,23.9,0,26.4,noche,Recursos Humanos,5.8,no
+E02476,60,18.4,1,33.3,mañana,Sistemas,12.8,no
+E02477,51,3.7,2,38.5,mañana,Seguridad,7.4,no
+E02478,32,3.2,0,39.5,mañana,Operaciones,16.1,no
+E02479,45,10.4,1,40.0,tarde,Operaciones,2.0,si
+E02480,34,24.6,3,3.5,noche,Administración,2.6,no
+E02481,63,2.4,0,24.6,mañana,Sistemas,9.5,no
+E02482,50,24.8,2,4.9,noche,Sistemas,2.1,no
+E02483,27,4.0,0,34.0,noche,Recursos Humanos,13.7,no
+E02484,59,21.1,3,33.6,tarde,Sistemas,5.3,no
+E02485,20,21.7,4,42.3,tarde,Seguridad,10.2,si
+E02486,49,10.1,0,39.9,tarde,Seguridad,1.1,no
+E02487,43,2.1,0,23.5,tarde,Operaciones,14.2,no
+E02488,61,7.2,0,34.6,tarde,Operaciones,2.1,no
+E02489,56,17.1,3,27.6,mañana,Recursos Humanos,10.3,no
+E02490,32,7.6,1,27.6,mañana,Seguridad,11.4,no
+E02491,33,20.9,3,4.9,mañana,Operaciones,3.1,no
+E02492,64,23.0,2,33.5,noche,Administración,7.6,no
+E02493,51,21.3,4,29.0,mañana,Administración,11.4,no
+E02494,60,15.4,1,33.6,tarde,Recursos Humanos,5.9,no
+E02495,34,16.5,1,26.1,tarde,Operaciones,0,no
+E02496,49,20.1,1,40.0,noche,Operaciones,14.8,no
+E02497,64,5.9,1,11.8,mañana,Sistemas,2.3,no
+E02498,51,17.7,3,17.1,noche,Administración,24.5,no
+E02499,63,21.6,2,35.2,tarde,Administración,10.9,no
+E02500,60,19.9,2,18.7,noche,Operaciones,13.4,no
+E02501,44,9.3,4,21.8,tarde,Seguridad,6.1,no
+E02502,37,9.6,1,36.5,tarde,Recursos Humanos,12.8,no
+E02503,59,13.4,2,41.0,noche,Operaciones,10.6,no
+E02504,29,20.4,2,9.2,tarde,Administración,9.3,no
+E02505,20,7.6,3,20.7,mañana,Recursos Humanos,2.4,no
+E02506,27,6.9,2,11.5,noche,Administración,9.3,no
+E02507,57,1.3,1,30.4,tarde,Administración,10.8,no
+E02508,40,22.4,2,42.4,mañana,Operaciones,10.5,no
+E02509,26,10.3,0,29.9,tarde,Recursos Humanos,18.6,si
+E02510,42,16.1,1,33.2,tarde,Administración,9.9,no
+E02511,40,13.7,1,5.1,noche,Operaciones,10.4,no
+E02512,47,20.4,4,29.9,noche,Recursos Humanos,9.4,no
+E02513,51,16.3,1,30.9,mañana,Sistemas,3.6,no
+E02514,64,4.1,4,29.5,noche,Sistemas,3.4,no
+E02515,28,3.7,4,40.8,tarde,Seguridad,10.9,no
+E02516,20,17.0,0,18.9,mañana,Seguridad,7.6,no
+E02517,48,23.1,4,28.7,tarde,Recursos Humanos,10.1,si
+E02518,62,23.2,0,17.2,noche,Administración,21.2,no
+E02519,31,17.1,2,33.1,mañana,Operaciones,11.1,no
+E02520,58,21.2,2,9.6,tarde,Sistemas,9.1,no
+E02521,60,19.2,0,10.6,tarde,Administración,15.8,no
+E02522,44,4.1,4,2.5,mañana,Recursos Humanos,2.7,no
+E02523,61,9.8,1,40.9,mañana,Administración,15.8,no
+E02524,28,15.8,2,22.3,mañana,Operaciones,13.5,no
+E02525,30,16.5,1,10.4,mañana,Recursos Humanos,6.8,no
+E02526,32,19.3,4,20.5,noche,Administración,5.0,no
+E02527,34,21.3,1,31.4,mañana,Operaciones,5.8,no
+E02528,45,10.7,0,23.3,mañana,Seguridad,14.3,no
+E02529,52,12.8,1,18.1,tarde,Sistemas,3.8,no
+E02530,27,5.0,1,2.7,mañana,Seguridad,3.5,no
+E02531,60,20.6,1,25.4,noche,Administración,11.4,no
+E02532,36,24.1,4,22.7,noche,Seguridad,14.6,no
+E02533,33,8.1,1,34.2,mañana,Recursos Humanos,0,no
+E02534,21,24.6,0,7.2,mañana,Administración,8.1,no
+E02535,29,8.7,1,44.6,noche,Administración,3.0,si
+E02536,59,24.0,2,18.8,tarde,Recursos Humanos,10.1,no
+E02537,35,6.1,0,40.5,noche,Seguridad,16.5,no
+E02538,37,2.9,0,3.4,tarde,Seguridad,8.3,no
+E02539,61,5.7,4,25.6,tarde,Sistemas,7.4,no
+E02540,31,0.3,3,30.0,mañana,Seguridad,4.2,no
+E02541,62,10.0,2,26.1,noche,Seguridad,1.9,no
+E02542,43,7.8,2,13.2,tarde,Sistemas,8.0,no
+E02543,37,15.7,0,4.0,mañana,Seguridad,10.3,no
+E02544,37,19.2,0,30.6,tarde,Seguridad,0,no
+E02545,48,9.4,4,44.3,noche,Operaciones,4.2,no
+E02546,21,20.1,2,3.6,mañana,Recursos Humanos,16.0,no
+E02547,28,1.8,0,39.1,tarde,Sistemas,22.3,no
+E02548,59,1.8,3,9.9,mañana,Seguridad,0.5,no
+E02549,24,0.9,1,43.0,tarde,Recursos Humanos,9.8,no
+E02550,28,22.3,3,11.2,noche,Recursos Humanos,2.8,si
+E02551,59,24.0,3,31.6,noche,Administración,0.7,no
+E02552,60,10.5,4,11.4,noche,Recursos Humanos,15.5,no
+E02553,39,2.9,1,5.0,tarde,Operaciones,2.5,si
+E02554,31,12.8,1,32.9,noche,Operaciones,9.3,si
+E02555,44,1.7,2,38.1,tarde,Seguridad,9.3,no
+E02556,20,14.1,0,21.1,tarde,Seguridad,14.3,no
+E02557,51,9.9,3,14.6,noche,Seguridad,8.0,no
+E02558,46,11.2,1,20.8,tarde,Sistemas,3.8,no
+E02559,46,0.8,1,38.7,mañana,Sistemas,11.6,no
+E02560,44,17.5,2,21.7,mañana,Administración,0.4,no
+E02561,61,11.0,2,5.8,noche,Administración,4.7,si
+E02562,64,17.4,2,10.8,mañana,Sistemas,0.0,no
+E02563,46,8.7,1,8.1,mañana,Seguridad,2.7,no
+E02564,38,5.9,4,4.4,tarde,Administración,2.4,no
+E02565,62,8.4,3,18.3,tarde,Seguridad,2.7,no
+E02566,39,24.3,2,34.2,tarde,Recursos Humanos,10.4,no
+E02567,35,3.0,4,26.1,noche,Administración,0,si
+E02568,48,17.6,2,38.7,tarde,Administración,9.8,no
+E02569,30,6.6,1,24.1,noche,Administración,20.2,no
+E02570,50,14.8,1,23.0,mañana,Administración,16.9,no
+E02571,35,19.3,1,24.0,tarde,Sistemas,7.3,no
+E02572,28,0.2,0,40.3,noche,Seguridad,6.9,no
+E02573,32,1.1,2,15.4,noche,Operaciones,5.2,no
+E02574,28,19.6,1,17.3,tarde,Administración,8.8,no
+E02575,29,14.2,4,38.3,tarde,Sistemas,8.2,no
+E02576,26,1.4,1,2.2,noche,Operaciones,8.7,no
+E02577,58,8.3,3,18.3,tarde,Administración,4.0,no
+E02578,55,14.6,3,28.6,tarde,Sistemas,10.4,no
+E02579,55,5.5,2,4.0,noche,Operaciones,7.6,si
+E02580,24,17.4,1,18.4,mañana,Sistemas,15.0,si
+E02581,30,5.1,1,40.2,mañana,Seguridad,5.0,si
+E02582,36,6.2,3,14.6,tarde,Recursos Humanos,8.7,no
+E02583,64,16.6,3,32.4,tarde,Administración,10.8,no
+E02584,29,13.5,4,2.2,noche,Operaciones,11.8,no
+E02585,61,1.3,3,40.0,noche,Sistemas,3.5,no
+E02586,39,7.2,1,21.5,mañana,Sistemas,9.1,no
+E02587,30,19.8,4,37.7,mañana,Recursos Humanos,6.3,no
+E02588,41,7.0,1,18.2,mañana,Seguridad,9.0,no
+E02589,28,15.6,2,11.3,mañana,Sistemas,11.0,no
+E02590,21,24.8,1,10.5,mañana,Recursos Humanos,10.0,no
+E02591,43,18.4,0,6.4,tarde,Seguridad,13.8,no
+E02592,42,10.7,2,35.1,noche,Administración,8.1,si
+E02593,34,16.0,4,10.3,mañana,Recursos Humanos,18.0,no
+E02594,33,6.5,2,22.5,mañana,Sistemas,4.9,no
+E02595,21,3.2,0,14.0,mañana,Administración,0,no
+E02596,23,4.1,2,8.2,mañana,Operaciones,18.3,no
+E02597,26,22.9,3,12.4,noche,Seguridad,12.0,no
+E02598,26,17.3,4,15.1,tarde,Seguridad,9.9,no
+E02599,34,23.1,4,3.2,tarde,Administración,0.1,no
+E02600,41,11.0,4,35.7,tarde,Recursos Humanos,9.5,si
+E02601,44,15.0,3,36.3,noche,Operaciones,6.4,no
+E02602,35,7.0,3,12.2,noche,Recursos Humanos,8.0,no
+E02603,25,23.5,0,36.0,mañana,Recursos Humanos,11.9,no
+E02604,35,3.0,2,21.1,noche,Sistemas,15.6,no
+E02605,23,18.6,3,3.2,mañana,Seguridad,7.2,no
+E02606,29,0.9,2,28.7,mañana,Administración,20.7,no
+E02607,51,17.4,0,8.8,tarde,Sistemas,17.7,no
+E02608,35,3.6,1,22.7,tarde,Operaciones,4.4,si
+E02609,31,21.4,3,7.6,mañana,Seguridad,6.7,no
+E02610,32,17.1,1,12.5,noche,Seguridad,8.0,no
+E02611,48,4.9,0,44.0,tarde,Operaciones,7.7,no
+E02612,41,21.0,0,23.0,noche,Administración,7.8,no
+E02613,63,21.5,2,28.0,tarde,Administración,9.2,no
+E02614,51,19.2,2,14.8,noche,Seguridad,0,no
+E02615,46,15.9,1,10.2,noche,Operaciones,0,no
+E02616,30,11.3,2,22.9,tarde,Recursos Humanos,7.0,si
+E02617,28,10.0,0,24.9,mañana,Administración,7.5,no
+E02618,38,14.3,0,41.8,mañana,Administración,20.3,no
+E02619,40,19.2,2,10.6,mañana,Administración,13.9,no
+E02620,49,17.5,1,18.7,tarde,Recursos Humanos,5.8,no
+E02621,47,7.4,3,34.6,mañana,Sistemas,5.1,si
+E02622,41,16.6,0,28.4,mañana,Administración,11.3,no
+E02623,56,13.5,4,38.5,mañana,Operaciones,17.0,no
+E02624,31,5.6,1,38.6,mañana,Sistemas,17.3,no
+E02625,43,9.3,4,14.0,noche,Sistemas,14.3,si
+E02626,39,10.9,0,19.4,tarde,Seguridad,14.3,no
+E02627,39,6.6,1,24.6,tarde,Operaciones,12.8,no
+E02628,56,16.8,4,2.9,tarde,Recursos Humanos,14.1,no
+E02629,44,12.0,3,37.6,noche,Operaciones,4.4,no
+E02630,58,21.8,3,34.0,noche,Sistemas,7.3,no
+E02631,31,2.8,0,7.2,tarde,Recursos Humanos,3.9,no
+E02632,30,0.4,4,31.4,mañana,Operaciones,7.9,no
+E02633,64,7.0,0,22.4,noche,Administración,12.2,si
+E02634,59,21.6,4,20.6,tarde,Administración,12.8,no
+E02635,27,2.4,4,8.1,noche,Recursos Humanos,7.3,si
+E02636,64,5.5,1,20.0,tarde,Sistemas,7.4,no
+E02637,54,4.9,3,8.1,tarde,Recursos Humanos,5.9,no
+E02638,31,2.4,2,15.2,mañana,Operaciones,8.3,no
+E02639,46,17.7,4,42.2,noche,Recursos Humanos,15.4,si
+E02640,48,19.5,3,34.8,mañana,Sistemas,1.8,no
+E02641,55,18.9,1,42.1,mañana,Recursos Humanos,6.6,no
+E02642,33,12.5,3,40.3,noche,Recursos Humanos,0,no
+E02643,31,15.9,3,39.9,noche,Seguridad,13.5,no
+E02644,24,6.2,1,25.3,mañana,Sistemas,12.0,no
+E02645,63,22.5,4,32.5,mañana,Sistemas,13.9,no
+E02646,58,18.3,0,10.8,mañana,Seguridad,2.8,no
+E02647,51,18.4,3,31.8,tarde,Seguridad,7.1,no
+E02648,57,1.1,1,34.2,noche,Operaciones,20.8,no
+E02649,24,2.5,4,29.8,tarde,Recursos Humanos,8.5,si
+E02650,52,15.2,0,43.1,mañana,Seguridad,3.2,no
+E02651,42,13.3,3,11.9,noche,Operaciones,14.4,si
+E02652,64,16.9,3,44.6,noche,Recursos Humanos,1.4,no
+E02653,56,13.3,0,34.6,noche,Operaciones,14.5,no
+E02654,56,11.2,1,14.6,noche,Administración,5.6,no
+E02655,28,10.9,4,29.0,tarde,Operaciones,11.6,no
+E02656,59,0.6,3,12.8,tarde,Recursos Humanos,0,no
+E02657,21,19.1,4,26.3,tarde,Seguridad,16.3,si
+E02658,36,19.5,4,21.1,noche,Seguridad,3.0,no
+E02659,58,10.1,4,4.3,noche,Recursos Humanos,14.7,no
+E02660,53,2.8,2,21.3,tarde,Seguridad,10.6,no
+E02661,54,13.3,0,44.9,tarde,Administración,17.4,no
+E02662,45,7.9,0,35.9,mañana,Administración,6.3,no
+E02663,22,24.7,3,8.2,mañana,Seguridad,11.3,no
+E02664,31,13.8,2,40.7,mañana,Administración,3.5,no
+E02665,55,19.3,1,1.0,noche,Administración,7.0,no
+E02666,55,20.1,1,15.5,tarde,Administración,0.8,no
+E02667,46,21.4,1,44.8,noche,Operaciones,1.3,si
+E02668,23,23.1,0,20.7,tarde,Sistemas,10.1,no
+E02669,42,19.0,1,18.7,noche,Administración,16.8,si
+E02670,55,24.2,2,16.7,tarde,Sistemas,8.4,no
+E02671,48,13.5,4,38.2,tarde,Seguridad,4.1,si
+E02672,53,19.0,3,41.2,mañana,Sistemas,14.5,no
+E02673,43,0.8,0,28.8,mañana,Seguridad,18.5,si
+E02674,58,6.8,4,14.0,tarde,Recursos Humanos,13.6,no
+E02675,30,8.6,2,19.6,tarde,Operaciones,5.7,no
+E02676,40,9.4,2,35.6,mañana,Sistemas,3.1,no
+E02677,31,7.9,0,19.7,mañana,Recursos Humanos,3.9,no
+E02678,48,8.3,0,10.5,noche,Operaciones,7.7,no
+E02679,58,7.6,1,13.7,tarde,Operaciones,13.1,no
+E02680,34,8.2,2,5.2,mañana,Administración,19.3,no
+E02681,30,7.2,4,33.1,mañana,Sistemas,8.4,si
+E02682,25,18.5,0,18.4,noche,Recursos Humanos,17.4,no
+E02683,30,19.5,3,7.3,tarde,Seguridad,3.5,no
+E02684,42,13.4,4,25.0,mañana,Administración,4.1,no
+E02685,63,4.3,2,26.7,tarde,Recursos Humanos,16.1,no
+E02686,40,21.5,3,5.5,mañana,Administración,6.3,no
+E02687,43,8.4,2,3.3,noche,Sistemas,9.9,no
+E02688,34,6.5,2,21.0,tarde,Seguridad,4.4,no
+E02689,27,11.0,3,24.3,noche,Operaciones,3.7,si
+E02690,32,14.5,2,31.9,noche,Seguridad,4.8,no
+E02691,34,8.3,1,22.5,noche,Sistemas,20.5,si
+E02692,35,5.4,4,4.7,mañana,Recursos Humanos,22.7,no
+E02693,55,0.9,0,21.9,noche,Recursos Humanos,0,no
+E02694,38,4.4,4,24.9,mañana,Sistemas,3.2,si
+E02695,40,4.5,1,20.6,tarde,Seguridad,10.1,no
+E02696,26,18.2,4,22.2,noche,Sistemas,5.4,no
+E02697,25,12.0,3,13.9,tarde,Seguridad,6.9,no
+E02698,24,9.5,2,8.2,tarde,Administración,9.8,no
+E02699,36,15.1,2,12.3,tarde,Seguridad,18.9,no
+E02700,27,14.7,0,26.8,mañana,Sistemas,0.5,no
+E02701,30,14.4,0,24.4,mañana,Operaciones,6.5,no
+E02702,38,13.5,1,19.0,noche,Operaciones,4.5,no
+E02703,49,12.9,4,23.7,noche,Administración,3.2,no
+E02704,41,4.3,4,41.1,tarde,Seguridad,3.8,no
+E02705,29,18.5,0,38.1,mañana,Recursos Humanos,13.9,no
+E02706,28,14.6,2,33.2,noche,Sistemas,4.2,no
+E02707,41,21.5,4,40.5,tarde,Sistemas,7.3,no
+E02708,37,22.9,1,12.6,tarde,Sistemas,0,no
+E02709,31,24.9,1,44.2,mañana,Sistemas,12.6,no
+E02710,27,5.2,0,23.1,tarde,Administración,0.7,no
+E02711,20,20.9,0,4.5,tarde,Administración,4.1,no
+E02712,60,15.4,1,41.3,noche,Administración,11.3,no
+E02713,57,9.3,1,7.5,tarde,Seguridad,2.4,no
+E02714,52,19.7,4,4.9,noche,Operaciones,8.1,no
+E02715,32,18.7,1,34.8,noche,Operaciones,0,no
+E02716,35,0.5,4,33.8,mañana,Administración,12.0,no
+E02717,28,3.1,2,26.2,tarde,Operaciones,10.2,no
+E02718,64,6.1,4,19.8,noche,Sistemas,4.5,si
+E02719,23,12.6,1,6.4,tarde,Operaciones,14.5,no
+E02720,64,17.9,4,10.1,mañana,Operaciones,2.1,no
+E02721,52,22.9,4,4.5,noche,Operaciones,8.1,no
+E02722,20,6.1,2,16.5,noche,Sistemas,0,no
+E02723,48,21.0,1,19.9,tarde,Operaciones,3.5,no
+E02724,57,8.4,3,18.0,tarde,Recursos Humanos,2.9,no
+E02725,63,2.9,4,17.7,mañana,Seguridad,5.7,si
+E02726,51,3.4,1,23.4,mañana,Seguridad,0,no
+E02727,20,10.5,2,34.7,tarde,Seguridad,11.2,no
+E02728,36,7.4,0,23.9,tarde,Operaciones,11.7,no
+E02729,40,22.3,1,28.4,noche,Seguridad,0,no
+E02730,36,21.8,0,28.9,tarde,Seguridad,23.2,no
+E02731,33,16.7,0,25.1,mañana,Seguridad,5.6,no
+E02732,26,12.2,2,10.2,mañana,Administración,2.0,no
+E02733,33,13.2,0,26.5,noche,Operaciones,1.3,no
+E02734,36,14.4,4,3.0,tarde,Seguridad,1.6,si
+E02735,52,4.3,3,23.2,tarde,Administración,1.4,no
+E02736,35,21.8,2,34.2,tarde,Sistemas,0,no
+E02737,61,12.3,3,21.0,mañana,Sistemas,5.0,no
+E02738,37,24.0,0,44.3,mañana,Seguridad,12.2,no
+E02739,33,19.0,4,40.7,noche,Seguridad,21.9,no
+E02740,34,16.3,1,16.8,noche,Recursos Humanos,0,no
+E02741,58,20.7,0,5.1,noche,Sistemas,13.7,no
+E02742,60,2.8,3,42.9,mañana,Administración,11.8,si
+E02743,36,3.3,0,12.6,mañana,Sistemas,7.3,no
+E02744,22,4.3,2,39.3,mañana,Administración,4.9,no
+E02745,64,7.0,4,1.9,noche,Seguridad,9.0,no
+E02746,43,6.8,1,25.9,mañana,Operaciones,12.6,si
+E02747,29,12.1,2,28.1,mañana,Recursos Humanos,0.7,no
+E02748,50,11.6,1,26.8,noche,Administración,7.4,no
+E02749,25,14.4,3,10.0,mañana,Operaciones,0,no
+E02750,64,19.8,1,9.2,mañana,Operaciones,9.3,no
+E02751,53,15.5,3,2.6,tarde,Seguridad,10.4,no
+E02752,54,9.5,3,3.2,mañana,Recursos Humanos,0,si
+E02753,41,23.2,1,35.3,mañana,Administración,10.8,no
+E02754,43,20.1,1,32.7,mañana,Administración,1.7,no
+E02755,23,8.5,0,21.9,tarde,Sistemas,12.1,no
+E02756,21,3.4,3,43.0,noche,Sistemas,9.4,si
+E02757,25,19.5,0,29.8,mañana,Recursos Humanos,14.5,no
+E02758,50,20.3,0,25.9,noche,Administración,4.1,no
+E02759,46,0.6,0,37.2,tarde,Operaciones,2.2,no
+E02760,20,2.8,3,8.4,mañana,Seguridad,7.8,si
+E02761,28,24.5,1,37.3,tarde,Operaciones,12.5,no
+E02762,31,2.3,1,18.5,mañana,Operaciones,12.0,si
+E02763,57,23.9,2,41.2,noche,Sistemas,5.5,no
+E02764,44,20.6,4,36.1,tarde,Recursos Humanos,16.9,no
+E02765,50,15.6,3,14.9,mañana,Recursos Humanos,9.3,no
+E02766,21,11.6,1,37.0,noche,Administración,7.3,no
+E02767,28,14.6,0,16.4,tarde,Sistemas,13.5,no
+E02768,25,16.7,1,15.1,noche,Administración,10.6,no
+E02769,46,18.9,2,13.6,noche,Administración,1.0,no
+E02770,28,10.7,1,39.7,noche,Seguridad,0,no
+E02771,21,12.5,4,12.8,tarde,Operaciones,13.1,no
+E02772,27,11.0,4,29.9,mañana,Administración,12.9,no
+E02773,45,3.3,4,20.2,mañana,Sistemas,9.0,no
+E02774,58,19.1,1,42.1,mañana,Seguridad,13.3,no
+E02775,48,7.0,0,12.8,tarde,Operaciones,0,no
+E02776,40,2.9,2,26.3,noche,Seguridad,4.9,no
+E02777,63,4.2,1,44.9,mañana,Seguridad,9.4,no
+E02778,20,9.0,0,15.5,mañana,Recursos Humanos,15.5,no
+E02779,35,19.8,4,33.7,tarde,Seguridad,9.0,no
+E02780,25,0.1,0,23.7,noche,Administración,7.9,si
+E02781,56,14.5,1,38.7,mañana,Seguridad,14.1,no
+E02782,63,3.5,4,22.8,tarde,Administración,15.4,no
+E02783,41,17.9,2,3.0,mañana,Administración,5.3,no
+E02784,50,21.1,2,4.6,noche,Seguridad,6.7,si
+E02785,37,14.9,1,38.0,noche,Administración,9.1,no
+E02786,25,3.0,0,5.3,mañana,Seguridad,5.5,no
+E02787,41,15.1,4,29.4,noche,Operaciones,7.6,si
+E02788,32,14.3,2,36.4,mañana,Sistemas,11.0,si
+E02789,46,5.1,0,34.6,tarde,Seguridad,0,no
+E02790,38,9.4,4,26.3,noche,Operaciones,11.7,no
+E02791,55,11.0,1,32.5,mañana,Sistemas,5.0,no
+E02792,25,16.1,4,1.7,mañana,Administración,9.9,no
+E02793,29,11.2,3,41.6,tarde,Sistemas,10.7,si
+E02794,36,13.3,2,23.0,mañana,Seguridad,13.6,no
+E02795,30,9.0,1,43.7,tarde,Operaciones,4.2,no
+E02796,59,11.4,0,1.4,mañana,Recursos Humanos,15.7,no
+E02797,24,17.5,1,5.7,mañana,Seguridad,7.6,no
+E02798,62,24.4,3,16.2,mañana,Operaciones,9.1,no
+E02799,21,4.3,0,3.4,tarde,Seguridad,9.0,no
+E02800,21,14.0,0,24.0,tarde,Sistemas,6.3,no
+E02801,24,24.6,2,6.6,noche,Seguridad,0,si
+E02802,20,0.7,3,40.8,noche,Operaciones,7.4,si
+E02803,39,23.9,3,35.0,noche,Operaciones,1.6,no
+E02804,48,24.3,3,14.4,mañana,Recursos Humanos,19.7,no
+E02805,41,20.6,1,2.1,noche,Sistemas,7.1,si
+E02806,39,12.5,3,33.7,noche,Recursos Humanos,10.6,no
+E02807,30,24.0,1,4.7,tarde,Administración,4.2,no
+E02808,62,18.9,1,34.0,mañana,Seguridad,0,no
+E02809,64,21.2,3,32.0,tarde,Operaciones,18.9,no
+E02810,48,21.4,3,13.1,mañana,Administración,11.9,no
+E02811,25,6.7,1,28.4,tarde,Seguridad,2.8,no
+E02812,26,16.0,4,16.9,mañana,Seguridad,5.5,no
+E02813,33,24.3,2,6.5,tarde,Operaciones,15.3,no
+E02814,29,18.2,0,39.7,tarde,Administración,11.2,no
+E02815,42,21.1,2,27.6,tarde,Recursos Humanos,12.4,no
+E02816,38,4.3,0,43.7,noche,Operaciones,8.3,no
+E02817,53,12.3,1,9.6,noche,Sistemas,5.2,no
+E02818,34,0.1,2,30.4,mañana,Operaciones,3.3,no
+E02819,53,21.6,4,36.5,noche,Sistemas,0,no
+E02820,36,20.0,0,24.6,tarde,Seguridad,6.4,no
+E02821,32,1.1,2,5.0,tarde,Operaciones,10.2,si
+E02822,45,18.2,0,11.9,mañana,Sistemas,4.3,no
+E02823,26,0.1,4,42.6,tarde,Recursos Humanos,17.2,no
+E02824,26,24.7,4,9.9,mañana,Recursos Humanos,0,no
+E02825,22,22.8,0,3.2,mañana,Operaciones,11.7,no
+E02826,26,23.0,3,21.9,mañana,Recursos Humanos,7.9,no
+E02827,60,16.3,3,19.3,noche,Sistemas,0,no
+E02828,23,3.9,4,44.5,tarde,Administración,7.6,no
+E02829,43,24.5,0,21.5,noche,Operaciones,15.9,no
+E02830,41,1.9,4,43.2,tarde,Recursos Humanos,9.5,no
+E02831,20,4.2,3,24.3,tarde,Administración,10.6,si
+E02832,49,11.7,0,34.5,noche,Recursos Humanos,10.7,si
+E02833,29,17.3,1,5.9,noche,Seguridad,7.0,no
+E02834,36,16.9,3,39.7,noche,Seguridad,5.0,si
+E02835,55,8.5,0,11.0,tarde,Seguridad,8.2,no
+E02836,63,0.2,4,36.1,noche,Sistemas,4.3,no
+E02837,62,12.5,2,1.6,noche,Operaciones,12.2,no
+E02838,30,19.2,0,10.4,tarde,Recursos Humanos,6.7,no
+E02839,49,15.1,2,34.6,noche,Operaciones,9.1,no
+E02840,24,11.8,3,18.1,tarde,Operaciones,5.8,no
+E02841,25,24.6,2,42.0,noche,Recursos Humanos,5.9,si
+E02842,44,2.9,0,18.9,tarde,Recursos Humanos,21.7,no
+E02843,36,9.1,1,44.1,noche,Administración,8.4,no
+E02844,54,5.3,1,33.9,mañana,Administración,3.6,no
+E02845,26,12.6,3,10.7,mañana,Operaciones,5.7,no
+E02846,22,20.2,1,36.8,tarde,Recursos Humanos,18.6,no
+E02847,44,18.0,2,34.6,noche,Administración,15.8,no
+E02848,34,19.9,2,11.2,noche,Operaciones,5.5,no
+E02849,46,20.5,2,39.7,tarde,Seguridad,7.2,no
+E02850,27,3.9,2,23.2,noche,Seguridad,0.5,no
+E02851,24,19.1,3,39.0,mañana,Administración,9.3,no
+E02852,43,8.2,4,5.3,mañana,Administración,5.3,no
+E02853,62,3.9,4,38.6,noche,Sistemas,8.0,no
+E02854,38,5.7,3,17.9,mañana,Operaciones,8.6,no
+E02855,22,7.0,2,35.0,tarde,Recursos Humanos,0,si
+E02856,49,2.5,0,21.3,mañana,Administración,1.0,no
+E02857,62,12.0,0,44.8,mañana,Seguridad,16.3,no
+E02858,21,12.2,1,14.5,mañana,Administración,11.9,si
+E02859,62,7.5,1,38.3,noche,Seguridad,4.8,no
+E02860,63,4.0,4,8.6,tarde,Seguridad,5.2,no
+E02861,46,13.9,3,37.7,mañana,Seguridad,9.9,no
+E02862,29,0.3,3,29.7,tarde,Recursos Humanos,19.2,no
+E02863,50,23.6,3,10.2,noche,Seguridad,4.0,no
+E02864,52,9.0,3,6.5,noche,Seguridad,3.2,no
+E02865,57,0.8,1,12.6,noche,Seguridad,4.2,si
+E02866,20,17.3,2,35.3,mañana,Operaciones,10.2,no
+E02867,46,15.1,0,7.4,mañana,Administración,0,no
+E02868,20,8.2,2,38.6,tarde,Operaciones,11.1,no
+E02869,49,11.3,3,33.4,noche,Administración,16.2,no
+E02870,21,8.6,1,8.0,mañana,Administración,11.6,no
+E02871,49,4.5,1,10.2,tarde,Recursos Humanos,1.6,no
+E02872,50,17.7,0,8.7,noche,Recursos Humanos,9.9,no
+E02873,27,9.3,3,40.0,tarde,Administración,9.5,si
+E02874,54,4.1,2,35.3,mañana,Administración,11.6,no
+E02875,26,14.4,3,11.2,tarde,Recursos Humanos,11.1,no
+E02876,21,0.2,1,26.7,mañana,Recursos Humanos,7.6,no
+E02877,63,19.9,3,1.6,tarde,Recursos Humanos,0,no
+E02878,24,20.7,3,3.7,noche,Sistemas,0,si
+E02879,48,5.4,0,44.9,tarde,Recursos Humanos,10.8,no
+E02880,32,17.1,1,42.4,tarde,Administración,12.5,no
+E02881,48,22.9,1,17.6,mañana,Sistemas,18.4,no
+E02882,20,19.6,4,20.1,mañana,Administración,9.3,no
+E02883,42,18.9,4,15.3,mañana,Recursos Humanos,15.6,no
+E02884,34,20.4,4,25.2,mañana,Administración,9.1,no
+E02885,56,19.0,0,8.9,mañana,Recursos Humanos,14.6,no
+E02886,47,5.6,0,29.7,tarde,Administración,12.5,no
+E02887,30,9.9,4,15.6,mañana,Seguridad,12.5,no
+E02888,59,8.9,4,10.0,tarde,Operaciones,3.4,si
+E02889,51,21.5,2,20.1,mañana,Seguridad,12.7,no
+E02890,20,21.2,0,2.0,mañana,Administración,0,no
+E02891,39,1.2,1,9.2,mañana,Operaciones,3.4,no
+E02892,34,7.0,1,24.9,mañana,Administración,12.5,no
+E02893,42,5.2,0,1.3,mañana,Recursos Humanos,4.7,no
+E02894,23,20.2,0,40.9,tarde,Operaciones,0.9,no
+E02895,34,7.1,3,36.0,noche,Sistemas,1.4,no
+E02896,59,20.3,1,36.6,tarde,Recursos Humanos,8.1,no
+E02897,47,7.4,1,11.8,mañana,Administración,3.5,si
+E02898,61,13.4,1,16.3,noche,Administración,16.1,no
+E02899,48,18.8,2,5.0,noche,Sistemas,15.9,no
+E02900,59,9.8,1,40.9,noche,Administración,10.9,no
+E02901,39,12.4,4,9.7,tarde,Seguridad,7.1,no
+E02902,58,4.0,2,40.9,tarde,Recursos Humanos,3.1,no
+E02903,28,8.5,1,44.4,mañana,Administración,2.0,no
+E02904,34,1.9,3,11.1,tarde,Operaciones,12.4,no
+E02905,36,11.8,3,7.7,noche,Seguridad,12.5,si
+E02906,27,22.6,3,31.9,noche,Seguridad,9.6,si
+E02907,40,14.8,1,30.0,noche,Operaciones,4.0,no
+E02908,64,4.8,1,32.0,mañana,Operaciones,11.6,no
+E02909,57,6.8,0,32.7,mañana,Sistemas,3.7,no
+E02910,57,16.7,3,3.2,tarde,Seguridad,5.0,no
+E02911,29,3.2,0,31.5,tarde,Recursos Humanos,4.4,no
+E02912,64,5.9,4,37.0,noche,Operaciones,10.1,no
+E02913,51,24.2,0,14.3,noche,Seguridad,0.2,no
+E02914,35,15.9,1,37.5,mañana,Recursos Humanos,0,no
+E02915,41,2.4,3,39.4,mañana,Recursos Humanos,0,no
+E02916,53,16.6,2,43.2,tarde,Sistemas,1.1,no
+E02917,30,13.2,2,9.5,noche,Administración,0.0,no
+E02918,21,17.8,4,22.0,tarde,Recursos Humanos,7.3,no
+E02919,43,19.5,0,16.9,mañana,Operaciones,14.8,no
+E02920,42,9.8,0,25.4,mañana,Recursos Humanos,8.2,no
+E02921,39,19.9,3,42.1,tarde,Recursos Humanos,0.6,no
+E02922,61,10.3,0,26.9,tarde,Recursos Humanos,20.2,no
+E02923,56,6.1,1,13.0,tarde,Administración,15.8,no
+E02924,45,19.7,1,27.6,noche,Seguridad,11.2,no
+E02925,57,10.0,2,12.5,tarde,Sistemas,2.3,no
+E02926,21,4.6,1,22.0,tarde,Sistemas,6.6,no
+E02927,59,14.4,1,11.8,mañana,Administración,6.7,no
+E02928,34,7.4,3,21.4,mañana,Administración,13.5,no
+E02929,62,0.5,0,24.3,tarde,Seguridad,0.6,no
+E02930,23,7.0,3,5.9,noche,Seguridad,20.0,no
+E02931,20,5.5,4,24.1,tarde,Sistemas,6.1,no
+E02932,48,11.6,3,9.8,tarde,Sistemas,1.6,no
+E02933,27,5.1,0,39.2,mañana,Seguridad,0,no
+E02934,47,19.8,2,12.4,noche,Sistemas,10.6,si
+E02935,32,8.7,3,40.6,tarde,Sistemas,11.0,no
+E02936,50,11.7,3,40.4,noche,Operaciones,15.9,no
+E02937,31,17.3,4,35.8,noche,Operaciones,1.8,no
+E02938,40,20.5,2,39.7,mañana,Seguridad,14.1,si
+E02939,56,2.2,1,38.2,noche,Administración,12.5,si
+E02940,55,17.4,1,2.8,mañana,Operaciones,3.6,no
+E02941,47,19.2,2,8.4,tarde,Operaciones,9.6,no
+E02942,56,12.5,0,18.1,tarde,Seguridad,14.2,no
+E02943,55,9.2,4,10.9,mañana,Seguridad,18.5,si
+E02944,37,17.2,0,8.6,noche,Seguridad,0,si
+E02945,50,8.5,2,23.0,tarde,Operaciones,0,no
+E02946,58,9.8,0,13.3,tarde,Administración,8.8,no
+E02947,23,11.9,2,4.4,noche,Seguridad,6.7,no
+E02948,34,16.2,3,19.1,mañana,Operaciones,0,no
+E02949,25,5.3,4,3.3,noche,Seguridad,7.6,no
+E02950,36,21.1,3,43.4,tarde,Seguridad,9.9,no
+E02951,62,18.9,2,18.8,mañana,Operaciones,5.4,no
+E02952,56,2.2,0,17.4,noche,Administración,11.2,no
+E02953,53,17.4,2,26.4,mañana,Sistemas,6.7,no
+E02954,21,17.4,2,29.6,noche,Seguridad,13.6,no
+E02955,35,10.7,3,15.8,mañana,Recursos Humanos,7.2,no
+E02956,45,10.6,3,23.4,mañana,Sistemas,2.5,si
+E02957,28,10.1,1,31.8,mañana,Administración,1.0,no
+E02958,61,10.5,2,40.1,tarde,Administración,9.4,no
+E02959,33,11.3,4,29.5,tarde,Operaciones,0,no
+E02960,50,16.9,1,36.6,mañana,Seguridad,4.4,no
+E02961,50,4.2,3,23.7,noche,Administración,6.2,si
+E02962,21,21.1,2,36.1,noche,Operaciones,5.0,si
+E02963,64,11.4,0,12.5,noche,Seguridad,6.6,no
+E02964,45,10.0,1,32.8,mañana,Seguridad,8.8,si
+E02965,50,19.1,1,26.4,noche,Sistemas,10.0,no
+E02966,25,14.5,4,8.8,noche,Administración,13.6,no
+E02967,34,14.0,3,19.4,tarde,Recursos Humanos,0,si
+E02968,39,18.4,4,41.6,noche,Seguridad,7.5,no
+E02969,63,0.8,1,32.6,noche,Administración,14.1,no
+E02970,63,2.2,4,34.9,tarde,Operaciones,7.0,no
+E02971,44,14.1,4,44.0,tarde,Sistemas,5.3,no
+E02972,20,15.4,2,37.1,tarde,Recursos Humanos,7.6,no
+E02973,62,25.0,1,11.2,noche,Operaciones,16.2,no
+E02974,49,17.4,4,35.4,noche,Sistemas,13.2,no
+E02975,62,0.1,1,28.9,noche,Operaciones,12.4,no
+E02976,26,8.6,3,29.4,noche,Sistemas,5.3,no
+E02977,25,23.0,2,30.0,noche,Administración,4.3,si
+E02978,23,23.5,4,35.1,mañana,Seguridad,14.1,no
+E02979,60,11.2,4,3.1,mañana,Administración,7.1,si
+E02980,30,16.0,3,39.1,mañana,Seguridad,10.1,no
+E02981,53,13.8,2,29.7,tarde,Operaciones,10.9,no
+E02982,53,0.8,4,38.4,tarde,Recursos Humanos,0,no
+E02983,25,4.6,0,29.5,noche,Operaciones,0,no
+E02984,58,0.1,3,42.2,noche,Sistemas,10.3,no
+E02985,28,9.8,0,1.7,mañana,Administración,5.1,no
+E02986,32,3.0,2,3.5,mañana,Seguridad,7.2,no
+E02987,41,9.5,4,29.6,noche,Operaciones,12.1,no
+E02988,20,21.9,2,40.6,mañana,Recursos Humanos,13.1,no
+E02989,58,4.1,0,39.6,mañana,Seguridad,0,no
+E02990,43,23.5,1,7.9,mañana,Seguridad,15.6,no
+E02991,35,11.3,4,37.2,noche,Sistemas,8.4,no
+E02992,44,19.0,2,1.0,tarde,Recursos Humanos,14.8,no
+E02993,36,1.1,4,16.6,noche,Seguridad,15.6,no
+E02994,63,17.5,0,36.9,tarde,Operaciones,20.0,no
+E02995,29,6.8,0,39.6,noche,Administración,5.8,no
+E02996,53,17.9,2,20.9,tarde,Recursos Humanos,6.4,no
+E02997,22,25.0,3,43.3,mañana,Seguridad,17.3,no
+E02998,38,11.6,4,35.1,noche,Seguridad,13.2,no
+E02999,28,20.4,0,43.6,noche,Recursos Humanos,10.6,no

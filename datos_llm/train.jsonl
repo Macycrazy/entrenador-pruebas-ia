@@ -1,0 +1,108 @@
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El expediente lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El reporte mensual lleva un mes sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo expediente para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del expediente?", "salida": "consulta"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El reporte mensual estará listo en una semana.", "salida": "una semana"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el usuario en la oficina.", "salida": "usuario"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo usuario para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El permiso lleva una semana sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo permiso para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El carnet estará listo en quince días.", "salida": "quince días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El carnet lleva un mes sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del usuario?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo permiso para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo usuario para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El permiso lleva quince días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El carnet lleva una semana sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del equipo asignado?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El permiso lleva una semana sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El equipo asignado estará listo en una semana.", "salida": "una semana"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El permiso estará listo en dos días.", "salida": "dos días"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El reporte mensual estará listo en dos días.", "salida": "dos días"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El expediente estará listo en quince días.", "salida": "quince días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El usuario lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El carnet lleva quince días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El permiso estará listo en quince días.", "salida": "quince días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El reporte mensual estará listo en quince días.", "salida": "quince días"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El usuario estará listo en dos días.", "salida": "dos días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El usuario lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo permiso para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del usuario?", "salida": "consulta"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el reporte mensual en la oficina.", "salida": "reporte mensual"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el expediente en la oficina.", "salida": "expediente"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva un mes sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El reporte mensual estará listo en quince días.", "salida": "quince días"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el equipo asignado en la oficina.", "salida": "equipo asignado"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el reporte mensual en la oficina.", "salida": "reporte mensual"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del usuario?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del equipo asignado?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del expediente?", "salida": "consulta"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el reporte mensual en la oficina.", "salida": "reporte mensual"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del expediente?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El carnet lleva una semana sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del expediente?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del carnet?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo expediente para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del expediente?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El carnet estará listo en quince días.", "salida": "quince días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El permiso estará listo en un mes.", "salida": "un mes"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del usuario?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El expediente lleva quince días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del reporte mensual?", "salida": "consulta"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El expediente estará listo en una semana.", "salida": "una semana"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo equipo asignado para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo permiso para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del equipo asignado?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo usuario para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El expediente estará listo en dos días.", "salida": "dos días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El usuario lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El usuario estará listo en dos días.", "salida": "dos días"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El usuario estará listo en una semana.", "salida": "una semana"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del equipo asignado?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo permiso para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El equipo asignado estará listo en un mes.", "salida": "un mes"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo expediente para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del permiso?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El carnet lleva un mes sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva una semana sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del carnet?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva quince días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el usuario en la oficina.", "salida": "usuario"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del equipo asignado?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del usuario?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo equipo asignado para el personal.", "salida": "solicitud"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el permiso en la oficina.", "salida": "permiso"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El reporte mensual estará listo en un mes.", "salida": "un mes"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva un mes sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del equipo asignado?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del reporte mensual?", "salida": "consulta"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El expediente estará listo en una semana.", "salida": "una semana"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El equipo asignado lleva quince días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El usuario estará listo en un mes.", "salida": "un mes"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del carnet?", "salida": "consulta"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El permiso estará listo en dos días.", "salida": "dos días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El carnet lleva una semana sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo carnet para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El usuario lleva un mes sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el expediente en la oficina.", "salida": "expediente"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo expediente para el personal.", "salida": "solicitud"}
+{"instruccion": "Responde con el plazo mencionado.", "entrada": "El carnet estará listo en quince días.", "salida": "quince días"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del permiso?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del reporte mensual?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del reporte mensual?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "¿Cuánto tarda el trámite del permiso?", "salida": "consulta"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "Necesito un nuevo equipo asignado para el personal.", "salida": "solicitud"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El reporte mensual lleva una semana sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Clasifica la solicitud como queja, consulta o solicitud.", "entrada": "El reporte mensual lleva dos días sin funcionar y nadie responde.", "salida": "queja"}
+{"instruccion": "Extrae el objeto mencionado en el texto.", "entrada": "Ayer entregué el equipo asignado en la oficina.", "salida": "equipo asignado"}

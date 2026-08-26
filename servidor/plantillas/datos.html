@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block titulo %}Datos{% endblock %}
+
+{% block estilos %}
+  .rejilla{grid-template-columns:minmax(0,1fr) 360px}
+  .muestras{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(110px,1fr))}
+  .muestras img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;
+                border:1px solid var(--borde);background:#000}
+  .dataset{padding:12px;background:var(--panel2);border:1px solid var(--borde);
+           border-radius:10px;margin-bottom:10px;cursor:pointer;font-size:13.5px}
+  .dataset.activo{border-color:var(--acento)}
+  .dataset b{display:block;margin-bottom:4px}
+  .clase{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0}
+{% endblock %}
+
+{% block contenido %}
+<h1>🗂️ Datos</h1>
+<p class="subtitulo">Con qué se ha entrenado: cuántos ejemplos hay de cada clase, cómo se
+   reparten por subgrupo y qué pinta tienen.</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <h2 id="titulo-muestras">Muestras</h2>
+    <div class="muestras" id="muestras"><p class="vacio">Elige un dataset.</p></div>
+    <div class="controles">
+      <select id="clase" style="max-width:240px"></select>
+      <button class="sec" id="btn-otras">Ver otras</button>
+    </div>
+  </section>
+
+  <aside>
+    <div class="tarjeta" style="margin-bottom:18px">
+      <h2>Datasets en disco</h2>
+      <div id="datasets"><p class="vacio">Cargando…</p></div>
+    </div>
+    <div class="tarjeta">
+      <h2>Reparto</h2>
+      <div id="reparto"><p class="vacio">—</p></div>
+    </div>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let datasets = [], elegido = null, semilla = 0;
+
+async function cargar() {
+  const r = await fetch("/api/datos/resumen");
+  datasets = (await r.json()).datasets;
+  document.getElementById("datasets").innerHTML = datasets.length
+    ? datasets.map((d, i) => `<div class="dataset" data-i="${i}">
+        <b>${Panel.escapar(d.nombre)}</b>
+        ${d.total.toLocaleString("es")} archivos ·
+        ${Object.keys(d.clases).length} clases</div>`).join("")
+    : '<p class="vacio">No hay datasets todavía. Descárgalos desde la pestaña Entrenar.</p>';
+  document.querySelectorAll("[data-i]").forEach(el =>
+    el.onclick = () => elegir(Number(el.dataset.i)));
+  if (datasets.length) elegir(0);
+}
+
+function elegir(indice) {
+  elegido = datasets[indice];
+  document.querySelectorAll("[data-i]").forEach(el =>
+    el.classList.toggle("activo", Number(el.dataset.i) === indice));
+
+  const selector = document.getElementById("clase");
+  selector.innerHTML = Object.keys(elegido.clases)
+    .map(c => `<option value="${Panel.escapar(c)}">${Panel.escapar(c)}
+      (${elegido.clases[c].toLocaleString("es")})</option>`).join("");
+
+  const total = elegido.total || 1;
+  let html = Object.entries(elegido.clases).sort((a, b) => b[1] - a[1]).map(([c, n], i) => `
+    <div class="clase"><span>${Panel.escapar(c)}</span>
+      <span>${n.toLocaleString("es")} · ${(n / total * 100).toFixed(1)}%</span></div>
+    <div class="barra"><span style="width:${(n / total * 100)}%;
+      background:${Panel.color(i)}"></span></div>`).join("");
+
+  for (const [nombre, valores] of Object.entries(elegido.subgrupos || {})) {
+    const suma = Object.values(valores).reduce((a, b) => a + b, 0) || 1;
+    html += `<h2 style="margin-top:18px">por ${Panel.escapar(nombre)}</h2>` +
+      Object.entries(valores).map(([v, n], i) => `
+        <div class="clase"><span>${Panel.escapar(v)}</span>
+          <span>${(n / suma * 100).toFixed(1)}%</span></div>
+        <div class="barra"><span style="width:${(n / suma * 100)}%;
+          background:${Panel.color(i + 2)}"></span></div>`).join("");
+  }
+  document.getElementById("reparto").innerHTML = html;
+  verMuestras();
+}
+
+async function verMuestras() {
+  if (!elegido) return;
+  const clase = document.getElementById("clase").value;
+  const carpeta = `${elegido.raiz}/${clase}`;
+  document.getElementById("titulo-muestras").textContent = `Muestras · ${carpeta}`;
+  try {
+    const r = await fetch(`/api/datos/muestras?carpeta=${encodeURIComponent(carpeta)}&n=24&desde=${semilla}`);
+    const datos = await r.json();
+    document.getElementById("muestras").innerHTML = datos.rutas.length
+      ? datos.rutas.map(ruta =>
+          `<img loading="lazy" src="/api/datos/imagen?ruta=${encodeURIComponent(ruta)}">`).join("")
+      : '<p class="vacio">Esta carpeta no tiene imágenes (puede ser audio o texto).</p>';
+  } catch (e) {
+    document.getElementById("muestras").innerHTML =
+      `<p class="vacio">${Panel.escapar(e.message)}</p>`;
+  }
+}
+
+document.getElementById("clase").onchange = verMuestras;
+document.getElementById("btn-otras").onclick = () => { semilla++; verMuestras(); };
+cargar();
+</script>
+{% endblock %}

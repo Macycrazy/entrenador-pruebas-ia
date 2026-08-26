@@ -1,0 +1,47 @@
+# Preset «calidad»: el equilibrio recomendado para la RTX 5060 Ti 16 GB.
+# EfficientNetV2-S a 224 px con RandAugment, mixup, EMA y degradación de webcam.
+nombre: calidad
+
+modelo:
+  arquitectura: efficientnet_v2_s
+  dropout: 0.3
+
+datos:
+  tam_img: 224
+  batch: 96
+  workers: 8
+
+optimizador:
+  nombre: adamw_fused
+  lr: 3.0e-4
+  wd: 0.02
+  lr_backbone_factor: 0.3      # el backbone ya sabe ver; la cabeza es la que aprende deprisa
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 1.0
+
+perdida:
+  nombre: ce
+  suavizado: 0.05
+
+aumentos:
+  politica: randaugment
+  randaugment_n: 2
+  randaugment_m: 9
+  webcam: 0.35                 # la cámara real es peor que el dataset
+  mixup: 0.2
+  cutmix: 1.0
+  mixcut_prob: 0.5
+
+entrenamiento:
+  epocas: 25
+  precision: bf16
+  congelar_epocas: 1
+  ema: 0.999
+  paciencia: 6
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  tta: true
+  calibrar: true

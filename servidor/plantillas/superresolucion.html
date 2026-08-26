@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% block titulo %}Super-resolución{% endblock %}
+
+{% block estilos %}
+  .comparador{position:relative;border-radius:12px;overflow:hidden;background:#000;
+              user-select:none;touch-action:none}
+  .comparador img{display:block;width:100%}
+  .comparador .encima{position:absolute;inset:0;overflow:hidden}
+  .comparador .encima img{position:absolute;top:0;left:0;height:100%;width:auto;
+                          max-width:none}
+  .tirador{position:absolute;top:0;bottom:0;width:3px;background:var(--acento);
+           cursor:ew-resize}
+  .tirador::after{content:"◀ ▶";position:absolute;top:50%;left:50%;
+                  transform:translate(-50%,-50%);background:var(--acento);color:#06231f;
+                  font-size:11px;font-weight:700;padding:4px 7px;border-radius:20px;
+                  white-space:nowrap}
+  .rotulo-lado{position:absolute;bottom:10px;font-size:11.5px;background:rgba(11,16,32,.8);
+         color:var(--texto);padding:3px 9px;border-radius:20px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🔍 Super-resolución</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <div class="comparador" id="comparador">
+      <img id="derecha" alt="">
+      <div class="encima" id="encima"><img id="izquierda" alt=""></div>
+      <div class="tirador" id="tirador" style="left:50%"></div>
+      <span class="rotulo-lado" id="marca-izq" style="left:10px">redimensionado normal</span>
+      <span class="rotulo-lado" id="marca-der" style="right:10px">modelo</span>
+      <div class="aviso" id="aviso" style="position:relative;min-height:260px">
+        Sube una foto pequeña o borrosa
+      </div>
+    </div>
+
+    <div class="controles">
+      <button id="btn-foto">Mejorar una foto…</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <label class="check"><input type="checkbox" id="chk-original"> Comparar con el original</label>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Entrada <b id="m-entrada">–</b></span>
+      <span>Salida <b id="m-salida">–</b></span>
+      <span>Tiempo <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Qué estás viendo</h2>
+    <p class="vacio" id="explicacion">
+      Arrastra la línea vertical: a la izquierda está el agrandado normal (el que hace
+      cualquier programa) y a la derecha lo que reconstruye el modelo.
+    </p>
+    <div id="datos-modelo" style="margin-top:14px"></div>
+    <p class="nota" style="margin-top:auto">
+      El modelo se entrena desde cero degradando fotos buenas: reduce, desenfoca y comprime
+      para fabricar el «antes», y aprende a deshacerlo. La métrica es PSNR en decibelios,
+      siempre comparada con el redimensionado normal para saber si aporta algo de verdad.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "superresolucion", config: "{{ vista.config }}"};
+let ultimo = null;
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) { avisoSinModelo(document.getElementById("sin-modelo"), VISTA); return false; }
+  const extra = datos.extra || {};
+  document.getElementById("datos-modelo").innerHTML = `
+    <div class="fila"><span>escala</span><span>×${extra.escala ?? "?"}</span></div>
+    <div class="fila"><span>PSNR en validación</span><span>${extra.psnr ?? "–"} dB</span></div>
+    <div class="fila"><span>frente al redimensionado</span>
+      <span style="color:${(extra.mejora_db ?? 0) > 0 ? "var(--d)" : "var(--error)"}">
+        ${(extra.mejora_db ?? 0) > 0 ? "+" : ""}${extra.mejora_db ?? "–"} dB</span></div>`;
+  return true;
+}
+
+function pintar() {
+  if (!ultimo) return;
+  const izquierda = document.getElementById("chk-original").checked
+    ? ultimo.original : ultimo.bicubica;
+  document.getElementById("izquierda").src = izquierda;
+  document.getElementById("derecha").src = ultimo.mejorada;
+  document.getElementById("marca-izq").textContent =
+    document.getElementById("chk-original").checked
+      ? `original (${ultimo.entrada[0]}×${ultimo.entrada[1]})` : "redimensionado normal";
+  // La capa de la izquierda debe tener el ancho del contenedor para que encaje al arrastrar
+  const ancho = document.getElementById("comparador").clientWidth;
+  document.getElementById("izquierda").style.width = ancho + "px";
+}
+
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  document.getElementById("aviso").textContent = "Reconstruyendo…";
+  try {
+    ultimo = await Panel.enviarArchivo("/api/superresolucion/predecir", f, "imagen");
+    document.getElementById("aviso").hidden = true;
+    document.getElementById("m-entrada").textContent = ultimo.entrada.join("×");
+    document.getElementById("m-salida").textContent = ultimo.salida.join("×");
+    document.getElementById("m-ms").textContent = ultimo.ms.toFixed(0) + " ms";
+    pintar();
+  } catch (err) {
+    document.getElementById("aviso").textContent = err.message;
+    document.getElementById("aviso").hidden = false;
+  }
+  e.target.value = "";
+};
+document.getElementById("chk-original").onchange = pintar;
+window.addEventListener("resize", pintar);
+
+// Arrastre del comparador
+const comparador = document.getElementById("comparador");
+let arrastrando = false;
+const mover = (ev) => {
+  if (!arrastrando || !ultimo) return;
+  const rect = comparador.getBoundingClientRect();
+  const x = Math.max(0, Math.min(rect.width, (ev.touches?.[0]?.clientX ?? ev.clientX) - rect.left));
+  document.getElementById("encima").style.width = x + "px";
+  document.getElementById("tirador").style.left = x + "px";
+};
+comparador.addEventListener("pointerdown", (e) => { arrastrando = true; mover(e); });
+window.addEventListener("pointermove", mover);
+window.addEventListener("pointerup", () => arrastrando = false);
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

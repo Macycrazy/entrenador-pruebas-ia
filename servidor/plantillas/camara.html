@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block titulo %}{{ vista.titulo }}{% endblock %}
+
+{% block contenido %}
+<h1>{{ vista.icono }} {{ vista.titulo }}</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <div class="acciones-arriba">
+      <button id="btn-camara">📷 Iniciar cámara</button>
+      <button id="btn-foto" class="sec">🖼️ Usar una foto…</button>
+      <button id="btn-ejemplo" class="sec">✨ Probar con un ejemplo</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <select id="camaras" hidden style="width:auto"></select>
+      <span class="pista-uso">Sin cámara a mano, pulsa «Probar con un ejemplo»</span>
+    </div>
+
+    <div class="lienzo-caja">
+      <video id="video" playsinline muted autoplay class="espejo"></video>
+      <canvas id="overlay" class="overlay"></canvas>
+      <div class="aviso" id="aviso">Elige arriba: cámara en vivo, una foto tuya o un ejemplo</div>
+    </div>
+
+    <details class="opciones">
+      <summary><span>Opciones</span></summary>
+      <div class="controles">
+        <label class="check"><input type="checkbox" id="chk-espejo" checked> Espejo</label>
+        <label class="check"><input type="checkbox" id="chk-rostros" checked> Detectar rostros</label>
+        <label class="check" title="Promedia las últimas predicciones">
+          <input type="checkbox" id="chk-suavizar" checked> Suavizar</label>
+        <label class="check">Intervalo
+          <input type="range" id="intervalo" min="100" max="1000" step="50" value="250">
+          <span id="intervalo-txt">250 ms</span></label>
+      </div>
+    </details>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Latencia <b id="m-ms">–</b></span>
+      <span>Análisis/s <b id="m-fps">–</b></span>
+      <span>Rostros <b id="m-rostros">0</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Resultado</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      El modelo estima una apariencia aprendida del dataset de entrenamiento; no determina
+      la identidad ni ningún dato real de nadie. Los porcentajes están calibrados con la
+      temperatura ajustada en validación.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "{{ vista.slug }}", config: "{{ vista.config }}"};
+const video = document.getElementById("video");
+const overlay = document.getElementById("overlay");
+const aviso = document.getElementById("aviso");
+const resultados = document.getElementById("resultados");
+const chkEspejo = document.getElementById("chk-espejo");
+const chkRostros = document.getElementById("chk-rostros");
+const chkSuavizar = document.getElementById("chk-suavizar");
+const rango = document.getElementById("intervalo");
+let listo = false, modoImagen = false, suavizado = [], marcas = [];
+
+const camara = new Camara(video, {
+  intervalo: Number(rango.value),
+  onFotograma: async (blob, ancho, alto) => {
+    if (!listo) return;
+    const datos = await Panel.enviarArchivo(
+      `/api/${VISTA.slug}/predecir?detectar=${chkRostros.checked}`, blob, "imagen");
+    pintar(datos);
+  },
+});
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  listo = ok;
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) avisoSinModelo(document.getElementById("sin-modelo"), VISTA);
+  return ok;
+}
+
+function pintar(datos) {
+  marcas.push(performance.now());
+  marcas = marcas.filter(t => performance.now() - t < 1000);
+  document.getElementById("m-fps").textContent = marcas.length;
+  document.getElementById("m-ms").textContent = (datos.ms ?? 0).toFixed(0) + " ms";
+  document.getElementById("m-rostros").textContent = datos.rostros.length;
+
+  const rostros = chkSuavizar.checked ? suavizar(datos.rostros) : datos.rostros;
+  const colores = {};
+  const cajas = rostros.map((r, i) => {
+    const color = Panel.color(Object.keys(r.probabilidades).indexOf(r.etiqueta));
+    colores[r.etiqueta] = color;
+    return {...r.caja, color, texto: `${r.etiqueta} ${(r.confianza * 100).toFixed(0)}%`};
+  });
+  dibujarCajas(overlay, video, cajas, datos.ancho, datos.alto,
+               {espejo: chkEspejo.checked && !modoImagen, contener: modoImagen});
+
+  if (!rostros.length) {
+    resultados.innerHTML = '<p class="vacio">No se detecta ningún rostro.</p>';
+    return;
+  }
+  resultados.innerHTML = rostros.map((r, i) => {
+    const extras = Object.entries(r.extra || {}).map(([nombre, v]) =>
+      `<div class="fila" style="margin-top:6px"><span>${Panel.escapar(nombre)}</span>
+       <span style="color:var(--texto)"><b>${Panel.escapar(v.etiqueta)}</b>
+       ${(v.confianza * 100).toFixed(0)}%</span></div>`).join("");
+    const color = Panel.color(Object.keys(r.probabilidades).indexOf(r.etiqueta));
+    return `<div style="margin-bottom:16px;padding-bottom:14px;
+                 border-bottom:${i < rostros.length - 1 ? "1px dashed var(--borde)" : "0"}">
+      <div class="fila" style="align-items:baseline;margin-bottom:9px">
+        <span class="etiqueta" style="color:${color}">${Panel.escapar(r.etiqueta)}</span>
+        <span>rostro ${i + 1}</span></div>
+      ${Panel.barras(r.probabilidades)}${extras}</div>`;
+  }).join("");
+}
+
+function suavizar(rostros) {
+  const alfa = 0.35;
+  suavizado = rostros.map((r, i) => {
+    const previo = suavizado[i];
+    const probs = {};
+    for (const [c, p] of Object.entries(r.probabilidades)) {
+      probs[c] = previo ? previo.probabilidades[c] * (1 - alfa) + p * alfa : p;
+    }
+    const mejor = Object.entries(probs).sort((a, b) => b[1] - a[1])[0];
+    return {...r, probabilidades: probs, etiqueta: mejor[0], confianza: mejor[1]};
+  });
+  return suavizado;
+}
+
+document.getElementById("btn-camara").onclick = async (e) => {
+  if (camara.activa) {
+    camara.detener();
+    e.target.textContent = "Iniciar cámara";
+    aviso.hidden = false; aviso.textContent = "Cámara detenida";
+    return;
+  }
+  e.target.disabled = true;
+  try {
+    modoImagen = false;
+    video.style.backgroundImage = "";
+    video.classList.toggle("espejo", chkEspejo.checked);
+    await camara.iniciar(document.getElementById("camaras").value || undefined);
+    await camara.listar(document.getElementById("camaras"));
+    aviso.hidden = true;
+    e.target.textContent = "Detener cámara";
+  } catch (err) {
+    aviso.textContent = "No se pudo abrir la cámara: " + err.message;
+  } finally {
+    e.target.disabled = false;
+  }
+};
+
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  camara.detener();
+  modoImagen = true; suavizado = [];
+  chkEspejo.checked = false; video.classList.remove("espejo");
+  video.style.cssText += `background-image:url(${URL.createObjectURL(f)});
+                          background-size:contain;background-position:center;
+                          background-repeat:no-repeat`;
+  aviso.hidden = true;
+  const previo = chkSuavizar.checked; chkSuavizar.checked = false;
+  try {
+    pintar(await Panel.enviarArchivo(
+      `/api/${VISTA.slug}/predecir?detectar=${chkRostros.checked}`, f, "imagen"));
+  } catch (err) {
+    resultados.innerHTML = `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  }
+  chkSuavizar.checked = previo;
+  e.target.value = "";
+};
+
+chkEspejo.onchange = () => video.classList.toggle("espejo", chkEspejo.checked && !modoImagen);
+rango.oninput = () => {
+  document.getElementById("intervalo-txt").textContent = rango.value + " ms";
+  camara.intervalo = Number(rango.value);
+  if (camara.activa) camara.arrancarBucle();
+};
+window.addEventListener("resize", () => overlay.getContext("2d")
+  .clearRect(0, 0, overlay.width, overlay.height));
+
+comprobar();
+setInterval(() => { if (!listo) comprobar(); }, 6000);
+</script>
+{% endblock %}

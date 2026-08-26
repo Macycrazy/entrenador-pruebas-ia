@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block titulo %}Profundidad{% endblock %}
+
+{% block estilos %}
+  .capa{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
+        transition:opacity .15s ease}
+{% endblock %}
+
+{% block contenido %}
+<h1>🌐 Profundidad</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <div class="controles acciones-arriba">
+      <button id="btn-foto">Analizar imagen…</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <label class="check">Mezcla
+        <input type="range" id="mezcla" min="0" max="1" step="0.05" value="1">
+        <span id="mezcla-txt">100 %</span></label>
+      <label class="check"><input type="checkbox" id="chk-gris"> En blanco y negro</label>
+    </div>
+
+    <div class="lienzo-caja" style="aspect-ratio:4/3">
+      <img id="original" hidden>
+      <img id="mapa" class="capa" hidden>
+      <div class="aviso" id="aviso">Sube una foto</div>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Tiempo <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Cómo leerlo</h2>
+    <p class="vacio">Los tonos claros están cerca de la cámara y los oscuros lejos. El
+       modelo deduce la distancia de una sola foto, sin sensor ni segunda cámara.</p>
+    <div style="height:16px;border-radius:6px;margin:14px 0;
+      background:linear-gradient(90deg,#0a0c28,#3c146e,#a02864,#e65a28,#fac83c,#ffffdc)"></div>
+    <div class="fila"><span>lejos</span><span>cerca</span></div>
+    <p class="nota" style="margin-top:auto">
+      Modelo ya entrenado (Depth-Anything V2, Apache 2.0, 99 MB). Sirve para separar a una
+      persona del fondo, medir distancias aproximadas o detectar si alguien se acerca
+      demasiado a la cámara.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let ultimo = null;
+
+async function comprobar() {
+  return (await Panel.pintarEstado("profundidad",
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"))).ok;
+}
+
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  const original = document.getElementById("original");
+  original.src = URL.createObjectURL(f);
+  original.hidden = false;
+  document.getElementById("aviso").textContent = "Calculando profundidad…";
+  try {
+    ultimo = await Panel.enviarArchivo("/api/profundidad/predecir", f, "imagen");
+    document.getElementById("aviso").hidden = true;
+    document.getElementById("m-ms").textContent = ultimo.ms.toFixed(0) + " ms";
+    pintar();
+  } catch (err) {
+    document.getElementById("aviso").textContent = err.message;
+    document.getElementById("aviso").hidden = false;
+  }
+  e.target.value = "";
+};
+
+function pintar() {
+  if (!ultimo) return;
+  const mapa = document.getElementById("mapa");
+  mapa.src = document.getElementById("chk-gris").checked ? ultimo.gris : ultimo.mapa;
+  mapa.hidden = false;
+  mapa.style.opacity = document.getElementById("mezcla").value;
+}
+
+document.getElementById("mezcla").oninput = () => {
+  document.getElementById("mezcla-txt").textContent =
+    Math.round(document.getElementById("mezcla").value * 100) + " %";
+  pintar();
+};
+document.getElementById("chk-gris").onchange = pintar;
+comprobar();
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+# Preset «rápido»: para iterar y comprobar que el circuito funciona.
+# ~10 min por época en CPU con 6 000 imágenes; minutos en la 5060 Ti con el dataset entero.
+nombre: rapido
+
+modelo:
+  arquitectura: mobilenet_v3_large
+
+datos:
+  tam_img: 160
+  batch: 128
+
+entrenamiento:
+  epocas: 8
+  congelar_epocas: 1
+  paciencia: 3
+
+aumentos:
+  politica: basica
+  webcam: 0.2
+
+evaluacion:
+  calibrar: true

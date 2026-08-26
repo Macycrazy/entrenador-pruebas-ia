@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block titulo %}Generar imágenes{% endblock %}
+
+{% block estilos %}
+  .lienzo{background:#000;border:1px solid var(--borde);border-radius:12px;overflow:hidden;
+          display:flex;align-items:center;justify-content:center;min-height:420px}
+  .lienzo img{max-width:100%;display:block}
+  .galeria{display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
+           margin-top:14px}
+  .galeria img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;cursor:pointer;
+               border:1px solid var(--borde)}
+  .campo{margin-bottom:12px}
+  .campo label{display:block;font-size:12px;color:var(--suave);margin-bottom:5px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🎨 Generar imágenes</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <div class="lienzo" id="lienzo">
+      <span class="vacio" id="aviso">Describe lo que quieres ver y pulsa «Generar»</span>
+    </div>
+    <div class="galeria" id="galeria"></div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Tiempo <b id="m-ms">–</b></span>
+      <span>Pasos <b id="m-pasos">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Qué dibujar</h2>
+    <textarea id="prompt" style="min-height:90px"
+      placeholder="un retrato de una persona en una oficina, luz suave">un retrato profesional de una persona, luz suave, fondo neutro</textarea>
+
+    <div class="campo" style="margin-top:12px">
+      <label for="negativo">Lo que NO quieres</label>
+      <input type="text" id="negativo" value="borroso, deforme, baja calidad">
+    </div>
+
+    <label class="check" style="margin-bottom:12px">Pasos
+      <input type="range" id="pasos" min="4" max="50" step="1" value="25">
+      <span id="pasos-txt">25</span></label>
+    <label class="check" style="margin-bottom:12px">Fidelidad al texto
+      <input type="range" id="guia" min="1" max="15" step="0.5" value="7.5">
+      <span id="guia-txt">7.5</span></label>
+    <label class="check" style="margin-bottom:14px">
+      <input type="checkbox" id="chk-semilla"> Semilla fija (repetible)</label>
+
+    <div class="controles" style="margin-top:0">
+      <button id="btn-generar">Generar</button>
+      <button class="sec" id="btn-descargar" disabled>Descargar</button>
+    </div>
+
+    <p class="nota" style="margin-top:auto">
+      Más pasos = más detalle y más tiempo. La fidelidad alta obedece al texto pero satura
+      la imagen. Si entrenas un LoRA con fotos de alguien, invócalo con la frase de
+      instancia (por ejemplo «sks persona») dentro de la descripción.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "generacion", config: "{{ vista.config }}"};
+let ultimaUrl = null;
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  if (!ok) return false;
+  const extra = datos.extra || {};
+  document.getElementById("pasos").value = extra.pasos ?? 25;
+  document.getElementById("pasos-txt").textContent = extra.pasos ?? 25;
+  document.getElementById("guia").value = extra.guia ?? 7.5;
+  document.getElementById("guia-txt").textContent = extra.guia ?? 7.5;
+  if (extra.instancia) {
+    document.getElementById("prompt").value =
+      `${extra.instancia}, retrato profesional, luz suave`;
+  }
+  return true;
+}
+
+document.getElementById("btn-generar").onclick = async (e) => {
+  const prompt = document.getElementById("prompt").value.trim();
+  if (!prompt) return;
+  e.target.disabled = true;
+  e.target.textContent = "Dibujando…";
+  document.getElementById("aviso").textContent = "Dibujando… (los primeros pasos tardan más)";
+  try {
+    const cuerpo = {
+      prompt,
+      negativo: document.getElementById("negativo").value,
+      pasos: Number(document.getElementById("pasos").value),
+      guia: Number(document.getElementById("guia").value),
+    };
+    if (document.getElementById("chk-semilla").checked) cuerpo.semilla = 1234;
+
+    const r = await fetch("/api/generacion/generar", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(cuerpo),
+    });
+    if (!r.ok) throw new Error((await r.json()).detail || `HTTP ${r.status}`);
+
+    document.getElementById("m-ms").textContent = (r.headers.get("X-Ms") / 1000).toFixed(1) + " s";
+    document.getElementById("m-pasos").textContent = r.headers.get("X-Pasos");
+    ultimaUrl = URL.createObjectURL(await r.blob());
+    document.getElementById("lienzo").innerHTML = `<img src="${ultimaUrl}">`;
+    document.getElementById("btn-descargar").disabled = false;
+
+    const miniatura = document.createElement("img");
+    miniatura.src = ultimaUrl;
+    miniatura.onclick = () =>
+      document.getElementById("lienzo").innerHTML = `<img src="${miniatura.src}">`;
+    document.getElementById("galeria").prepend(miniatura);
+  } catch (err) {
+    document.getElementById("lienzo").innerHTML =
+      `<span class="vacio" style="padding:20px">${Panel.escapar(err.message)}</span>`;
+  } finally {
+    e.target.disabled = false;
+    e.target.textContent = "Generar";
+  }
+};
+
+document.getElementById("btn-descargar").onclick = () => {
+  if (!ultimaUrl) return;
+  const enlace = document.createElement("a");
+  enlace.href = ultimaUrl;
+  enlace.download = "generada.png";
+  enlace.click();
+};
+
+for (const id of ["pasos", "guia"]) {
+  const control = document.getElementById(id);
+  control.oninput = () => document.getElementById(id + "-txt").textContent = control.value;
+}
+
+comprobar();
+</script>
+{% endblock %}

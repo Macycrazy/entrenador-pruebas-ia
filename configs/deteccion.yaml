@@ -1,0 +1,54 @@
+# Detección de objetos: dónde está cada cosa (EPP, personas, vehículos, documentos…).
+#
+#   datos_deteccion/clases.txt
+#   datos_deteccion/train/imagenes/*.jpg + train/etiquetas/*.txt   (formato YOLO)
+#   datos_deteccion/val/…
+#
+#   python entrenar.py --config configs/deteccion.yaml
+#
+# Para probar el circuito sin dataset real:
+#   python preparacion/generar_deteccion_sintetica.py
+nombre: deteccion
+tarea: vision_deteccion
+
+datos:
+  ruta: datos_deteccion
+  batch: 4              # las imágenes van a tamaño completo: el lote es pequeño
+  workers: 4
+  balanceo: ninguno
+
+modelo:
+  # De más preciso a más rápido:
+  #   fasterrcnn_resnet50_fpn_v2 > retinanet_resnet50_fpn_v2 > fcos_resnet50_fpn
+  #   > fasterrcnn_mobilenet_v3_large_fpn > fasterrcnn_mobilenet_v3_large_320_fpn
+  arquitectura: fasterrcnn_resnet50_fpn_v2
+  preentrenado: true
+
+optimizador:
+  nombre: sgd           # lo estándar en detección; AdamW también funciona con lr ~1e-4
+  lr: 0.005
+  wd: 0.0005
+  momentum: 0.9
+  lr_backbone_factor: 0.1
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 1.0
+
+aumentos:
+  flip: 0.5             # en detección solo se voltea (girando también las cajas)
+
+entrenamiento:
+  epocas: 20
+  precision: fp32       # los detectores son sensibles a bf16; súbelo solo si va bien
+  congelar_epocas: 0    # aquí no se congela: la cabeza y el RPN necesitan el backbone
+  canales_last: false
+  clip_grad: 10.0
+  ema: 0.0
+  paciencia: 6
+  metrica_objetivo: map50
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

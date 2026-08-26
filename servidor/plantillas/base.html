@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titulo %}Inteligencia Artificial · CIIP{% endblock %}</title>
+<link rel="icon" href="/estaticos/logo-ciip.png">
+<style>
+  /* Identidad CIIP: la escala de azules del logotipo institucional */
+  :root{
+    --marino:#223d90; --azul:#0971b8; --cian:#1dc0e7; --celeste:#a5d8ea;
+    --fondo:#060b1a; --fondo2:#0a1230;
+    --panel:rgba(18,28,62,.72); --panel2:rgba(26,40,86,.62);
+    --borde:rgba(120,160,230,.18); --borde-vivo:rgba(29,192,231,.55);
+    --texto:#eaf1fb; --suave:#93a7cd; --tenue:#6b7fa8;
+    --exito:#2fd4a0; --alerta:#ffb547; --error:#ff6b7d;
+    --sombra:0 18px 45px rgba(0,0,0,.45);
+    --curva:cubic-bezier(.22,.9,.28,1);
+    /* Alias de la paleta anterior: las páginas de cada tarea siguen usando estos
+       nombres, así que apuntan a los colores nuevos en vez de quedarse sin valor. */
+    --acento:var(--cian); --a:var(--azul); --b:var(--marino);
+    --c:var(--alerta); --d:var(--exito);
+  }
+  *{box-sizing:border-box}
+  [hidden]{display:none !important}
+
+  body{
+    margin:0;color:var(--texto);line-height:1.6;font-size:15px;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:var(--fondo);
+    background-image:
+      radial-gradient(1100px 600px at 12% -8%, rgba(34,61,144,.42), transparent 60%),
+      radial-gradient(900px 520px at 92% 4%, rgba(29,192,231,.14), transparent 62%),
+      radial-gradient(700px 700px at 60% 110%, rgba(9,113,184,.18), transparent 60%);
+    background-attachment:fixed;
+  }
+  a{color:inherit;text-decoration:none}
+
+  /* ---------------------------------------------------------- animaciones */
+  @keyframes entrar{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes latir{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+  @keyframes girar{to{transform:rotate(360deg)}}
+  @keyframes brillo{0%{background-position:-420px 0}100%{background-position:420px 0}}
+  @keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes barrer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+  .entra{animation:entrar .5s var(--curva) both}
+  .entra-1{animation-delay:.05s}.entra-2{animation-delay:.11s}
+  .entra-3{animation-delay:.17s}.entra-4{animation-delay:.23s}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;
+                         transition-duration:.01ms !important}
+  }
+
+  /* ------------------------------------------------------------ cabecera */
+  header{
+    position:sticky;top:0;z-index:20;
+    background:linear-gradient(180deg, rgba(8,14,36,.94), rgba(8,14,36,.82));
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--borde);
+  }
+  header::after{
+    content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;
+    background:linear-gradient(90deg,var(--marino),var(--azul),var(--cian),var(--azul),var(--marino));
+    background-size:280% 100%;animation:brillo 9s linear infinite;opacity:.75;
+  }
+  .barra-marca{display:flex;align-items:center;gap:16px;padding:12px 24px;
+               max-width:1600px;margin:0 auto}
+  .marca{display:flex;align-items:center;gap:12px;flex:none}
+  .marca img{height:34px;width:auto;filter:brightness(0) invert(1);opacity:.96}
+  .marca .titulo{font-size:13.5px;font-weight:700;letter-spacing:.4px;line-height:1.15}
+  .marca .titulo small{display:block;font-size:10.5px;font-weight:500;color:var(--tenue);
+                       letter-spacing:.9px;text-transform:uppercase}
+
+  nav{display:flex;gap:3px;flex-wrap:wrap;padding:0 24px 10px;max-width:1600px;margin:0 auto}
+  nav a{
+    font-size:12.5px;padding:6px 11px;border-radius:8px;color:var(--suave);
+    border:1px solid transparent;white-space:nowrap;position:relative;
+    transition:color .2s,background .2s,border-color .2s,transform .2s var(--curva);
+  }
+  nav a:hover{background:var(--panel2);color:var(--texto);transform:translateY(-1px)}
+  nav a.activa{
+    background:linear-gradient(135deg, rgba(29,192,231,.16), rgba(34,61,144,.3));
+    color:#fff;border-color:var(--borde-vivo);
+    box-shadow:0 0 0 1px rgba(29,192,231,.12), 0 6px 18px rgba(9,113,184,.22);
+  }
+  nav a.sin-modelo{opacity:.4}
+  nav .separador{width:1px;background:var(--borde);margin:2px 7px}
+
+  /* Menús desplegables por familia: 23 demostraciones no caben sueltas en la barra. */
+  nav .grupo{position:relative}
+  nav .cabeza-grupo{
+    font:inherit;font-size:12.5px;color:var(--suave);background:none;border:1px solid transparent;
+    padding:7px 12px;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:6px;
+    transition:.2s var(--curva);white-space:nowrap}
+  nav .cabeza-grupo:hover,nav .grupo.abierto .cabeza-grupo{
+    background:var(--panel2);color:var(--texto);border-color:var(--borde)}
+  nav .cabeza-grupo.activa{color:var(--cian);background:rgba(29,192,231,.10);
+    border-color:var(--borde-vivo)}
+  nav .cabeza-grupo .flecha{font-size:9px;opacity:.65;transition:transform .25s var(--curva)}
+  nav .grupo.abierto .cabeza-grupo .flecha{transform:rotate(180deg)}
+  nav .menu{
+    position:absolute;top:calc(100% + 8px);left:0;z-index:60;min-width:330px;
+    background:rgba(12,20,46,.97);backdrop-filter:blur(14px);
+    border:1px solid var(--borde);border-radius:14px;padding:8px;box-shadow:var(--sombra);
+    opacity:0;visibility:hidden;transform:translateY(-8px);
+    transition:opacity .2s var(--curva),transform .2s var(--curva),visibility .2s}
+  nav .grupo.abierto .menu{opacity:1;visibility:visible;transform:none}
+  nav .menu-nota{margin:4px 10px 8px;font-size:11px;color:var(--tenue);line-height:1.45}
+  nav .menu a{display:flex;align-items:flex-start;gap:10px;padding:9px 10px;border-radius:9px;
+              white-space:normal}
+  nav .menu a:hover{background:var(--panel2);transform:none}
+  nav .menu a.activa{background:rgba(29,192,231,.12)}
+  nav .menu .ic{font-size:16px;line-height:1.2;flex:none}
+  nav .menu .tx{font-size:13px;color:var(--texto);line-height:1.3;flex:1}
+  nav .menu .tx small{display:block;margin-top:3px;font-size:11px;color:var(--tenue);
+                      font-weight:400;line-height:1.4}
+  nav .menu .pt{flex:none;width:6px;height:6px;border-radius:50%;margin-top:6px;
+                background:var(--alerta);opacity:.75}
+
+  main{max-width:1400px;margin:0 auto;padding:26px 24px 56px}
+  h1{font-size:26px;margin:0 0 6px;font-weight:700;letter-spacing:-.4px;
+     display:flex;align-items:center;gap:12px}
+  .subtitulo{color:var(--suave);font-size:15px;margin:0 0 22px;max-width:80ch}
+
+  /* -------------------------------------------------------------- piezas */
+  .tarjeta{
+    background:var(--panel);border:1px solid var(--borde);border-radius:18px;padding:20px;
+    box-shadow:var(--sombra);backdrop-filter:blur(8px);
+    transition:border-color .25s, transform .25s var(--curva), box-shadow .25s;
+  }
+  .rejilla{display:grid;gap:20px;grid-template-columns:minmax(0,1fr) 370px}
+  @media (max-width:980px){.rejilla{grid-template-columns:1fr}}
+
+  h2{font-size:11.5px;text-transform:uppercase;letter-spacing:1.4px;color:var(--cian);
+     margin:0 0 13px;font-weight:700}
+
+  button{
+    background:linear-gradient(135deg,var(--cian),var(--azul));color:#04121f;border:0;
+    border-radius:10px;padding:10px 18px;font-size:14px;font-weight:700;cursor:pointer;
+    letter-spacing:.2px;box-shadow:0 6px 18px rgba(9,113,184,.35);
+    transition:transform .18s var(--curva), box-shadow .18s, filter .18s;
+  }
+  button:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 26px rgba(29,192,231,.4)}
+  button:active:not(:disabled){transform:translateY(0)}
+  button.sec{background:var(--panel2);color:var(--texto);border:1px solid var(--borde);
+             font-weight:600;box-shadow:none}
+  button.sec:hover:not(:disabled){border-color:var(--borde-vivo);background:rgba(29,192,231,.08)}
+  button:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+  /* Enlaces con aspecto de botón, para las llamadas a la acción. */
+  .boton{display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,var(--cian),var(--azul));color:#04121f;
+    border-radius:11px;padding:11px 20px;font-size:14px;font-weight:700;letter-spacing:.2px;
+    box-shadow:0 6px 18px rgba(9,113,184,.35);
+    transition:transform .18s var(--curva), box-shadow .18s, background .18s}
+  .boton:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(29,192,231,.42);
+               color:#04121f}
+  .boton.secundario{background:rgba(255,255,255,.06);color:var(--texto);
+                    border:1px solid var(--borde);box-shadow:none;font-weight:600}
+  .boton.secundario:hover{color:var(--texto);border-color:var(--borde-vivo);
+                          background:rgba(29,192,231,.10)}
+
+  select,input[type=text],textarea{
+    background:rgba(10,18,48,.75);color:var(--texto);border:1px solid var(--borde);
+    border-radius:10px;padding:10px;font-size:13.5px;font-family:inherit;width:100%;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  select:focus,input[type=text]:focus,textarea:focus{
+    outline:none;border-color:var(--borde-vivo);box-shadow:0 0 0 3px rgba(29,192,231,.14)}
+  textarea{resize:vertical;min-height:110px;line-height:1.6}
+  input[type=range]{accent-color:var(--cian);width:130px}
+  input[type=checkbox]{accent-color:var(--cian);width:16px;height:16px}
+  label.check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--suave);
+              cursor:pointer;user-select:none}
+  .controles{display:flex;gap:11px;flex-wrap:wrap;align-items:center;margin-top:16px}
+
+  /* Lo primero que hay que pulsar va arriba del todo y se ve sin bajar. */
+  .acciones-arriba{display:flex;gap:11px;flex-wrap:wrap;align-items:center;
+                   margin-bottom:16px;padding-bottom:16px;
+                   border-bottom:1px solid var(--borde)}
+  .acciones-arriba .pista-uso{font-size:12.5px;color:var(--tenue);margin-left:auto}
+  details.opciones{margin-top:14px}
+  details.opciones summary{cursor:pointer;font-size:12.5px;color:var(--suave);
+                           list-style:none;user-select:none;padding:6px 0}
+  details.opciones summary::before{content:"⚙ Opciones  ▸"}
+  details.opciones[open] summary::before{content:"⚙ Opciones  ▾"}
+  details.opciones summary span{display:none}
+
+  .chip{font-size:11.5px;padding:4px 12px;border-radius:999px;background:var(--panel2);
+        border:1px solid var(--borde);color:var(--suave);font-weight:600;letter-spacing:.3px}
+  .chip.ok{color:var(--exito);border-color:rgba(47,212,160,.4);
+           background:rgba(47,212,160,.1)}
+  .chip.ok::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+                   background:var(--exito);margin-right:7px;vertical-align:middle;
+                   animation:latir 2s ease-in-out infinite}
+  /* "listo" = va con un modelo base descargado; "ok" = entrenado por nosotros. */
+  .chip.listo{color:var(--celeste);border-color:rgba(165,216,234,.35);
+              background:rgba(165,216,234,.08)}
+  .chip.mal{color:var(--alerta);border-color:rgba(255,181,71,.35);
+            background:rgba(255,181,71,.09)}
+
+  .lienzo-caja{position:relative;background:#02060f;border-radius:14px;overflow:hidden;
+               aspect-ratio:16/9;max-height:min(42vh,360px);margin:0 auto;width:100%;
+               border:1px solid var(--borde)}
+  .lienzo-caja video,.lienzo-caja img{width:100%;height:100%;object-fit:contain;display:block}
+  .lienzo-caja video.espejo{transform:scaleX(-1)}
+  canvas.overlay{position:absolute;inset:0;width:100%;height:100%}
+  .aviso{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+         text-align:center;padding:26px;color:var(--suave);font-size:14px}
+
+  .barra{height:10px;background:rgba(10,18,48,.8);border-radius:7px;overflow:hidden;
+         margin:6px 0 4px;position:relative}
+  .barra span{display:block;height:100%;border-radius:7px;
+              transition:width .45s var(--curva)}
+  .fila{display:flex;justify-content:space-between;font-size:12.5px;color:var(--suave)}
+  .etiqueta{font-size:26px;font-weight:800;text-transform:capitalize;letter-spacing:-.5px}
+  .vacio{color:var(--tenue);font-size:14px}
+  .metricas{display:flex;gap:22px;flex-wrap:wrap;font-size:12px;color:var(--tenue);
+            margin-top:18px;padding-top:14px;border-top:1px solid var(--borde)}
+  .metricas b{color:var(--texto);font-weight:700;font-variant-numeric:tabular-nums;
+              font-size:13px}
+  code{background:rgba(29,192,231,.1);border:1px solid rgba(29,192,231,.18);padding:2px 7px;
+       border-radius:6px;font-size:12.5px;color:var(--celeste)}
+  .nota{font-size:12px;color:var(--tenue);margin-top:16px;line-height:1.65}
+  .sin-modelo-aviso{background:linear-gradient(135deg,rgba(34,61,144,.30),rgba(9,113,184,.10));
+                    border:1px solid var(--borde);border-radius:16px;padding:26px 28px;
+                    color:var(--suave);font-size:14px;line-height:1.7}
+  .sin-modelo-aviso .titulo{font-size:17px;font-weight:700;color:var(--texto);
+                            margin-bottom:8px;letter-spacing:-.2px}
+  .sin-modelo-aviso p{margin:0 0 18px;max-width:62ch}
+  .acciones-aviso{display:flex;gap:11px;flex-wrap:wrap}
+  .sin-modelo-aviso details{margin-top:20px;padding-top:16px;border-top:1px solid var(--borde)}
+  .sin-modelo-aviso summary{cursor:pointer;font-size:12.5px;color:var(--tenue);
+                            list-style:none;user-select:none}
+  .sin-modelo-aviso summary::before{content:"▸ ";transition:.2s}
+  .sin-modelo-aviso details[open] summary::before{content:"▾ "}
+  .sin-modelo-aviso details code{display:block;margin-top:10px;width:fit-content}
+
+  /* Tira de ejemplos: material listo para quien no trae archivos propios. */
+  .tira-ejemplos{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:14px 0 4px}
+  .tira-ejemplos .etq{font-size:12.5px;color:var(--tenue);margin-right:4px}
+  .miniatura{padding:0;background:none;border:1px solid var(--borde);border-radius:10px;
+             overflow:hidden;cursor:pointer;box-shadow:none;width:64px;
+             transition:.2s var(--curva)}
+  .miniatura img{display:block;width:100%;height:48px;object-fit:cover}
+  .miniatura span{display:block;font-size:9.5px;color:var(--tenue);padding:3px 2px;
+                  text-align:center;letter-spacing:.2px;white-space:nowrap;overflow:hidden;
+                  text-overflow:ellipsis}
+  .miniatura:hover{transform:translateY(-3px);border-color:var(--borde-vivo)}
+  .miniatura.elegida{border-color:var(--cian);box-shadow:0 0 0 3px rgba(29,192,231,.18)}
+
+  /* ------------------------------------------- panel explicativo (para legos) */
+  .explica{
+    background:linear-gradient(135deg, rgba(34,61,144,.34), rgba(9,113,184,.14));
+    border:1px solid var(--borde-vivo);border-radius:18px;padding:16px 22px 15px;margin-bottom:18px;
+    position:relative;overflow:hidden;
+  }
+  .explica::before{
+    content:"";position:absolute;top:0;left:0;width:60%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(29,192,231,.09),transparent);
+    animation:barrer 6s ease-in-out infinite;
+  }
+  .explica .cabeza{display:flex;align-items:center;gap:10px;cursor:pointer;
+                   font-weight:700;font-size:15px;position:relative}
+  .explica .cabeza .flecha{margin-left:auto;color:var(--cian);transition:transform .3s var(--curva)}
+  .explica.cerrado .cabeza .flecha{transform:rotate(-90deg)}
+  .explica .cuerpo{margin-top:14px;display:grid;gap:16px;position:relative;
+                   grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+  .explica.cerrado .cuerpo{display:none}
+  .explica h4{margin:0 0 5px;font-size:11px;text-transform:uppercase;letter-spacing:1.1px;
+              color:var(--cian);font-weight:700}
+  .explica p{margin:0;font-size:13.5px;line-height:1.7;color:var(--texto);opacity:.92}
+  {% block estilos %}{% endblock %}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="barra-marca">
+    <a href="/" class="marca">
+      <img src="/estaticos/logo-ciip.png" alt="CIIP">
+      <span class="titulo">Inteligencia Artificial
+        <small>Centro Internacional de Inversión Productiva</small></span>
+    </a>
+  </div>
+  <nav>
+    <a href="/" class="{% if activa == 'inicio' %}activa{% endif %}">🏠 Inicio</a>
+    {# Las 23 demostraciones, agrupadas por familia: sueltas no cabían en la barra. #}
+    {% for f in familias %}
+      {% set aqui = f.vistas | selectattr('slug', 'equalto', activa) | list | length > 0 %}
+      <div class="grupo {% if aqui %}dentro{% endif %}">
+        <button type="button" class="cabeza-grupo {% if aqui %}activa{% endif %}"
+                aria-expanded="false">
+          {{ f.icono }} {{ f.nombre }} <span class="flecha">▾</span>
+        </button>
+        <div class="menu">
+          {% if f.resumen %}<p class="menu-nota">{{ f.resumen }}</p>{% endif %}
+          {% for v in f.vistas %}
+          <a href="/{{ v.slug }}" class="{% if activa == v.slug %}activa{% endif %}">
+            <span class="ic">{{ v.icono }}</span>
+            <span class="tx">{{ v.titulo }}
+              <small>{{ v.descripcion }}</small></span>
+            {% if v.nivel() == "sin" %}<span class="pt" title="todavía por entrenar"></span>{% endif %}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+    <span class="separador"></span>
+    {% for v in paginas %}
+    <a href="/{{ v.slug }}" class="{% if activa == v.slug %}activa{% endif %}"
+       title="{{ v.descripcion }}">{{ v.icono }} {{ v.titulo }}</a>
+    {% endfor %}
+  </nav>
+</header>
+
+<main>
+  {% if vista and vista.explicacion %}
+  <div class="explica entra" id="explica">
+    <div class="cabeza" onclick="document.getElementById('explica').classList.toggle('cerrado')">
+      <span>💡</span><span>¿Qué es esto y para qué sirve?</span>
+      <span class="flecha">▼</span>
+    </div>
+    <div class="cuerpo">
+      <div><h4>En pocas palabras</h4><p>{{ vista.explicacion }}</p></div>
+      {% if vista.analogia %}<div><h4>Como si dijéramos</h4><p>{{ vista.analogia }}</p></div>{% endif %}
+      {% if vista.utilidad %}<div><h4>Aquí serviría para</h4><p>{{ vista.utilidad }}</p></div>{% endif %}
+    </div>
+  </div>
+  {% endif %}
+  {% block contenido %}{% endblock %}
+</main>
+
+<script>
+// Menús de la cabecera: se abren al pulsar y se cierran al salir, al pulsar fuera o con Esc.
+(function(){
+  const grupos = [...document.querySelectorAll("nav .grupo")];
+  const cerrar = salvo => grupos.forEach(g => {
+    if (g !== salvo) { g.classList.remove("abierto");
+                       g.querySelector(".cabeza-grupo").setAttribute("aria-expanded","false"); }
+  });
+  grupos.forEach(g => {
+    const boton = g.querySelector(".cabeza-grupo");
+    boton.addEventListener("click", e => {
+      e.stopPropagation();
+      const abierto = g.classList.toggle("abierto");
+      boton.setAttribute("aria-expanded", abierto);
+      cerrar(g);
+    });
+    let salida;
+    g.addEventListener("mouseleave", () => { salida = setTimeout(() => {
+      g.classList.remove("abierto");
+      boton.setAttribute("aria-expanded","false"); }, 320); });
+    g.addEventListener("mouseenter", () => clearTimeout(salida));
+  });
+  document.addEventListener("click", () => cerrar(null));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") cerrar(null); });
+})();
+</script>
+<script src="/estaticos/comun.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

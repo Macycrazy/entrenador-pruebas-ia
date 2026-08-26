@@ -1,0 +1,53 @@
+# Generación de imágenes: enseñarle un sujeto nuevo a un modelo de difusión con LoRA.
+#
+#   datos_generacion/*.jpg    (15-25 fotos del sujeto; .txt opcional con la descripción)
+#   python entrenar.py --config configs/generacion.yaml
+#
+# Sin entrenar nada, la vista /generacion ya genera imágenes con el modelo base.
+# Necesita:  pip install diffusers peft accelerate safetensors
+nombre: generacion
+tarea: imagen_generacion
+
+datos:
+  ruta: datos_generacion
+  batch: 1              # la difusión come memoria; se compensa con acumulación
+  workers: 2
+  val_proporcion: 0.15
+
+generacion:
+  # ~1 GB y rápido. Para más calidad: stable-diffusion-v1-5/stable-diffusion-v1-5
+  # o stabilityai/stable-diffusion-xl-base-1.0 (~7 GB, baja la resolución a 768).
+  # NO uses sdxl-turbo ni sd-turbo: son de licencia no comercial.
+  modelo_base: segmind/tiny-sd
+  resolucion: 512
+  lora_r: 16
+  lora_alpha: 16
+  instancia: "una foto de sks persona"
+  pasos: 25
+  guia: 7.5
+  negativo: "borroso, deforme, baja calidad"
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-4            # LoRA en difusión aguanta un lr alto
+  wd: 0.01
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: constante     # lo habitual en DreamBooth/LoRA
+
+entrenamiento:
+  epocas: 60            # con 20 fotos, 60 pasadas son ~1200 pasos
+  precision: bf16
+  acumular: 4
+  clip_grad: 1.0
+  congelar_epocas: 0
+  canales_last: false
+  ema: 0.0
+  paciencia: 0          # la pérdida de difusión es ruidosa: no sirve para parar antes
+  metrica_objetivo: acc
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

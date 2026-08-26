@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block titulo %}Detección de objetos{% endblock %}
+
+{% block estilos %}
+  .objeto{display:flex;justify-content:space-between;align-items:center;gap:10px;
+          padding:7px 0;border-bottom:1px dashed var(--borde);font-size:13.5px}
+  .punto{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:8px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🔲 Detección de objetos</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <div class="controles acciones-arriba">
+      <button id="btn-foto">Analizar imagen…</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <button id="btn-camara" class="sec">Usar cámara</button>
+      <label class="check">Confianza mínima
+        <input type="range" id="umbral" min="0.05" max="0.95" step="0.05" value="0.5">
+        <span id="umbral-txt">0.50</span></label>
+    </div>
+
+    <div class="lienzo-caja" style="aspect-ratio:4/3">
+      <img id="imagen" hidden>
+      <canvas id="overlay" class="overlay"></canvas>
+      <div class="aviso" id="aviso">Sube una imagen o usa la cámara</div>
+      <video id="video" playsinline muted autoplay hidden></video>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Objetos <b id="m-objetos">0</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Objetos encontrados</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      Baja la confianza mínima para ver detecciones dudosas y súbela para quedarte solo con
+      las seguras. La métrica del entrenamiento (mAP) resume ese equilibrio en un número.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "deteccion", config: "{{ vista.config }}"};
+const imagen = document.getElementById("imagen");
+const video = document.getElementById("video");
+const overlay = document.getElementById("overlay");
+const umbral = document.getElementById("umbral");
+let ultimoArchivo = null, usandoCamara = false;
+
+const camara = new Camara(video, {intervalo: 900, onFotograma: async (blob) => analizar(blob)});
+
+async function comprobar() {
+  const {ok} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) avisoSinModelo(document.getElementById("sin-modelo"), VISTA);
+  return ok;
+}
+
+async function analizar(blob) {
+  try {
+    const datos = await Panel.enviarArchivo(
+      `/api/deteccion/predecir?umbral=${umbral.value}`, blob, "imagen");
+    pintar(datos);
+  } catch (e) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(e.message)}</p>`;
+  }
+}
+
+function pintar(datos) {
+  document.getElementById("m-objetos").textContent = datos.objetos.length;
+  const medio = usandoCamara ? video : imagen;
+  const cajas = datos.objetos.map(o => ({
+    ...o.caja, color: Panel.color(o.indice),
+    texto: `${o.clase} ${(o.confianza * 100).toFixed(0)}%`,
+  }));
+  dibujarCajas(overlay, medio, cajas, datos.ancho, datos.alto, {contener: true});
+
+  document.getElementById("resultados").innerHTML = datos.objetos.length
+    ? datos.objetos.sort((a, b) => b.confianza - a.confianza).map(o => `
+        <div class="objeto">
+          <span><span class="punto" style="background:${Panel.color(o.indice)}"></span>
+            ${Panel.escapar(o.clase)}</span>
+          <span>${(o.confianza * 100).toFixed(1)}%</span></div>`).join("")
+    : '<p class="vacio">Ningún objeto por encima del umbral.</p>';
+}
+
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  camara.detener(); usandoCamara = false;
+  video.hidden = true; imagen.hidden = false;
+  imagen.src = URL.createObjectURL(f);
+  document.getElementById("aviso").hidden = true;
+  ultimoArchivo = f;
+  await new Promise(r => imagen.complete ? r() : imagen.onload = r);
+  analizar(f);
+  e.target.value = "";
+};
+document.getElementById("btn-camara").onclick = async (e) => {
+  if (camara.activa) {
+    camara.detener(); usandoCamara = false; video.hidden = true;
+    e.target.textContent = "Usar cámara"; return;
+  }
+  imagen.hidden = true; video.hidden = false; usandoCamara = true;
+  document.getElementById("aviso").hidden = true;
+  await camara.iniciar();
+  e.target.textContent = "Detener cámara";
+};
+umbral.oninput = () => {
+  document.getElementById("umbral-txt").textContent = Number(umbral.value).toFixed(2);
+  if (ultimoArchivo && !usandoCamara) analizar(ultimoArchivo);
+};
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

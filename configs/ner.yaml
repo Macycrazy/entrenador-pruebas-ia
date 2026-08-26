@@ -1,0 +1,44 @@
+# Reconocimiento de entidades: encontrar nombres, lugares, organizaciones y lo que tú
+# quieras (gerencias, códigos de carnet, tipos de trámite) dentro de un texto.
+#
+#   datos_ner/entidades.jsonl   una muestra por línea:
+#     {"texto": "...", "entidades": [[inicio, fin, "TIPO"]]}
+#
+#   python entrenar.py --config configs/ner.yaml
+nombre: ner
+tarea: texto_ner
+
+datos:
+  ruta: datos_ner
+  batch: 8
+  workers: 2
+  val_proporcion: 0.15
+
+ner:
+  modelo_base: Davlan/bert-base-multilingual-cased-ner-hrl   # AFL-3.0, multilingüe
+  longitud_max: 256
+
+optimizador:
+  nombre: adamw
+  lr: 3.0e-5
+  wd: 0.01
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 0.5
+
+entrenamiento:
+  epocas: 8
+  precision: fp32
+  congelar_epocas: 0
+  canales_last: false
+  clip_grad: 1.0
+  ema: 0.0
+  paciencia: 3
+  metrica_objetivo: acc     # = F1 por entidad
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

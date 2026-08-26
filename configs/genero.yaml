@@ -1,0 +1,52 @@
+# Configuración concreta del clasificador de género sobre FairFace ya descargado.
+# Aprovecha las etiquetas de edad y etnia para medir el sesgo por subgrupo.
+#
+#   python entrenar.py --config configs/genero.yaml
+#
+# Para entrenar además edad y etnia (multitarea), descomenta objetivos_extra:
+# el backbone mejora al tener que explicar tres cosas a la vez y la interfaz
+# puede mostrarlas.
+nombre: genero
+tarea: imagen_clasificacion
+
+datos:
+  ruta: datos
+  metadatos: datos/metadatos.csv
+  subgrupos: [etnia, edad]
+  # objetivos_extra: [etnia, edad]
+  tam_img: 224
+  batch: 96
+  workers: 8
+  balanceo: sampler
+
+modelo:
+  arquitectura: efficientnet_v2_s
+  dropout: 0.3
+
+optimizador:
+  nombre: adamw_fused
+  lr: 3.0e-4
+  wd: 0.02
+  lr_backbone_factor: 0.3
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 1.0
+
+aumentos:
+  politica: randaugment
+  webcam: 0.35            # el dataset es limpio; la webcam del CIIP no lo será
+  mixup: 0.2
+  cutmix: 1.0
+
+entrenamiento:
+  epocas: 25
+  precision: bf16
+  congelar_epocas: 1
+  ema: 0.999
+  paciencia: 6
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  tta: true
+  calibrar: true

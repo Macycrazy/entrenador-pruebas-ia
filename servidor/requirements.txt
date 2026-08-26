@@ -1,0 +1,44 @@
+# Dependencias del PANEL (el que enseña las demostraciones).
+#
+# El panel solo lee modelos ya entrenados: nunca entrena. Puede correr en otra
+# máquina distinta a la del entrenamiento, y con CPU basta si no hay GPU.
+#
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+#   pip install -r servidor/requirements.txt
+#   python servidor/app.py --puerto 8010
+#
+# Con GPU, instala torch con el índice cu128 en vez del cpu (ver requirements.txt).
+
+# --- lo mínimo para que arranque -------------------------------------------
+fastapi>=0.110
+uvicorn[standard]>=0.29
+jinja2>=3.1
+python-multipart>=0.0.9      # subida de archivos desde el navegador
+numpy>=1.26
+pyyaml>=6.0
+opencv-python>=4.9           # detección de rostros y tratamiento de imagen
+pillow>=10.2
+
+# --- las vistas que van con un modelo base descargado ----------------------
+# Sin esto el panel arranca igual, pero esas vistas avisan de la librería que falta.
+transformers>=4.40           # voz a texto, entidades, búsqueda, clasificación de texto
+sentencepiece                # algunos tokenizadores lo necesitan
+diffusers>=0.27              # generar imágenes
+accelerate>=0.29             # acelera la carga de los modelos grandes
+peft>=0.10                   # modelos de lenguaje ajustados con LoRA
+soundfile                    # leer y escribir audio (torchaudio ya no trae decodificador)
+torchaudio                   # instalar del MISMO índice que torch
+easyocr                      # leer documentos
+timm>=1.0                    # backbones extra de imagen
+pyarrow>=15.0                # banco de voces (parquet)
+
+# --- reconocimiento facial --------------------------------------------------
+# ¡OJO! Instálalo SIEMPRE así:
+#     pip install facenet-pytorch --no-deps
+# Sus dependencias fijan torch<2.3 y degradarían una instalación cu128 a cu121,
+# dejando una RTX 50xx sin núcleos utilizables.
+# facenet-pytorch
+
+# --- opcional ---------------------------------------------------------------
+# onnxruntime>=1.17          # servir un modelo .onnx en CPU
+# onnxruntime-gpu>=1.17      # lo mismo con GPU

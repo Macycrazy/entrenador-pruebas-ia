@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block titulo %}Voz a texto{% endblock %}
+
+{% block estilos %}
+  .grabador{display:flex;flex-direction:column;align-items:center;justify-content:center;
+            gap:14px;min-height:200px;background:var(--panel2);border:1px solid var(--borde);
+            border-radius:12px;padding:22px}
+  .rec{width:74px;height:74px;border-radius:50%;background:var(--error);color:#fff;
+       font-size:13px;font-weight:650;border:0;cursor:pointer}
+  .rec.grabando{animation:latido 1s infinite}
+  @keyframes latido{50%{opacity:.55}}
+  .transcrito{background:var(--panel2);border:1px solid var(--borde);border-radius:10px;
+              padding:16px;font-size:15px;line-height:1.7;min-height:120px;white-space:pre-wrap}
+  audio{width:100%;margin-top:14px}
+{% endblock %}
+
+{% block contenido %}
+<h1>✍️ Voz a texto</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <div class="grabador">
+      <button id="btn-grabar" class="rec">Grabar</button>
+      <span class="vacio" id="estado">Pulsa para grabar, o sube un archivo de audio</span>
+    </div>
+    <audio id="reproductor" controls hidden></audio>
+
+    <div class="controles">
+      <button id="btn-archivo" class="sec">Subir audio…</button>
+      <input type="file" id="archivo" accept="audio/*" hidden>
+      <button id="btn-transcribir" disabled>Transcribir</button>
+      <select id="idioma" style="max-width:170px">
+        <option value="spanish">Español</option>
+        <option value="english">Inglés</option>
+        <option value="portuguese">Portugués</option>
+      </select>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Duración <b id="m-duracion">–</b></span>
+      <span>Tiempo <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Transcripción</h2>
+    <div class="transcrito" id="salida">El texto aparecerá aquí.</div>
+    <div class="controles">
+      <button class="sec" id="btn-copiar">Copiar</button>
+    </div>
+    <p class="nota" style="margin-top:auto">
+      Whisper ya transcribe bien sin entrenar nada. Afinarlo sirve para lo que hace peor:
+      el acento local, las siglas y los nombres propios de la institución, y el ruido de
+      fondo de tu oficina. La métrica es WER, el porcentaje de palabras que falla.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "transcripcion", config: "{{ vista.config }}"};
+let audioActual = null, grabadora = null, trozos = [];
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  if (ok && datos.extra?.sin_entrenar) {
+    document.getElementById("salida").textContent =
+      "Usando Whisper tal cual, sin ajuste propio. Ya funciona; afinarlo mejora el acento " +
+      "y el vocabulario de la casa.";
+  }
+  return ok;
+}
+
+document.getElementById("btn-grabar").onclick = async (e) => {
+  if (grabadora && grabadora.state === "recording") { grabadora.stop(); return; }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    grabadora = new MediaRecorder(stream);
+    trozos = [];
+    grabadora.ondataavailable = ev => trozos.push(ev.data);
+    grabadora.onstop = () => {
+      stream.getTracks().forEach(t => t.stop());
+      audioActual = new File(trozos, "grabacion.webm", {type: grabadora.mimeType});
+      const audio = document.getElementById("reproductor");
+      audio.src = URL.createObjectURL(audioActual);
+      audio.hidden = false;
+      document.getElementById("btn-transcribir").disabled = false;
+      document.getElementById("estado").textContent = "Listo. Pulsa «Transcribir».";
+      e.target.textContent = "Grabar";
+      e.target.classList.remove("grabando");
+    };
+    grabadora.start();
+    e.target.textContent = "Parar";
+    e.target.classList.add("grabando");
+    document.getElementById("estado").textContent = "Grabando… habla con normalidad.";
+  } catch (err) {
+    document.getElementById("estado").textContent = "Sin micrófono: " + err.message;
+  }
+};
+
+document.getElementById("btn-archivo").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = (e) => {
+  audioActual = e.target.files[0];
+  if (!audioActual) return;
+  const audio = document.getElementById("reproductor");
+  audio.src = URL.createObjectURL(audioActual);
+  audio.hidden = false;
+  document.getElementById("btn-transcribir").disabled = false;
+  document.getElementById("estado").textContent = audioActual.name;
+};
+
+document.getElementById("btn-transcribir").onclick = async (e) => {
+  if (!audioActual) return;
+  e.target.disabled = true;
+  document.getElementById("salida").textContent = "Transcribiendo…";
+  try {
+    const idioma = document.getElementById("idioma").value;
+    const datos = await Panel.enviarArchivo(
+      `/api/transcripcion/predecir?idioma=${idioma}`, audioActual, "audio");
+    document.getElementById("salida").textContent = datos.texto || "(no se entendió nada)";
+    document.getElementById("m-duracion").textContent = datos.duracion + " s";
+    document.getElementById("m-ms").textContent = (datos.ms / 1000).toFixed(1) + " s";
+  } catch (err) {
+    document.getElementById("salida").textContent = "Error: " + err.message;
+  } finally {
+    e.target.disabled = false;
+  }
+};
+
+document.getElementById("btn-copiar").onclick = () =>
+  navigator.clipboard.writeText(document.getElementById("salida").textContent);
+
+comprobar();
+</script>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block titulo %}Buscar fotos{% endblock %}
+
+{% block estilos %}
+  .rejilla-fotos{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+  .foto{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--borde)}
+  .foto img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#000}
+  .foto span{position:absolute;bottom:0;left:0;right:0;background:rgba(11,16,32,.85);
+             font-size:11px;padding:3px 6px;color:var(--suave)}
+  .sugerencias{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+  .sugerencias button{font-size:12px;padding:5px 10px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🖼️ Buscar fotos</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <div class="controles" style="margin-top:0">
+      <input type="text" id="texto" style="flex:1;min-width:260px"
+        placeholder="a person wearing glasses">
+      <button id="btn-buscar">Buscar</button>
+    </div>
+    <div class="sugerencias">
+      <button class="sec" data-q="a person wearing glasses">con gafas</button>
+      <button class="sec" data-q="a smiling person">sonriendo</button>
+      <button class="sec" data-q="an elderly person">persona mayor</button>
+      <button class="sec" data-q="a child">un niño</button>
+      <button class="sec" data-q="a person wearing a suit and tie">con traje</button>
+    </div>
+
+    <div class="rejilla-fotos" id="resultados" style="margin-top:18px">
+      <p class="vacio">Indexa una carpeta y describe lo que buscas.</p>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Indexadas <b id="m-indexadas">0</b></span>
+      <span>Búsqueda <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Indexar una carpeta</h2>
+    <div class="campo" style="margin-bottom:10px">
+      <label for="carpeta" style="display:block;font-size:12px;color:var(--suave);margin-bottom:4px">
+        Carpeta (dentro del proyecto)</label>
+      <input type="text" id="carpeta" value="datos/val/mujer">
+    </div>
+    <label class="check" style="margin-bottom:12px">Máximo de fotos
+      <input type="range" id="limite" min="100" max="2000" step="100" value="400">
+      <span id="limite-txt">400</span></label>
+    <div class="controles" style="margin-top:0">
+      <button id="btn-indexar">Indexar</button>
+    </div>
+    <p class="nota" id="estado-indice">Indexar recorre las fotos una vez; después buscar
+       es instantáneo.</p>
+
+    <p class="nota" style="margin-top:auto">
+      El modelo entiende inglés: «a person wearing glasses» funciona mejor que la frase en
+      español. Para buscar en español haría falta un CLIP multilingüe, bastante más pesado.
+      No hay etiquetas de por medio: entiende la descripción y la foto directamente.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado("imagenes",
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  if (ok) document.getElementById("m-indexadas").textContent = datos.extra?.indexadas ?? 0;
+  return ok;
+}
+
+document.getElementById("btn-indexar").onclick = async (e) => {
+  e.target.disabled = true;
+  document.getElementById("estado-indice").textContent = "Indexando… (una pasada por las fotos)";
+  try {
+    const datos = await Panel.enviarJson("/api/imagenes/indexar", {
+      carpeta: document.getElementById("carpeta").value.trim(),
+      limite: Number(document.getElementById("limite").value),
+    });
+    document.getElementById("estado-indice").textContent =
+      `${datos.indexadas} fotos indexadas en ${datos.segundos} s · ${datos.total} en total.`;
+    document.getElementById("m-indexadas").textContent = datos.total;
+  } catch (err) {
+    document.getElementById("estado-indice").textContent = err.message;
+  } finally { e.target.disabled = false; }
+};
+
+async function buscar() {
+  const texto = document.getElementById("texto").value.trim();
+  if (!texto) return;
+  document.getElementById("resultados").innerHTML = '<p class="vacio">Buscando…</p>';
+  try {
+    const datos = await Panel.enviarJson("/api/imagenes/buscar", {texto});
+    document.getElementById("m-ms").textContent = (datos.ms ?? 0).toFixed(0) + " ms";
+    document.getElementById("resultados").innerHTML = datos.resultados.length
+      ? datos.resultados.map(r => `<div class="foto">
+          <img loading="lazy" src="/api/datos/imagen?ruta=${encodeURIComponent(r.ruta)}">
+          <span>${r.similitud.toFixed(3)}</span></div>`).join("")
+      : `<p class="vacio">${Panel.escapar(datos.detalle || "Sin resultados.")}</p>`;
+  } catch (err) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  }
+}
+
+document.getElementById("btn-buscar").onclick = buscar;
+document.getElementById("texto").onkeydown = (e) => { if (e.key === "Enter") buscar(); };
+document.querySelectorAll("[data-q]").forEach(b => b.onclick = () => {
+  document.getElementById("texto").value = b.dataset.q;
+  buscar();
+});
+document.getElementById("limite").oninput = () =>
+  document.getElementById("limite-txt").textContent = document.getElementById("limite").value;
+
+comprobar();
+</script>
+{% endblock %}

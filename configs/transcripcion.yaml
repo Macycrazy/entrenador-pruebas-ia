@@ -1,0 +1,50 @@
+# Transcripción de voz a texto afinando Whisper.
+#
+# Whisper ya transcribe bien de fábrica: esto sirve para el acento local, el vocabulario
+# propio (siglas, nombres de gerencias) y el ruido de tu oficina.
+#
+#   datos_voz/textos.csv   con columnas: archivo,texto
+#   datos_voz/audios/*.wav
+#   python entrenar.py --config configs/transcripcion.yaml
+nombre: transcripcion
+tarea: audio_transcripcion
+
+datos:
+  ruta: datos_voz
+  batch: 4
+  workers: 2
+  val_proporcion: 0.15
+
+transcripcion:
+  # tiny (302 MB) para probar · small (2 GB) es el equilibrio · medium si sobra VRAM
+  modelo_base: openai/whisper-small
+  idioma: spanish
+  tarea: transcribe
+  sr: 16000
+  duracion_max: 30.0
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-5          # ajuste fino sobre un modelo ya muy entrenado
+  wd: 0.0
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 0.5
+
+entrenamiento:
+  epocas: 8
+  precision: fp32
+  acumular: 4
+  clip_grad: 1.0
+  congelar_epocas: 0
+  canales_last: false
+  ema: 0.0
+  paciencia: 3
+  metrica_objetivo: acc     # = 1 - WER
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

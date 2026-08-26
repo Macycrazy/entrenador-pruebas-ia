@@ -1,0 +1,46 @@
+# Detección de anomalías visuales: encontrar lo raro habiendo visto solo lo normal.
+#
+#   datos_anomalias/normal/*.jpg      ejemplos correctos (con estos se entrena)
+#   datos_anomalias/anomalas/*.jpg    opcional, SOLO para medir
+#
+#   python preparacion/generar_anomalias_sintetico.py
+#   python entrenar.py --config configs/anomalias.yaml
+nombre: anomalias
+tarea: imagen_anomalias
+
+datos:
+  ruta: datos_anomalias
+  batch: 32
+  workers: 4
+  val_proporcion: 0.2
+
+anomalias:
+  tam_img: 128
+  canales: 32
+  cuello: 64          # estrecho a propósito: si puede memorizarlo todo, no detecta nada
+  percentil: 99       # umbral de alarma sobre el error de lo normal
+  carpeta_anomalas: ""
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-3
+  wd: 0.0
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 0.5
+
+entrenamiento:
+  epocas: 40
+  precision: fp32
+  congelar_epocas: 0
+  canales_last: false
+  ema: 0.999
+  paciencia: 12
+  metrica_objetivo: acc     # AUC si hay ejemplos anómalos para medir
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

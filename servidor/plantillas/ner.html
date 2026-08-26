@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block titulo %}Entidades en texto{% endblock %}
+
+{% block estilos %}
+  .marcado{background:var(--panel2);border:1px solid var(--borde);border-radius:10px;
+           padding:16px;font-size:15px;line-height:2;white-space:pre-wrap;min-height:150px}
+  .ent{padding:2px 6px;border-radius:6px;font-weight:600;color:#0b1020}
+  .ent small{font-size:9.5px;opacity:.75;margin-left:4px;text-transform:uppercase}
+  .grupo-entidad{margin-bottom:14px}
+  .grupo-entidad h3{font-size:12px;text-transform:uppercase;letter-spacing:.7px;color:var(--suave);
+            margin:0 0 6px;font-weight:600}
+{% endblock %}
+
+{% block contenido %}
+<h1>🏷️ Entidades en texto</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <h2>Texto</h2>
+    <textarea id="texto" style="min-height:130px">Ana María Rodríguez, de la Gerencia de Sistemas del CIIP en Caracas, solicitó la renovación de su carnet el 15 de marzo.</textarea>
+    <div class="controles">
+      <button id="btn-analizar">Buscar entidades</button>
+    </div>
+    <h2 style="margin-top:20px">Texto marcado</h2>
+    <div class="marcado" id="marcado">Aquí se resaltará lo que encuentre.</div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Entidades <b id="m-entidades">0</b></span>
+      <span>Tiempo <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Encontrado</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      El modelo base reconoce personas, lugares y organizaciones sin entrenar nada.
+      Entrenarlo con <code>configs/ner.yaml</code> le enseña entidades tuyas: gerencias,
+      códigos de carnet o tipos de trámite. La métrica es F1 por entidad, que solo cuenta
+      si acierta el tipo y dónde empieza y acaba.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const COLOR_TIPO = {};
+function colorTipo(tipo) {
+  if (!(tipo in COLOR_TIPO)) COLOR_TIPO[tipo] = Panel.color(Object.keys(COLOR_TIPO).length);
+  return COLOR_TIPO[tipo];
+}
+
+async function comprobar() {
+  return (await Panel.pintarEstado("ner",
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"))).ok;
+}
+
+document.getElementById("btn-analizar").onclick = async (e) => {
+  const texto = document.getElementById("texto").value;
+  if (!texto.trim()) return;
+  e.target.disabled = true;
+  try {
+    const datos = await Panel.enviarJson("/api/ner/predecir", {texto});
+    document.getElementById("m-entidades").textContent = datos.entidades.length;
+    document.getElementById("m-ms").textContent = datos.ms.toFixed(0) + " ms";
+
+    // Se reconstruye el texto insertando las marcas de atrás hacia delante
+    let html = "";
+    let cursor = 0;
+    for (const ent of datos.entidades) {
+      html += Panel.escapar(texto.slice(cursor, ent.inicio));
+      html += `<span class="ent" style="background:${colorTipo(ent.tipo)}">${
+        Panel.escapar(texto.slice(ent.inicio, ent.fin))}<small>${
+        Panel.escapar(ent.tipo)}</small></span>`;
+      cursor = ent.fin;
+    }
+    html += Panel.escapar(texto.slice(cursor));
+    document.getElementById("marcado").innerHTML = html;
+
+    const grupos = Object.entries(datos.por_tipo);
+    document.getElementById("resultados").innerHTML = grupos.length
+      ? grupos.map(([tipo, valores]) => `<div class="grupo-entidad">
+          <h3 style="color:${colorTipo(tipo)}">${Panel.escapar(tipo)}</h3>
+          ${valores.map(v => `<div class="fila" style="padding:3px 0">
+            <span style="color:var(--texto)">${Panel.escapar(v)}</span></div>`).join("")}
+        </div>`).join("")
+      : '<p class="vacio">No encontró ninguna entidad.</p>';
+  } catch (err) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  } finally {
+    e.target.disabled = false;
+  }
+};
+
+comprobar();
+</script>
+{% endblock %}

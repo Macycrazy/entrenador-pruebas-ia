@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% block titulo %}Hablar y clonar voz{% endblock %}
+
+{% block estilos %}
+  .voz{display:flex;justify-content:space-between;align-items:center;padding:8px 11px;
+       background:var(--panel2);border:1px solid var(--borde);border-radius:9px;
+       margin-bottom:6px;font-size:13.5px}
+  .voz button{padding:3px 9px;font-size:11.5px}
+  audio{width:100%;margin-top:14px}
+  .aviso-idioma{background:#2a1f10;border:1px solid #7a5a1e;color:#f4d58d;border-radius:10px;
+                padding:11px 14px;font-size:12.5px;margin-top:14px;line-height:1.6}
+{% endblock %}
+
+{% block contenido %}
+<h1>🗣️ Hablar y clonar voz</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <h2>Texto a decir</h2>
+    <textarea id="texto" style="min-height:130px"
+      placeholder="Escribe aquí lo que quieres oír…">Bienvenidos al centro. Este sistema fue entrenado aquí mismo.</textarea>
+
+    <div class="controles">
+      <button id="btn-hablar">Decirlo en voz alta</button>
+      <select id="voz" style="max-width:230px"></select>
+    </div>
+
+    <audio id="reproductor" controls hidden></audio>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Duración <b id="m-duracion">–</b></span>
+      <span>Generación <b id="m-ms">–</b></span>
+    </div>
+
+    <div class="aviso-idioma">
+      El modelo base está entrenado en inglés: leyendo español suena a extranjero. Para que
+      hable en español natural hay que ajustarlo con grabaciones en español, que es
+      justamente lo que hace <code>configs/voz_sintesis.yaml</code>.
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Clonar una voz</h2>
+    <p class="vacio" style="margin-top:0">Sube o graba entre 5 y 15 segundos de alguien
+       hablando. Se extrae su timbre y queda disponible en el desplegable.</p>
+
+    <div class="controles" style="margin-top:10px">
+      <input type="text" id="nombre" placeholder="Nombre de la voz" style="max-width:180px">
+      <button class="sec" id="btn-grabar">Grabar</button>
+      <button class="sec" id="btn-subir">Subir audio…</button>
+      <input type="file" id="archivo" accept="audio/*" hidden>
+    </div>
+    <p class="nota" id="estado-clon">Ninguna referencia todavía.</p>
+    <div class="controles"><button id="btn-clonar" disabled>Clonar esta voz</button></div>
+
+    <h2 style="margin-top:22px">Voces guardadas</h2>
+    <div id="lista"><p class="vacio">Ninguna.</p></div>
+
+    <p class="nota" style="margin-top:auto">
+      Clonar aquí copia el timbre a partir de un vector; ajustar el modelo con 10-30 minutos
+      de grabaciones de esa persona lo clava mucho más. Usa la voz de alguien solo con su
+      permiso.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "voz", config: "{{ vista.config }}"};
+let referencia = null, grabadora = null, trozos = [];
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  if (!ok) return false;
+  const extra = datos.extra || {};
+  const selector = document.getElementById("voz");
+  const previa = selector.value;
+  selector.innerHTML =
+    (extra.voces_propias || []).map(v =>
+      `<option value="${Panel.escapar(v)}">🎤 ${Panel.escapar(v)} (clonada)</option>`).join("") +
+    [7306, 1000, 3000, 5000, 7000].map(i =>
+      `<option value="${i}">voz del banco nº ${i}</option>`).join("");
+  if (previa) selector.value = previa;
+  pintarVoces(extra.voces_propias || []);
+  return true;
+}
+
+function pintarVoces(voces) {
+  document.getElementById("lista").innerHTML = voces.length
+    ? voces.map(v => `<div class="voz"><span>${Panel.escapar(v)}</span>
+        <button class="sec" data-olvidar="${Panel.escapar(v)}">Quitar</button></div>`).join("")
+    : '<p class="vacio">Ninguna.</p>';
+  document.querySelectorAll("[data-olvidar]").forEach(b => b.onclick = async () => {
+    await fetch(`/api/voz/voces/${encodeURIComponent(b.dataset.olvidar)}`, {method: "DELETE"});
+    comprobar();
+  });
+}
+
+document.getElementById("btn-hablar").onclick = async (e) => {
+  const texto = document.getElementById("texto").value.trim();
+  if (!texto) return;
+  e.target.disabled = true;
+  e.target.textContent = "Generando…";
+  try {
+    const r = await fetch("/api/voz/hablar", {
+      method: "POST", headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({texto, voz: document.getElementById("voz").value}),
+    });
+    if (!r.ok) throw new Error((await r.json()).detail || `HTTP ${r.status}`);
+    document.getElementById("m-duracion").textContent = r.headers.get("X-Segundos") + " s";
+    document.getElementById("m-ms").textContent = r.headers.get("X-Ms") + " ms";
+    const audio = document.getElementById("reproductor");
+    audio.src = URL.createObjectURL(await r.blob());
+    audio.hidden = false;
+    audio.play().catch(() => {});
+  } catch (err) {
+    alert(err.message);
+  } finally {
+    e.target.disabled = false;
+    e.target.textContent = "Decirlo en voz alta";
+  }
+};
+
+document.getElementById("btn-subir").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = (e) => {
+  referencia = e.target.files[0];
+  if (!referencia) return;
+  document.getElementById("estado-clon").textContent = "Referencia: " + referencia.name;
+  document.getElementById("btn-clonar").disabled = false;
+};
+
+document.getElementById("btn-grabar").onclick = async (e) => {
+  if (grabadora && grabadora.state === "recording") { grabadora.stop(); return; }
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({audio: true});
+    grabadora = new MediaRecorder(stream);
+    trozos = [];
+    grabadora.ondataavailable = ev => trozos.push(ev.data);
+    grabadora.onstop = () => {
+      stream.getTracks().forEach(t => t.stop());
+      referencia = new File(trozos, "referencia.webm", {type: grabadora.mimeType});
+      document.getElementById("estado-clon").textContent = "Referencia grabada.";
+      document.getElementById("btn-clonar").disabled = false;
+      e.target.textContent = "Grabar";
+    };
+    grabadora.start();
+    e.target.textContent = "Parar";
+    document.getElementById("estado-clon").textContent = "Grabando… habla con normalidad.";
+  } catch (err) {
+    document.getElementById("estado-clon").textContent = "Sin micrófono: " + err.message;
+  }
+};
+
+document.getElementById("btn-clonar").onclick = async (e) => {
+  const nombre = document.getElementById("nombre").value.trim();
+  if (!nombre) { alert("Ponle un nombre a la voz"); return; }
+  e.target.disabled = true;
+  try {
+    await Panel.enviarArchivo(`/api/voz/clonar?nombre=${encodeURIComponent(nombre)}`,
+                              referencia, "audio");
+    document.getElementById("estado-clon").textContent = `Voz «${nombre}» guardada.`;
+    document.getElementById("nombre").value = "";
+    referencia = null;
+    await comprobar();
+  } catch (err) {
+    document.getElementById("estado-clon").textContent = err.message;
+  } finally {
+    e.target.disabled = true;
+  }
+};
+
+comprobar();
+</script>
+{% endblock %}

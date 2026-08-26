@@ -1,0 +1,51 @@
+# Detección de vida: cara real frente a foto, pantalla o máscara.
+#
+#   datos_spoof/real/…    datos_spoof/ataque/…
+#   python entrenar.py --config configs/antispoofing.yaml
+#
+# Clave: la pista está en la TEXTURA (moiré de pantalla, reflejos del papel, falta de
+# microtextura de piel), no en la forma de la cara. Por eso aquí casi todas las
+# aumentaciones que ayudan en clasificación normal hacen daño: desenfocar, comprimir
+# o mezclar imágenes borra justo la señal. Y no se hace recorte agresivo, porque los
+# bordes del ataque (marco del móvil, papel) son información útil.
+nombre: antispoofing
+tarea: rostro_antispoofing
+
+datos:
+  ruta: datos_spoof
+  clases: [ataque, real]
+  tam_img: 224
+  batch: 64
+  balanceo: sampler
+
+modelo:
+  arquitectura: efficientnet_b0    # basta uno pequeño; la textura es local
+  dropout: 0.2
+
+aumentos:
+  politica: ninguna       # nada de RandAugment: altera la textura
+  flip: 0.5
+  recorte_escala: [0.9, 1.0]
+  webcam: 0.0             # NO: simular una cámara mala imita justo a un ataque
+  mixup: 0.0
+  cutmix: 0.0
+  borrado: 0.0
+
+perdida:
+  nombre: focal           # los ataques difíciles son pocos y son los que importan
+  focal_gamma: 2.0
+
+optimizador:
+  nombre: adamw
+  lr: 2.0e-4
+
+entrenamiento:
+  epocas: 20
+  congelar_epocas: 1
+  ema: 0.999
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  calibrar: true
+  # Con el informe de evaluar.py elige el umbral: en control de acceso interesa
+  # un FAR bajísimo aunque rechaces a algún usuario legítimo de vez en cuando.

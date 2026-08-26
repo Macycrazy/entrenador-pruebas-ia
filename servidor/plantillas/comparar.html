@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block titulo %}Comparar modelos{% endblock %}
+
+{% block estilos %}
+  .columnas{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+  .modelo{background:var(--panel2);border:1px solid var(--borde);border-radius:12px;padding:14px}
+  .modelo h3{margin:0 0 4px;font-size:14.5px;font-weight:650}
+  .modelo .meta{font-size:11.5px;color:var(--suave);margin-bottom:12px}
+  .grande{font-size:24px;font-weight:700;text-transform:capitalize;margin-bottom:8px}
+  .previa{width:100%;max-height:280px;object-fit:contain;border-radius:10px;background:#000;
+          margin-bottom:14px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🔬 Comparar modelos</h1>
+<p class="subtitulo">La misma foto por varios modelos a la vez. Sirve para ver qué aportó
+   entrenar más: el de tres épocas frente al de veinticinco, lado a lado.</p>
+
+<div class="tarjeta" style="margin-bottom:18px">
+  <div class="controles" style="margin-top:0">
+    <button id="btn-foto">Elegir imagen…</button>
+    <input type="file" id="archivo" accept="image/*" hidden>
+    <span class="vacio" id="elegida">Ninguna imagen todavía</span>
+  </div>
+  <h2 style="margin-top:18px">Modelos a comparar</h2>
+  <div id="seleccion"><p class="vacio">Cargando experimentos…</p></div>
+  <div class="controles"><button id="btn-comparar" disabled>Comparar</button></div>
+</div>
+
+<img id="previa" class="previa" hidden>
+<div class="columnas" id="resultados"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let archivo = null;
+
+async function cargarExperimentos() {
+  const r = await fetch("/api/experimentos");
+  const {experimentos} = await r.json();
+  // Solo modelos que aceptan imágenes: ofrecer aquí "tabular" o "series" era una
+  // trampa, porque no admiten una foto.
+  const DE_IMAGEN = ["imagen_clasificacion", "imagen_anomalias", "imagen_superresolucion",
+                     "vision_deteccion", "vision_segmentacion", "rostro_identificacion",
+                     "rostro_antispoofing"];
+  const utiles = experimentos.filter(e => e.tiene_modelo &&
+                                          (!e.tarea || DE_IMAGEN.includes(e.tarea)));
+
+  // Por defecto, dos modelos de la MISMA tarea y con distinto entrenamiento: es la
+  // comparación que tiene sentido (el de pocas épocas frente al de muchas).
+  const porTarea = {};
+  utiles.forEach(e => (porTarea[e.tarea] ||= []).push(e));
+  const pareja = Object.values(porTarea)
+    .map(g => [...g].sort((a, b) => a.epocas - b.epocas))
+    .filter(g => g.length >= 2)
+    .sort((a, b) => (b.at(-1).epocas - b[0].epocas) - (a.at(-1).epocas - a[0].epocas))[0];
+  const marcados = new Set(pareja ? [pareja[0].nombre, pareja.at(-1).nombre]
+                                  : utiles.slice(0, 1).map(e => e.nombre));
+
+  document.getElementById("seleccion").innerHTML = utiles.length
+    ? utiles.map(e => `<label class="check" style="display:inline-flex;margin-right:16px">
+        <input type="checkbox" value="${Panel.escapar(e.nombre)}"
+               ${marcados.has(e.nombre) ? "checked" : ""}>
+        ${Panel.escapar(e.nombre)} <span class="vacio">(${e.epocas} épocas)</span></label>`).join("")
+      + (pareja ? `<p class="vacio" style="margin:10px 0 0">Vienen marcados
+          <b>${Panel.escapar(pareja[0].nombre)}</b> (${pareja[0].epocas} épocas) y
+          <b>${Panel.escapar(pareja.at(-1).nombre)}</b> (${pareja.at(-1).epocas} épocas):
+          el mismo tipo de modelo, entrenado poco y entrenado a fondo.</p>` : "")
+    : '<p class="vacio">Necesitas al menos un modelo entrenado.</p>';
+  refrescar();
+}
+
+function refrescar() {
+  const marcados = document.querySelectorAll("#seleccion input:checked").length;
+  document.getElementById("btn-comparar").disabled = !(archivo && marcados);
+}
+
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = (e) => {
+  archivo = e.target.files[0];
+  if (!archivo) return;
+  document.getElementById("elegida").textContent = archivo.name;
+  const previa = document.getElementById("previa");
+  previa.src = URL.createObjectURL(archivo);
+  previa.hidden = false;
+  refrescar();
+};
+document.getElementById("seleccion").addEventListener("change", refrescar);
+
+document.getElementById("btn-comparar").onclick = async () => {
+  const nombres = [...document.querySelectorAll("#seleccion input:checked")].map(i => i.value);
+  document.getElementById("resultados").innerHTML = '<p class="vacio">Comparando…</p>';
+  try {
+    const datos = await Panel.enviarArchivo(
+      `/api/comparar?experimentos=${encodeURIComponent(nombres.join(","))}`, archivo, "imagen");
+    document.getElementById("resultados").innerHTML = datos.resultados.map(r => {
+      if (!r.ok) return `<div class="modelo"><h3>${Panel.escapar(r.experimento)}</h3>
+        <p class="vacio">${Panel.escapar(r.detalle)}</p></div>`;
+      const rostro = (r.rostros || [])[0];
+      if (!rostro) return `<div class="modelo"><h3>${Panel.escapar(r.experimento)}</h3>
+        <p class="vacio">No detectó ningún rostro.</p></div>`;
+      const acc = r.acc_val != null ? ` · val ${(r.acc_val * 100).toFixed(1)}%` : "";
+      return `<div class="modelo">
+        <h3>${Panel.escapar(r.experimento)}</h3>
+        <div class="meta">${Panel.escapar(r.modelo || "")}${acc}</div>
+        <div class="grande" style="color:${Panel.color(0)}">${Panel.escapar(rostro.etiqueta)}</div>
+        ${Panel.barras(rostro.probabilidades)}</div>`;
+    }).join("");
+  } catch (e) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(e.message)}</p>`;
+  }
+};
+
+cargarExperimentos();
+</script>
+{% endblock %}

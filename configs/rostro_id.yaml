@@ -1,0 +1,66 @@
+# Reconocimiento facial: identificación 1:N y verificación 1:1.
+#
+#   python preparacion/descargar_rostros.py --fuente lfw --min-por-identidad 3
+#   python entrenar.py --config configs/rostro_id.yaml
+#   python galeria_rostros.py inscribir --modelo experimentos/rostro_id --fotos plantilla/
+#
+# Para algo serio, entrena con CASIA-WebFace (10 575 identidades) o VGGFace2:
+#   python preparacion/descargar_rostros.py --fuente casia
+nombre: rostro_id
+tarea: rostro_identificacion
+
+datos:
+  ruta: datos_rostros
+  tam_img: 160          # el estándar de facenet; 112 o 224 también son habituales
+  batch: 64
+  workers: 8
+  balanceo: ninguno     # con miles de identidades el sampler balanceado no aporta
+
+rostros:
+  dim_embedding: 512
+  min_por_identidad: 4
+  val_por_identidad: 2    # 2 o más: con una sola foto por persona no hay pares
+                          # positivos que comparar y no se puede medir verificación
+  far_objetivo: 0.001
+
+modelo:
+  arquitectura: rostro:facenet   # backbone ya preentrenado con caras (pip install facenet-pytorch)
+  # arquitectura: resnet50       # alternativa sin dependencias extra
+  cabeza: arcface
+  dropout: 0.2
+
+perdida:
+  nombre: arcface
+  arcface_margen: 0.5
+  arcface_escala: 30.0
+  suavizado: 0.0        # el margen ya regulariza; sumar suavizado suele empeorar
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-3            # la cabeza con margen parte de cero y necesita lr alto
+  wd: 5.0e-4
+  lr_backbone_factor: 0.1
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 1.0
+
+aumentos:
+  politica: basica
+  flip: 0.5
+  recorte_escala: [0.8, 1.0]   # recortes suaves: la identidad está en la geometría
+  webcam: 0.25
+  mixup: 0.0                   # mezclar identidades no tiene sentido aquí
+  cutmix: 0.0
+
+entrenamiento:
+  epocas: 20
+  precision: bf16
+  congelar_epocas: 1
+  ema: 0.999
+  paciencia: 6
+  metrica_objetivo: acc        # rank-1; usa "tar" para optimizar la verificación
+
+evaluacion:
+  calibrar: false              # aquí no hay probabilidades que calibrar
+  curvas: false

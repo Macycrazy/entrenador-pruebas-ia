@@ -1,0 +1,52 @@
+# Clasificación de texto: intención, sentimiento, categoría, spam…
+#
+#   datos_texto/train.csv  con columnas: texto,etiqueta
+#   python entrenar.py --config configs/texto.yaml
+#
+# Para probar sin datos:  python preparacion/generar_texto_sintetico.py
+# Necesita:  pip install transformers
+nombre: texto
+tarea: texto_clasificacion
+
+datos:
+  ruta: datos_texto
+  batch: 16
+  workers: 2
+  balanceo: sampler
+  val_proporcion: 0.15
+
+texto:
+  # Multilingüe y ligero. Alternativas en español:
+  #   PlanTL-GOB-ES/roberta-base-bne  ·  dccuchile/bert-base-spanish-wwm-cased
+  # Para pruebas rápidas: prajjwal1/bert-tiny (17 MB)
+  modelo_base: distilbert-base-multilingual-cased
+  longitud_max: 256
+  columna_texto: texto
+  columna_etiqueta: etiqueta
+
+modelo:
+  dropout: 0.1        # el dropout real lo lleva el propio modelo base
+
+optimizador:
+  nombre: adamw
+  lr: 3.0e-5          # los transformadores de texto quieren lr mucho más bajo que una CNN
+  wd: 0.01
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno      # 'polinomial' es lo clásico en BERT y va igual de bien
+  warmup_epocas: 0.5
+
+entrenamiento:
+  epocas: 5           # con textos suele bastar; más épocas sobreajustan
+  precision: bf16
+  congelar_epocas: 0  # congelar el modelo base solo si tienes muy pocos datos
+  canales_last: false
+  clip_grad: 1.0
+  ema: 0.0
+  paciencia: 3
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  calibrar: true
+  tta: false

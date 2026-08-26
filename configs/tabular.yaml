@@ -1,0 +1,42 @@
+# Datos tabulares: predecir una columna a partir de las demás.
+#
+#   datos_tabular/datos.csv
+#   python entrenar.py --config configs/tabular.yaml --set tabular.objetivo=ausento
+nombre: tabular
+tarea: tabular
+
+datos:
+  ruta: datos_tabular
+  batch: 64
+  workers: 0
+  val_proporcion: 0.2
+
+tabular:
+  objetivo: ""            # OBLIGATORIO: la columna a predecir
+  ignorar: []             # identificadores, nombres… lo que no debe influir
+  capas: [128, 64]
+  dropout: 0.2
+  tipo: auto              # auto | clasificacion | regresion
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-3
+  wd: 0.01
+  lr_backbone_factor: 1.0
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 1.0
+
+entrenamiento:
+  epocas: 60
+  precision: fp32
+  congelar_epocas: 0
+  canales_last: false
+  ema: 0.999
+  paciencia: 15
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  calibrar: true
+  curvas: true

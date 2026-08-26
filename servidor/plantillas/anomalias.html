@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block titulo %}Anomalías visuales{% endblock %}
+
+{% block estilos %}
+  .tres{display:grid;gap:12px;grid-template-columns:repeat(3,1fr)}
+  .tres figure{margin:0}
+  .tres img{width:100%;border-radius:10px;border:1px solid var(--borde);background:#000;
+            display:block;aspect-ratio:1;object-fit:contain}
+  .tres figcaption{font-size:11.5px;color:var(--suave);margin-top:6px;text-align:center}
+  .veredicto{font-size:26px;font-weight:700;margin:4px 0 10px}
+{% endblock %}
+
+{% block contenido %}
+<h1>⚠️ Anomalías visuales</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <div class="tres">
+      <figure><img id="entrada"><figcaption>lo que entró</figcaption></figure>
+      <figure><img id="reconstruida"><figcaption>lo que el modelo esperaba</figcaption></figure>
+      <figure><img id="mapa"><figcaption>dónde no coincide</figcaption></figure>
+    </div>
+    <div class="controles">
+      <button id="btn-foto">Revisar una imagen…</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <label class="check">Sensibilidad
+        <input type="range" id="umbral" min="0.5" max="3" step="0.1" value="1">
+        <span id="umbral-txt">normal</span></label>
+    </div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Error <b id="m-error">–</b></span>
+      <span>Umbral <b id="m-umbral">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Veredicto</h2>
+    <div id="resultados"><p class="vacio">Sube una imagen para revisarla.</p></div>
+    <h2 style="margin-top:20px">Calidad del detector</h2>
+    <div id="calidad"><p class="vacio">—</p></div>
+    <p class="nota" style="margin-top:auto">
+      El modelo aprende a reconstruir lo normal. Cuando le llega algo que no encaja, la
+      reconstrucción falla y ese fallo delata la anomalía. <b>Solo se entrena con ejemplos
+      correctos</b>: no hace falta tener fotos de todos los defectos posibles, que es
+      justo lo que nunca se tiene.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "anomalias", config: "{{ vista.config }}"};
+let base = null, ultimo = null;
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) { avisoSinModelo(document.getElementById("sin-modelo"), VISTA); return false; }
+  const extra = datos.extra || {};
+  base = extra.umbral;
+  document.getElementById("m-umbral").textContent = base;
+  document.getElementById("calidad").innerHTML = `
+    <div class="fila"><span>AUC</span><span>${datos.acc_val?.toFixed(4) ?? "–"}</span></div>
+    <div class="fila"><span>anomalías detectadas</span>
+      <span>${extra.detectadas != null ? (extra.detectadas * 100).toFixed(0) + " %" : "–"}</span></div>
+    <div class="fila"><span>falsas alarmas</span>
+      <span>${extra.falsas_alarmas != null ? (extra.falsas_alarmas * 100).toFixed(1) + " %" : "–"}</span></div>
+    <div class="fila"><span>error típico de lo normal</span><span>${extra.error_normal}</span></div>`;
+  return true;
+}
+
+async function revisar(f) {
+  const factor = Number(document.getElementById("umbral").value);
+  const datos = await Panel.enviarArchivo(
+    `/api/anomalias/predecir?umbral=${(base * factor).toFixed(6)}`, f, "imagen");
+  ultimo = datos;
+  document.getElementById("entrada").src = datos.entrada;
+  document.getElementById("reconstruida").src = datos.reconstruida;
+  document.getElementById("mapa").src = datos.mapa;
+  document.getElementById("m-error").textContent = datos.error.toFixed(5);
+  document.getElementById("m-umbral").textContent = datos.umbral.toFixed(5);
+  const color = datos.anomala ? "var(--error)" : "var(--d)";
+  document.getElementById("resultados").innerHTML = `
+    <div class="veredicto" style="color:${color}">
+      ${datos.anomala ? "ANOMALÍA" : "NORMAL"}</div>
+    <div class="fila"><span>error de reconstrucción</span><span>${datos.error.toFixed(5)}</span></div>
+    <div class="fila"><span>umbral</span><span>${datos.umbral.toFixed(5)}</span></div>
+    <div class="barra" style="margin-top:10px"><span style="width:${
+      Math.min(100, datos.veces_umbral * 50).toFixed(0)}%;background:${color}"></span></div>
+    <div class="fila"><span>${datos.veces_umbral}× el umbral</span>
+      <span>${datos.ms.toFixed(0)} ms</span></div>`;
+}
+
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  window._ultimoArchivo = f;
+  try { await revisar(f); } catch (err) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  }
+  e.target.value = "";
+};
+document.getElementById("umbral").oninput = async () => {
+  const f = Number(document.getElementById("umbral").value);
+  document.getElementById("umbral-txt").textContent =
+    f < 0.9 ? "estricta" : f > 1.4 ? "permisiva" : "normal";
+  if (window._ultimoArchivo) await revisar(window._ultimoArchivo);
+};
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

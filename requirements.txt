@@ -1,0 +1,37 @@
+# Dependencias del ENTRENAMIENTO (máquina con la RTX 5060 Ti).
+#
+# PyTorch va aparte y ANTES, con la build de CUDA 12.8: la RTX 50xx es Blackwell
+# (sm_120) y no funciona con cu118/cu121.
+#
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+#   pip install -r requirements.txt
+#   python preparacion/comprobar_gpu.py
+
+torch>=2.7
+torchvision>=0.22
+numpy>=1.26
+pillow>=10.2
+pyyaml>=6.0            # configuraciones y presets
+opencv-python>=4.9     # detección de rostros al preparar los datos
+pyarrow>=15.0          # leer los parquet de los datasets (preparacion/descargar_dataset.py)
+
+# --- opcionales, cada uno habilita una parte del catálogo -------------------
+# timm>=1.0            # ~1000 backbones extra:  modelo.arquitectura=timm:nombre
+#
+# facenet-pytorch      # backbone preentrenado con caras (rostro:facenet)
+#   ¡OJO! Instálalo SIEMPRE con --no-deps:
+#       pip install facenet-pytorch --no-deps
+#   Sus dependencias fijan torch<2.3 y, si se lo permites, te degrada la instalación
+#   cu128 a cu121. En una RTX 50xx eso deja la GPU inservible (no hay kernels sm_120).
+# optuna>=3.6          # búsqueda bayesiana de hiperparámetros (buscar.py)
+#
+# --- por tarea -------------------------------------------------------------
+# torchaudio           # tarea audio_clasificacion (instalar del mismo índice que torch)
+# soundfile            # decodificador de audio recomendado: torchaudio 2.11 ya no trae
+#                      # decodificadores propios y exige torchcodec + FFmpeg del sistema
+# transformers         # tarea texto_clasificacion
+# sentencepiece        # algunos tokenizadores lo necesitan para convertirse a "rápidos"
+# peft                 # tarea texto_llm (LoRA); con bitsandbytes además QLoRA en 4 bits
+# tensorboard          # salida.tensorboard=true
+# bitsandbytes         # optimizador.nombre=adam8bit (menos VRAM)
+# onnx onnxruntime-gpu # exportar.py --formato onnx y servir sin PyTorch

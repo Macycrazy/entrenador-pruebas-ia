@@ -1,0 +1,55 @@
+# ---------------------------------------------------------------- entorno
+.venv*/
+__pycache__/
+*.pyc
+.DS_Store
+
+# ------------------------------------------------- datos con caras reales
+# Se descargan con preparacion/descargar_dataset.py. Nunca al repositorio:
+# son fotografías de personas reales.
+datos/.cache_parquet/
+datos/crudo/*
+datos/train/*
+datos/val/*
+datos/metadatos.csv
+!datos/**/.gitkeep
+datos_rostros/
+datos_rostros_pares/
+
+# --------------------------------------- datos que se generan con un comando
+# Cada uno tiene su generador en preparacion/. No hace falta versionarlos.
+datos_deteccion/
+datos_audio/
+datos_texto/
+datos_spoof/
+
+# Sí van datos_anomalias/ y datos_segmentacion/: son formas geométricas
+# generadas, pesan 5 MB entre las dos y hacen que esas vistas traigan ejemplos.
+
+# ------------------------------------------------ resultados y modelos
+# Los entrenamientos completos ocupan cientos de MB. Se dejan pasar solo los
+# cinco modelos ya entrenados (mejor.pt), que son 26 MB y hacen que el panel
+# funcione nada más clonar el repositorio.
+experimentos/*
+!experimentos/.gitkeep
+!experimentos/*/
+experimentos/*/*
+!experimentos/*/mejor.pt
+!experimentos/*/metricas.json
+!experimentos/*/config.yaml
+experimentos/demo_cpu/
+
+# --------------------------------------------- modelos descargados de fuera
+# Pesan 116 MB y se vuelven a descargar solos la primera vez que se usan.
+modelos/*.pt
+modelos/*.pth
+modelos/*.onnx
+modelos/*.json
+modelos/*.parquet
+modelos/ocr/
+
+# ------------------------------------------ índices con datos de personas
+# galeria.npz e indice_imagenes.npz guardan vectores extraídos de caras
+# reales, e indice_semantico.npz el texto de los documentos indexados.
+# Se regeneran con galeria_rostros.py y buscar_* en un momento.
+modelos/*.npz

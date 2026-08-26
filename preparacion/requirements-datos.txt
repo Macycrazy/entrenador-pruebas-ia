@@ -1,0 +1,15 @@
+# Dependencias del ENTRENAMIENTO (máquina con la RTX 5060 Ti).
+#
+# IMPORTANTE: instala PyTorch ANTES que este archivo, con la build de CUDA 12.8.
+# La RTX 5060 Ti es Blackwell (sm_120) y no funciona con las builds cu118/cu121:
+#
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+#   pip install -r requirements.txt
+#   python preparacion/comprobar_gpu.py
+
+torch>=2.7
+torchvision>=0.22
+numpy>=1.26
+opencv-python>=4.9
+pillow>=10.2
+pyarrow>=15.0          # leer los parquet de los datasets (descargar_dataset.py)

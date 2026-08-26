@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block titulo %}Modelo de lenguaje{% endblock %}
+
+{% block estilos %}
+  .conversacion{display:flex;flex-direction:column;gap:12px;min-height:340px;
+                max-height:56vh;overflow-y:auto;padding-right:6px}
+  .burbuja{max-width:82%;padding:11px 14px;border-radius:12px;font-size:14px;line-height:1.6;
+           white-space:pre-wrap;word-break:break-word}
+  .burbuja.mia{align-self:flex-end;background:var(--acento);color:#06231f}
+  .burbuja.suya{align-self:flex-start;background:var(--panel2);border:1px solid var(--borde)}
+  .burbuja.pensando{color:var(--suave);font-style:italic}
+  .entrada{display:flex;gap:9px;margin-top:14px}
+  .entrada textarea{min-height:52px}
+{% endblock %}
+
+{% block contenido %}
+<h1>💬 Modelo de lenguaje</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div id="sin-modelo" hidden></div>
+
+<div class="rejilla" id="contenido">
+  <section class="tarjeta">
+    <div class="conversacion" id="conversacion">
+      <div class="burbuja suya">Pregúntame algo. Respondo con el ajuste LoRA que hayas entrenado.</div>
+    </div>
+    <div class="entrada">
+      <textarea id="mensaje" placeholder="Escribe tu instrucción… (Enter para enviar)"></textarea>
+      <button id="btn-enviar">Enviar</button>
+    </div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Última respuesta <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Ajustes</h2>
+    <label class="check" style="margin-bottom:14px">Tokens máximos
+      <input type="range" id="tokens" min="32" max="512" step="32" value="200">
+      <span id="tokens-txt">200</span></label>
+    <label class="check" style="margin-bottom:14px">Temperatura
+      <input type="range" id="temperatura" min="0" max="1.5" step="0.05" value="0.7">
+      <span id="temperatura-txt">0.70</span></label>
+    <button class="sec" id="btn-limpiar">Limpiar conversación</button>
+    <p class="nota" style="margin-top:auto">
+      Temperatura 0 hace la respuesta determinista; subirla la vuelve más creativa y más
+      propensa a inventar. Cada mensaje es independiente: el modelo no recuerda los
+      anteriores salvo que se lo pegues en la instrucción.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const VISTA = {slug: "llm", config: "{{ vista.config }}"};
+const conversacion = document.getElementById("conversacion");
+const mensaje = document.getElementById("mensaje");
+
+async function comprobar() {
+  const {ok} = await Panel.pintarEstado(VISTA.slug,
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  document.getElementById("contenido").hidden = !ok;
+  document.getElementById("sin-modelo").hidden = ok;
+  if (!ok) avisoSinModelo(document.getElementById("sin-modelo"), VISTA);
+  return ok;
+}
+
+function burbuja(texto, clase) {
+  const div = document.createElement("div");
+  div.className = "burbuja " + clase;
+  div.textContent = texto;
+  conversacion.appendChild(div);
+  conversacion.scrollTop = conversacion.scrollHeight;
+  return div;
+}
+
+async function enviar() {
+  const texto = mensaje.value.trim();
+  if (!texto) return;
+  mensaje.value = "";
+  burbuja(texto, "mia");
+  const esperando = burbuja("pensando…", "suya pensando");
+  document.getElementById("btn-enviar").disabled = true;
+  try {
+    const datos = await Panel.enviarJson("/api/llm/responder", {
+      instruccion: texto,
+      tokens: Number(document.getElementById("tokens").value),
+      temperatura: Number(document.getElementById("temperatura").value),
+    });
+    esperando.className = "burbuja suya";
+    esperando.textContent = datos.respuesta || "(respuesta vacía)";
+    document.getElementById("m-ms").textContent = (datos.ms / 1000).toFixed(1) + " s";
+  } catch (e) {
+    esperando.className = "burbuja suya";
+    esperando.textContent = "Error: " + e.message;
+  } finally {
+    document.getElementById("btn-enviar").disabled = false;
+  }
+}
+
+document.getElementById("btn-enviar").onclick = enviar;
+mensaje.onkeydown = (e) => {
+  if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); enviar(); }
+};
+document.getElementById("btn-limpiar").onclick = () => conversacion.innerHTML = "";
+for (const [id, formato] of [["tokens", v => v], ["temperatura", v => Number(v).toFixed(2)]]) {
+  const control = document.getElementById(id);
+  control.oninput = () => document.getElementById(id + "-txt").textContent = formato(control.value);
+}
+
+comprobar();
+setInterval(() => { if (document.getElementById("contenido").hidden) comprobar(); }, 6000);
+</script>
+{% endblock %}

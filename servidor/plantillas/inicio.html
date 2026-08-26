@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block titulo %}Panel de IA{% endblock %}
+
+{% block estilos %}
+  /* --- Héroe -------------------------------------------------------------- */
+  .heroe{position:relative;overflow:hidden;border:1px solid var(--borde);
+         border-radius:20px;padding:38px 34px 34px;margin-bottom:26px;
+         background:linear-gradient(135deg,rgba(34,61,144,.55),rgba(9,113,184,.28) 45%,rgba(10,18,48,.2));
+         box-shadow:var(--sombra)}
+  .heroe::before{content:"";position:absolute;inset:-40% -10% auto auto;width:520px;height:520px;
+                 background:radial-gradient(circle,rgba(29,192,231,.30),transparent 62%);
+                 animation:flotar 11s ease-in-out infinite;pointer-events:none}
+  .heroe::after{content:"";position:absolute;inset:auto auto -55% -12%;width:420px;height:420px;
+                background:radial-gradient(circle,rgba(34,61,144,.55),transparent 65%);
+                animation:flotar 14s ease-in-out infinite reverse;pointer-events:none}
+  .heroe > *{position:relative;z-index:1}
+  .heroe h1{display:block;font-size:34px;line-height:1.18;margin:0 0 12px;letter-spacing:-.6px}
+  .heroe h1 .destaca{background:linear-gradient(90deg,var(--cian),var(--celeste));
+                     -webkit-background-clip:text;background-clip:text;color:transparent}
+  .heroe .lema{max-width:660px;font-size:15px;color:var(--suave);line-height:1.65;margin:0}
+  .heroe .acciones{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+
+  /* --- Cifras ------------------------------------------------------------- */
+  .cifras{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+          margin:26px 0 30px}
+  .cifra{background:var(--panel);border:1px solid var(--borde);border-radius:14px;
+         padding:18px 18px 16px;position:relative;overflow:hidden;transition:.25s var(--curva)}
+  .cifra:hover{border-color:var(--borde-vivo);transform:translateY(-3px)}
+  .cifra::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;
+                background:linear-gradient(90deg,var(--cian),transparent);opacity:.55}
+  .cifra b{display:block;font-size:32px;font-weight:750;letter-spacing:-1px;
+           font-variant-numeric:tabular-nums;line-height:1.05;
+           background:linear-gradient(180deg,#fff,var(--celeste));
+           -webkit-background-clip:text;background-clip:text;color:transparent}
+  .cifra span{display:block;margin-top:6px;font-size:12px;color:var(--suave);
+              text-transform:uppercase;letter-spacing:.7px}
+
+  /* --- Familias y tarjetas ------------------------------------------------ */
+  .familia{margin:34px 0 14px;display:flex;align-items:center;gap:12px}
+  .familia h2{margin:0;font-size:14px;font-weight:650;letter-spacing:1.4px;
+              text-transform:uppercase;color:var(--celeste);white-space:nowrap}
+  .familia .linea{flex:1;height:1px;background:linear-gradient(90deg,var(--borde-vivo),transparent)}
+  .familia .cuenta{font-size:11.5px;color:var(--tenue);white-space:nowrap}
+
+  .tarjetas{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(272px,1fr))}
+  .tarea{display:block;position:relative;overflow:hidden;background:var(--panel);
+         border:1px solid var(--borde);border-radius:16px;padding:20px 18px 16px;
+         transition:transform .28s var(--curva),border-color .28s,box-shadow .28s}
+  .tarea::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;
+                 background:linear-gradient(180deg,var(--cian),var(--azul));
+                 transform:scaleY(0);transform-origin:top;transition:transform .3s var(--curva)}
+  .tarea:hover{transform:translateY(-5px);border-color:var(--borde-vivo);
+               box-shadow:0 16px 34px rgba(0,0,0,.42)}
+  .tarea:hover::before{transform:scaleY(1)}
+  .tarea .icono{font-size:28px;line-height:1;display:inline-block;transition:transform .3s var(--curva)}
+  .tarea:hover .icono{transform:scale(1.18) rotate(-6deg)}
+  .tarea h3{margin:12px 0 7px;font-size:15.5px;font-weight:650}
+  .tarea p{margin:0;font-size:13px;color:var(--suave);line-height:1.58;min-height:60px}
+  .tarea .pie{display:flex;justify-content:space-between;align-items:center;gap:8px;
+              margin-top:14px;padding-top:12px;border-top:1px solid var(--borde);
+              font-size:11.5px;color:var(--tenue)}
+  .tarea.apagada{opacity:.6}
+  .tarea.apagada:hover{opacity:.88}
+
+  @media (max-width:640px){ .heroe{padding:28px 22px} .heroe h1{font-size:26px} }
+{% endblock %}
+
+{% block contenido %}
+{# Agrupación por familia: el orden de esta lista es el orden en que se muestran. #}
+{% set familias = [
+  ("Biometría facial",  "Quién es quien hay delante de la cámara, y si es una persona real.",
+   ["genero","atributos","rostros","antispoofing"]),
+  ("Visión por computador", "Entender qué hay en una imagen y dónde está.",
+   ["deteccion","segmentacion","seguimiento","pose","profundidad","anomalias","superresolucion","ocr"]),
+  ("Audio y voz", "Escuchar, transcribir y hablar.",
+   ["audio","transcripcion","voz"]),
+  ("Generación", "Crear contenido nuevo que no existía.",
+   ["generacion"]),
+  ("Texto y lenguaje", "Leer, clasificar, buscar por significado y conversar.",
+   ["texto","ner","busqueda","imagenes","llm"]),
+  ("Datos y predicción", "Anticipar lo que va a pasar a partir de los registros.",
+   ["tabular","series"]),
+] %}
+{% set por_slug = {} %}{% for v in vistas %}{% set _ = por_slug.update({v.slug: v}) %}{% endfor %}
+
+<section class="heroe entra">
+  <h1>Inteligencia artificial <span class="destaca">entrenada aquí dentro</span>,
+      sobre datos del CIIP.</h1>
+  <p class="lema">{{ vistas | length }} demostraciones funcionando en esta misma máquina:
+     ninguna imagen, grabación ni documento sale a internet. Cada una se entrena por
+     separado y puedes verla aprender en directo. Es la versión pequeña de lo que un
+     servidor dedicado haría a escala real.</p>
+  <div class="acciones">
+    <a class="boton" href="/recorrido">🎬 Empezar el recorrido guiado</a>
+    <a class="boton secundario" href="/entrenamiento">🚀 Entrenar un modelo</a>
+    <a class="boton secundario" href="/guia">📖 Cómo funciona</a>
+  </div>
+</section>
+
+<div class="cifras">
+  <div class="cifra entra entra-1"><b data-cuenta="{{ vistas | length }}">0</b><span>demostraciones</span></div>
+  <div class="cifra entra entra-2"><b data-cuenta="{{ listas }}">0</b><span>listas para usar</span></div>
+  <div class="cifra entra entra-3"><b data-cuenta="{{ entrenados }}">0</b><span>entrenados aquí</span></div>
+  <div class="cifra entra entra-4"><b data-cuenta="{{ por_entrenar }}">0</b><span>por entrenar</span></div>
+  <div class="cifra entra entra-4"><b>{{ dispositivo }}</b><span>dispositivo</span></div>
+</div>
+
+{% for nombre, resumen, slugs in familias %}
+  {% set grupo = [] %}{% for s in slugs %}{% if s in por_slug %}{% set _ = grupo.append(por_slug[s]) %}{% endif %}{% endfor %}
+  {% if grupo %}
+  <div class="familia">
+    <h2>{{ nombre }}</h2>
+    <div class="linea"></div>
+    <span class="cuenta">{{ resumen }}</span>
+  </div>
+  <div class="tarjetas">
+    {% for v in grupo %}
+    <a class="tarea entra {% if v.nivel() == 'sin' %}apagada{% endif %}"
+       style="animation-delay:{{ loop.index0 * 45 }}ms" href="/{{ v.slug }}">
+      <div class="icono">{{ v.icono }}</div>
+      <h3>{{ v.titulo }}</h3>
+      <p>{{ v.descripcion }}</p>
+      <div class="pie">
+        <span>{{ v.tarea or "sin entrenamiento" }}</span>
+        {% if v.nivel() == 'entrenado' %}
+          <span class="chip ok" title="modelo entrenado en esta máquina">entrenado aquí</span>
+        {% elif v.nivel() == 'base' %}
+          <span class="chip listo"
+                title="funciona ya con {{ v.modelo_base or 'un modelo preentrenado' }}">listo</span>
+        {% else %}
+          <span class="chip mal" title="hay que entrenarlo primero">por entrenar</span>
+        {% endif %}
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endfor %}
+
+<p class="nota" style="margin-top:30px">
+  Las tarjetas atenuadas todavía no tienen modelo propio entrenado: la página funciona
+  igual y explica cómo entrenarlo. Cada tarea se entrena con
+  <code>python entrenar.py --config configs/&lt;tarea&gt;.yaml</code>, o desde
+  <a href="/entrenamiento">la consola del panel</a>. El servidor solo lee modelos ya
+  entrenados: nunca entrena por su cuenta.
+</p>
+
+<script>
+// Los contadores suben desde cero cuando la tarjeta entra en pantalla.
+(function(){
+  const lento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("[data-cuenta]").forEach(el => {
+    const fin = parseInt(el.dataset.cuenta, 10) || 0;
+    if (lento) { el.textContent = fin; return; }
+    let inicio = null;
+    const paso = t => {
+      if (inicio === null) inicio = t;
+      const p = Math.min((t - inicio) / 900, 1);
+      el.textContent = Math.round(fin * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  });
+})();
+</script>
+{% endblock %}

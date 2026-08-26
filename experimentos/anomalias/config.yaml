@@ -1,0 +1,223 @@
+tarea: imagen_anomalias
+nombre: anomalias
+semilla: 42
+determinista: false
+datos:
+  ruta: datos_anomalias
+  clases: null
+  tam_img: 224
+  batch: 32
+  workers: 3
+  balanceo: sampler
+  kfold: 0
+  fold: 0
+  val_proporcion: 0.2
+  agrupar_por: null
+  metadatos: null
+  subgrupos: []
+  objetivos_extra: []
+  deduplicar: false
+  cache_ram: false
+  limite: 0
+modelo:
+  arquitectura: efficientnet_v2_s
+  preentrenado: true
+  dropout: 0.2
+  drop_path: 0.0
+  congelar_backbone: false
+  cabeza: lineal
+  checkpoint_gradiente: false
+optimizador:
+  nombre: adamw
+  lr: 0.001
+  wd: 0.0
+  momentum: 0.9
+  nesterov: true
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
+  lr_backbone_factor: 1.0
+  llrd: 0.0
+  sam: false
+  sam_rho: 0.05
+  lookahead: false
+scheduler:
+  nombre: coseno
+  warmup_epocas: 0.5
+  min_lr: 0.0
+  step_tam: 10
+  hitos:
+  - 10
+  - 15
+  gamma: 0.1
+  paciencia_plateau: 2
+  T0: 5
+  potencia: 1.0
+perdida:
+  nombre: ce
+  suavizado: 0.05
+  focal_gamma: 2.0
+  pesos_clase: false
+  arcface_margen: 0.5
+  arcface_escala: 30.0
+  destilacion:
+    activa: false
+    profesor: null
+    temperatura: 4.0
+    alfa: 0.5
+aumentos:
+  politica: basica
+  randaugment_n: 2
+  randaugment_m: 9
+  flip: 0.5
+  recorte_escala:
+  - 0.65
+  - 1.0
+  rotacion: 12
+  color:
+  - 0.3
+  - 0.3
+  - 0.25
+  - 0.03
+  grises: 0.05
+  borrado: 0.25
+  webcam: 0.0
+  mixup: 0.0
+  cutmix: 0.0
+  mixcut_prob: 0.5
+entrenamiento:
+  epocas: 30
+  precision: fp32
+  acumular: 1
+  clip_grad: 5.0
+  congelar_epocas: 0
+  descongelado_gradual: false
+  paciencia: 12
+  metrica_objetivo: acc
+  ema: 0.999
+  swa: false
+  swa_desde: 0.75
+  compilar: false
+  canales_last: false
+  tf32: true
+  vigilar_gpu: true
+  temp_max: 85
+  temp_avisos: 3
+  resolucion_progresiva: []
+  reanudar: null
+anomalias:
+  tam_img: 96
+  canales: 32
+  cuello: 64
+  percentil: 99
+  carpeta_anomalas: ''
+superresolucion:
+  escala: 4
+  tam_parche: 128
+  canales: 64
+  bloques: 8
+  degradacion: 0.5
+audio:
+  sr: 16000
+  duracion: 3.0
+  n_mels: 64
+  n_fft: 1024
+  hop: 256
+  specaug_tiempo: 0.15
+  specaug_frec: 0.15
+  recorte_aleatorio: true
+generacion:
+  modelo_base: segmind/tiny-sd
+  resolucion: 512
+  lora_r: 16
+  lora_alpha: 16
+  instancia: una foto de sks persona
+  pasos: 25
+  guia: 7.5
+  negativo: borroso, deforme, baja calidad
+transcripcion:
+  modelo_base: openai/whisper-small
+  idioma: spanish
+  tarea: transcribe
+  sr: 16000
+  duracion_max: 30.0
+voz:
+  modelo_base: microsoft/speecht5_tts
+  vocoder: microsoft/speecht5_hifigan
+  banco_voces: Matthijs/cmu-arctic-xvectors
+  voz_por_defecto: 7306
+  sr: 16000
+  tokens_max: 600
+  vector_hablante: ''
+tabular:
+  objetivo: ''
+  ignorar: []
+  capas:
+  - 128
+  - 64
+  dropout: 0.2
+  tipo: auto
+series:
+  columna: ''
+  fecha: ''
+  ventana: 24
+  horizonte: 6
+  capas:
+  - 128
+  - 64
+ner:
+  modelo_base: Davlan/bert-base-multilingual-cased-ner-hrl
+  longitud_max: 256
+  etiquetas: []
+imagenes:
+  modelo_base: openai/clip-vit-base-patch32
+  lote: 32
+  resultados: 12
+busqueda:
+  modelo_base: intfloat/multilingual-e5-small
+  trozo: 250
+  solape: 60
+  resultados: 5
+texto:
+  modelo_base: distilbert-base-multilingual-cased
+  longitud_max: 256
+  columna_texto: texto
+  columna_etiqueta: etiqueta
+llm:
+  modelo_base: Qwen/Qwen2.5-1.5B-Instruct
+  longitud_max: 512
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  lora_modulos: []
+  cuatro_bits: false
+  solo_respuesta: true
+  plantilla: '### Instrucción:
+
+    {instruccion}
+
+    {entrada}
+
+
+    ### Respuesta:
+
+    '
+rostros:
+  dim_embedding: 512
+  min_por_identidad: 4
+  val_por_identidad: 2
+  max_identidades: 0
+  pares_max: 4000
+  far_objetivo: 0.001
+  umbral_similitud: 0.35
+evaluacion:
+  tta: false
+  calibrar: false
+  curvas: false
+  umbral: 0.5
+  guardar_errores: true
+salida:
+  dir: /home/miguel/Descargas/ia-genero/experimentos
+  tensorboard: false
+  guardar_cada: 0

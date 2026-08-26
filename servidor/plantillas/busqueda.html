@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% block titulo %}Búsqueda semántica{% endblock %}
+
+{% block estilos %}
+  .resultado{background:var(--panel2);border:1px solid var(--borde);border-radius:10px;
+             padding:13px 15px;margin-bottom:10px}
+  .resultado .cabecera{display:flex;justify-content:space-between;font-size:11.5px;
+                       color:var(--suave);margin-bottom:7px}
+  .resultado p{margin:0;font-size:14px;line-height:1.65}
+  .doc{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;
+       background:var(--panel2);border:1px solid var(--borde);border-radius:8px;
+       margin-bottom:6px;font-size:12.5px}
+  .doc button{padding:3px 8px;font-size:11px}
+{% endblock %}
+
+{% block contenido %}
+<h1>🔎 Búsqueda semántica</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <h2>Pregunta</h2>
+    <div class="controles" style="margin-top:0">
+      <input type="text" id="pregunta" style="flex:1;min-width:260px"
+        placeholder="¿Qué documentos hablan de la renovación del carnet?">
+      <button id="btn-buscar">Buscar</button>
+    </div>
+    <div id="resultados" style="margin-top:18px">
+      <p class="vacio">Indexa algún documento y pregunta lo que quieras.</p>
+    </div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Fragmentos <b id="m-fragmentos">0</b></span>
+      <span>Tiempo <b id="m-ms">–</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Documentos</h2>
+    <div class="controles" style="margin-top:0">
+      <button class="sec" id="btn-subir">Subir .txt…</button>
+      <input type="file" id="archivo" accept=".txt,.md,.csv" hidden>
+    </div>
+    <textarea id="pegado" style="min-height:90px;margin-top:10px"
+      placeholder="…o pega aquí un texto y pulsa Indexar"></textarea>
+    <div class="controles"><button id="btn-indexar">Indexar lo pegado</button></div>
+
+    <h2 style="margin-top:20px">Indexados</h2>
+    <div id="lista"><p class="vacio">Ninguno.</p></div>
+
+    <p class="nota" style="margin-top:auto">
+      Busca por significado, no por palabras: encuentra el fragmento que responde aunque no
+      comparta ni una palabra con la pregunta. Es la base de un asistente que conteste
+      sobre los reglamentos de la institución.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function comprobar() {
+  const {ok} = await Panel.pintarEstado("busqueda",
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  if (ok) await cargarIndice();
+  return ok;
+}
+
+async function cargarIndice() {
+  const r = await fetch("/api/busqueda/estado_indice");
+  if (!r.ok) return;
+  const datos = await r.json();
+  document.getElementById("m-fragmentos").textContent = datos.fragmentos;
+  document.getElementById("lista").innerHTML = datos.origenes.length
+    ? datos.origenes.map(o => `<div class="doc"><span>${Panel.escapar(o)}</span>
+        <button class="sec" data-quitar="${Panel.escapar(o)}">Quitar</button></div>`).join("")
+    : '<p class="vacio">Ninguno.</p>';
+  document.querySelectorAll("[data-quitar]").forEach(b => b.onclick = async () => {
+    await fetch(`/api/busqueda/documentos/${encodeURIComponent(b.dataset.quitar)}`,
+                {method: "DELETE"});
+    cargarIndice();
+  });
+}
+
+document.getElementById("btn-subir").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  try {
+    const datos = await Panel.enviarArchivo("/api/busqueda/indexar", f, "archivo");
+    document.getElementById("m-fragmentos").textContent = datos.total;
+    await cargarIndice();
+  } catch (err) { alert(err.message); }
+  e.target.value = "";
+};
+
+document.getElementById("btn-indexar").onclick = async (e) => {
+  const texto = document.getElementById("pegado").value.trim();
+  if (!texto) return;
+  e.target.disabled = true;
+  try {
+    await Panel.enviarJson("/api/busqueda/indexar",
+      {texto, origen: "pegado " + new Date().toLocaleTimeString("es")});
+    document.getElementById("pegado").value = "";
+    await cargarIndice();
+  } catch (err) { alert(err.message); } finally { e.target.disabled = false; }
+};
+
+async function buscar() {
+  const pregunta = document.getElementById("pregunta").value.trim();
+  if (!pregunta) return;
+  document.getElementById("resultados").innerHTML = '<p class="vacio">Buscando…</p>';
+  try {
+    const datos = await Panel.enviarJson("/api/busqueda/buscar", {pregunta});
+    document.getElementById("m-ms").textContent = (datos.ms ?? 0).toFixed(0) + " ms";
+    document.getElementById("resultados").innerHTML = datos.resultados.length
+      ? datos.resultados.map(r => `<div class="resultado">
+          <div class="cabecera"><span>${Panel.escapar(r.origen)}</span>
+            <span>parecido ${r.similitud.toFixed(3)}</span></div>
+          <p>${Panel.escapar(r.texto)}</p></div>`).join("")
+      : `<p class="vacio">${Panel.escapar(datos.detalle || "Sin resultados.")}</p>`;
+  } catch (err) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(err.message)}</p>`;
+  }
+}
+document.getElementById("btn-buscar").onclick = buscar;
+document.getElementById("pregunta").onkeydown = (e) => { if (e.key === "Enter") buscar(); };
+
+comprobar();
+</script>
+{% endblock %}

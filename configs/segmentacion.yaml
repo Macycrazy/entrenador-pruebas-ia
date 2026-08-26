@@ -1,0 +1,53 @@
+# Segmentación semántica: una clase por píxel.
+#
+#   datos_segmentacion/clases.txt        (la primera clase es el fondo)
+#   datos_segmentacion/train/imagenes/*.jpg + train/mascaras/*.png
+#
+#   python preparacion/generar_segmentacion_sintetica.py
+#   python entrenar.py --config configs/segmentacion.yaml
+nombre: segmentacion
+tarea: vision_segmentacion
+
+datos:
+  ruta: datos_segmentacion
+  tam_img: 256          # 512 da mejor detalle y cuesta 4 veces más
+  batch: 8
+  workers: 4
+  balanceo: ninguno
+
+modelo:
+  # deeplabv3_resnet50 es el más preciso; lraspp_mobilenet_v3_large va en tiempo real
+  arquitectura: deeplabv3_resnet50
+  preentrenado: true
+
+optimizador:
+  nombre: adamw
+  lr: 1.0e-4
+  wd: 0.01
+  lr_backbone_factor: 0.3
+
+scheduler:
+  nombre: polinomial    # lo habitual en segmentación
+  warmup_epocas: 0.5
+  potencia: 0.9
+
+perdida:
+  suavizado: 0.0        # con máscaras el suavizado suele estorbar
+
+aumentos:
+  flip: 0.5
+  color: [0.2, 0.2, 0.0, 0.0]
+
+entrenamiento:
+  epocas: 30
+  precision: bf16
+  congelar_epocas: 0
+  canales_last: false
+  ema: 0.999
+  paciencia: 8
+  metrica_objetivo: miou
+
+evaluacion:
+  calibrar: false
+  curvas: false
+  tta: false

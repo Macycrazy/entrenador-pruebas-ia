@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block titulo %}Pose corporal{% endblock %}
+
+{% block contenido %}
+<h1>🤸 Pose corporal</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <div class="controles acciones-arriba">
+      <button id="btn-camara">Iniciar cámara</button>
+      <button id="btn-foto" class="sec">Analizar imagen…</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <label class="check"><input type="checkbox" id="chk-espejo" checked> Espejo</label>
+      <label class="check">Confianza
+        <input type="range" id="umbral" min="0.3" max="0.95" step="0.05" value="0.8">
+        <span id="umbral-txt">0.80</span></label>
+    </div>
+
+    <div class="lienzo-caja">
+      <video id="video" playsinline muted autoplay class="espejo"></video>
+      <canvas id="overlay" class="overlay"></canvas>
+      <div class="aviso" id="aviso">Inicia la cámara o sube una foto de cuerpo entero</div>
+    </div>
+
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Personas <b id="m-personas">0</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Articulaciones</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      Modelo ya entrenado con COCO: 17 puntos por persona, sin entrenar nada. Sirve para
+      postura y ergonomía, control de acceso (¿está de pie o en el suelo?) o para contar
+      gente sin identificarla.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const video = document.getElementById("video");
+const overlay = document.getElementById("overlay");
+const umbral = document.getElementById("umbral");
+let modoImagen = false, huesos = [], nombres = [];
+
+const camara = new Camara(video, {intervalo: 700, onFotograma: async (blob) => analizar(blob)});
+
+async function comprobar() {
+  const {ok, datos} = await Panel.pintarEstado("pose",
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"));
+  if (ok) { huesos = datos.extra?.huesos || []; nombres = datos.extra?.nombres || []; }
+  return ok;
+}
+
+async function analizar(blob) {
+  try {
+    const datos = await Panel.enviarArchivo(
+      `/api/pose/predecir?umbral=${umbral.value}`, blob, "imagen");
+    pintar(datos);
+  } catch (e) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(e.message)}</p>`;
+  }
+}
+
+function pintar(datos) {
+  document.getElementById("m-personas").textContent = datos.personas.length;
+  const ctx = overlay.getContext("2d");
+  const rect = video.getBoundingClientRect();
+  overlay.width = rect.width; overlay.height = rect.height;
+  ctx.clearRect(0, 0, overlay.width, overlay.height);
+
+  const ajustar = modoImagen ? Math.min : Math.max;
+  const escala = ajustar(overlay.width / datos.ancho, overlay.height / datos.alto);
+  const dx = (overlay.width - datos.ancho * escala) / 2;
+  const dy = (overlay.height - datos.alto * escala) / 2;
+  const espejo = document.getElementById("chk-espejo").checked && !modoImagen;
+  const px = p => espejo ? overlay.width - (p.x * escala + dx) : p.x * escala + dx;
+  const py = p => p.y * escala + dy;
+
+  datos.personas.forEach((persona, i) => {
+    const color = Panel.color(i);
+    ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = 3;
+    for (const [a, b] of (datos.huesos || huesos)) {
+      const pa = persona.puntos[a], pb = persona.puntos[b];
+      if (!pa || !pb) continue;
+      ctx.beginPath(); ctx.moveTo(px(pa), py(pa)); ctx.lineTo(px(pb), py(pb)); ctx.stroke();
+    }
+    for (const punto of persona.puntos) {
+      ctx.beginPath(); ctx.arc(px(punto), py(punto), 4, 0, Math.PI * 2); ctx.fill();
+    }
+  });
+
+  document.getElementById("resultados").innerHTML = datos.personas.length
+    ? datos.personas.map((p, i) => `
+        <div class="fila" style="padding:6px 0;border-bottom:1px dashed var(--borde)">
+          <span style="color:${Panel.color(i)}">persona ${i + 1}</span>
+          <span>${p.puntos.filter(q => q.visible).length}/${p.puntos.length} puntos ·
+            ${(p.confianza * 100).toFixed(0)}%</span></div>`).join("")
+    : '<p class="vacio">No se detecta ninguna persona.</p>';
+}
+
+document.getElementById("btn-camara").onclick = async (e) => {
+  if (camara.activa) {
+    camara.detener(); e.target.textContent = "Iniciar cámara"; return;
+  }
+  modoImagen = false;
+  video.style.backgroundImage = "";
+  video.classList.toggle("espejo", document.getElementById("chk-espejo").checked);
+  await camara.iniciar();
+  document.getElementById("aviso").hidden = true;
+  e.target.textContent = "Detener cámara";
+};
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  camara.detener();
+  modoImagen = true;
+  video.classList.remove("espejo");
+  document.getElementById("chk-espejo").checked = false;
+  video.style.cssText += `background-image:url(${URL.createObjectURL(f)});
+    background-size:contain;background-position:center;background-repeat:no-repeat`;
+  document.getElementById("aviso").hidden = true;
+  await analizar(f);
+  e.target.value = "";
+};
+umbral.oninput = () => document.getElementById("umbral-txt").textContent =
+  Number(umbral.value).toFixed(2);
+document.getElementById("chk-espejo").onchange = (e) =>
+  video.classList.toggle("espejo", e.target.checked && !modoImagen);
+
+comprobar();
+</script>
+{% endblock %}

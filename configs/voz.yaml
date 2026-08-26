@@ -1,0 +1,59 @@
+# Clasificación de audio: género por voz, identificación de hablante, palabra clave,
+# sonidos de máquina… El sonido se convierte en espectrograma mel y se trata como imagen,
+# así que valen todos los backbones y casi todas las opciones de visión.
+#
+#   datos_audio/<clase>/*.wav
+#   python entrenar.py --config configs/voz.yaml
+#
+# Para probar sin datos:  python preparacion/generar_audio_sintetico.py
+nombre: voz
+tarea: audio_clasificacion
+
+datos:
+  ruta: datos_audio
+  batch: 32
+  workers: 4
+  balanceo: sampler
+  val_proporcion: 0.15
+
+audio:
+  sr: 16000
+  duracion: 3.0        # sube a 5-8 s para identificar hablante; baja a 1 s para wake-word
+  n_mels: 64
+  n_fft: 1024
+  hop: 256
+  specaug_tiempo: 0.15
+  specaug_frec: 0.15
+
+modelo:
+  arquitectura: efficientnet_b0   # de sobra para espectrogramas; mobilenet_v3_large si va justo
+  preentrenado: true              # sí, los pesos de ImageNet ayudan también aquí
+  dropout: 0.2
+
+optimizador:
+  nombre: adamw
+  lr: 3.0e-4
+  wd: 0.01
+
+scheduler:
+  nombre: coseno
+  warmup_epocas: 1.0
+
+aumentos:
+  politica: ninguna    # las aumentaciones de imagen no tienen sentido en un espectrograma;
+  flip: 0.0            # voltear el tiempo cambia el significado del sonido
+  webcam: 0.0
+  borrado: 0.0
+  mixup: 0.2           # esto sí: mixup funciona muy bien en audio
+
+entrenamiento:
+  epocas: 25
+  precision: bf16
+  congelar_epocas: 1
+  ema: 0.999
+  paciencia: 6
+  metrica_objetivo: acc_balanceada
+
+evaluacion:
+  tta: false           # el espejo horizontal invertiría el tiempo
+  calibrar: true

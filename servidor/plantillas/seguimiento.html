@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block titulo %}Objetos y seguimiento{% endblock %}
+
+{% block contenido %}
+<h1>🎯 Objetos y seguimiento</h1>
+<p class="subtitulo">{{ vista.descripcion }}</p>
+
+<div class="rejilla">
+  <section class="tarjeta">
+    <div class="controles acciones-arriba">
+      <button id="btn-camara">Iniciar cámara</button>
+      <button id="btn-foto" class="sec">Analizar imagen…</button>
+      <input type="file" id="archivo" accept="image/*" hidden>
+      <label class="check"><input type="checkbox" id="chk-seguir" checked> Seguir objetos</label>
+      <label class="check">Confianza
+        <input type="range" id="umbral" min="0.2" max="0.95" step="0.05" value="0.6">
+        <span id="umbral-txt">0.60</span></label>
+    </div>
+    <div class="lienzo-caja">
+      <video id="video" playsinline muted autoplay></video>
+      <canvas id="overlay" class="overlay"></canvas>
+      <div class="aviso" id="aviso">Inicia la cámara o sube una foto</div>
+    </div>
+    <div class="metricas">
+      <span>Estado <b id="chip-estado" class="chip">comprobando…</b></span>
+      <span>Modelo <b id="chip-modelo" hidden></b></span>
+      <span>Objetos <b id="m-objetos">0</b></span>
+      <span>Seguidos <b id="m-seguidos">0</b></span>
+    </div>
+  </section>
+
+  <aside class="tarjeta" style="display:flex;flex-direction:column">
+    <h2>Qué está viendo</h2>
+    <div id="resultados"><p class="vacio">Sin datos todavía.</p></div>
+    <p class="nota" style="margin-top:auto">
+      Detector ya entrenado con 80 objetos cotidianos, sin entrenar nada. El seguimiento
+      asigna un número a cada objeto y lo mantiene entre fotogramas emparejando por
+      solapamiento, así se puede contar cuánta gente pasó sin identificar a nadie.
+    </p>
+  </aside>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const video = document.getElementById("video");
+const overlay = document.getElementById("overlay");
+const umbral = document.getElementById("umbral");
+let modoImagen = false, pistas = [], siguienteId = 1, vistos = new Set();
+
+const camara = new Camara(video, {intervalo: 800, onFotograma: async (blob) => analizar(blob)});
+
+async function comprobar() {
+  return (await Panel.pintarEstado("seguimiento",
+    document.getElementById("chip-estado"), document.getElementById("chip-modelo"))).ok;
+}
+
+/** Solapamiento entre dos cajas: la base del seguimiento. */
+function iou(a, b) {
+  const x1 = Math.max(a.x, b.x), y1 = Math.max(a.y, b.y);
+  const x2 = Math.min(a.x + a.ancho, b.x + b.ancho);
+  const y2 = Math.min(a.y + a.alto, b.y + b.alto);
+  const inter = Math.max(0, x2 - x1) * Math.max(0, y2 - y1);
+  return inter / (a.ancho * a.alto + b.ancho * b.alto - inter + 1e-9);
+}
+
+/** Empareja cada detección con la pista más parecida del fotograma anterior. */
+function seguir(objetos) {
+  const usadas = new Set();
+  for (const objeto of objetos) {
+    let mejor = null, mejorIou = 0.3;
+    for (const pista of pistas) {
+      if (usadas.has(pista.id) || pista.clase !== objeto.clase) continue;
+      const solape = iou(pista.caja, objeto.caja);
+      if (solape > mejorIou) { mejorIou = solape; mejor = pista; }
+    }
+    if (mejor) {
+      objeto.id = mejor.id;
+      mejor.caja = objeto.caja;
+      mejor.visto = 0;
+    } else {
+      objeto.id = siguienteId++;
+      pistas.push({id: objeto.id, clase: objeto.clase, caja: objeto.caja, visto: 0});
+    }
+    usadas.add(objeto.id);
+    vistos.add(objeto.clase + "#" + objeto.id);
+  }
+  // Las pistas que llevan varios fotogramas sin aparecer se descartan
+  pistas.forEach(p => { if (!usadas.has(p.id)) p.visto++; });
+  pistas = pistas.filter(p => p.visto < 4);
+  return objetos;
+}
+
+async function analizar(blob) {
+  try {
+    const datos = await Panel.enviarArchivo(
+      `/api/seguimiento/predecir?umbral=${umbral.value}`, blob, "imagen");
+    const objetos = document.getElementById("chk-seguir").checked && !modoImagen
+      ? seguir(datos.objetos) : datos.objetos;
+
+    document.getElementById("m-objetos").textContent = objetos.length;
+    document.getElementById("m-seguidos").textContent = vistos.size;
+
+    dibujarCajas(overlay, video, objetos.map(o => ({
+      ...o.caja, color: Panel.color(o.id ?? o.indice),
+      texto: o.id ? `#${o.id} ${o.clase}` : `${o.clase} ${(o.confianza * 100).toFixed(0)}%`,
+    })), datos.ancho, datos.alto, {contener: modoImagen});
+
+    const cuenta = {};
+    objetos.forEach(o => cuenta[o.clase] = (cuenta[o.clase] || 0) + 1);
+    document.getElementById("resultados").innerHTML = objetos.length
+      ? Object.entries(cuenta).sort((a, b) => b[1] - a[1]).map(([clase, n], i) =>
+          `<div class="fila" style="padding:6px 0;border-bottom:1px dashed var(--borde)">
+            <span style="color:${Panel.color(i)}">${Panel.escapar(clase)}</span>
+            <span>${n}</span></div>`).join("")
+      : '<p class="vacio">No se detecta nada por encima del umbral.</p>';
+  } catch (e) {
+    document.getElementById("resultados").innerHTML =
+      `<p class="vacio">${Panel.escapar(e.message)}</p>`;
+  }
+}
+
+document.getElementById("btn-camara").onclick = async (e) => {
+  if (camara.activa) {
+    camara.detener(); e.target.textContent = "Iniciar cámara"; return;
+  }
+  modoImagen = false; pistas = []; vistos.clear(); siguienteId = 1;
+  video.style.backgroundImage = "";
+  await camara.iniciar();
+  document.getElementById("aviso").hidden = true;
+  e.target.textContent = "Detener cámara";
+};
+document.getElementById("btn-foto").onclick = () => document.getElementById("archivo").click();
+document.getElementById("archivo").onchange = async (e) => {
+  const f = e.target.files[0];
+  if (!f) return;
+  camara.detener();
+  modoImagen = true;
+  video.style.cssText += `background-image:url(${URL.createObjectURL(f)});
+    background-size:contain;background-position:center;background-repeat:no-repeat`;
+  document.getElementById("aviso").hidden = true;
+  await analizar(f);
+  e.target.value = "";
+};
+umbral.oninput = () => document.getElementById("umbral-txt").textContent =
+  Number(umbral.value).toFixed(2);
+
+comprobar();
+</script>
+{% endblock %}
